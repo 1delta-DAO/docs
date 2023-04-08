@@ -1,5 +1,15 @@
 # Borrow Swap Functions
 
+Allows swapping loan positions with a lender.
+
+## Prequisites
+
+- For the brokerage smart contract, the user has to approve borrow delegation first. 
+- With abstract accounts, no additinal action is required.
+
+
+## Functions and parameters
+
 ---
 
 **Function:** `swapBorrowExactIn`

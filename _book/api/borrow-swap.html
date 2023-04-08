@@ -99,9 +99,10 @@
             
 
             
-        </li>
+            <ul class="articles">
+                
     
-        <li class="chapter " data-level="1.2" data-path="../1delta.html">
+        <li class="chapter " data-level="1.1.1" data-path="../1delta.html">
             
                 <a href="../1delta.html">
             
@@ -114,7 +115,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../margin-aggregation.html">
+        <li class="chapter " data-level="1.1.2" data-path="../margin-aggregation.html">
             
                 <a href="../margin-aggregation.html">
             
@@ -127,7 +128,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../doc/overview.html">
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../doc/overview.html">
             
                 <a href="../doc/overview.html">
             
@@ -141,7 +147,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../doc/intro.html">
+        <li class="chapter " data-level="1.2.1" data-path="../doc/intro.html">
             
                 <a href="../doc/intro.html">
             
@@ -154,7 +160,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../doc/broker.html">
+        <li class="chapter " data-level="1.2.2" data-path="../doc/broker.html">
             
                 <a href="../doc/broker.html">
             
@@ -167,7 +173,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../doc/abstract-account.html">
+        <li class="chapter " data-level="1.2.3" data-path="../doc/abstract-account.html">
             
                 <a href="../doc/abstract-account.html">
             
@@ -185,7 +191,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../how-to/how-to.html">
+        <li class="chapter " data-level="1.3" data-path="../how-to/how-to.html">
             
                 <a href="../how-to/how-to.html">
             
@@ -199,7 +205,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../how-to/how-to-broker.html">
+        <li class="chapter " data-level="1.3.1" data-path="../how-to/how-to-broker.html">
             
                 <a href="../how-to/how-to-broker.html">
             
@@ -212,7 +218,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.2" data-path="../how-to/how-to-abstract-account.html">
+        <li class="chapter " data-level="1.3.2" data-path="../how-to/how-to-abstract-account.html">
             
                 <a href="../how-to/how-to-abstract-account.html">
             
@@ -230,7 +236,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="summary.html">
+        <li class="chapter " data-level="1.4" data-path="summary.html">
             
                 <a href="summary.html">
             
@@ -244,7 +250,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="money-market.html">
+        <li class="chapter " data-level="1.4.1" data-path="money-market.html">
             
                 <a href="money-market.html">
             
@@ -257,7 +263,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6.2" data-path="borrow-swap.html">
+        <li class="chapter active" data-level="1.4.2" data-path="borrow-swap.html">
             
                 <a href="borrow-swap.html">
             
@@ -270,7 +276,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="collateral-swap.html">
+        <li class="chapter " data-level="1.4.3" data-path="collateral-swap.html">
             
                 <a href="collateral-swap.html">
             
@@ -283,7 +289,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.4" data-path="margin-open.html">
+        <li class="chapter " data-level="1.4.4" data-path="margin-open.html">
             
                 <a href="margin-open.html">
             
@@ -296,7 +302,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.5" data-path="margin-close.html">
+        <li class="chapter " data-level="1.4.5" data-path="margin-close.html">
             
                 <a href="margin-close.html">
             
@@ -360,6 +366,13 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="borrow-swap-functions">Borrow Swap Functions</h1>
+<p>Allows swapping loan positions with a lender.</p>
+<h2 id="prequisites">Prequisites</h2>
+<ul>
+<li>For the brokerage smart contract, the user has to approve borrow delegation first. </li>
+<li>With abstract accounts, no additinal action is required.</li>
+</ul>
+<h2 id="functions-and-parameters">Functions and parameters</h2>
 <hr>
 <p><strong>Function:</strong> <code>swapBorrowExactIn</code></p>
 <p>This function allows a user to execute a swap on Uniswap V3 to borrow an exact amount of tokens in a single-pool trade, adjusting for the interest rate mode.</p>
@@ -505,7 +518,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Borrow Swap","level":"1.6.2","depth":2,"next":{"title":"Collateral Swap","level":"1.6.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},"previous":{"title":"Money Market","level":"1.6.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/borrow-swap.md","mtime":"2023-04-08T14:45:16.459Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T15:08:40.438Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Borrow Swap","level":"1.4.2","depth":2,"next":{"title":"Collateral Swap","level":"1.4.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},"previous":{"title":"Money Market","level":"1.4.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/borrow-swap.md","mtime":"2023-04-08T15:11:00.962Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T16:12:50.942Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

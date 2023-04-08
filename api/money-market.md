@@ -4,6 +4,7 @@ Functions that allow a swap aggreagated with a single money market interactions.
 
 ## Supplying to a lender
 
+Supply functions connected with swaps.
 
 ---
 
@@ -53,7 +54,7 @@ This function allows the user to swap tokens to receive a specified amount of ou
 
 - `amountOut` (`uint256`): The exact amount of output tokens to be received.
 
-- `interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
+- `- `interestRateMode`` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
 
 - `amountInMaximum` (`uint256`): The maximum amount of input tokens allowed to be used.
 
@@ -75,8 +76,181 @@ This function allows the user to swap Ether to receive a specified amount of out
 
 **Returns:** `uint256`: The amount of Ether used for the swap.
 
+---
+
+**Function:** `swapETHAndSupplyExactOut`
+
+This function allows the user to swap Ether to receive a specified amount of output tokens (tokenOut) and supply the resulting tokens to a lending protocol.
+
+**Parameters:**
+
+`params` (ExactOutputMultiParams calldata): A struct containing parameters for the swap and supply operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountOut` (`uint256`): The exact amount of output tokens to be received.
+
+**Returns:** `uint256`: The amount of Ether used for the swap.
+
+---
+
 ## Withdrawals
 
+Withdrawal functions connected with swaps
+
+---
+
+**Function:** `withdrawAndSwapExactIn`
+
+This function allows the user to withdraw a specified amount of input tokens (tokenIn) from a lending protocol and swap them to receive output tokens.
+
+**Parameters:**
+
+`params` (ExactInputParams memory): A struct containing parameters for the withdrawal and swap operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountIn` (`uint256`): The exact amount of input tokens to be withdrawn and swapped.
+
+**Returns:** `uint256`: The amount of output tokens received from the swap.
+
+---
+
+**Function:** `withdrawAndSwapExactInToETH`
+
+This function allows the user to withdraw a specified amount of input tokens (tokenIn) from a lending protocol and swap them to receive Ether.
+
+**Parameters:**
+
+`params` (ExactInputMultiParams memory): A struct containing parameters for the withdrawal and swap operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountIn` (`uint256`): The exact amount of input tokens to be withdrawn and swapped.
+
+**Returns:** `uint256`: The amount of Ether received from the swap.
+
+---
+
+**Function:** `withdrawAndSwapExactOut`
+
+This function allows the user to withdraw input tokens (tokenIn) from a lending protocol and swap them to receive a specified amount of output tokens (tokenOut).
+
+**Parameters:**
+
+`params` (MarginSwapParamsMultiExactOut calldata): A struct containing parameters for the withdrawal and swap operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountOut` (`uint256`): The exact amount of output tokens to be received.
+
+- `interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
+
+- `amountInMaximum` (`uint256`): The maximum amount of input tokens allowed to be withdrawn.
+
+**Returns:** `uint256`: The amount of input tokens withdrawn for the swap.
+
+---
+
+**Function:** `withdrawAndSwapExactOutToETH`
+
+This function allows the user to withdraw input tokens (tokenIn) from a lending protocol and swap them to receive a specified amount of Ether.
+
+**Parameters:**
+
+`params` (MarginSwapParamsMultiExactOut calldata): A struct containing parameters for the withdrawal and swap operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountOut` (`uint256`): The exact amount of Ether to be received.
+
+- `interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
+
+- `amountInMaximum` (`uint256`): The maximum amount of input tokens allowed to be withdrawn.
+
+**Returns:** `uint256`: The amount of input tokens withdrawn for the swap.
+
 ## Borrowing
+
+
+---
+
+**Function:** `borrowAndSwapExactIn`
+
+This function allows the user to borrow a specified amount of input tokens (tokenIn) and swap them to receive output tokens.
+
+**Parameters:**
+
+`interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
+
+- `params` (ExactInputWithLimitParams memory): A struct containing parameters for the borrow and swap operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountIn` (`uint256`): The exact amount of input tokens to be borrowed and swapped.
+
+- `amountOutMinimum` (`uint256`): The minimum amount of output tokens that must be received.
+
+**Returns:** `uint256`: The amount of output tokens received from the swap.
+
+---
+
+**Function:** `borrowAndSwapExactInToETH`
+
+This function allows the user to borrow a specified amount of input tokens (tokenIn) and swap them to receive Ether.
+
+**Parameters:**
+
+`interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
+
+- `params` (StandaloneExactInputUniswapParams calldata): A struct containing parameters for the borrow and swap operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountIn` (`uint256`): The exact amount of input tokens to be borrowed and swapped.
+
+- `amountOutMinimum` (`uint256`): The minimum amount of Ether that must be received.
+
+**Returns:** `uint256`: The amount of Ether received from the swap.
+
+---
+
+**Function:** `borrowAndSwapExactOut`
+
+This function allows the user to borrow input tokens (tokenIn) and swap them to receive a specified amount of output tokens (tokenOut).
+
+**Parameters:**
+
+`params` (MarginSwapParamsMultiExactOut memory): A struct containing parameters for the borrow and swap operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountOut` (`uint256`): The exact amount of output tokens to be received.
+
+- `interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
+
+- `amountInMaximum` (`uint256`): The maximum amount of input tokens allowed to be borrowed.
+
+**Returns:** `uint256`: The amount of input tokens borrowed for the swap.
+
+---
+
+**Function:** `borrowAndSwapExactOutToETH`
+
+This function allows the user to borrow input tokens (tokenIn) and swap them to receive a specified amount of Ether.
+
+**Parameters:**
+
+`params` (MarginSwapParamsMultiExactOut calldata): A struct containing parameters for the borrow and swap operation.
+
+- `path` (`bytes`): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.
+
+- `amountOut` (`uint256`): The exact amount of Ether to be received.
+
+- `interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
+
+- `amountInMaximum` (`uint256`): The maximum amount of input tokens allowed to be borrowed.
+
+**Returns:** `uint256`: The amount of input tokens borrowed for the swap.
 
 ## Repay

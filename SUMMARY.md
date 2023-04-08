@@ -1,7 +1,8 @@
 # Contents
 
-* [1delta](1delta.md)
-* [Margin Aggregation](margin-aggregation.md)
+* [Introduction](README.md)
+    * [1delta](1delta.md)
+    * [Margin Aggregation](margin-aggregation.md)
 * [Architecture](./doc/overview.md)
     * [Introduction](./doc/intro.md)
     * [Broker architecture](./doc/broker.md)

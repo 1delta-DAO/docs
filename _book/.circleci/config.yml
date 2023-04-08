@@ -6,7 +6,7 @@ orbs:
 jobs:
   build-and-push-to-gcs:
     docker:
-      - image: circleci/node:latest
+      - image: circleci/node:18
     parameters:
       domain:
         type: string

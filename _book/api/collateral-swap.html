@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Broker architecture · HonKit</title>
+        <title>Collateral Swap · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -56,10 +56,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="doc-abstract-account.html" />
+    <link rel="next" href="margin-open.html" />
     
     
-    <link rel="prev" href="doc-intro.html" />
+    <link rel="prev" href="borrow-swap.html" />
     
 
     </head>
@@ -127,9 +127,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="doc-overview.html">
+        <li class="chapter " data-level="1.4" data-path="../doc/overview.html">
             
-                <a href="doc-overview.html">
+                <a href="../doc/overview.html">
             
                     
                     Architecture
@@ -141,9 +141,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="doc-intro.html">
+        <li class="chapter " data-level="1.4.1" data-path="../doc/intro.html">
             
-                <a href="doc-intro.html">
+                <a href="../doc/intro.html">
             
                     
                     Introduction
@@ -154,9 +154,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.4.2" data-path="doc-broker.html">
+        <li class="chapter " data-level="1.4.2" data-path="../doc/broker.html">
             
-                <a href="doc-broker.html">
+                <a href="../doc/broker.html">
             
                     
                     Broker architecture
@@ -167,9 +167,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="doc-abstract-account.html">
+        <li class="chapter " data-level="1.4.3" data-path="../doc/abstract-account.html">
             
-                <a href="doc-abstract-account.html">
+                <a href="../doc/abstract-account.html">
             
                     
                     Abstract accounts
@@ -230,9 +230,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="../api/api-summary.html">
+        <li class="chapter " data-level="1.6" data-path="summary.html">
             
-                <a href="../api/api-summary.html">
+                <a href="summary.html">
             
                     
                     Contract API
@@ -244,9 +244,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="../api/api-money-market.html">
+        <li class="chapter " data-level="1.6.1" data-path="money-market.html">
             
-                <a href="../api/api-money-market.html">
+                <a href="money-market.html">
             
                     
                     Money Market
@@ -257,9 +257,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="../api/api-borrow-swap.html">
+        <li class="chapter " data-level="1.6.2" data-path="borrow-swap.html">
             
-                <a href="../api/api-borrow-swap.html">
+                <a href="borrow-swap.html">
             
                     
                     Borrow Swap
@@ -270,9 +270,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="../api/api-collateral-swap.html">
+        <li class="chapter active" data-level="1.6.3" data-path="collateral-swap.html">
             
-                <a href="../api/api-collateral-swap.html">
+                <a href="collateral-swap.html">
             
                     
                     Collateral Swap
@@ -283,9 +283,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.4" data-path="../api/api-margin-open.html">
+        <li class="chapter " data-level="1.6.4" data-path="margin-open.html">
             
-                <a href="../api/api-margin-open.html">
+                <a href="margin-open.html">
             
                     
                     Open Margin Position
@@ -296,9 +296,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.5" data-path="../api/api-margin-close.html">
+        <li class="chapter " data-level="1.6.5" data-path="margin-close.html">
             
-                <a href="../api/api-margin-close.html">
+                <a href="margin-close.html">
             
                     
                     Close Margin Position
@@ -344,7 +344,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Broker architecture</a>
+        <a href=".." >Collateral Swap</a>
     </h1>
 </div>
 
@@ -359,8 +359,95 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="general-interface-for-aggregatoion-of-trading-on-aave">General interface for aggregatoion of trading on AAVE</h1>
-<p>test</p>
+                                <h1 id="collateral-swap-functions">Collateral Swap Functions</h1>
+<hr>
+<p><strong>Function:</strong> <code>swapCollateralExactIn</code>
+This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a single-pool trade, specifying the exact input amount.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (ExactInputCollateralSingleParamsBase memory): A struct containing parameters for the single-pool trade.</p>
+<ul>
+<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token.</p>
+</li>
+<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
+</li>
+<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token.</p>
+</li>
+<li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapCollateralExactInMulti</code></p>
+<p>This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a multi-pool trade, specifying the exact input amount.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (ExactInputCollateralMultiParams memory): A struct containing parameters for the multi-pool trade.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapCollateralExactOut</code>
+This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a single-pool trade, specifying the exact output amount.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (ExactOutputCollateralSingleParamsBase memory): A struct containing parameters for the single-pool trade.</p>
+<ul>
+<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token.</p>
+</li>
+<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
+</li>
+<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token.</p>
+</li>
+<li><p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens to be received.</p>
+</li>
+<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used in the swap.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapCollateralExactOutMulti</code></p>
+<p>This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a multi-pool trade, specifying the exact output amount.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (ExactOutputCollateralMultiParams memory): A struct containing parameters for the multi-pool trade.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens to be received.</p>
+</li>
+<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used in the swap.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapCollateralAllIn</code></p>
+<p>This function allows a user to swap all the collateral from one token (tokenIn) to another (tokenOut) in a single-pool trade.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (AllInputSingleParamsBase calldata): A struct containing parameters for the single-pool trade.</p>
+<ul>
+<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token.</p>
+</li>
+<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
+</li>
+<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token.</p>
+</li>
+<li><p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens allowed to be received.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapCollateralAllInMulti</code></p>
+<p>This function allows a user to swap all the collateral from one token (tokenIn) to another (tokenOut) in a multi-pool trade.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (AllInputCollateralMultiParamsBase calldata): A struct containing parameters for the multi-pool trade.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens allowed to be received.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
 
                                 
                                 </section>
@@ -388,12 +475,12 @@
 
             
                 
-                <a href="doc-intro.html" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                <a href="borrow-swap.html" class="navigation navigation-prev " aria-label="Previous page: Borrow Swap">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="doc-abstract-account.html" class="navigation navigation-next " aria-label="Next page: Abstract accounts">
+                <a href="margin-open.html" class="navigation navigation-next " aria-label="Next page: Open Margin Position">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -404,7 +491,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Broker architecture","level":"1.4.2","depth":2,"next":{"title":"Abstract accounts","level":"1.4.3","depth":2,"path":"doc/doc-abstract-account.md","ref":"./doc/doc-abstract-account.md","articles":[]},"previous":{"title":"Introduction","level":"1.4.1","depth":2,"path":"doc/doc-intro.md","ref":"./doc/doc-intro.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/doc-broker.md","mtime":"2023-04-08T12:19:51.538Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T14:55:20.289Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Collateral Swap","level":"1.6.3","depth":2,"next":{"title":"Open Margin Position","level":"1.6.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},"previous":{"title":"Borrow Swap","level":"1.6.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/collateral-swap.md","mtime":"2023-04-08T14:44:12.335Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T15:08:40.438Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

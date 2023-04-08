@@ -69,9 +69,6 @@ This function allows the user to decrease their margin position by using collate
 
 **Returns:** `uint256`: The amount of borrowed tokens repaid.
 
-
-
-
 ---
 
 **Function:** `trimMarginPositionExactOutMulti`

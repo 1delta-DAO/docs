@@ -1,5 +1,8 @@
 # Open Margin Position
 
+Allows opening a margin positions using a lender.
+
+---
 
 **Function:** `openMarginPositionExactIn`
 

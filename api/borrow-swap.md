@@ -1,5 +1,7 @@
 # Borrow Swap Functions
 
+---
+
 **Function:** `swapBorrowExactIn`
 
 This function allows a user to execute a swap on Uniswap V3 to borrow an exact amount of tokens in a single-pool trade, adjusting for the interest rate mode.

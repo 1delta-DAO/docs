@@ -1,5 +1,6 @@
 # Collateral Swap Functions
 
+---
 
 **Function:** `swapCollateralExactIn`
 This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a single-pool trade, specifying the exact input amount.

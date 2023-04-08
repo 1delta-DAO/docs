@@ -15,6 +15,11 @@ jobs:
       - gcp-cli/install
       - gcp-cli/initialize
       - run:
+          name: Build static files
+          command: |
+            npm install
+            npx honkit build
+      - run:
           name: Push static files to gcs
           command: gsutil -m rsync -d -R _book gs://<< parameters.domain >>
       - run: sleep 7

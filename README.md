@@ -16,10 +16,6 @@ Our vision is to bring fully-featured, decentralized aggregator services to EVMs
 * **Full transparency** - Users hold the lending protocol balances themselves and can always see and access their raw balances with the lender
 * Lending protocols have been less accessible to traders who are looking for a fully-featured aggregator. With 1Delta, we hope to open the door for these traders to take advantage of the **strong liquidity and attractive rates** on large lending protocols without sacrificing the tools they have come to expect while trading.
 
-
-The project’s mid-term roadmap is given by its milestones over the next 6 to 12 months. However, 1Delta’s vision goes far beyond the milestones mentioned below.
-
-
 After jump-starting our initial traction, 1Delta will maintain itself through the collection of small fees on top of DEX trading fees and interest income. We are also exploring the potential of payment for TVL / order flow models.
 
 ---

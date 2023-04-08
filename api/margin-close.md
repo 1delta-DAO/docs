@@ -1,5 +1,15 @@
 # Close Margin Position
 
+Allows users to close a borrow position with collateral.
+
+## Prequisites
+
+Supports single-pool swaps and multi-hop swaps. In this case, `tokenIn` and `tokenOut` are provided together with the `fee` parameter to identify the swap pool.
+
+In case of a multi-hop swaps, the swap-path is provided as encoded `bytes`.
+
+## Functions
+
 ---
 
 **Function:** `trimMarginPositionExactIn`
@@ -88,6 +98,13 @@ This function allows the user to decrease their margin position by using collate
 - `amountInMaximum` (`uint256`): The maximum amount of collateral tokens allowed to be used.
 
 **Returns:** `uint256`: The amount of collateral tokens used for the swap.
+
+---
+
+
+### Functions to repay the full loan or withdraw the full position
+
+The following functions allow a dust-free repayment of loans or withdrawal from a collateral position.
 
 ---
 

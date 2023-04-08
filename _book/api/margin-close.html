@@ -364,6 +364,11 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="close-margin-position">Close Margin Position</h1>
+<p>Allows users to close a borrow position with collateral.</p>
+<h2 id="prequisites">Prequisites</h2>
+<p>Supports single-pool swaps and multi-hop swaps. In this case, <code>tokenIn</code> and <code>tokenOut</code> are provided together with the <code>fee</code> parameter to identify the swap pool.</p>
+<p>In case of a multi-hop swaps, the swap-path is provided as encoded <code>bytes</code>.</p>
+<h2 id="functions">Functions</h2>
 <hr>
 <p><strong>Function:</strong> <code>trimMarginPositionExactIn</code></p>
 <p>This function allows the user to decrease their margin position by using collateral (tokenIn) to repay a portion of their borrowed tokens (tokenOut). The user provides the amount of collateral to be used as input.</p>
@@ -436,6 +441,9 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of collateral tokens used for the swap.</p>
+<hr>
+<h3 id="functions-to-repay-the-full-loan-or-withdraw-the-full-position">Functions to repay the full loan or withdraw the full position</h3>
+<p>The following functions allow a dust-free repayment of loans or withdrawal from a collateral position.</p>
 <hr>
 <p><strong>Function:</strong> <code>trimMarginPositionAllIn</code></p>
 <p>This function allows the user to decrease their margin position by using all available collateral (tokenIn) to repay a portion of their borrowed tokens (tokenOut).</p>

@@ -367,6 +367,10 @@
                                 
                                 <h1 id="open-margin-position">Open Margin Position</h1>
 <p>Allows opening a margin positions using a lender.</p>
+<h2 id="prequisites">Prequisites</h2>
+<p>Supports single-pool swaps and multi-hop swaps. In this case, <code>tokenIn</code> and <code>tokenOut</code> are provided together with the <code>fee</code> parameter to identify the swap pool.</p>
+<p>In case of a multi-hop swaps, the swap-path is provided as encoded <code>bytes</code>.</p>
+<h2 id="functions">Functions</h2>
 <hr>
 <p><strong>Function:</strong> <code>openMarginPositionExactIn</code></p>
 <p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut). The user provides the debt amount as input.</p>
@@ -381,9 +385,7 @@
 </li>
 <li><p><code>amountIn</code> (uint256): The amount of input tokens to borrow.</p>
 </li>
-<li><ul>
-<li><code>interestRateMode</code> (uint256): The interest rate mode (stable or variable) for the borrowed tokens.</li>
-</ul>
+<li><p><code>interestRateMode</code> (uint256): The interest rate mode (stable or variable) for the borrowed tokens.</p>
 </li>
 <li><p><code>amountOutMinimum</code> (uint256): The minimum amount of output tokens (collateral) allowed to be received.</p>
 </li>
@@ -419,9 +421,7 @@
 </li>
 <li><p><code>amountIn</code> (<code>uint256</code>): The amount of input tokens to borrow.</p>
 </li>
-<li><ul>
-<li><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the borrowed tokens.</li>
-</ul>
+<li><p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the borrowed tokens.</p>
 </li>
 <li><p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens (collateral) allowed to be received.</p>
 </li>

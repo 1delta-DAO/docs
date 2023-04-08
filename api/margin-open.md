@@ -2,6 +2,14 @@
 
 Allows opening a margin positions using a lender.
 
+## Prequisites
+
+Supports single-pool swaps and multi-hop swaps. In this case, `tokenIn` and `tokenOut` are provided together with the `fee` parameter to identify the swap pool.
+
+In case of a multi-hop swaps, the swap-path is provided as encoded `bytes`.
+
+## Functions
+
 ---
 
 **Function:** `openMarginPositionExactIn`
@@ -20,7 +28,7 @@ This function allows a user to open a margin position by borrowing a token (toke
 
 - `amountIn` (uint256): The amount of input tokens to borrow.
 
-- - `interestRateMode` (uint256): The interest rate mode (stable or variable) for the borrowed tokens.
+- `interestRateMode` (uint256): The interest rate mode (stable or variable) for the borrowed tokens.
 
 - `amountOutMinimum` (uint256): The minimum amount of output tokens (collateral) allowed to be received.
 
@@ -64,7 +72,7 @@ This function allows a user to open a margin position by borrowing a token (toke
 
 - `amountIn` (`uint256`): The amount of input tokens to borrow.
 
-- - `interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
+- `interestRateMode` (`uint256`): The interest rate mode (stable or variable) for the borrowed tokens.
 
 - `amountOutMinimum` (`uint256`): The minimum amount of output tokens (collateral) allowed to be received.
 

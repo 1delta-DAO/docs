@@ -380,7 +380,7 @@
 <li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
 </li>
 </ul>
-<p>No return values</p>
+<p><strong>No return values</strong></p>
 <hr>
 <p><strong>Function:</strong> <code>swapETHAndSupplyExactIn</code></p>
 <p>This function allows the user to swap a specified amount of Ether for output tokens and supply the resulting tokens to a lending protocol.</p>
@@ -392,7 +392,7 @@
 <li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of Ether to be swapped.</p>
 </li>
 </ul>
-<p>No return values</p>
+<p><strong>No return values</strong></p>
 <hr>
 <p><strong>Function:</strong> <code>swapAndSupplyExactOut</code></p>
 <p>This function allows the user to swap tokens to receive a specified amount of output tokens (tokenOut) and supply the resulting tokens to a lending protocol.</p>
@@ -434,7 +434,7 @@
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether used for the swap.</p>
 <hr>
-<h2 id="withdrawals">Withdrawals</h2>
+<h2 id="withdrawals-from-existing-deposits">Withdrawals from existing deposits</h2>
 <p>Withdrawal functions connected with swaps</p>
 <hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapExactIn</code></p>
@@ -492,6 +492,29 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens withdrawn for the swap.</p>
+<h3 id="functions-withdeawing-the-full-balances">Functions withdeawing the full balances</h3>
+<hr>
+<p><strong>Function:</strong> <code>withdrawAndSwapAllIn</code></p>
+<p>This function allows the user to withdraw their entire balance of input tokens (tokenIn) from the lending protocol and swap them for output tokens (tokenOut).</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (AllInputCollateralMultiParamsBaseWithRecipient calldata): A struct containing parameters for the withdraw and swap operation.</p>
+<ul>
+<li><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</li>
+<li><code>recipient</code> (<code>address</code>): The address that will receive the output tokens.</li>
+<li><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens that must be received.</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
+<hr>
+<p><strong>Function:</strong> <code>withdrawAndSwapAllInToETH</code></p>
+<p>This function allows the user to withdraw their entire balance of input tokens (tokenIn) from the lending protocol and swap them for Ether.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (AllInputCollateralMultiParamsBaseWithRecipient calldata): A struct containing parameters for the withdraw and swap operation.</p>
+<ul>
+<li><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</li>
+<li><code>recipient</code> (<code>address</code>): The address that will receive the Ether.</li>
+<li><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of Ether that must be received.</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether received from the swap.</p>
 <h2 id="borrowing">Borrowing</h2>
 <hr>
 <p><strong>Function:</strong> <code>borrowAndSwapExactIn</code></p>
@@ -557,7 +580,88 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens borrowed for the swap.</p>
+<hr>
 <h2 id="repay">Repay</h2>
+<p>Allows the user to repay borrow balances with a lender with any currency.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapAndRepayExactIn</code></p>
+<p>This function allows the user to swap a specified amount of input tokens (tokenIn) and repay a debt in the lending protocol.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the repayment.</p>
+<p><code>params</code> (ExactInputMultiParams calldata): A struct containing parameters for the swap and repay operation.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens repaid to the lending protocol.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapETHAndRepayExactIn</code></p>
+<p>This function allows the user to swap a specified amount of Ether and repay a debt in the lending protocol.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the repayment.</p>
+<p><code>params</code> (ExactInputMultiParams calldata): A struct containing parameters for the swap and repay operation.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of Ether to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens repaid to the lending protocol.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapAndRepayExactOut</code></p>
+<p>This function allows the user to swap input tokens (tokenIn) to repay a specified amount of output tokens (tokenOut) to the lending protocol.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (MarginSwapParamsMultiExactOut memory): A struct containing parameters for the swap and repay operation.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens to be repaid.</p>
+</li>
+<li><p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the repayment.</p>
+</li>
+<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens swapped for the repayment.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapETHAndRepayExactOut</code></p>
+<p>This function allows the user to swap Ether to repay a specified amount of output tokens (tokenOut) to the lending protocol.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the repayment.</p>
+<p><code>params</code> (ExactOutputMultiParams calldata): A struct containing parameters for the swap and repay operation.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens to be repaid.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether swapped for the repayment.</p>
+<h3 id="functions-repaying-the-full-loan">Functions repaying the full loan</h3>
+<p>Repaying with these will not left any borrow dust.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapAndRepayAllOut</code></p>
+<p>This function allows the user to swap input tokens (tokenIn) to repay their entire debt balance of output tokens (tokenOut) in the lending protocol.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (AllOutputMultiParamsBase calldata): A struct containing parameters for the swap and repay operation.</p>
+<ul>
+<li><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</li>
+<li><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the repayment.</li>
+<li><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens swapped for the repayment.</p>
+<hr>
+<p><strong>Function:</strong> <code>swapETHAndRepayAllOut</code></p>
+<p>This function allows the user to swap Ether to repay their entire debt balance of output tokens (tokenOut) in the lending protocol.</p>
+<p><strong>Parameters:</strong></p>
+<p><code>params</code> (AllOutputMultiParamsBase calldata): A struct containing parameters for the swap and repay operation.</p>
+<ul>
+<li><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</li>
+<li><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the repayment.</li>
+<li><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of Ether allowed to be swapped.</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether swapped for the repayment.</p>
 
                                 
                                 </section>
@@ -601,7 +705,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Money Market","level":"1.4.1","depth":2,"next":{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},"previous":{"title":"Contract API","level":"1.4","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.4.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.4.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.4.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.4.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/money-market.md","mtime":"2023-04-08T15:06:49.370Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T16:12:50.942Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Money Market","level":"1.4.1","depth":2,"next":{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},"previous":{"title":"Contract API","level":"1.4","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.4.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.4.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.4.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.4.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/money-market.md","mtime":"2023-04-08T16:41:45.380Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T16:46:09.406Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

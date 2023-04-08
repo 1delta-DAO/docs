@@ -127,9 +127,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../doc-overview.html">
+        <li class="chapter " data-level="1.4" data-path="../doc/doc-overview.html">
             
-                <a href="../doc-overview.html">
+                <a href="../doc/doc-overview.html">
             
                     
                     Architecture
@@ -141,9 +141,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../doc-intro.html">
+        <li class="chapter " data-level="1.4.1" data-path="../doc/doc-intro.html">
             
-                <a href="../doc-intro.html">
+                <a href="../doc/doc-intro.html">
             
                     
                     Introduction
@@ -154,9 +154,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../doc-broker.html">
+        <li class="chapter " data-level="1.4.2" data-path="../doc/doc-broker.html">
             
-                <a href="../doc-broker.html">
+                <a href="../doc/doc-broker.html">
             
                     
                     Broker architecture
@@ -167,9 +167,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../doc-abstract-account.html">
+        <li class="chapter " data-level="1.4.3" data-path="../doc/doc-abstract-account.html">
             
-                <a href="../doc-abstract-account.html">
+                <a href="../doc/doc-abstract-account.html">
             
                     
                     Abstract accounts
@@ -185,9 +185,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../how-to.html">
+        <li class="chapter " data-level="1.5" data-path="../how-to/how-to.html">
             
-                <a href="../how-to.html">
+                <a href="../how-to/how-to.html">
             
                     
                     How Tos
@@ -199,9 +199,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../how-to-broker.html">
+        <li class="chapter " data-level="1.5.1" data-path="../how-to/how-to-broker.html">
             
-                <a href="../how-to-broker.html">
+                <a href="../how-to/how-to-broker.html">
             
                     
                     Brokering
@@ -212,9 +212,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5.2" data-path="../how-to-abstract-account.html">
+        <li class="chapter " data-level="1.5.2" data-path="../how-to/how-to-abstract-account.html">
             
-                <a href="../how-to-abstract-account.html">
+                <a href="../how-to/how-to-abstract-account.html">
             
                     
                     Abstract accounts
@@ -364,70 +364,103 @@
 <p>This function allows a user to execute a swap on Uniswap V3 to borrow an exact amount of tokens in a single-pool trade, adjusting for the interest rate mode.</p>
 <p><strong>Parameters:</strong></p>
 <p><code>params</code> (ExactInputSingleParamsBase memory): A struct containing parameters for the single-pool trade.</p>
-<p><code>tokenIn</code> (address): The address of the input token.</p>
-<p><code>fee</code> (uint24): The fee tier of the pool to be used for the swap.</p>
-<p><code>tokenOut</code> (address): The address of the output token.</p>
-<p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
-<p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
-<p>Returns:</p>
-<p><code>uint256</code>: The amount of output tokens received from the swap.</p>
+<ul>
+<li><p><code>tokenIn</code> (address): The address of the input token.</p>
+</li>
+<li><p><code>fee</code> (uint24): The fee tier of the pool to be used for the swap.</p>
+</li>
+<li><p><code>tokenOut</code> (address): The address of the output token.</p>
+</li>
+<li><p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
+</li>
+<li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
 <hr>
 <p><strong>Function:</strong> <code>swapBorrowExactInMulti</code></p>
 <p>This function allows a user to execute a swap on Uniswap V3 to borrow an exact amount of tokens in a multi-pool trade, adjusting for the interest rate mode.</p>
 <p><strong>Parameters:</strong></p>
 <p><code>params</code> (ExactInputMultiParams memory): A struct containing parameters for the multi-pool trade.</p>
-<p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-<p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
-<p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
-<p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens expected to be received from the swap. If the output is lower, the transaction will revert.</p>
-<p>Returns:</p>
-<p><code>uint256</code>: The amount of output tokens received from the swap.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
+</li>
+<li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
+</li>
+<li><p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens expected to be received from the swap. If the output is lower, the transaction will revert.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
 <hr>
 <p><strong>Function:</strong> <code>swapBorrowExactOut</code></p>
 <p>This function allows a user to execute a swap on Uniswap V3 to borrow an exact amount of tokens in a single-pool trade while specifying the maximum amount of input tokens, adjusting for the interest rate mode.</p>
 <p><strong>Parameters:</strong></p>
 <p><code>params</code> (ExactOutputSingleParamsBase memory): A struct containing parameters for the single-pool trade.</p>
-<p><code>tokenIn</code> (address): The address of the input token.</p>
-<p><code>fee</code> (uint24): The fee tier of the pool to be used for the swap.</p>
-<p><code>tokenOut</code> (address): The address of the output token.</p>
-<p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
-<p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens expected to be received from the swap.</p>
-<p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
-<p>Returns:</p>
-<p><code>uint256</code>: The amount of input tokens used in the swap.</p>
+<ul>
+<li><p><code>tokenIn</code> (address): The address of the input token.</p>
+</li>
+<li><p><code>fee</code> (uint24): The fee tier of the pool to be used for the swap.</p>
+</li>
+<li><p><code>tokenOut</code> (address): The address of the output token.</p>
+</li>
+<li><p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
+</li>
+<li><p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens expected to be received from the swap.</p>
+</li>
+<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used in the swap.</p>
 <hr>
 <p><strong>Function:</strong> <code>swapBorrowExactOutMulti</code></p>
 <p>This function allows a user to execute a swap on Uniswap V3 to borrow an exact amount of tokens in a multi-pool trade while specifying the maximum amount of input tokens, adjusting for the interest rate mode.</p>
 <p><strong>Parameters:</strong></p>
 <p><code>params</code> (ExactOutputMultiParams memory): A struct containing parameters for the multi-pool trade.</p>
-<p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-<p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
-<p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens expected to be received from the swap.</p>
-<p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
-<p>Returns:</p>
-<p><code>uint256</code>: The amount of input tokens used in the swap.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
+</li>
+<li><p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens expected to be received from the swap.</p>
+</li>
+<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used in the swap.</p>
 <hr>
 <p><strong>Function:</strong> <code>swapBorrowAllOut</code></p>
 <p>This function allows a user to execute a swap on Uniswap V3 to borrow the full amount of tokens required to repay a debt in a single-pool trade while specifying the maximum amount of input tokens, adjusting for the interest rate mode.</p>
 <p><strong>Parameters:</strong></p>
 <p><code>params</code> (MarginSwapParamsAllOut calldata): A struct containing parameters for the single-pool trade.</p>
-<p><code>tokenIn</code> (<code>address</code>): The address of the input token.</p>
-<p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
-<p><code>tokenOut</code> (<code>address</code>): The address of the output token.</p>
-<p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
-<p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
-<p>Returns:</p>
-<p><code>uint256</code>: The amount of input tokens used in the swap.</p>
+<ul>
+<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token.</p>
+</li>
+<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
+</li>
+<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token.</p>
+</li>
+<li><p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
+</li>
+<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used in the swap.</p>
 <hr>
 <p><strong>Function:</strong> <code>swapBorrowAllOutMulti</code></p>
 <p>This function allows a user to execute a swap on Uniswap V3 to borrow the full amount of tokens required to repay a debt in a multi-pool trade while specifying the maximum amount of input tokens, adjusting for the interest rate mode.</p>
 <p><strong>Parameters:</strong></p>
 <p><code>params</code> (AllOutputMultiParamsBase calldata): A struct containing parameters for the multi-pool trade.</p>
-<p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-<p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
-<p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
-<p>Returns:</p>
-<p><code>uint256</code>: The amount of input tokens used in the swap.</p>
+<ul>
+<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
+</li>
+<li><p><code>interestRateMode</code> (<code>uint256</code>): The encoded interest rate mode, where the first digit represents the &quot;from&quot; interest rate and the second digit represents the &quot;to&quot; interest rate.</p>
+</li>
+<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
+</li>
+</ul>
+<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used in the swap.</p>
 
                                 
                                 </section>
@@ -471,7 +504,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Borrow Swap","level":"1.6.2","depth":2,"next":{"title":"Collateral Swap","level":"1.6.3","depth":2,"path":"api/api-collateral-swap.md","ref":"./api/api-collateral-swap.md","articles":[]},"previous":{"title":"Money Market","level":"1.6.1","depth":2,"path":"api/api-money-market.md","ref":"./api/api-money-market.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/api-borrow-swap.md","mtime":"2023-04-08T13:57:03.222Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T14:23:31.028Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Borrow Swap","level":"1.6.2","depth":2,"next":{"title":"Collateral Swap","level":"1.6.3","depth":2,"path":"api/api-collateral-swap.md","ref":"./api/api-collateral-swap.md","articles":[]},"previous":{"title":"Money Market","level":"1.6.1","depth":2,"path":"api/api-money-market.md","ref":"./api/api-money-market.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/api-borrow-swap.md","mtime":"2023-04-08T14:45:16.459Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T14:55:20.289Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

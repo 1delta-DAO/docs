@@ -6,7 +6,7 @@ orbs:
 jobs:
   build-and-push-to-gcs:
     docker:
-      - image: circleci/node:18
+      - image: circleci/node:latest
     parameters:
       domain:
         type: string
@@ -14,6 +14,9 @@ jobs:
       - checkout
       - gcp-cli/install
       - gcp-cli/initialize
+      - run:
+          name: Push static files to gcs
+          command: gsutil -m rsync -d -R _book gs://<< parameters.domain >>
       - run: sleep 7
       - run:
           name: Remove Cache Control from static files

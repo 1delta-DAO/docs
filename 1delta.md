@@ -10,11 +10,11 @@ Existing aggregator/derivatives platforms have been the go-to solution for lever
 
 
 Our vision is to bring fully-featured, decentralized aggregator services to EVMs. This includes
-* Single-click margin trading (opening, closing positions, debt- and collateral swaps)
-* Connecting established DEXs with established lending protocols to allow our users to access top-notch trading performance and highly competitive deposit and borrow rates
-* Seamless UX and visibility - easy risk management through risk parameter displays and single-click self-liquidations
-* Full transparency - Users hold the lending protocol balances themselves and can always see and access their raw balances with the lender
-* Lending protocols have been less accessible to traders who are looking for a fully-featured aggregator. With 1Delta, we hope to open the door for these traders to take advantage of the strong liquidity and attractive rates on large lending protocols without sacrificing the tools they have come to expect while trading.
+* **Single-click margin trading** (opening, closing positions, debt- and collateral swaps)
+* **Connecting established DEXs with established lending protocols** to allow our users to access top-notch trading performance and highly competitive deposit and borrow rates
+* **Seamless UX and visibility** - easy risk management through risk parameter displays and single-click self-liquidations
+* **Full transparency** - Users hold the lending protocol balances themselves and can always see and access their raw balances with the lender
+* Lending protocols have been less accessible to traders who are looking for a fully-featured aggregator. With 1Delta, we hope to open the door for these traders to take advantage of the **strong liquidity and attractive rates** on large lending protocols without sacrificing the tools they have come to expect while trading.
 
 
 The project’s mid-term roadmap is given by its milestones over the next 6 to 12 months. However, 1Delta’s vision goes far beyond the milestones mentioned below.

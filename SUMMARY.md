@@ -8,5 +8,9 @@
 * [How Tos](how-to.md)
     * [Brokering](how-to-broker.md)
     * [Abstract accounts](how-to-abstract-account.md)
-
-
+* [Contract API](api-summary.md)
+    * [Money Market](api-money-market.md)
+    * [Borrow Swap](api-borrow-swap.md)
+    * [Collateral Swap](api-collateral-swap.md)
+    * [Open Margin Position](api-margin-open.md)
+    * [Close Margin Position](api-margin-close.md)

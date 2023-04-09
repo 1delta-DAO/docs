@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Introduction · HonKit</title>
+        <title>How Tos · HonKit</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -59,7 +59,7 @@
     <link rel="next" href="broker.html" />
     
     
-    <link rel="prev" href="overview.html" />
+    <link rel="prev" href="../doc/abstract-account.html" />
     
 
     </head>
@@ -133,9 +133,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2" data-path="overview.html">
+        <li class="chapter " data-level="1.2" data-path="../doc/overview.html">
             
-                <a href="overview.html">
+                <a href="../doc/overview.html">
             
                     
                     Architecture
@@ -147,22 +147,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.2.1" data-path="intro.html">
+        <li class="chapter " data-level="1.2.1" data-path="../doc/broker.html">
             
-                <a href="intro.html">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="broker.html">
-            
-                <a href="broker.html">
+                <a href="../doc/broker.html">
             
                     
                     Broker architecture
@@ -173,9 +160,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.3" data-path="abstract-account.html">
+        <li class="chapter " data-level="1.2.2" data-path="../doc/abstract-account.html">
             
-                <a href="abstract-account.html">
+                <a href="../doc/abstract-account.html">
             
                     
                     Abstract accounts
@@ -191,9 +178,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../how-to/how-to.html">
+        <li class="chapter active" data-level="1.3" data-path="overview.html">
             
-                <a href="../how-to/how-to.html">
+                <a href="overview.html">
             
                     
                     How Tos
@@ -205,9 +192,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="../how-to/how-to-broker.html">
+        <li class="chapter " data-level="1.3.1" data-path="broker.html">
             
-                <a href="../how-to/how-to-broker.html">
+                <a href="broker.html">
             
                     
                     Brokering
@@ -218,9 +205,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="../how-to/how-to-abstract-account.html">
+        <li class="chapter " data-level="1.3.2" data-path="abstract-account.html">
             
-                <a href="../how-to/how-to-abstract-account.html">
+                <a href="abstract-account.html">
             
                     
                     Abstract accounts
@@ -350,7 +337,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Introduction</a>
+        <a href=".." >How Tos</a>
     </h1>
 </div>
 
@@ -365,8 +352,27 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="what-does-1delta-do">What Does 1delta Do?</h1>
-<p>test</p>
+                                <h1 id="how-to-use-1delta">How To Use 1delta</h1>
+<p>1delta has a unique approach to margin trading. Our initial version combines the simplicity of a lending protocol interface with well versed swap interfeces that will help you with building any position with the lender.</p>
+<h2 id="selecting-a-trade">Selecting a Trade</h2>
+<p>To be able to pick positions, you only have to clcik the &quot;Start Trading&quot; button. </p>
+<p><img src="../assets/selection-screenshot.png" alt="Start Trading" title="Start by clicking &apos;Start Trading&apos;!"></p>
+<p>Trades are then selected by clicking on the <em>checkmarks</em> next to the token icons. Dependent on your selection, the confirmation button will briefly summarize which type of trade can now be executed.</p>
+<p><img src="../assets/pick-screenshot.png" alt="Selection" title="Confirm"></p>
+<p>The selections map to the trade types as follows.</p>
+<ul>
+<li><strong>Single Collatral Position:</strong> Swap and deposit or wihdraw and swap.</li>
+<li><strong>Single Debt Position:</strong> Borrow and swap or swap and repay.</li>
+<li><strong>Two Collatral Positions:</strong> Swap collateral positions.</li>
+<li><strong>Two Debt Positions:</strong> Swap debt positions.</li>
+<li><strong>One Collateral and one Debt Positions:</strong> Open a margin position (Borrow, swap and supply) or close one (withdraw debt, swap and repay debt)</li>
+</ul>
+<p>The follwoing chart shows hot the selections compose trade types.</p>
+<p><img src="../assets/trade-selections.png" alt="Trade Selection" title="Biuld a position by just clicking on them!"></p>
+<h2 id="lender-dependent-mechanics">Lender-Dependent Mechanics</h2>
+<p>Dependent on which lender you want to trade with, the mechanics can vary</p>
+<h3 id="brokering"><a href="broker.html">Brokering</a></h3>
+<h3 id="abstract-accounts"><a href="abstract-account.html">Abstract accounts</a></h3>
 
                                 
                                 </section>
@@ -394,12 +400,12 @@
 
             
                 
-                <a href="overview.html" class="navigation navigation-prev " aria-label="Previous page: Architecture">
+                <a href="../doc/abstract-account.html" class="navigation navigation-prev " aria-label="Previous page: Abstract accounts">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="broker.html" class="navigation navigation-next " aria-label="Next page: Broker architecture">
+                <a href="broker.html" class="navigation navigation-next " aria-label="Next page: Brokering">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -410,7 +416,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Introduction","level":"1.2.1","depth":2,"next":{"title":"Broker architecture","level":"1.2.2","depth":2,"path":"doc/broker.md","ref":"./doc/broker.md","articles":[]},"previous":{"title":"Architecture","level":"1.2","depth":1,"path":"doc/overview.md","ref":"./doc/overview.md","articles":[{"title":"Introduction","level":"1.2.1","depth":2,"path":"doc/intro.md","ref":"./doc/intro.md","articles":[]},{"title":"Broker architecture","level":"1.2.2","depth":2,"path":"doc/broker.md","ref":"./doc/broker.md","articles":[]},{"title":"Abstract accounts","level":"1.2.3","depth":2,"path":"doc/abstract-account.md","ref":"./doc/abstract-account.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/intro.md","mtime":"2023-04-08T12:42:24.684Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T16:46:09.406Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"How Tos","level":"1.3","depth":1,"next":{"title":"Brokering","level":"1.3.1","depth":2,"path":"how-to/broker.md","ref":"./how-to/broker.md","articles":[]},"previous":{"title":"Abstract accounts","level":"1.2.2","depth":2,"path":"doc/abstract-account.md","ref":"./doc/abstract-account.md","articles":[]},"articles":[{"title":"Brokering","level":"1.3.1","depth":2,"path":"how-to/broker.md","ref":"./how-to/broker.md","articles":[]},{"title":"Abstract accounts","level":"1.3.2","depth":2,"path":"how-to/abstract-account.md","ref":"./how-to/abstract-account.md","articles":[]}],"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"how-to/overview.md","mtime":"2023-04-09T11:13:47.542Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-09T11:29:11.879Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

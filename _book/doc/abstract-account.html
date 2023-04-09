@@ -56,7 +56,7 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../how-to/how-to.html" />
+    <link rel="next" href="../how-to/overview.html" />
     
     
     <link rel="prev" href="broker.html" />
@@ -147,20 +147,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="intro.html">
-            
-                <a href="intro.html">
-            
-                    
-                    Introduction
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.2.2" data-path="broker.html">
+        <li class="chapter " data-level="1.2.1" data-path="broker.html">
             
                 <a href="broker.html">
             
@@ -173,7 +160,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.2.3" data-path="abstract-account.html">
+        <li class="chapter active" data-level="1.2.2" data-path="abstract-account.html">
             
                 <a href="abstract-account.html">
             
@@ -191,9 +178,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="../how-to/how-to.html">
+        <li class="chapter " data-level="1.3" data-path="../how-to/overview.html">
             
-                <a href="../how-to/how-to.html">
+                <a href="../how-to/overview.html">
             
                     
                     How Tos
@@ -205,9 +192,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="../how-to/how-to-broker.html">
+        <li class="chapter " data-level="1.3.1" data-path="../how-to/broker.html">
             
-                <a href="../how-to/how-to-broker.html">
+                <a href="../how-to/broker.html">
             
                     
                     Brokering
@@ -218,9 +205,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.2" data-path="../how-to/how-to-abstract-account.html">
+        <li class="chapter " data-level="1.3.2" data-path="../how-to/abstract-account.html">
             
-                <a href="../how-to/how-to-abstract-account.html">
+                <a href="../how-to/abstract-account.html">
             
                     
                     Abstract accounts
@@ -365,9 +352,9 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="1delta-abstract-accounts">1delta Abstract Accounts</h1>
-<p>1delta Accounts are user-controlled smart contracts that allow the automation of lending pool interactions and their connecting swaps. 
-Flash loans / swaps are used to execute the interactions in a single transaction — this would mostly be impossible without abstract accounts on lending protocols similar to Compound.</p>
+                                <h1 id="architecture-using-abstract-accounts">Architecture Using Abstract Accounts</h1>
+<p>First of all, users have to create an abstract account using our factory contract. Once the account is created, the user can then interact though it in a very similar manner to the brokerage contract, except that they are rather <em>self-brokering</em>.</p>
+<p><img src="../assets/account-chart.png" alt="Accounts" title="Abstract Account Architecture Chart"></p>
 
                                 
                                 </section>
@@ -400,7 +387,7 @@ Flash loans / swaps are used to execute the interactions in a single transaction
                 </a>
                 
                 
-                <a href="../how-to/how-to.html" class="navigation navigation-next " aria-label="Next page: How Tos">
+                <a href="../how-to/overview.html" class="navigation navigation-next " aria-label="Next page: How Tos">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -411,7 +398,7 @@ Flash loans / swaps are used to execute the interactions in a single transaction
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Abstract accounts","level":"1.2.3","depth":2,"next":{"title":"How Tos","level":"1.3","depth":1,"path":"how-to/how-to.md","ref":"./how-to/how-to.md","articles":[{"title":"Brokering","level":"1.3.1","depth":2,"path":"how-to/how-to-broker.md","ref":"./how-to/how-to-broker.md","articles":[]},{"title":"Abstract accounts","level":"1.3.2","depth":2,"path":"how-to/how-to-abstract-account.md","ref":"./how-to/how-to-abstract-account.md","articles":[]}]},"previous":{"title":"Broker architecture","level":"1.2.2","depth":2,"path":"doc/broker.md","ref":"./doc/broker.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/abstract-account.md","mtime":"2023-04-08T14:02:00.630Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-08T16:46:09.406Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Abstract accounts","level":"1.2.2","depth":2,"next":{"title":"How Tos","level":"1.3","depth":1,"path":"how-to/overview.md","ref":"./how-to/overview.md","articles":[{"title":"Brokering","level":"1.3.1","depth":2,"path":"how-to/broker.md","ref":"./how-to/broker.md","articles":[]},{"title":"Abstract accounts","level":"1.3.2","depth":2,"path":"how-to/abstract-account.md","ref":"./how-to/abstract-account.md","articles":[]}]},"previous":{"title":"Broker architecture","level":"1.2.1","depth":2,"path":"doc/broker.md","ref":"./doc/broker.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"doc/abstract-account.md","mtime":"2023-04-09T11:28:19.870Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-09T11:29:11.879Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

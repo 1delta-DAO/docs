@@ -1,0 +1,34 @@
+{
+    "gitbook": ">=3.0.0",
+    "title": "OqedPIGOfsDlo31UNwYbCFMSaO9m9G",
+    "root": ".",
+    "structure": {
+      "readme": "README.md",
+      "summary": "SUMMARY.md"
+    },
+    "plugins": [
+      "-search",
+      "-lunr",
+      "page-toc-button",
+      "include-codeblock",
+      "anchors",
+      "js-console"
+    ],
+    "variables": {
+      "esversion": "2019",
+      "nodeversion": "12.13.0",
+      "npmversion": "6.12.0",
+      "triplebackticks": "```",
+      "console": "<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"
+    },
+    "pluginsConfig": {
+      "include-codeblock": {
+        "template": "./resources/gitbook-plugin-include-codeblock.hbs"
+      },
+      "page-toc-button": {
+        "maxTocDepth": 2,
+        "minTocSize": 2
+      }
+    }
+  }
+  

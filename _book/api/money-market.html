@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Money Market · HonKit</title>
+        <title>Money Market · OqedPIGOfsDlo31UNwYbCFMSaO9m9G</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -16,11 +16,15 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
                 
             
                 
@@ -69,10 +73,6 @@
     <div class="book-summary">
         
             
-<div id="book-search-input" role="search">
-    <input type="text" placeholder="Type to search" />
-</div>
-
             
                 <nav role="navigation">
                 
@@ -347,14 +347,11 @@
                     <div class="page-wrapper" tabindex="-1" role="main">
                         <div class="page-inner">
                             
-<div id="book-search-results">
-    <div class="search-noresults">
-    
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="money-market-functions">Money Market Functions</h1>
+                                <html><head></head><body><h1 id="money-market-functions"><a name="money-market-functions" class="plugin-anchor" href="#money-market-functions"><i class="fa fa-link" aria-hidden="true"></i></a>Money Market Functions</h1>
 <p>Functions that allow a swap aggreagated with a single money market interactions.</p>
-<h2 id="supplying-to-a-lender">Supplying to a lender</h2>
+<h2 id="supplying-to-a-lender"><a name="supplying-to-a-lender" class="plugin-anchor" href="#supplying-to-a-lender"><i class="fa fa-link" aria-hidden="true"></i></a>Supplying to a lender</h2>
 <p>Supply functions connected with swaps.</p>
 <hr>
 <p><strong>Function:</strong> <code>swapAndSupplyExactIn</code></p>
@@ -421,7 +418,7 @@
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether used for the swap.</p>
 <hr>
-<h2 id="withdrawals-from-existing-deposits">Withdrawals from existing deposits</h2>
+<h2 id="withdrawals-from-existing-deposits"><a name="withdrawals-from-existing-deposits" class="plugin-anchor" href="#withdrawals-from-existing-deposits"><i class="fa fa-link" aria-hidden="true"></i></a>Withdrawals from existing deposits</h2>
 <p>Withdrawal functions connected with swaps</p>
 <hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapExactIn</code></p>
@@ -479,7 +476,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens withdrawn for the swap.</p>
-<h3 id="functions-withdeawing-the-full-balances">Functions withdeawing the full balances</h3>
+<h3 id="functions-withdeawing-the-full-balances"><a name="functions-withdeawing-the-full-balances" class="plugin-anchor" href="#functions-withdeawing-the-full-balances"><i class="fa fa-link" aria-hidden="true"></i></a>Functions withdeawing the full balances</h3>
 <hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapAllIn</code></p>
 <p>This function allows the user to withdraw their entire balance of input tokens (tokenIn) from the lending protocol and swap them for output tokens (tokenOut).</p>
@@ -502,7 +499,7 @@
 <li><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of Ether that must be received.</li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether received from the swap.</p>
-<h2 id="borrowing">Borrowing</h2>
+<h2 id="borrowing"><a name="borrowing" class="plugin-anchor" href="#borrowing"><i class="fa fa-link" aria-hidden="true"></i></a>Borrowing</h2>
 <hr>
 <p><strong>Function:</strong> <code>borrowAndSwapExactIn</code></p>
 <p>This function allows the user to borrow a specified amount of input tokens (tokenIn) and swap them to receive output tokens.</p>
@@ -568,7 +565,7 @@
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens borrowed for the swap.</p>
 <hr>
-<h2 id="repay">Repay</h2>
+<h2 id="repay"><a name="repay" class="plugin-anchor" href="#repay"><i class="fa fa-link" aria-hidden="true"></i></a>Repay</h2>
 <p>Allows the user to repay borrow balances with a lender with any currency.</p>
 <hr>
 <p><strong>Function:</strong> <code>swapAndRepayExactIn</code></p>
@@ -625,7 +622,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether swapped for the repayment.</p>
-<h3 id="functions-repaying-the-full-loan">Functions repaying the full loan</h3>
+<h3 id="functions-repaying-the-full-loan"><a name="functions-repaying-the-full-loan" class="plugin-anchor" href="#functions-repaying-the-full-loan"><i class="fa fa-link" aria-hidden="true"></i></a>Functions repaying the full loan</h3>
 <p>Repaying with these will not left any borrow dust.</p>
 <hr>
 <p><strong>Function:</strong> <code>swapAndRepayAllOut</code></p>
@@ -649,26 +646,10 @@
 <li><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of Ether allowed to be swapped.</li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether swapped for the repayment.</p>
-
+</body></html>
                                 
                                 </section>
                             
-    </div>
-    <div class="search-results">
-        <div class="has-results">
-            
-            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
-            <ul class="search-results-list"></ul>
-            
-        </div>
-        <div class="no-results">
-            
-            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
-            
-        </div>
-    </div>
-</div>
-
                         </div>
                     </div>
                 
@@ -692,7 +673,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Money Market","level":"1.4.1","depth":2,"next":{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},"previous":{"title":"Contract API","level":"1.4","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.4.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.4.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.4.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.4.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"api/money-market.md","mtime":"2023-04-08T16:41:45.380Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-09T11:29:11.879Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Money Market","level":"1.4.1","depth":2,"next":{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},"previous":{"title":"Contract API","level":"1.4","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.4.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.4.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.4.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.4.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","page-toc-button","include-codeblock","anchors","js-console","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"./resources/gitbook-plugin-include-codeblock.hbs","theme":"chrome","unindent":false},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"js-console":{},"livereload":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"OqedPIGOfsDlo31UNwYbCFMSaO9m9G","gitbook":">=3.0.0"},"file":{"path":"api/money-market.md","mtime":"2023-04-08T16:41:45.380Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-09T12:32:21.435Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -746,23 +727,15 @@
     <script src="../gitbook/theme.js"></script>
     
         
+        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-js-console/console-ui.js"></script>
+        
+    
+        
         <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
         
     
         

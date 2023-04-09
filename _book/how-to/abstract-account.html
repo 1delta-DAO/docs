@@ -350,13 +350,17 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="how-to-create-and-use-1delta-abstract-accounts"><a name="how-to-create-and-use-1delta-abstract-accounts" class="plugin-anchor" href="#how-to-create-and-use-1delta-abstract-accounts"><i class="fa fa-link" aria-hidden="true"></i></a>How to create and use 1delta abstract accounts</h1>
-<h2 id="building-a-margin-position-with-1delta"><a name="building-a-margin-position-with-1delta" class="plugin-anchor" href="#building-a-margin-position-with-1delta"><i class="fa fa-link" aria-hidden="true"></i></a>Building a margin position with 1delta</h2>
+<p>We will describe how to use 1delta to trade on top of a lending protocol.</p>
+<h2 id="create-an-account"><a name="create-an-account" class="plugin-anchor" href="#create-an-account"><i class="fa fa-link" aria-hidden="true"></i></a>Create an account</h2>
 <p>To begin trading, you will need to create a 1Delta account. The account provides you with flexibility, control and is very cheap to create — only minor gas fees are incurred.</p>
 <p><img src="../assets/account-create.png" alt="Account Creation" title="Create Account!"></p>
+<h2 id="deposit-collateral"><a name="deposit-collateral" class="plugin-anchor" href="#deposit-collateral"><i class="fa fa-link" aria-hidden="true"></i></a>Deposit collateral</h2>
 <p>Once the account is created, you can deposit funds to the lending protocol. If you do not currently own the token you want to deposit, you can also swap and then supply in the same transaction using a Uniswap-style interface:</p>
 <p><img src="../assets/swap-in-account.png" alt="Swap In" title="Swap In!"></p>
+<h2 id="open-a-margin-position---borrow-swap-and-supply-in-a-single-click"><a name="open-a-margin-position---borrow-swap-and-supply-in-a-single-click" class="plugin-anchor" href="#open-a-margin-position---borrow-swap-and-supply-in-a-single-click"><i class="fa fa-link" aria-hidden="true"></i></a>Open a margin position - Borrow, Swap and Supply in a single Click</h2>
 <p>It is now time to trade on margin. With your deposited collateral you can now use the full capacity of your borrowing power. The following screenshot shows an indication of a positionn increase where WETH is borrowed and sold for USDC - which is directly deposited. All the relevant risk parameters are shown, in the scenario, the user sees a warning that the account will get close to liquidation after execution.</p>
 <p><img src="../assets/margin-trade-account.png" alt="Open" title="Trade on margin!"></p>
+<h2 id="close-a-margin-psotion---withdraw-swap-and-repay-in-a-single-click"><a name="close-a-margin-psotion---withdraw-swap-and-repay-in-a-single-click" class="plugin-anchor" href="#close-a-margin-psotion---withdraw-swap-and-repay-in-a-single-click"><i class="fa fa-link" aria-hidden="true"></i></a>Close a margin psotion - Withdraw, Swap and Repay in a single Click</h2>
 <p>If our health factor gets very low, the manual withdraw-swap-repay cycle would lead to a significant hassle when trying to unwind the position, all while 1Delta executes the interactions in a single transaction:</p>
 <p><img src="../assets/close-account.png" alt="Close" title="Trade on margin!">
 <em>Our health factor is immediately restored if we trim the full position by selecting the maximum output amount on the right hand side. The dApp will also make sure that there is no dust left.</em></p>

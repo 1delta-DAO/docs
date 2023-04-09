@@ -8,7 +8,6 @@ To begin trading, you will need to create a 1Delta account. The account provides
 
 ![Account Creation](../assets/account-create.png "Create Account!")
 
-
 ## Deposit collateral
 
 Once the account is created, you can deposit funds to the lending protocol. If you do not currently own the token you want to deposit, you can also swap and then supply in the same transaction using a Uniswap-style interface:
@@ -22,7 +21,7 @@ It is now time to trade on margin. With your deposited collateral you can now us
 
 ![Open](../assets/margin-trade-account.png "Trade on margin!")
 
-## Close a margin psotion - Withdraw, Swap and Repay in a single Click
+## Close a margin postion - Withdraw, Swap and Repay in a single Click
 
 If our health factor gets very low, the manual withdraw-swap-repay cycle would lead to a significant hassle when trying to unwind the position, all while 1Delta executes the interactions in a single transaction:
 

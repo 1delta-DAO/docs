@@ -1,3 +1,8 @@
+---
+layout: home
+title: How To Use 1delta
+---
+
 # How To Use 1delta
 
 1delta has a unique approach to margin trading. Our initial version combines the simplicity of a lending protocol interface with well versed swap interfeces that will help you with building any position with the lender.

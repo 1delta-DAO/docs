@@ -29,4 +29,4 @@ If our health factor gets very low, the manual withdraw-swap-repay cycle would l
 ![Close](../assets/close-account.png "Trade on margin!")
 *Our health factor is immediately restored if we trim the full position by selecting the maximum output amount on the right hand side. The dApp will also make sure that there is no dust left.*
 
-WE can see that the health factor jumps up and the LTV drops to zero. On top of that, 1delta's implementation prevents dust if you pick the maximum amount for closing a position.
+We can see that the health factor jumps up and the LTV drops to zero. On top of that, 1delta's implementation prevents dust if you pick the maximum amount for closing a position.

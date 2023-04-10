@@ -23,7 +23,7 @@ The selections map to the trade types as follows.
 - **Single Debt Position:** Borrow and swap or swap and repay.
 - **Two Collatral Positions:** Swap collateral positions.
 - **Two Debt Positions:** Swap debt positions.
-- **One Collateral and one Debt Positions:** Open a margin position (Borrow, swap and supply) or close one (withdraw debt, swap and repay debt)
+- **One Collateral and one Debt Positions:** Open a margin position (Borrow, swap and supply) or close one (withdraw collateral, swap and repay debt)
 
 The follwoing chart shows hot the selections compose trade types.
 

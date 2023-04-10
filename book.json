@@ -1,13 +1,12 @@
 {
     "gitbook": ">=3.0.0",
-    "title": "OqedPIGOfsDlo31UNwYbCFMSaO9m9G",
+    "title": "1delta docs",
     "root": ".",
     "structure": {
       "readme": "README.md",
       "summary": "SUMMARY.md"
     },
     "plugins": [
-      "-search",
       "-lunr",
       "page-toc-button",
       "include-codeblock",

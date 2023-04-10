@@ -33,5 +33,5 @@ The follwoing chart shows hot the selections compose trade types.
 
 Dependent on which lender you want to trade with, the mechanics can vary
 
-### [Brokering](broker.md)
-### [Abstract accounts](abstract-account.md)
+### [With Delegation](delegation.md)
+### [Using Abstract Accounts](abstract-accounts.md)

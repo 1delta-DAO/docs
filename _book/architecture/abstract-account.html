@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Abstract accounts · OqedPIGOfsDlo31UNwYbCFMSaO9m9G</title>
+        <title>Abstract accounts · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -25,6 +25,10 @@
             
                 
                 <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
                 
@@ -73,6 +77,10 @@
     <div class="book-summary">
         
             
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
             
                 <nav role="navigation">
                 
@@ -99,23 +107,9 @@
             
 
             
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.1.1" data-path="../1delta.html">
-            
-                <a href="../1delta.html">
-            
-                    
-                    1delta
-            
-                </a>
-            
-
-            
         </li>
     
-        <li class="chapter " data-level="1.1.2" data-path="../margin-aggregation.html">
+        <li class="chapter " data-level="1.2" data-path="../margin-aggregation.html">
             
                 <a href="../margin-aggregation.html">
             
@@ -128,17 +122,12 @@
             
         </li>
     
-
-            </ul>
+        <li class="chapter " data-level="1.3" data-path="../guide/overview.html">
             
-        </li>
-    
-        <li class="chapter " data-level="1.2" data-path="../doc/overview.html">
-            
-                <a href="../doc/overview.html">
+                <a href="../guide/overview.html">
             
                     
-                    Architecture
+                    Guide
             
                 </a>
             
@@ -147,12 +136,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.2.1" data-path="../doc/broker.html">
+        <li class="chapter " data-level="1.3.1" data-path="../guide/delegation.html">
             
-                <a href="../doc/broker.html">
+                <a href="../guide/delegation.html">
             
                     
-                    Broker architecture
+                    Brokering
             
                 </a>
             
@@ -160,9 +149,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.2.2" data-path="../doc/abstract-account.html">
+        <li class="chapter " data-level="1.3.2" data-path="../guide/abstract-accounts.html">
             
-                <a href="../doc/abstract-account.html">
+                <a href="../guide/abstract-accounts.html">
             
                     
                     Abstract accounts
@@ -178,12 +167,12 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3" data-path="overview.html">
+        <li class="chapter " data-level="1.4" data-path="overview.html">
             
                 <a href="overview.html">
             
                     
-                    How Tos
+                    Architecture
             
                 </a>
             
@@ -192,12 +181,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="broker.html">
+        <li class="chapter " data-level="1.4.1" data-path="broker.html">
             
                 <a href="broker.html">
             
                     
-                    Brokering
+                    Broker architecture
             
                 </a>
             
@@ -205,7 +194,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.2" data-path="abstract-account.html">
+        <li class="chapter active" data-level="1.4.2" data-path="abstract-account.html">
             
                 <a href="abstract-account.html">
             
@@ -223,7 +212,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4" data-path="../api/summary.html">
+        <li class="chapter " data-level="1.5" data-path="../api/summary.html">
             
                 <a href="../api/summary.html">
             
@@ -237,7 +226,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.1" data-path="../api/money-market.html">
+        <li class="chapter " data-level="1.5.1" data-path="../api/money-market.html">
             
                 <a href="../api/money-market.html">
             
@@ -250,7 +239,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.2" data-path="../api/borrow-swap.html">
+        <li class="chapter " data-level="1.5.2" data-path="../api/borrow-swap.html">
             
                 <a href="../api/borrow-swap.html">
             
@@ -263,7 +252,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3" data-path="../api/collateral-swap.html">
+        <li class="chapter " data-level="1.5.3" data-path="../api/collateral-swap.html">
             
                 <a href="../api/collateral-swap.html">
             
@@ -276,7 +265,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.4" data-path="../api/margin-open.html">
+        <li class="chapter " data-level="1.5.4" data-path="../api/margin-open.html">
             
                 <a href="../api/margin-open.html">
             
@@ -289,7 +278,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.5" data-path="../api/margin-close.html">
+        <li class="chapter " data-level="1.5.5" data-path="../api/margin-close.html">
             
                 <a href="../api/margin-close.html">
             
@@ -347,28 +336,34 @@
                     <div class="page-wrapper" tabindex="-1" role="main">
                         <div class="page-inner">
                             
+<div id="book-search-results">
+    <div class="search-noresults">
+    
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="how-to-create-and-use-1delta-abstract-accounts"><a name="how-to-create-and-use-1delta-abstract-accounts" class="plugin-anchor" href="#how-to-create-and-use-1delta-abstract-accounts"><i class="fa fa-link" aria-hidden="true"></i></a>How to create and use 1delta abstract accounts</h1>
-<p>We will describe how to use 1delta to trade on top of a lending protocol.</p>
-<h2 id="create-an-account"><a name="create-an-account" class="plugin-anchor" href="#create-an-account"><i class="fa fa-link" aria-hidden="true"></i></a>Create an account</h2>
-<p>To begin trading, you will need to create a 1Delta account. The account provides you with flexibility, control and is very cheap to create — only minor gas fees are incurred.</p>
-<p><img src="../assets/account-create.png" alt="Account Creation" title="Create Account!"></p>
-<h2 id="deposit-collateral"><a name="deposit-collateral" class="plugin-anchor" href="#deposit-collateral"><i class="fa fa-link" aria-hidden="true"></i></a>Deposit collateral</h2>
-<p>Once the account is created, you can deposit funds to the lending protocol. If you do not currently own the token you want to deposit, you can also swap and then supply in the same transaction using a Uniswap-style interface:</p>
-<p><img src="../assets/swap-in-account.png" alt="Swap In" title="Swap In!"></p>
-<h2 id="open-a-margin-position---borrow-swap-and-supply-in-a-single-click"><a name="open-a-margin-position---borrow-swap-and-supply-in-a-single-click" class="plugin-anchor" href="#open-a-margin-position---borrow-swap-and-supply-in-a-single-click"><i class="fa fa-link" aria-hidden="true"></i></a>Open a margin position - Borrow, Swap and Supply in a single Click</h2>
-<p>It is now time to trade on margin. With your deposited collateral you can now use the full capacity of your borrowing power. The following screenshot shows an indication of a positionn increase where WETH is borrowed and sold for USDC - which is directly deposited. All the relevant risk parameters are shown, in the scenario, the user sees a warning that the account will get close to liquidation after execution.</p>
-<p><img src="../assets/margin-trade-account.png" alt="Open" title="Trade on margin!"></p>
-<h2 id="close-a-margin-postion---withdraw-swap-and-repay-in-a-single-click"><a name="close-a-margin-postion---withdraw-swap-and-repay-in-a-single-click" class="plugin-anchor" href="#close-a-margin-postion---withdraw-swap-and-repay-in-a-single-click"><i class="fa fa-link" aria-hidden="true"></i></a>Close a margin postion - Withdraw, Swap and Repay in a single Click</h2>
-<p>If our health factor gets very low, the manual withdraw-swap-repay cycle would lead to a significant hassle when trying to unwind the position, all while 1Delta executes the interactions in a single transaction:</p>
-<p><img src="../assets/close-account.png" alt="Close" title="Trade on margin!">
-<em>Our health factor is immediately restored if we trim the full position by selecting the maximum output amount on the right hand side. The dApp will also make sure that there is no dust left.</em></p>
-<p>We can see that the health factor jumps up and the LTV drops to zero. On top of that, 1delta&apos;s implementation prevents dust if you pick the maximum amount for closing a position.</p>
+                                <html><head></head><body><h1 id="architecture-using-abstract-accounts"><a name="architecture-using-abstract-accounts" class="plugin-anchor" href="#architecture-using-abstract-accounts"><i class="fa fa-link" aria-hidden="true"></i></a>Architecture Using Abstract Accounts</h1>
+<p>First of all, users have to create an abstract account using our factory contract. Once the account is created, the user can then interact though it in a very similar manner to the brokerage contract, except that they are rather <em>self-brokering</em>.</p>
+<p><img src="../assets/account-chart.png" alt="Accounts" title="Abstract Account Architecture Chart"></p>
 </body></html>
                                 
                                 </section>
                             
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
                         </div>
                     </div>
                 
@@ -376,7 +371,7 @@
 
             
                 
-                <a href="broker.html" class="navigation navigation-prev " aria-label="Previous page: Brokering">
+                <a href="broker.html" class="navigation navigation-prev " aria-label="Previous page: Broker architecture">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -392,7 +387,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Abstract accounts","level":"1.3.2","depth":2,"next":{"title":"Contract API","level":"1.4","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.4.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.4.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.4.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.4.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.4.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"previous":{"title":"Brokering","level":"1.3.1","depth":2,"path":"how-to/broker.md","ref":"./how-to/broker.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-search","-lunr","page-toc-button","include-codeblock","anchors","js-console","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"./resources/gitbook-plugin-include-codeblock.hbs","theme":"chrome","unindent":false},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"anchors":{},"js-console":{},"livereload":{},"highlight":{},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"OqedPIGOfsDlo31UNwYbCFMSaO9m9G","gitbook":">=3.0.0"},"file":{"path":"how-to/abstract-account.md","mtime":"2023-04-09T15:04:34.481Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-09T15:04:51.192Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Abstract accounts","level":"1.4.2","depth":2,"next":{"title":"Contract API","level":"1.5","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.5.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.5.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.5.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.5.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.5.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"previous":{"title":"Broker architecture","level":"1.4.1","depth":2,"path":"architecture/broker.md","ref":"./architecture/broker.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","page-toc-button","include-codeblock","anchors","js-console","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"js-console":{},"highlight":{},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"./resources/gitbook-plugin-include-codeblock.hbs","theme":"chrome","unindent":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"architecture/abstract-account.md","mtime":"2023-04-09T13:36:35.296Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-10T10:45:47.677Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -455,6 +450,14 @@
     
         
         <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
         
     
         

@@ -11,7 +11,7 @@ On the other hand, we have protocols that *do not allow this type of delegation*
 **Compound V2 and similar protocols like Venus.io fall into this category.**
 
 
-* [Broker Architecture](broker.md)
+* [Delegation Architecture](delegation.md)
 * [Abstract Account Architecture](abstract-accounts.md)
 
 

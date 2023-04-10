@@ -1,4 +1,4 @@
-# Broker Structure
+# Delegation Structure
 
 The architecture for protocols that allow delegated borrowing and withdrawals is provided as follows.
 

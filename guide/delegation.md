@@ -24,7 +24,7 @@ In order to borrow or repay funds, select a single currency on the debt side. Th
 
 With collateral in place, we can now proceed to open a margin position by selecting one currency for collateral and another for debt. The example below demonstrates our selection for building a long WETH position funded by borrowing USDC. To execute the trade, we click the trade button once more.
 ![Open Margin](../assets//delegation//select-margin-open.png "Open a margin position!") 
-*Choose a single currency for both collateral and debt sides, then click the trade button to configure the margin trade*
+*Choose a single currency for both collateral and debt sides, then click the trade button to configure the margin trade.*
 
 The swap modal presents an overview of the trade details. We can either specify the amount of WETH we wish to deposit or the amount of USDC we want to borrow. First, we must approve the borrow delegation, which grants permission for the 1delta router to borrow funds on our behalf. Additionally, we can choose between different borrowing modes when trading on top of AAVE.
 

@@ -9,7 +9,7 @@ To begin, we first select a trade type by clicking the "Start Trading" button, f
 The screenshot below illustrates a selection of WETH as collateral, indicating that we intend to interact with a WETH collateral position.
 
 ![Select](../assets//delegation/select-single.png "Pick the trade!") 
-*Selecting a single asset on the collateral side allows us to either withdraw or deposit to the lender*
+*Selecting a single asset on the collateral side allows us to either withdraw or deposit to the lender.*
 
 By clicking on the prominent blue button, we can now link a swap trade to either a deposit or withdrawal transaction. However, it's essential to deposit collateral first before proceeding with any other transaction types that include borrowing.
 

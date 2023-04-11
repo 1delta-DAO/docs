@@ -28,7 +28,7 @@ To open margin positions, users can manulally loop through the following steps i
     5. Borrow $262.144 (80% of$327.68), swap an supply
     6. Borrow $48.576 (the remaining amount to bring the total borrowed funds to $3,000)
 
-We see that building this leverage takes 9 transactions to complete as each sub-step in step 3) is a separate transaction. The follwoing chart summarizes the general procedure.
+We see that building this leverage takes 22 transactions to complete as each sub-step in step 3. consists of 3 separate transactions. The follwoing chart summarizes the general procedure.
 
 ![Margin Aggregation](./assets/manual-swaps.png)
 *1) A first USDT deposit is required for taking out a loan; 2) we can borrow WBTC to our wallet; 3) we swap WBTC to USDT on a DEX; 4) we deposit USDT to the lender; we repeat from step 2) until we reach the desired position size.*

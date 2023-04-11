@@ -342,7 +342,7 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="how-to-use-1deltas-margin-aggregator"><a name="how-to-use-1deltas-margin-aggregator" class="plugin-anchor" href="#how-to-use-1deltas-margin-aggregator"><i class="fa fa-link" aria-hidden="true"></i></a>How to use 1delta&apos;s margin aggregator</h1>
-<p>In this guide, we will outline the process of utilizing the 1delta margin trading implementation to manage lending positions within the Aave lending protocol.</p>
+<p>In this guide, we will outline the process of utilizing the 1delta margin trading implementation to manage lending positions within the AAVE lending protocol.</p>
 <h2 id="supply--withdraw--borrow--repay"><a name="supply--withdraw--borrow--repay" class="plugin-anchor" href="#supply--withdraw--borrow--repay"><i class="fa fa-link" aria-hidden="true"></i></a>Supply / Withdraw / Borrow / Repay</h2>
 <p>To begin, we first select a trade type by clicking the &quot;Start Trading&quot; button, followed by choosing the specific position we wish to engage with.</p>
 <p>The screenshot below illustrates a selection of WETH as collateral, indicating that we intend to interact with a WETH collateral position.</p>
@@ -350,39 +350,39 @@
 <em>Selecting a single asset on the collateral side allows us to either withdraw or deposit to the lender</em></p>
 <p>By clicking on the prominent blue button, we can now link a swap trade to either a deposit or withdrawal transaction. However, it&apos;s essential to deposit collateral first before proceeding with any other transaction types that include borrowing.</p>
 <p><img src="../assets/delegation/swap-in.png" alt="Transact In" title="Supply collateral!"> 
-<em>On the left hand side, a direct supply is initiated, on the right hand side, a swap from USDC to WETH is done before supplying the obtained WETH</em></p>
+<em>On the left hand side, a direct supply is initiated, on the right hand side, a swap from USDC to WETH is done before supplying the obtained WETH.</em></p>
 <p>To initiate a withdrawal, click on &quot;Withdraw instead&quot; or the arrow situated between the input panels.</p>
 <p>In order to borrow or repay funds, select a single currency on the debt side. The default mode is set to borrowing; however, by clicking on &quot;Repay instead,&quot; we can opt to repay debt using our wallet balance.</p>
 <h2 id="open-a-margin-position"><a name="open-a-margin-position" class="plugin-anchor" href="#open-a-margin-position"><i class="fa fa-link" aria-hidden="true"></i></a>Open a margin position</h2>
-<p>With collateral in place, we can now proceed to open a margin position by selecting one currency for collateral and another for debt. The example below demonstrates our selection for building a long WETH position funded by borrowing USDC. To execute the trade, click the trade button once more.
+<p>With collateral in place, we can now proceed to open a margin position by selecting one currency for collateral and another for debt. The example below demonstrates our selection for building a long WETH position funded by borrowing USDC. To execute the trade, we click the trade button once more.
 <img src="../assets/delegation/select-margin-open.png" alt="Open Margin" title="Open a margin position!"> 
 <em>Choose a single currency for both collateral and debt sides, then click the trade button to configure the margin trade</em></p>
 <p>The swap modal presents an overview of the trade details. We can either specify the amount of WETH we wish to deposit or the amount of USDC we want to borrow. First, we must approve the borrow delegation, which grants permission for the 1delta router to borrow funds on our behalf. Additionally, we can choose between different borrowing modes when trading on top of AAVE.</p>
 <p><img src="../assets/delegation/margin-open.png" alt="Open Margin Modal" title="Trade!"> 
-<em>The swap modal displays the trade&apos;s impact on our health factor and LTV</em></p>
+<em>The swap modal displays the trade&apos;s impact on our health factor and LTV.</em></p>
 <p>Upon successful execution of the trade, our positions will be displayed:</p>
 <p><img src="../assets/delegation/position.png" alt="Positions"> 
-<em>After execution, our debt position in the selected interest rate mode and an increased WETH position will be visible</em></p>
+<em>After execution, our debt position in the selected interest rate mode and an increased WETH position will be visible.</em></p>
 <h2 id="swap-debt"><a name="swap-debt" class="plugin-anchor" href="#swap-debt"><i class="fa fa-link" aria-hidden="true"></i></a>Swap debt</h2>
-<p>With 1Delta, we can effortlessly exchange our debt positions in just a single click. To swap our USDC debt for another currency, we simply select USDC and the target currency (in this case, WBTC) to access the debt swap trade configuration.</p>
+<p>With 1delta, we can effortlessly exchange our debt positions in just a single click. To swap our USDC debt for another currency, we simply select USDC and the target currency (in this case, WBTC) to access the debt swap trade configuration.</p>
 <p><img src="../assets/delegation/select-debt-swap.png" alt="Positions"> 
-<em>We initiate the debt swap configuration by choosing two debt currencies</em></p>
+<em>We initiate the debt swap configuration by choosing two debt currencies.</em></p>
 <p>Within the trade configuration, we approve the borrow delegation (if not already done) to enable borrowing of WBTC. When selecting the maximum amount, 1delta&apos;s smart contracts ensure no residual debt remains in the position to be repaid. If the positions are in the wrong order, we can click the arrow between the input panels to switch them.</p>
 <p><img src="../assets/delegation/debt-swap.png" alt="Trade Debt"> 
-<em>To switch the currencies in the swap, we can click the down arrow</em></p>
+<em>To switch the currencies in the swap, we can click the down arrow - we would then borrow USDC and repay potential WBTC debt.</em></p>
 <p>Following the trade, we&apos;ll notice that the original USDC debt position has been completely replaced with a WBTC debt position.</p>
 <p><img src="../assets/delegation/post-debt-swap.png" alt="Trade Debt"> 
-<em>After executing a debt swap with the maximum repay amount selected, no leftover debt will persist</em></p>
+<em>After executing a debt swap with the maximum repay amount selected, no leftover debt will persist.</em></p>
 <h2 id="swap-collateral"><a name="swap-collateral" class="plugin-anchor" href="#swap-collateral"><i class="fa fa-link" aria-hidden="true"></i></a>Swap collateral</h2>
 <p>One of 1delta&apos;s key features is the ability to trade collateral without the need to withdraw and repay debt. By selecting two collateral positions, we can easily swap them. In this example, we aim to exchange our WETH collateral for USDC collateral.</p>
 <p><img src="../assets/delegation/select-collateral-swap.png" alt="Trade Collateral"> 
-<em>We choose two collateral positions to execute a collateral swap</em></p>
+<em>We choose two collateral positions to execute a collateral swap.</em></p>
 <p>Upon pressing the trade button, we&apos;ll access the configuration. By selecting all available WETH to swap, our entire WETH collateral position will be converted to a USDC collateral position:</p>
 <p><img src="../assets/delegation/collateral-swap.png" alt="Collateral Sawp Config"> 
-<em>The input panel headers indicate which lending protocol interaction occurs for each position - in a collateral swap, the top currency is withdrawn to repay the bottom one</em></p>
+<em>The input panel headers indicate which lending protocol interaction occurs for each position - in a collateral swap, the top currency is withdrawn to repay the bottom one.</em></p>
 <p>After approving the withdrawal and executing the transaction, we&apos;ll see that our entire collateral position has been exchanged:</p>
 <p><img src="../assets/delegation/post-collateral-swap.png" alt="Collateral Sawp Config"> 
-<em>Post-execution view of the transaction shown in the previous screenshot</em></p>
+<em>Post-execution view of the transaction shown in the previous screenshot.</em></p>
 <h2 id="close-a-margin-position"><a name="close-a-margin-position" class="plugin-anchor" href="#close-a-margin-position"><i class="fa fa-link" aria-hidden="true"></i></a>Close a margin position</h2>
 <p>In the event that our health factor drops rapidly, we can prevent liquidation with just a single click. 1delta enables us to directly withdraw, swap, and repay a loan in one simple step. In this case, similar to opening a margin position, we&apos;ll need to select one currency on the collateral side (the currency we want to withdraw) and another on the debt side (the currency we want to repay).</p>
 <p>Upon clicking the trade button, either click on the arrow or the &quot;Close position instead&quot; button to reduce our position. We&apos;ll need to approve the 1Delta contract&apos;s withdrawal of collateral on our behalf, as demonstrated in the following screenshot.</p>

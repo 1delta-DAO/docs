@@ -4,7 +4,7 @@ In this guide, we will outline the process of utilizing the 1delta margin tradin
 
 ## Supply / Withdraw / Borrow / Repay
 
-To begin, first select a trade type by clicking the "Start Trading" button, followed by choosing the specific position we wish to engage with.
+To begin, we first select a trade type by clicking the "Start Trading" button, followed by choosing the specific position we wish to engage with.
 
 The screenshot below illustrates a selection of WETH as collateral, indicating that we intend to interact with a WETH collateral position.
 

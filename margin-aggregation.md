@@ -16,7 +16,7 @@ In summary, margin trading for cryptocurrencies is a high-risk, high-reward trad
 
 ## Margin Trading In DeFi
 
-To open margin positions, users can manulally loop through the following steps if they want to open an ETH-long psoition with 4x leverage.
+To open margin positions, users can manually loop through the following steps if they want to open an ETH-long position with 4x leverage.
 
 1. Supply initial collateral in ETH worth $1,000
 2. Borrow $800 worth of USDC (80% of %1,000)
@@ -28,13 +28,13 @@ To open margin positions, users can manulally loop through the following steps i
     5. Borrow $262.144 (80% of$327.68), swap an supply
     6. Borrow $48.576 (the remaining amount to bring the total borrowed funds to $3,000)
 
-We see that building this leverage takes 22 transactions to complete as each sub-step in step 3. consists of 3 separate transactions. The follwoing chart summarizes the general procedure.
+We see that building this leverage takes 22 transactions to complete as each sub-step in step 3. consists of 3 separate transactions. The following chart summarizes the general procedure.
 
 ![Margin Aggregation](./assets/manual-swaps.png)
 *1) A first USDT deposit is required for taking out a loan; 2) we can borrow WBTC to our wallet; 3) we swap WBTC to USDT on a DEX; 4) we deposit USDT to the lender; we repeat from step 2) until we reach the desired position size.*
 
 
-Certainly, this cannot be the long-term solution to DeFi margin trading. 1delta uses unique methods and implementations that allow opening such positions in a maximum of 2 transactions, wehere the first one is just the initial supply of the collateral.
+Certainly, this cannot be the long-term solution to DeFi margin trading. 1delta uses unique methods and implementations that allow opening such positions in a maximum of 2 transactions, where the first one is just the initial supply of the collateral.
 
 ## How 1delta Automates The Flow
 
@@ -46,7 +46,7 @@ We illustrate the example above using the 1delta protocol.
     2. We can now borrow 80% of the $4,000 ($3,2000) in USDC the we supplied, we borrow $3,000
     3. We repay the swap pool with the obtained $3,000 in USDC
 
-All sub-steps in step 2. happen within the same transaction. As such, there is no more manual looping when trying to buuild a leveraged position when using lending protocols. The follwoing chart summarizes the interactions with the lender.
+All sub-steps in step 2. happen within the same transaction. As such, there is no more manual looping when trying to build a leveraged position when using lending protocols. The following chart summarizes the interactions with the lender.
 
 ![Abstract Account Flow](./assets/abstract-account-flow.png)
 

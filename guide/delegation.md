@@ -62,12 +62,12 @@ One of 1delta's key features is the ability to trade collateral without the need
 
 Upon pressing the trade button, we'll access the configuration. By selecting all available WETH to swap, our entire WETH collateral position will be converted to a USDC collateral position:
 
-![Collateral Sawp Config](../assets//delegation/collateral-swap.png "") 
+![Collateral Swap Config](../assets//delegation/collateral-swap.png "") 
 *The input panel headers indicate which lending protocol interaction occurs for each position - in a collateral swap, the top currency is withdrawn to repay the bottom one.*
 
 After approving the withdrawal and executing the transaction, we'll see that our entire collateral position has been exchanged:
 
-![Collateral Sawp Config](../assets//delegation/post-collateral-swap.png "") 
+![Post Collateral Swap](../assets//delegation/post-collateral-swap.png "") 
 *Post-execution view of the transaction shown in the previous screenshot.*
 
 ## Close a margin position
@@ -87,6 +87,6 @@ After executing the trade, we'll notice that no debt position remains.
 
 Subsequently, we can withdraw all our collateral as described in the initial step.
 
-## Conclsion
+## Conclusion
 
 By following the steps outlined in this guide, you have successfully opened an approximately 3x leveraged long position in WETH, switched the exposure to short BTC, and closed the entire position. It's important to note that all actions demonstrated above can be executed in any order and using multiple currencies for both the collateral and debt sides.

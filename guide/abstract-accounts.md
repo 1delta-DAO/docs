@@ -17,11 +17,11 @@ Once the account is created, you can deposit funds to the lending protocol. If y
 
 ## Open a margin position - Borrow, Swap and Supply in a single Click
 
-It is now time to trade on margin. With your deposited collateral you can now use the full capacity of your borrowing power. The following screenshot shows an indication of a positionn increase where WETH is borrowed and sold for USDC - which is directly deposited. All the relevant risk parameters are shown, in the scenario, the user sees a warning that the account will get close to liquidation after execution.
+It is now time to trade on margin. With your deposited collateral you can now use the full capacity of your borrowing power. The following screenshot shows an indication of a position increase where WETH is borrowed and sold for USDC - which is directly deposited. All the relevant risk parameters are shown, in the scenario, the user sees a warning that the account will get close to liquidation after execution.
 
 ![Open](../assets/margin-trade-account.png "Trade on margin!")
 
-## Close a margin postion - Withdraw, Swap and Repay in a single Click
+## Close a margin position - Withdraw, Swap and Repay in a single Click
 
 If our health factor gets very low, the manual withdraw-swap-repay cycle would lead to a significant hassle when trying to unwind the position, all while 1Delta executes the interactions in a single transaction:
 

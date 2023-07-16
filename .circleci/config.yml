@@ -1,10 +1,7 @@
 version: 2.1
 
-orbs:
-  gcp-cli: circleci/gcp-cli@2.4.1
-
 jobs:
-  build-and-push-to-gcs:
+  build:
     docker:
       - image: circleci/node:latest
     parameters:
@@ -12,28 +9,41 @@ jobs:
         type: string
     steps:
       - checkout
-      - gcp-cli/install
-      - gcp-cli/initialize
       - run:
           name: Build static files
           command: |
             npm install
             npx honkit build
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - .
+
+  push:
+    docker:
+      - image: circleci/node:16
+    parameters:
+      cfpage:
+        type: string
+    steps:
+      - attach_workspace:
+          at: ~/project
       - run:
-          name: Push static files to gcs
-          command: gsutil -m rsync -d -R _book gs://<< parameters.domain >>
-      - run: sleep 7
-      - run:
-          name: Remove Cache Control from static files
-          command: gsutil setmeta -r -h "Cache-control:no-cache, max-age=0" gs://<< parameters.domain >>
+          name: Push static files to Cloudflare
+          command: npx wrangler pages deploy build --project-name=<< parameters.cfpage >>
 
 workflows:
   version: 2
   pipeline:
     jobs:
-      - build-and-push-to-gcs:
+      - build:
           name: docs/deploy
           domain: docs.1delta.io
           filters:
             branches:
               only: main
+      - push:
+          name: docs/push
+          cfpage: docs-1delta
+          requires:
+            - docs/deploy

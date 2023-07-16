@@ -37,7 +37,7 @@ workflows:
   pipeline:
     jobs:
       - build:
-          name: docs/deploy
+          name: docs/build
           domain: docs.1delta.io
           filters:
             branches:
@@ -46,4 +46,4 @@ workflows:
           name: docs/push
           cfpage: docs-1delta
           requires:
-            - docs/deploy
+            - docs/build

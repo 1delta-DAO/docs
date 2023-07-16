@@ -30,7 +30,7 @@ jobs:
           at: ~/project
       - run:
           name: Push static files to Cloudflare
-          command: npx wrangler pages deploy build --project-name=<< parameters.cfpage >>
+          command: npx wrangler pages deploy _book --project-name=<< parameters.cfpage >>
 
 workflows:
   version: 2

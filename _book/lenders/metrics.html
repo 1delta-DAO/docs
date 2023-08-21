@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Open Margin Position · 1delta docs</title>
+        <title>Metrics · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -76,10 +76,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="margin-close.html" />
+    <link rel="next" href="../api/summary.html" />
     
     
-    <link rel="prev" href="collateral-swap.html" />
+    <link rel="prev" href="summary.html" />
     
 
     </head>
@@ -224,9 +224,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.5" data-path="../lenders/summary.html">
+        <li class="chapter " data-level="1.5" data-path="summary.html">
             
-                <a href="../lenders/summary.html">
+                <a href="summary.html">
             
                     
                     Lenders
@@ -238,9 +238,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.5.1" data-path="../lenders/metrics.html">
+        <li class="chapter active" data-level="1.5.1" data-path="metrics.html">
             
-                <a href="../lenders/metrics.html">
+                <a href="metrics.html">
             
                     
                     Metrics
@@ -256,9 +256,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6" data-path="summary.html">
+        <li class="chapter " data-level="1.6" data-path="../api/summary.html">
             
-                <a href="summary.html">
+                <a href="../api/summary.html">
             
                     
                     Contract API
@@ -270,9 +270,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.6.1" data-path="money-market.html">
+        <li class="chapter " data-level="1.6.1" data-path="../api/money-market.html">
             
-                <a href="money-market.html">
+                <a href="../api/money-market.html">
             
                     
                     Money Market
@@ -283,9 +283,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.2" data-path="borrow-swap.html">
+        <li class="chapter " data-level="1.6.2" data-path="../api/borrow-swap.html">
             
-                <a href="borrow-swap.html">
+                <a href="../api/borrow-swap.html">
             
                     
                     Borrow Swap
@@ -296,9 +296,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.3" data-path="collateral-swap.html">
+        <li class="chapter " data-level="1.6.3" data-path="../api/collateral-swap.html">
             
-                <a href="collateral-swap.html">
+                <a href="../api/collateral-swap.html">
             
                     
                     Collateral Swap
@@ -309,9 +309,9 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.6.4" data-path="margin-open.html">
+        <li class="chapter " data-level="1.6.4" data-path="../api/margin-open.html">
             
-                <a href="margin-open.html">
+                <a href="../api/margin-open.html">
             
                     
                     Open Margin Position
@@ -322,9 +322,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.6.5" data-path="margin-close.html">
+        <li class="chapter " data-level="1.6.5" data-path="../api/margin-close.html">
             
-                <a href="margin-close.html">
+                <a href="../api/margin-close.html">
             
                     
                     Close Margin Position
@@ -370,7 +370,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Open Margin Position</a>
+        <a href=".." >Metrics</a>
     </h1>
 </div>
 
@@ -385,86 +385,29 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="open-margin-position">Open Margin Position</h1>
-<p>Allows opening a margin positions using a lender.</p>
-<h2 id="prequisites">Prequisites</h2>
-<p>Supports single-pool swaps and multi-hop swaps. In this case, <code>tokenIn</code> and <code>tokenOut</code> are provided together with the <code>fee</code> parameter to identify the swap pool.</p>
-<p>In case of a multi-hop swaps, the swap-path is provided as encoded <code>bytes</code>.</p>
-<h2 id="functions">Functions</h2>
-<hr>
-<p><strong>Function:</strong> <code>openMarginPositionExactIn</code></p>
-<p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut). The user provides the debt amount as input.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (MarginSwapParamsExactIn memory): A struct containing parameters for opening the margin position.</p>
+                                <h1 id="lending-metrics">Lending Metrics</h1>
+<h2 id="general-parameters">General Parameters</h2>
 <ul>
-<li><p><code>tokenIn</code> (address): The address of the input token to borrow.</p>
-</li>
-<li><p><code>fee</code> (uint24): The fee tier of the pool to be used for the swap.</p>
-</li>
-<li><p><code>tokenOut</code> (address): The address of the output token (collateral).</p>
-</li>
-<li><p><code>amountIn</code> (uint256): The amount of input tokens to borrow.</p>
-</li>
-<li><p><code>interestRateMode</code> (uint256): The interest rate mode (stable or variable) for the borrowed tokens.</p>
-</li>
-<li><p><code>amountOutMinimum</code> (uint256): The minimum amount of output tokens (collateral) allowed to be received.</p>
-</li>
+<li>Collateral <code>c</code>: The $ amount of deposits a trader owns</li>
+<li>Debt <code>d</code>: The $ amount borrowed from the lender</li>
+<li>Collateral factor <code>cF</code>: Determines how much borrow capacity a trader has when depositing an asset. Also described as Liquidation Threshold</li>
+<li>Discounted Collateral: <code>dC = sum of cF*(deposits in asset) for all assets</code></li>
+<li>Borrow Capacity <code>bC=dC-d</code>: The $ amount a trader can borrow</li>
+<li>Account Liquidation Threshold: <code>lT=dC/c</code></li>
 </ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens (collateral) received from the swap.</p>
-<hr>
-<p><strong>Function:</strong> <code>openMarginPositionExactOut</code></p>
-<p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut). The user provides the collateral amount as input.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (MarginSwapParamsExactOut memory): A struct containing parameters for opening the margin position.</p>
+<h2 id="risk-metrics">Risk Metrics</h2>
 <ul>
-<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token to borrow.</p>
-</li>
-<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
-</li>
-<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token (collateral).</p>
-</li>
-<li><p><code>amountOut</code> (<code>uint256</code>): The amount of output tokens (collateral) to receive.</p>
-</li>
-<li><p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the borrowed tokens.</p>
-</li>
-<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be borrowed.</p>
-</li>
+<li><strong>Health Factor</strong>: <code>hF=dC/d</code>, if lower than 1, the account can be liquidated</li>
+<li><strong>LTV</strong>: <code>ltv=c/d</code></li>
 </ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens (borrowed) used for the swap.</p>
-<hr>
-<p><strong>Function:</strong> <code>openMarginPositionExactInMulti</code></p>
-<p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut) using a multi-pool path. The user provides the debt amount as input.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (MarginSwapParamsMultiExactIn memory): A struct containing parameters for opening the margin position.</p>
+<h2 id="derived-values">Derived Values</h2>
 <ul>
-<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-</li>
-<li><p><code>amountIn</code> (<code>uint256</code>): The amount of input tokens to borrow.</p>
-</li>
-<li><p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the borrowed tokens.</p>
-</li>
-<li><p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens (collateral) allowed to be received.</p>
-</li>
+<li><strong>Max Leverage</strong> in pair: <code>l=1/(1-cfOut); cfOut = collateralFacor of Buy Asset</code></li>
+<li><strong>Max Open Size</strong> for pair: <code>mO=bC/l=bC(1-cfOut); cfOut = collateralFacor of Buy Asset</code></li>
+<li><strong>Liquidation Price</strong> (pair only, denomiated in collateral ccy / debt ccy): <code>lP=d_a_USD/(c_a*cF); d_a_USDC=sell asset amount in USD; c_a=buy amount denominated in collateral/buy currency</code><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2023-08-21 14:31:43
+</span></div></div></footer></li>
 </ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens (collateral) received from the swap.</p>
-<hr>
-<p><strong>Function:</strong> <code>openMarginPositionExactOutMulti</code></p>
-<p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut) using a multi-pool path. The user provides the collateral amount as input.</p>
-<p><strong><strong>Parameters:</strong></strong></p>
-<p><code>params</code> (MarginSwapParamsMultiExactOut memory): A struct containing parameters for opening the margin position.</p>
-<ul>
-<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-</li>
-<li><p><code>amountOut</code> (<code>uint256</code>): The amount of output tokens (collateral) to receive.</p>
-</li>
-<li><p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the borrowed tokens.</p>
-</li>
-<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be borrowed.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens (borrowed) used for the swap.</p><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2023-04-08 16:52:46
-</span></div></div></footer><p></p>
 
                                 
                                 </section>
@@ -492,12 +435,12 @@
 
             
                 
-                <a href="collateral-swap.html" class="navigation navigation-prev " aria-label="Previous page: Collateral Swap">
+                <a href="summary.html" class="navigation navigation-prev " aria-label="Previous page: Lenders">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="margin-close.html" class="navigation navigation-next " aria-label="Next page: Close Margin Position">
+                <a href="../api/summary.html" class="navigation navigation-next " aria-label="Next page: Contract API">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -508,7 +451,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Open Margin Position","level":"1.6.4","depth":2,"next":{"title":"Close Margin Position","level":"1.6.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]},"previous":{"title":"Collateral Swap","level":"1.6.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin-open.md","mtime":"2023-04-08T16:52:46.620Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-08-21T14:35:21.107Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Metrics","level":"1.5.1","depth":2,"next":{"title":"Contract API","level":"1.6","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.6.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.6.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.6.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.6.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.6.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"previous":{"title":"Lenders","level":"1.5","depth":1,"path":"lenders/summary.md","ref":"./lenders/summary.md","articles":[{"title":"Metrics","level":"1.5.1","depth":2,"path":"lenders/metrics.md","ref":"./lenders/metrics.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"lenders/metrics.md","mtime":"2023-08-21T14:31:43.519Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-08-21T14:35:21.107Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

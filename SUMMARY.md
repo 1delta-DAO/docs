@@ -7,6 +7,8 @@
 * [Architecture](./architecture/overview.md)
     * [Delegation](./architecture/delegation.md)
     * [Abstract Accounts](./architecture/abstract-account.md)
+* [Lenders](./lenders/summary.md)
+    * [Metrics](./lenders/metrics.md)
 * [Contract API](./api/summary.md)
     * [Money Market](./api/money-market.md)
     * [Borrow Swap](./api/borrow-swap.md)

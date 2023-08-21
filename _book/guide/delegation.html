@@ -16,19 +16,31 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-search-plus/search.css">
                 
             
                 
                 <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
                 
@@ -336,14 +348,14 @@
                     <div class="page-wrapper" tabindex="-1" role="main">
                         <div class="page-inner">
                             
-<div id="book-search-results">
+<div class="search-plus" id="book-search-results">
     <div class="search-noresults">
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="how-to-use-1deltas-margin-aggregator"><a name="how-to-use-1deltas-margin-aggregator" class="plugin-anchor" href="#how-to-use-1deltas-margin-aggregator"><i class="fa fa-link" aria-hidden="true"></i></a>How to use 1delta&apos;s margin aggregator</h1>
+                                <h1 id="how-to-use-1deltas-margin-aggregator">How to use 1delta&apos;s margin aggregator</h1>
 <p>In this guide, we will outline the process of utilizing the 1delta margin trading implementation to manage lending positions within the AAVE lending protocol.</p>
-<h2 id="supply--withdraw--borrow--repay"><a name="supply--withdraw--borrow--repay" class="plugin-anchor" href="#supply--withdraw--borrow--repay"><i class="fa fa-link" aria-hidden="true"></i></a>Supply / Withdraw / Borrow / Repay</h2>
+<h2 id="supply--withdraw--borrow--repay">Supply / Withdraw / Borrow / Repay</h2>
 <p>To begin, we first select a trade type by clicking the &quot;Start Trading&quot; button, followed by choosing the specific position we wish to engage with.</p>
 <p>The screenshot below illustrates a selection of WETH as collateral, indicating that we intend to interact with a WETH collateral position.</p>
 <p><img src="../assets/delegation/select-single.png" alt="Select" title="Pick the trade!"> 
@@ -353,7 +365,7 @@
 <em>On the left hand side, a direct supply is initiated, on the right hand side, a swap from USDC to WETH is done before supplying the obtained WETH.</em></p>
 <p>To initiate a withdrawal, click on &quot;Withdraw instead&quot; or the arrow situated between the input panels.</p>
 <p>In order to borrow or repay funds, select a single currency on the debt side. The default mode is set to borrowing; however, by clicking on &quot;Repay instead,&quot; we can opt to repay debt using our wallet balance.</p>
-<h2 id="open-a-margin-position"><a name="open-a-margin-position" class="plugin-anchor" href="#open-a-margin-position"><i class="fa fa-link" aria-hidden="true"></i></a>Open a margin position</h2>
+<h2 id="open-a-margin-position">Open a margin position</h2>
 <p>With collateral in place, we can now proceed to open a margin position by selecting one currency for collateral and another for debt. The example below demonstrates our selection for building a long WETH position funded by borrowing USDC. To execute the trade, we click the trade button once more.
 <img src="../assets/delegation/select-margin-open.png" alt="Open Margin" title="Open a margin position!"> 
 <em>Choose a single currency for both collateral and debt sides, then click the trade button to configure the margin trade.</em></p>
@@ -363,7 +375,7 @@
 <p>Upon successful execution of the trade, our positions will be displayed:</p>
 <p><img src="../assets/delegation/position.png" alt="Positions"> 
 <em>After execution, our debt position in the selected interest rate mode and an increased WETH position will be visible.</em></p>
-<h2 id="swap-debt"><a name="swap-debt" class="plugin-anchor" href="#swap-debt"><i class="fa fa-link" aria-hidden="true"></i></a>Swap debt</h2>
+<h2 id="swap-debt">Swap debt</h2>
 <p>With 1delta, we can effortlessly exchange our debt positions in just a single click. To swap our USDC debt for another currency, we simply select USDC and the target currency (in this case, WBTC) to access the debt swap trade configuration.</p>
 <p><img src="../assets/delegation/select-debt-swap.png" alt="Positions"> 
 <em>We initiate the debt swap configuration by choosing two debt currencies.</em></p>
@@ -373,17 +385,17 @@
 <p>Following the trade, we&apos;ll notice that the original USDC debt position has been completely replaced with a WBTC debt position.</p>
 <p><img src="../assets/delegation/post-debt-swap.png" alt="Trade Debt"> 
 <em>After executing a debt swap with the maximum repay amount selected, no leftover debt will persist.</em></p>
-<h2 id="swap-collateral"><a name="swap-collateral" class="plugin-anchor" href="#swap-collateral"><i class="fa fa-link" aria-hidden="true"></i></a>Swap collateral</h2>
+<h2 id="swap-collateral">Swap collateral</h2>
 <p>One of 1delta&apos;s key features is the ability to trade collateral without the need to withdraw and repay debt. By selecting two collateral positions, we can easily swap them. In this example, we aim to exchange our WETH collateral for USDC collateral.</p>
 <p><img src="../assets/delegation/select-collateral-swap.png" alt="Trade Collateral"> 
 <em>We choose two collateral positions to execute a collateral swap.</em></p>
 <p>Upon pressing the trade button, we&apos;ll access the configuration. By selecting all available WETH to swap, our entire WETH collateral position will be converted to a USDC collateral position:</p>
-<p><img src="../assets/delegation/collateral-swap.png" alt="Collateral Sawp Config"> 
+<p><img src="../assets/delegation/collateral-swap.png" alt="Collateral Swap Config"> 
 <em>The input panel headers indicate which lending protocol interaction occurs for each position - in a collateral swap, the top currency is withdrawn to repay the bottom one.</em></p>
 <p>After approving the withdrawal and executing the transaction, we&apos;ll see that our entire collateral position has been exchanged:</p>
-<p><img src="../assets/delegation/post-collateral-swap.png" alt="Collateral Sawp Config"> 
+<p><img src="../assets/delegation/post-collateral-swap.png" alt="Post Collateral Swap"> 
 <em>Post-execution view of the transaction shown in the previous screenshot.</em></p>
-<h2 id="close-a-margin-position"><a name="close-a-margin-position" class="plugin-anchor" href="#close-a-margin-position"><i class="fa fa-link" aria-hidden="true"></i></a>Close a margin position</h2>
+<h2 id="close-a-margin-position">Close a margin position</h2>
 <p>In the event that our health factor drops rapidly, we can prevent liquidation with just a single click. 1delta enables us to directly withdraw, swap, and repay a loan in one simple step. In this case, similar to opening a margin position, we&apos;ll need to select one currency on the collateral side (the currency we want to withdraw) and another on the debt side (the currency we want to repay).</p>
 <p>Upon clicking the trade button, either click on the arrow or the &quot;Close position instead&quot; button to reduce our position. We&apos;ll need to approve the 1Delta contract&apos;s withdrawal of collateral on our behalf, as demonstrated in the following screenshot.</p>
 <p><img src="../assets/delegation/margin-trim.png" alt="Trim Margin"> 
@@ -392,9 +404,11 @@
 <p><img src="../assets/delegation/post-margin-trim.png" alt="Trim Margin Post"> 
 <em>When selecting the maximum amount, no residual debt will persist in the position</em></p>
 <p>Subsequently, we can withdraw all our collateral as described in the initial step.</p>
-<h2 id="conclsion"><a name="conclsion" class="plugin-anchor" href="#conclsion"><i class="fa fa-link" aria-hidden="true"></i></a>Conclsion</h2>
-<p>By following the steps outlined in this guide, you have successfully opened an approximately 3x leveraged long position in WETH, switched the exposure to short BTC, and closed the entire position. It&apos;s important to note that all actions demonstrated above can be executed in any order and using multiple currencies for both the collateral and debt sides.</p>
-</body></html>
+<h2 id="conclusion">Conclusion</h2>
+<p>By following the steps outlined in this guide, you have successfully opened an approximately 3x leveraged long position in WETH, switched the exposure to short BTC, and closed the entire position. It&apos;s important to note that all actions demonstrated above can be executed in any order and using multiple currencies for both the collateral and debt sides.</p><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2023-04-27 15:38:06
+</span></div></div></footer><p></p>
+
                                 
                                 </section>
                             
@@ -437,7 +451,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"next":{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]},"previous":{"title":"Guide","level":"1.3","depth":1,"path":"guide/overview.md","ref":"./guide/overview.md","articles":[{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-lunr","page-toc-button","include-codeblock","anchors","js-console","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"js-console":{},"highlight":{},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"./resources/gitbook-plugin-include-codeblock.hbs","theme":"chrome","unindent":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/delegation.md","mtime":"2023-04-11T10:58:15.601Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-11T10:59:32.380Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"next":{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]},"previous":{"title":"Guide","level":"1.3","depth":1,"path":"guide/overview.md","ref":"./guide/overview.md","articles":[{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/delegation.md","mtime":"2023-04-27T15:38:06.714Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-08-21T09:33:05.996Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -491,23 +505,31 @@
     <script src="../gitbook/theme.js"></script>
     
         
-        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        <script src="../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-js-console/console-ui.js"></script>
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/honkit-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/honkit-plugin-search-plus/search.js"></script>
         
     
         
         <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
         
     
         

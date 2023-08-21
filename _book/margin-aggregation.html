@@ -16,19 +16,31 @@
     
             
                 
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
                 
             
                 
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-anchors/plugin.css">
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/honkit-plugin-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/honkit-plugin-search-plus/search.css">
                 
             
                 
                 <link rel="stylesheet" href="gitbook/@honkit/honkit-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
                 
             
                 
@@ -336,21 +348,21 @@
                     <div class="page-wrapper" tabindex="-1" role="main">
                         <div class="page-inner">
                             
-<div id="book-search-results">
+<div class="search-plus" id="book-search-results">
     <div class="search-noresults">
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="margin-aggregation"><a name="margin-aggregation" class="plugin-anchor" href="#margin-aggregation"><i class="fa fa-link" aria-hidden="true"></i></a>Margin Aggregation</h1>
-<h2 id="margin-trading-in-crypto"><a name="margin-trading-in-crypto" class="plugin-anchor" href="#margin-trading-in-crypto"><i class="fa fa-link" aria-hidden="true"></i></a>Margin Trading In Crypto</h2>
+                                <h1 id="margin-aggregation">Margin Aggregation</h1>
+<h2 id="margin-trading-in-crypto">Margin Trading In Crypto</h2>
 <p>Margin trading for cryptocurrencies is a financial strategy that enables investors to trade digital assets like Bitcoin, Ethereum, and other altcoins using borrowed funds from a broker or exchange. This approach allows traders to increase their purchasing power and enhance their profit potential by leveraging their existing capital. However, it&apos;s essential to remember that margin trading also entails higher risks and can lead to significant losses if the market moves against the trader&apos;s position.</p>
 <p>In cryptocurrency margin trading, investors can access leverage, which is essentially a multiplier that amplifies the trader&apos;s capital. For example, if a trader uses 5x leverage, a $1,000 investment would provide them with $5,000 worth of purchasing power in the market. This increased exposure can lead to substantial gains if the market moves in their favor, but it can also magnify losses if the market goes against them.</p>
 <p>To engage in margin trading, traders are required to deposit an initial margin (or collateral) into a lending protocol. This collateral serves as a guarantee for the borrowed funds and is calculated as a percentage of the total position value. Different lenders may have different margin requirements, and traders should be aware of the specific policies of their chosen platform.</p>
 <p>When margin trading cryptocurrencies, it&apos;s crucial to understand the concept of liquidation. Liquidation occurs when the market moves against a trader&apos;s position to the point where their collateral is no longer sufficient to cover their losses. Lenders usually measure this using the <strong>health factor</strong>.</p>
 <p>In such a case, the health factor drops below 1 and the wallet will be flagged for liquidation, allowing another actor to close part of the position to recover the borrowed funds.</p>
 <p>In summary, margin trading for cryptocurrencies is a high-risk, high-reward trading strategy that can lead to significant profits or losses, depending on market movements. It&apos;s best suited for experienced traders who have a solid understanding of market dynamics and can effectively manage risk.</p>
-<h2 id="margin-trading-in-defi"><a name="margin-trading-in-defi" class="plugin-anchor" href="#margin-trading-in-defi"><i class="fa fa-link" aria-hidden="true"></i></a>Margin Trading In DeFi</h2>
-<p>To open margin positions, users can manulally loop through the following steps if they want to open an ETH-long psoition with 4x leverage.</p>
+<h2 id="margin-trading-in-defi">Margin Trading In DeFi</h2>
+<p>To open margin positions, users can manually loop through the following steps if they want to open an ETH-long position with 4x leverage.</p>
 <ol>
 <li>Supply initial collateral in ETH worth $1,000</li>
 <li>Borrow $800 worth of USDC (80% of %1,000)</li>
@@ -364,11 +376,11 @@
 </ol>
 </li>
 </ol>
-<p>We see that building this leverage takes 22 transactions to complete as each sub-step in step 3. consists of 3 separate transactions. The follwoing chart summarizes the general procedure.</p>
+<p>We see that building this leverage takes 22 transactions to complete as each sub-step in step 3. consists of 3 separate transactions. The following chart summarizes the general procedure.</p>
 <p><img src="assets/manual-swaps.png" alt="Margin Aggregation">
 <em>1) A first USDT deposit is required for taking out a loan; 2) we can borrow WBTC to our wallet; 3) we swap WBTC to USDT on a DEX; 4) we deposit USDT to the lender; we repeat from step 2) until we reach the desired position size.</em></p>
-<p>Certainly, this cannot be the long-term solution to DeFi margin trading. 1delta uses unique methods and implementations that allow opening such positions in a maximum of 2 transactions, wehere the first one is just the initial supply of the collateral.</p>
-<h2 id="how-1delta-automates-the-flow"><a name="how-1delta-automates-the-flow" class="plugin-anchor" href="#how-1delta-automates-the-flow"><i class="fa fa-link" aria-hidden="true"></i></a>How 1delta Automates The Flow</h2>
+<p>Certainly, this cannot be the long-term solution to DeFi margin trading. 1delta uses unique methods and implementations that allow opening such positions in a maximum of 2 transactions, where the first one is just the initial supply of the collateral.</p>
+<h2 id="how-1delta-automates-the-flow">How 1delta Automates The Flow</h2>
 <p>We illustrate the example above using the 1delta protocol.</p>
 <ol>
 <li>Supply initial collateral in ETH worth $1,000</li>
@@ -379,10 +391,12 @@
 </ol>
 </li>
 </ol>
-<p>All sub-steps in step 2. happen within the same transaction. As such, there is no more manual looping when trying to buuild a leveraged position when using lending protocols. The follwoing chart summarizes the interactions with the lender.</p>
+<p>All sub-steps in step 2. happen within the same transaction. As such, there is no more manual looping when trying to build a leveraged position when using lending protocols. The following chart summarizes the interactions with the lender.</p>
 <p><img src="assets/abstract-account-flow.png" alt="Abstract Account Flow"></p>
-<p><em>Illustration of an abstract account that can open positions (borrow and supply) with flash swaps or flash loans in only two steps. As the 1Delta account is a smart contract, these steps can also be batch-executed in a single transaction.</em></p>
-</body></html>
+<p><em>Illustration of an abstract account that can open positions (borrow and supply) with flash swaps or flash loans in only two steps. As the 1Delta account is a smart contract, these steps can also be batch-executed in a single transaction.</em></p><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2023-04-27 15:38:06
+</span></div></div></footer><p></p>
+
                                 
                                 </section>
                             
@@ -425,7 +439,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Margin Aggregation","level":"1.2","depth":1,"next":{"title":"Guide","level":"1.3","depth":1,"path":"guide/overview.md","ref":"./guide/overview.md","articles":[{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]}]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","page-toc-button","include-codeblock","anchors","js-console","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"js-console":{},"highlight":{},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"./resources/gitbook-plugin-include-codeblock.hbs","theme":"chrome","unindent":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"margin-aggregation.md","mtime":"2023-04-10T11:21:28.704Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-11T10:59:32.380Z"},"basePath":".","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Margin Aggregation","level":"1.2","depth":1,"next":{"title":"Guide","level":"1.3","depth":1,"path":"guide/overview.md","ref":"./guide/overview.md","articles":[{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]}]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"margin-aggregation.md","mtime":"2023-04-27T15:38:06.714Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-08-21T09:33:05.996Z"},"basePath":".","book":{"language":""}});
         });
     </script>
 </div>
@@ -479,23 +493,31 @@
     <script src="gitbook/theme.js"></script>
     
         
-        <script src="gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        <script src="gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
         
     
         
-        <script src="gitbook/gitbook-plugin-js-console/console-ui.js"></script>
+        <script src="gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/honkit-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="gitbook/honkit-plugin-search-plus/search.js"></script>
         
     
         
         <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="gitbook/gitbook-plugin-search/search.js"></script>
         
     
         

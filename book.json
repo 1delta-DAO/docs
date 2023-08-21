@@ -1,33 +1,49 @@
 {
-    "gitbook": ">=3.0.0",
-    "title": "1delta docs",
-    "root": ".",
-    "structure": {
-      "readme": "README.md",
-      "summary": "SUMMARY.md"
-    },
-    "plugins": [
-      "-lunr",
-      "page-toc-button",
-      "include-codeblock",
-      "anchors",
-      "js-console"
-    ],
-    "variables": {
-      "esversion": "2019",
-      "nodeversion": "12.13.0",
-      "npmversion": "6.12.0",
-      "triplebackticks": "```",
-      "console": "<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"
-    },
-    "pluginsConfig": {
-      "include-codeblock": {
-        "template": "./resources/gitbook-plugin-include-codeblock.hbs"
-      },
-      "page-toc-button": {
-        "maxTocDepth": 2,
-        "minTocSize": 2
-      }
-    }
-  }
+  "honkit": ">=3.0.0",
+  "gitbook": ">=3.0.0",
+  "title": "1delta docs",
+  "root": ".",
+  "structure": {
+    "readme": "README.md",
+    "summary": "SUMMARY.md"
+  },
   
+  "plugins": [
+    "add-js-css",
+    "edit-link",
+    "flexible-alerts",
+    "insert-logo",
+    "pagefooter",
+    "-lunr",
+    "-search",
+    "search-plus"
+  ],
+  "pluginsConfig": {
+    "insert-logo": {
+      "url": "https://app.1delta.io/favicon.png",
+      "style": "background: none;width: 180px;"
+    },
+    "edit-link": {
+      "base": "https://github.com/1delta-DAO/docs",
+      "label": "Edit on GitHub"
+    },
+    "page-footer": {
+      "footer": "<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs'>here</a>. Please feel free to edit and contribute a merge request<div>",
+      "label": "Modified at: ",
+      "format": "YYYY-MM-DD HH:mm:ss",
+      "utc": true
+    },
+    "add-js-css": {
+      "js": ["./scripts/asciinema-player.js"],
+      "css": ["./style/footer.css", "./style/asciinema-player.css"]
+    }
+  },
+
+  "variables": {
+    "esversion": "2019",
+    "nodeversion": "12.13.0",
+    "npmversion": "6.12.0",
+    "triplebackticks": "```",
+    "console": "<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"
+  }
+}

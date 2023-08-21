@@ -4,11 +4,11 @@ Generally, lending protocols fall into two categories when trying to compose tra
 
 This architecture allows an external contract to aggregate the position on the user's behalf - meaning that the contract can directly operate on the user's balance.
 
-**Compound V3 and AAVE V3 are protocols in this category.**
+**Compound V3, Venus.io AAVE V3 are protocols in this category.**
 
 On the other hand, we have protocols that *do not allow this type of delegation*. In this case, users can create abstract account that will build the positions on their behalf. These abstract accounts are smart contracts that can only be operated by the user that created them.
 
-**Compound V2 and similar protocols like Venus.io fall into this category.**
+**Compound V2 and forks fall into this category.**
 
 
 * [Delegation Architecture](delegation.md)

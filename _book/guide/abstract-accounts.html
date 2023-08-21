@@ -16,19 +16,31 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-page-toc-button/plugin.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-anchors/plugin.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-search-plus/search.css">
                 
             
                 
                 <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
                 
             
                 
@@ -336,28 +348,30 @@
                     <div class="page-wrapper" tabindex="-1" role="main">
                         <div class="page-inner">
                             
-<div id="book-search-results">
+<div class="search-plus" id="book-search-results">
     <div class="search-noresults">
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="how-to-create-and-use-1delta-abstract-accounts"><a name="how-to-create-and-use-1delta-abstract-accounts" class="plugin-anchor" href="#how-to-create-and-use-1delta-abstract-accounts"><i class="fa fa-link" aria-hidden="true"></i></a>How to create and use 1delta abstract accounts</h1>
+                                <h1 id="how-to-create-and-use-1delta-abstract-accounts">How to create and use 1delta abstract accounts</h1>
 <p>We will describe how to use 1delta to trade on top of a lending protocol.</p>
-<h2 id="create-an-account"><a name="create-an-account" class="plugin-anchor" href="#create-an-account"><i class="fa fa-link" aria-hidden="true"></i></a>Create an account</h2>
+<h2 id="create-an-account">Create an account</h2>
 <p>To begin trading, you will need to create a 1Delta account. The account provides you with flexibility, control and is very cheap to create — only minor gas fees are incurred.</p>
 <p><img src="../assets/account-create.png" alt="Account Creation" title="Create Account!"></p>
-<h2 id="deposit-collateral"><a name="deposit-collateral" class="plugin-anchor" href="#deposit-collateral"><i class="fa fa-link" aria-hidden="true"></i></a>Deposit collateral</h2>
+<h2 id="deposit-collateral">Deposit collateral</h2>
 <p>Once the account is created, you can deposit funds to the lending protocol. If you do not currently own the token you want to deposit, you can also swap and then supply in the same transaction using a Uniswap-style interface:</p>
 <p><img src="../assets/swap-in-account.png" alt="Swap In" title="Swap In!"></p>
-<h2 id="open-a-margin-position---borrow-swap-and-supply-in-a-single-click"><a name="open-a-margin-position---borrow-swap-and-supply-in-a-single-click" class="plugin-anchor" href="#open-a-margin-position---borrow-swap-and-supply-in-a-single-click"><i class="fa fa-link" aria-hidden="true"></i></a>Open a margin position - Borrow, Swap and Supply in a single Click</h2>
-<p>It is now time to trade on margin. With your deposited collateral you can now use the full capacity of your borrowing power. The following screenshot shows an indication of a positionn increase where WETH is borrowed and sold for USDC - which is directly deposited. All the relevant risk parameters are shown, in the scenario, the user sees a warning that the account will get close to liquidation after execution.</p>
+<h2 id="open-a-margin-position---borrow-swap-and-supply-in-a-single-click">Open a margin position - Borrow, Swap and Supply in a single Click</h2>
+<p>It is now time to trade on margin. With your deposited collateral you can now use the full capacity of your borrowing power. The following screenshot shows an indication of a position increase where WETH is borrowed and sold for USDC - which is directly deposited. All the relevant risk parameters are shown, in the scenario, the user sees a warning that the account will get close to liquidation after execution.</p>
 <p><img src="../assets/margin-trade-account.png" alt="Open" title="Trade on margin!"></p>
-<h2 id="close-a-margin-postion---withdraw-swap-and-repay-in-a-single-click"><a name="close-a-margin-postion---withdraw-swap-and-repay-in-a-single-click" class="plugin-anchor" href="#close-a-margin-postion---withdraw-swap-and-repay-in-a-single-click"><i class="fa fa-link" aria-hidden="true"></i></a>Close a margin postion - Withdraw, Swap and Repay in a single Click</h2>
+<h2 id="close-a-margin-position---withdraw-swap-and-repay-in-a-single-click">Close a margin position - Withdraw, Swap and Repay in a single Click</h2>
 <p>If our health factor gets very low, the manual withdraw-swap-repay cycle would lead to a significant hassle when trying to unwind the position, all while 1Delta executes the interactions in a single transaction:</p>
 <p><img src="../assets/close-account.png" alt="Close" title="Trade on margin!">
 <em>Our health factor is immediately restored if we trim the full position by selecting the maximum output amount on the right hand side. The dApp will also make sure that there is no dust left.</em></p>
-<p>We can see that the health factor jumps up and the LTV drops to zero. On top of that, 1delta&apos;s implementation prevents dust if you pick the maximum amount for closing a position.</p>
-</body></html>
+<p>We can see that the health factor jumps up and the LTV drops to zero. On top of that, 1delta&apos;s implementation prevents dust if you pick the maximum amount for closing a position.</p><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2023-04-27 15:38:06
+</span></div></div></footer><p></p>
+
                                 
                                 </section>
                             
@@ -400,7 +414,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"next":{"title":"Architecture","level":"1.4","depth":1,"path":"architecture/overview.md","ref":"./architecture/overview.md","articles":[{"title":"Delegation","level":"1.4.1","depth":2,"path":"architecture/delegation.md","ref":"./architecture/delegation.md","articles":[]},{"title":"Abstract Accounts","level":"1.4.2","depth":2,"path":"architecture/abstract-account.md","ref":"./architecture/abstract-account.md","articles":[]}]},"previous":{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-lunr","page-toc-button","include-codeblock","anchors","js-console","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"search":{},"fontsettings":{"theme":"white","family":"sans","size":2},"js-console":{},"highlight":{},"page-toc-button":{"maxTocDepth":2,"minTocSize":2},"include-codeblock":{"check":false,"edit":false,"lang":"","fixlang":false,"template":"./resources/gitbook-plugin-include-codeblock.hbs","theme":"chrome","unindent":false},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"anchors":{}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/abstract-accounts.md","mtime":"2023-04-09T20:00:08.365Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-04-11T10:59:32.380Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"next":{"title":"Architecture","level":"1.4","depth":1,"path":"architecture/overview.md","ref":"./architecture/overview.md","articles":[{"title":"Delegation","level":"1.4.1","depth":2,"path":"architecture/delegation.md","ref":"./architecture/delegation.md","articles":[]},{"title":"Abstract Accounts","level":"1.4.2","depth":2,"path":"architecture/abstract-account.md","ref":"./architecture/abstract-account.md","articles":[]}]},"previous":{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/abstract-accounts.md","mtime":"2023-04-27T15:38:06.714Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-08-21T09:33:05.996Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -454,23 +468,31 @@
     <script src="../gitbook/theme.js"></script>
     
         
-        <script src="../gitbook/gitbook-plugin-page-toc-button/plugin.js"></script>
+        <script src="../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
         
     
         
-        <script src="../gitbook/gitbook-plugin-js-console/console-ui.js"></script>
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/honkit-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/honkit-plugin-search-plus/search.js"></script>
         
     
         
         <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
         
     
         

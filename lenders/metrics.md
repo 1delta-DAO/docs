@@ -17,6 +17,6 @@
 
 ## Derived Values
 
-- **Max Leverage** in pair: `l=1/(1-cfOut); cfOut = collateralFacor of Buy Asset`
-- **Max Open Size** for pair: `mO=bC/l=bC(1-cfOut); cfOut = collateralFacor of Buy Asset`
-- **Liquidation Price** (pair only, denomiated in collateral ccy / debt ccy): `lP=d_a_USD/(c_a*cF); d_a_USDC=sell asset amount in USD; c_a=buy amount denominated in collateral/buy currency`
+- **Max Leverage** in pair: `l=1/(1-cfBuy); cfBuy = collateralFacor of Buy Asset`
+- **Max Open Size** for pair: `mO=bC/l=bC(1-cfBuy); cfBuy = collateralFacor of Buy Asset`
+- **Liquidation Price** (pair only, denomiated in collateral ccy / debt ccy): `lP=sell_USD/(buy*cFBuy); sell_USDC=sell/borrow asset amount in USD; buy=purchase amount denominated in collateral/buy currency`

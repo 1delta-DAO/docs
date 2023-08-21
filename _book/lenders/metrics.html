@@ -402,9 +402,9 @@
 </ul>
 <h2 id="derived-values">Derived Values</h2>
 <ul>
-<li><strong>Max Leverage</strong> in pair: <code>l=1/(1-cfOut); cfOut = collateralFacor of Buy Asset</code></li>
-<li><strong>Max Open Size</strong> for pair: <code>mO=bC/l=bC(1-cfOut); cfOut = collateralFacor of Buy Asset</code></li>
-<li><strong>Liquidation Price</strong> (pair only, denomiated in collateral ccy / debt ccy): <code>lP=d_a_USD/(c_a*cF); d_a_USDC=sell asset amount in USD; c_a=buy amount denominated in collateral/buy currency</code><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+<li><strong>Max Leverage</strong> in pair: <code>l=1/(1-cfBuy); cfBuy = collateralFacor of Buy Asset</code></li>
+<li><strong>Max Open Size</strong> for pair: <code>mO=bC/l=bC(1-cfBuy); cfBuy = collateralFacor of Buy Asset</code></li>
+<li><strong>Liquidation Price</strong> (pair only, denomiated in collateral ccy / debt ccy): <code>lP=sell_USD/(buy*cFBuy); sell_USDC=sell/borrow asset amount in USD; buy=purchase amount denominated in collateral/buy currency</code><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
 2023-08-21 14:31:43
 </span></div></div></footer></li>
 </ul>

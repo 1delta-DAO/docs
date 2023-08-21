@@ -33,5 +33,5 @@ The following chart shows hot the selections compose trade types.
 
 Dependent on which lender you want to trade with, the mechanics can vary
 
-### [With Delegation](delegation.md)
-### [Using Abstract Accounts](abstract-accounts.md)
+### [With Delegation (Aave, Compound V3)](delegation.md)
+### [Using Abstract Accounts (Compound V2)](abstract-accounts.md)

@@ -24,11 +24,11 @@
       "style": "background: none;width: 180px;"
     },
     "edit-link": {
-      "base": "https://github.com/1delta-DAO/docs",
+      "base": "https://github.com/1delta-DAO/docs/blob/main/README.md",
       "label": "Edit on GitHub"
     },
     "page-footer": {
-      "footer": "<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs'>here</a>. Please feel free to edit and contribute a merge request<div>",
+      "footer": "<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>",
       "label": "Modified at: ",
       "format": "YYYY-MM-DD HH:mm:ss",
       "utc": true

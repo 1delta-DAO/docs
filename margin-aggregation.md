@@ -30,7 +30,9 @@ To open margin positions, users can manually loop through the following steps if
 
 We see that building this leverage takes 22 transactions to complete as each sub-step in step 3. consists of 3 separate transactions. The following chart summarizes the general procedure.
 
-![Margin Aggregation](./assets/manual-swaps.png)
+<p align="center">
+  <img src="./assets/manual-looping.png" />
+</p>
 *1) A first USDT deposit is required for taking out a loan; 2) we can borrow WBTC to our wallet; 3) we swap WBTC to USDT on a DEX; 4) we deposit USDT to the lender; we repeat from step 2) until we reach the desired position size.*
 
 
@@ -48,6 +50,7 @@ We illustrate the example above using the 1delta protocol.
 
 All sub-steps in step 2. happen within the same transaction. As such, there is no more manual looping when trying to build a leveraged position when using lending protocols. The following chart summarizes the interactions with the lender.
 
-![Abstract Account Flow](./assets/abstract-account-flow.png)
-
-*Illustration of an abstract account that can open positions (borrow and supply) with flash swaps or flash loans in only two steps. As the 1Delta account is a smart contract, these steps can also be batch-executed in a single transaction.*
+<p align="center">
+  <img src="./assets/delegation-automation.png" />
+</p>
+*Illustration of a swap router architecture that can open positions (borrow and supply) with flash swaps or flash loans in only two steps. As the 1Delta account is a smart contract, these steps can also be batch-executed in a single transaction.*

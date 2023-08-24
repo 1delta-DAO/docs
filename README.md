@@ -14,4 +14,4 @@ Our vision is to bring fully-featured, decentralized aggregator services to EVMs
 * **Connecting established DEXs with established lending protocols** to allow our users to access top-notch trading performance and highly competitive deposit and borrow rates
 * **Seamless UX and visibility** - easy risk management through risk parameter displays and single-click self-liquidations
 * **Full transparency** - Users hold the lending protocol balances themselves and can always see and access their raw balances with the lender
-* Lending protocols have been less accessible to traders who are looking for a fully-featured aggregator. With 1Delta, we hope to open the door for these traders to take advantage of the **strong liquidity and attractive rates** on large lending protocols without sacrificing the tools they have come to expect while trading.
+* Lending protocols have been less accessible to traders who are looking for a fully-featured aggregator. With 1delta, we hope to open the door for these traders to take advantage of the **strong liquidity and attractive rates** on large lending protocols without sacrificing the tools they have come to expect while trading.

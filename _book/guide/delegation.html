@@ -387,58 +387,58 @@
                                 
                                 <h1 id="how-to-use-1deltas-margin-aggregator">How to use 1delta&apos;s margin aggregator</h1>
 <p>In this guide, we will outline the process of utilizing the 1delta margin trading implementation to manage lending positions within the AAVE lending protocol.</p>
-<h2 id="supply--withdraw--borrow--repay">Supply / Withdraw / Borrow / Repay</h2>
-<p>To begin, we first select a trade type by clicking the &quot;Start Trading&quot; button, followed by choosing the specific position we wish to engage with.</p>
-<p>The screenshot below illustrates a selection of WETH as collateral, indicating that we intend to interact with a WETH collateral position.</p>
-<p><img src="../assets/delegation/select-single.png" alt="Select" title="Pick the trade!"> 
-<em>Selecting a single asset on the collateral side allows us to either withdraw or deposit to the lender.</em></p>
-<p>By clicking on the prominent blue button, we can now link a swap trade to either a deposit or withdrawal transaction. However, it&apos;s essential to deposit collateral first before proceeding with any other transaction types that include borrowing.</p>
-<p><img src="../assets/delegation/swap-in.png" alt="Transact In" title="Supply collateral!"> 
-<em>On the left hand side, a direct supply is initiated, on the right hand side, a swap from USDC to WETH is done before supplying the obtained WETH.</em></p>
-<p>To initiate a withdrawal, click on &quot;Withdraw instead&quot; or the arrow situated between the input panels.</p>
-<p>In order to borrow or repay funds, select a single currency on the debt side. The default mode is set to borrowing; however, by clicking on &quot;Repay instead,&quot; we can opt to repay debt using our wallet balance.</p>
+<h2 id="deposit--withdraw--borrow--repay">Deposit / Withdraw / Borrow / Repay</h2>
+<p>First-off, we support all basic lending interactions. These can be triggered in multiple ways.</p>
+<ol>
+<li>Through the main panel (only of you have no deposits)</li>
+<li>Through the market table</li>
+</ol>
+<p>Clicking the button will trigger a quick action panel that allows you to execute any transaction that you could execute with a lending protocol.</p>
+<p></p><p align="center">
+  <img src="../assets/quick-action/quick-action-panel.png">
+</p>
+<em>The quick action panel allows you to execute all direct transactions with the lenders. The left hand side shows the general view, whereas the right hand side shows a configuration where the trader wants to execute a swap before depositing. On input, the bottom of the panel shows a post-transaction indication.</em><p></p>
+<p>The top button row allows you to pick the transactions while the currency dropdowns allow you to pick the currencies for the interaction. In the quick action panel, your wallet balance is always shown at the top, indicated by the wallet icon.</p>
+<p>If an additional transaction is required before the transfer, the UI will instruct you to either approve spending (in case of deposits, withdrawals and repayments) or approve borrow delegation.</p>
 <h2 id="open-a-margin-position">Open a margin position</h2>
-<p>With collateral in place, we can now proceed to open a margin position by selecting one currency for collateral and another for debt. The example below demonstrates our selection for building a long WETH position funded by borrowing USDC. To execute the trade, we click the trade button once more.
-<img src="../assets/delegation/select-margin-open.png" alt="Open Margin" title="Open a margin position!"> 
-<em>Choose a single currency for both collateral and debt sides, then click the trade button to configure the margin trade.</em></p>
-<p>The swap modal presents an overview of the trade details. We can either specify the amount of WETH we wish to deposit or the amount of USDC we want to borrow. First, we must approve the borrow delegation, which grants permission for the 1delta router to borrow funds on our behalf. Additionally, we can choose between different borrowing modes when trading on top of AAVE.</p>
-<p><img src="../assets/delegation/margin-open.png" alt="Open Margin Modal" title="Trade!"> 
-<em>The swap modal displays the trade&apos;s impact on our health factor and LTV.</em></p>
-<p>Upon successful execution of the trade, our positions will be displayed:</p>
-<p><img src="../assets/delegation/position.png" alt="Positions"> 
-<em>After execution, our debt position in the selected interest rate mode and an increased WETH position will be visible.</em></p>
-<h2 id="swap-debt">Swap debt</h2>
-<p>With 1delta, we can effortlessly exchange our debt positions in just a single click. To swap our USDC debt for another currency, we simply select USDC and the target currency (in this case, WBTC) to access the debt swap trade configuration.</p>
-<p><img src="../assets/delegation/select-debt-swap.png" alt="Positions"> 
-<em>We initiate the debt swap configuration by choosing two debt currencies.</em></p>
-<p>Within the trade configuration, we approve the borrow delegation (if not already done) to enable borrowing of WBTC. When selecting the maximum amount, 1delta&apos;s smart contracts ensure no residual debt remains in the position to be repaid. If the positions are in the wrong order, we can click the arrow between the input panels to switch them.</p>
-<p><img src="../assets/delegation/debt-swap.png" alt="Trade Debt"> 
-<em>To switch the currencies in the swap, we can click the down arrow - we would then borrow USDC and repay potential WBTC debt.</em></p>
-<p>Following the trade, we&apos;ll notice that the original USDC debt position has been completely replaced with a WBTC debt position.</p>
-<p><img src="../assets/delegation/post-debt-swap.png" alt="Trade Debt"> 
-<em>After executing a debt swap with the maximum repay amount selected, no leftover debt will persist.</em></p>
-<h2 id="swap-collateral">Swap collateral</h2>
-<p>One of 1delta&apos;s key features is the ability to trade collateral without the need to withdraw and repay debt. By selecting two collateral positions, we can easily swap them. In this example, we aim to exchange our WETH collateral for USDC collateral.</p>
-<p><img src="../assets/delegation/select-collateral-swap.png" alt="Trade Collateral"> 
-<em>We choose two collateral positions to execute a collateral swap.</em></p>
-<p>Upon pressing the trade button, we&apos;ll access the configuration. By selecting all available WETH to swap, our entire WETH collateral position will be converted to a USDC collateral position:</p>
-<p><img src="../assets/delegation/collateral-swap.png" alt="Collateral Swap Config"> 
-<em>The input panel headers indicate which lending protocol interaction occurs for each position - in a collateral swap, the top currency is withdrawn to repay the bottom one.</em></p>
-<p>After approving the withdrawal and executing the transaction, we&apos;ll see that our entire collateral position has been exchanged:</p>
-<p><img src="../assets/delegation/post-collateral-swap.png" alt="Post Collateral Swap"> 
-<em>Post-execution view of the transaction shown in the previous screenshot.</em></p>
+<p>With collateral in place, we can now proceed to open a margin position by selecting a borrow currency at the top and a the collateral currency at the bottom. You also have to make sure that the &quot;open&quot; option is selected at the top.</p>
+<p></p><p align="center">
+  <img src="../assets/margin/margin-open-delegation.png">
+</p>
+<em>On the top panel, any debt currency can be selected whereas the collateral currency is specified in the bottom panel.</em><p></p>
+<p>A value can be typed into either panel. After entering a value, a trade will be calculated that leads to the best price. The button will be inactive if you are not allowed to execute the trade (e.g. if your selected trade is too large). Otherwise, a click on the button will trigger your wallet to approve the trade.</p>
+<p>If any sort of approval is required, the UI will show an approval button instead. Just approve the respective spending or delegation to be able to proceed with the trade.</p>
+<h2 id="swap-debt-or-collateral">Swap debt or collateral</h2>
+<p>With 1delta, we can effortlessly exchange our debt or collateral positions in just a single click. The &quot;Swap&quot;-option in the main panel enables a sub-selection with &quot;Collateral&quot; and &quot;Debt&quot; option.</p>
+<ul>
+<li>Collateral: Executing a collateral swap - a transactions where you can withdraw the top currency, swap it to the bottom currency and deposit it directly.<ul>
+<li>An execution requires you to own the withdrawal currency, meaning that you can only execute a trade where the top amount is lower or equal your existing collateral</li>
+<li>No restrictions apply to the bottom panel </li>
+</ul>
+</li>
+<li>Debt: Executing a debt swap - a transaction that borrows the top currency, swaps it to the bottom one and directly repays it.<ul>
+<li>An execution requires you to hold a debt position in the bottom currency.</li>
+<li>No restriction to the top currency applies</li>
+</ul>
+</li>
+</ul>
+<p></p><p align="center">
+  <img src="../assets/margin/collateral-debt-swaps.png">
+</p>
+<em>Collateral- and debt swaps allow you to easily change your exposure in a single trade.</em><p></p>
 <h2 id="close-a-margin-position">Close a margin position</h2>
-<p>In the event that our health factor drops rapidly, we can prevent liquidation with just a single click. 1delta enables us to directly withdraw, swap, and repay a loan in one simple step. In this case, similar to opening a margin position, we&apos;ll need to select one currency on the collateral side (the currency we want to withdraw) and another on the debt side (the currency we want to repay).</p>
-<p>Upon clicking the trade button, either click on the arrow or the &quot;Close position instead&quot; button to reduce our position. We&apos;ll need to approve the 1Delta contract&apos;s withdrawal of collateral on our behalf, as demonstrated in the following screenshot.</p>
-<p><img src="../assets/delegation/margin-trim.png" alt="Trim Margin"> 
-<em>Approval of withdrawal is required before closing our position.</em></p>
-<p>After executing the trade, we&apos;ll notice that no debt position remains.</p>
-<p><img src="../assets/delegation/post-margin-trim.png" alt="Trim Margin Post"> 
-<em>When selecting the maximum amount, no residual debt will persist in the position</em></p>
-<p>Subsequently, we can withdraw all our collateral as described in the initial step.</p>
-<h2 id="conclusion">Conclusion</h2>
-<p>By following the steps outlined in this guide, you have successfully opened an approximately 3x leveraged long position in WETH, switched the exposure to short BTC, and closed the entire position. It&apos;s important to note that all actions demonstrated above can be executed in any order and using multiple currencies for both the collateral and debt sides.</p><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2023-04-27 15:38:06
+<p>Closing a position (withdraw, swap an repay) is similarly easy. The &quot;Close&quot; tab in top button row allows you to execute the following three interactions in one transaction:</p>
+<ul>
+<li>Withdraw one of your collaterals</li>
+<li>Trade the currency against another one</li>
+<li>Repay an outstanding loan</li>
+</ul>
+<p>You can either pick the maximum collateral amount to withdraw or the maximum debt amount to repay. Our implementation makes sure that no borrow dust will be left.</p>
+<p></p><p align="center">
+  <img src="../assets/margin/close.png">
+</p>
+<em>Closing a position allows you to repay a debt position with ease.</em><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2023-08-24 16:09:14
 </span></div></div></footer><p></p>
 
                                 
@@ -483,7 +483,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"next":{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]},"previous":{"title":"Guide","level":"1.3","depth":1,"path":"guide/overview.md","ref":"./guide/overview.md","articles":[{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/delegation.md","mtime":"2023-04-27T15:38:06.714Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-08-22T09:41:59.529Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"next":{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]},"previous":{"title":"Guide","level":"1.3","depth":1,"path":"guide/overview.md","ref":"./guide/overview.md","articles":[{"title":"Delegation (AAVE)","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},{"title":"Abstract Accounts (0VIX)","level":"1.3.2","depth":2,"path":"guide/abstract-accounts.md","ref":"./guide/abstract-accounts.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main/README.md"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/delegation.md","mtime":"2023-08-24T16:09:14.410Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-08-24T16:09:19.804Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

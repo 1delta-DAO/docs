@@ -17,8 +17,8 @@
 
 ## Derived Values
 
-- **Max Leverage** in pair: `l=1/(1-cfBuy); cfBuy = collateralFacor of Buy Asset`
-- **Max Open Size** for pair: `mO=bC*l=bC(1-cfBuy); cfBuy = collateralFacor of Buy Asset`
+- **Max Leverage** in pair: `l=1/(1-cfBuy); cfBuy = collateralFactor of Buy Asset`
+- **Max Open Size** for pair: `mO=bC*l=bC(1-cfBuy); cfBuy = collateralFactor of Buy Asset`
 - **Liquidation Price** (ideally for assets paired with stablecoins, otherwise, one of the respective assets is assumed to have a constant price and `_USD`-values are replaced with raw balances):
     - *Long*:     `lP=sell_USD/(buy*cFBuy); sell_USDC=sell/borrow asset amount in USD; buy=purchase amount denominated in collateral/buy currency`
     - *Short*:    `lP=buy_USD*cfBuy/sell; buy_USDC=buy/deposit asset amount in USD; sell=sell/borrow asset amount in sell currency`

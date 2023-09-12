@@ -24,7 +24,7 @@
       "style": "background: none;width: 180px;"
     },
     "edit-link": {
-      "base": "https://github.com/1delta-DAO/docs/blob/main/README.md",
+      "base": "https://github.com/1delta-DAO/docs/blob/main",
       "label": "Edit on GitHub"
     },
     "page-footer": {

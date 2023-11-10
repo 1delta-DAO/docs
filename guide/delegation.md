@@ -30,7 +30,7 @@ After execution, you will see your balance in the "positions"-tab in the table:
 
 With collateral in place, we can now proceed to open a margin position by selecting a borrow currency at the top and a the collateral currency at the bottom. You also have to make sure that the "open" option is selected at the top.
 
-In our example, we want to sell the maximum amount MWNT possible given our collateral. This value is auto-selected when clicking on the MAX button. As a collateral, in this example, we select the currency that we deposited, USDC. The Account panel on the left hand side allows you to simulate the trade on your position by enabling the "Simulation" switch at the bottom.
+In our example, we want to sell the maximum amount MWNT possible given our collateral. This value is auto-selected when clicking on the MAX button. As a collateral, we select the currency that we deposited, USDC. The Account panel on the left hand side allows you to simulate the trade on your position by enabling the "Simulation" switch at the bottom.
 
 <p align="center">
   <img src="../assets/margin/margin-open.png" />
@@ -63,7 +63,7 @@ With 1delta, we can effortlessly exchange our debt or collateral positions in ju
 </p>
 *Collateral- and debt swaps allow you to easily change your exposure in a single trade. In this screenshot, we see the 4.57 USDC obtained after a swap from 10 MNT. 
 
-## Close a margin position
+## Closing a margin position
 
 Closing a position (withdraw, swap an repay) is similarly easy. The "Close" tab in top button row allows you to execute the following three interactions in one transaction:
 - Withdraw one of your collaterals

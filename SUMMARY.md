@@ -2,10 +2,10 @@
 
 * [Margin Aggregation](margin-aggregation.md)
 * [Guide](./guide/overview.md)
-    * [Delegation (AAVE)](./guide/delegation.md)
-    * [Abstract Accounts (0VIX)](./guide/abstract-accounts.md)
+    * [Borrow Delegation](./guide/delegation.md)
+    * [Abstract Accounts](./guide/abstract-accounts.md)
 * [Architecture](./architecture/overview.md)
-    * [Delegation](./architecture/delegation.md)
+    * [Borrow Delegation](./architecture/delegation.md)
     * [Abstract Accounts](./architecture/abstract-account.md)
 * [Lenders](./lenders/summary.md)
     * [Metrics](./lenders/metrics.md)

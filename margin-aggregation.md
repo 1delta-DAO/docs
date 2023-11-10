@@ -53,4 +53,4 @@ All sub-steps in step 2. happen within the same transaction. As such, there is n
 <p align="center">
   <img src="./assets/delegation-automation.png" />
 </p>
-*Illustration of a swap router architecture that can open positions (borrow and supply) with flash swaps or flash loans in only two steps.
+*Illustration of a swap router architecture that can open positions (borrow and supply) with flash swaps or flash loans in only two steps.*

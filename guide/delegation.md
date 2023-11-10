@@ -6,7 +6,7 @@ In this guide, we will outline the process of utilizing the 1delta margin tradin
 
 First-off, we support all basic lending interactions. These can be triggered in multiple ways.
 1. Through the main panel (only of you have no deposits)
-2. Through the market table
+2. Using the tables undernath the chart with the "My Wallet" or "Markets" tabs
 
 Clicking the button will trigger a quick action panel that allows you to execute any transaction that you could execute with a lending protocol.
 
@@ -19,18 +19,34 @@ The top button row allows you to pick the transactions while the currency dropdo
 
 If an additional transaction is required before the transfer, the UI will instruct you to either approve spending (in case of deposits, withdrawals and repayments) or approve borrow delegation.
 
+After execution, you will see your balance in the "positions"-tab in the table:
+
+<p align="center">
+  <img src="../assets/quick-action/balance-post-deposit.png" />
+</p>
+*The amount deposited will be display once the deposit transaction is confirmed.*
+
 ## Open a margin position
 
 With collateral in place, we can now proceed to open a margin position by selecting a borrow currency at the top and a the collateral currency at the bottom. You also have to make sure that the "open" option is selected at the top.
 
+In our example, we want to sell the maximum amount MWNT possible given our collateral. This value is auto-selected when clicking on the MAX button. As a collateral, in this example, we select the currency that we deposited, USDC. The Account panel on the left hand side allows you to simulate the trade on your position by enabling the "Simulation" switch at the bottom.
+
 <p align="center">
-  <img src="../assets/margin/margin-open-delegation.png" />
+  <img src="../assets/margin/margin-open.png" />
 </p>
-*On the top panel, any debt currency can be selected whereas the collateral currency is specified in the bottom panel.*
+*On the left hand side, the account panel simulates the user position post-trade. For the given trade on the right hand side, the APR rises by 103 percentage points, the assets and debt rise by about $17.50 and our leverage shoots up to 4.83x.*
 
 A value can be typed into either panel. After entering a value, a trade will be calculated that leads to the best price. The button will be inactive if you are not allowed to execute the trade (e.g. if your selected trade is too large). Otherwise, a click on the button will trigger your wallet to approve the trade.
 
 If any sort of approval is required, the UI will show an approval button instead. Just approve the respective spending or delegation to be able to proceed with the trade.
+
+The balanes in the "Positions" tab swiftly update and we can see the result after executing the trade selected above:
+
+<p align="center">
+  <img src="../assets/margin/balance-post-open.png" />
+</p>
+*A borrow position with a lender is flagges as a "Short" position in 1delta, whereas collateral positions are "Long" positions.*
 
 ## Swap debt or collateral
 
@@ -45,7 +61,7 @@ With 1delta, we can effortlessly exchange our debt or collateral positions in ju
 <p align="center">
   <img src="../assets/margin/collateral-debt-swaps.png" />
 </p>
-*Collateral- and debt swaps allow you to easily change your exposure in a single trade.*
+*Collateral- and debt swaps allow you to easily change your exposure in a single trade. In this screenshot, we see the 4.57 USDC obtained after a swap from 10 MNT. 
 
 ## Close a margin position
 
@@ -59,4 +75,4 @@ You can either pick the maximum collateral amount to withdraw or the maximum deb
 <p align="center">
   <img src="../assets/margin/close.png" />
 </p>
-*Closing a position allows you to repay a debt position with ease.*
+*Closing a position allows you to repay a debt position with ease. The simulations on the left hand side shows that our leverage and APR come down to the levels before the position was opened.*

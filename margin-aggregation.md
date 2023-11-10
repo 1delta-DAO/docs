@@ -45,7 +45,7 @@ We illustrate the example above using the 1delta protocol.
 1. Supply initial collateral in ETH worth $1,000
 2. We use a flash swap and receive $3,000 of ETH and supply
     1. We supply the obtained ETH
-    2. We can now borrow 80% of the $4,000 ($3,2000) in USDC the we supplied, we borrow $3,000
+    2. We can now borrow 80% of the $4,000 ($3,200) in USDC the we supplied, we borrow $3,000
     3. We repay the swap pool with the obtained $3,000 in USDC
 
 All sub-steps in step 2. happen within the same transaction. As such, there is no more manual looping when trying to build a leveraged position when using lending protocols. The following chart summarizes the interactions with the lender.

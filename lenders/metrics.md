@@ -5,7 +5,7 @@ This section dives into the parameters that lenders use to manage their protocol
 
 ## General Parameters
 
-All lenders define inone or another form the following parameters:
+All lenders define in one or another form the following parameters:
 
 <p align="center">
   <img src="../assets/formulas/definitions-lenders.svg" />
@@ -27,14 +27,16 @@ An account is flagged for liquidation if the **health factor** is below 1.
 
 Liquidation prices in return are indicators as to how much a single asset price can move until an account get liquidated. 
 
-The **liquidation price for a long asset** can be calculated as follows:
+This is done by setting the health factor to one and solving for the USD amount of the desired asset.
+
+The **liquidation price for a long asset** (indeed with *k*) can be calculated via assuming that the USD amount of asset *k* is dependent on all other given parameters as follows:
 
 <p align="center">
   <img src="../assets/formulas/liquidation-price-long.svg" />
 </p>
 
 
-Dividing the last amount by the collateral amount in question yields the liquidation price:
+Dividing the last amount by the collateral amount in question yields the liquidation price for a long position in asset *k*:
 
 <p align="center">
   <img src="../assets/formulas/liq-price-long-final.svg" />
@@ -47,7 +49,7 @@ For a **short asset**, we decompose the debt:
 </p>
 
 
-Dividing the last amount by the debt amount in question yields the liquidation price:
+Dividing the last amount by the debt amount in question yields the liquidation price for the short position in asset *k*:
 
 <p align="center">
   <img src="../assets/formulas/liq-price-short-final.svg" stroke='red' fill='red' color='red'/>

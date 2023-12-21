@@ -42,7 +42,7 @@ Dividing the last amount by the collateral amount in question yields the liquida
   <img src="../assets/formulas/liq-price-long-final.svg" />
 </p>
 
-For a **short asset**, we decompose the debt:
+For a **short asset**, we solve for the debt USD amount of asset *k*:
 
 <p align="center">
   <img src="../assets/formulas/liquidation-price-short.svg" />

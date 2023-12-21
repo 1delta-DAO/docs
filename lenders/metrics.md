@@ -11,7 +11,7 @@ All lenders define in one or another form the following parameters:
   <img src="../assets/formulas/definitions-lenders.svg" />
 </p>
 
-Note that the liquidation collateral factors are usually higher than the borrow collateral factors. Lenders in general allow opening positions at maximum LTV equal to the borrow-adjusted collateral.
+Note that the liquidation collateral factors are usually higher than the borrow collateral factors. Lenders in general allow opening positions at maximum LTV equal to the debt divided by borrow-adjusted collateral.
 
 ## Risk Metrics
 

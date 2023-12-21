@@ -386,12 +386,14 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="lending-metrics">Lending Metrics</h1>
+<p>This section dives into the parameters that lenders use to manage their protocol. The following parameters are used by most of them, including Compound V2 &amp; V3, Aave V1, V2 &amp; V3 and all forks of them.</p>
 <h2 id="general-parameters">General Parameters</h2>
 <p>All lenders define inone or another form the following parameters:</p>
 <p align="center">
   <img src="../assets/formulas/definitions-lenders.svg">
 </p>
 
+<p>Note that the liquidation collateral factors are usually higher than the borrow collateral factors. Lenders in general allow opening positions at maximum LTV equal to the borrow-adjusted collateral.</p>
 <h2 id="risk-metrics">Risk Metrics</h2>
 <p>The collateral parameters and heath factor are calculated in the following manner:</p>
 <p align="center">
@@ -420,14 +422,32 @@
 
 <p>Dividing the last amount by the debt amount in question yields the liquidation price:</p>
 <p align="center">
-  <img src="../assets/formulas/liq-price-short-final.svg">
+  <img src="../assets/formulas/liq-price-short-final.svg" stroke="red" fill="red" color="red">
 </p>
 
-<h4 id="special-cases">Special cases</h4>
+<h4 id="same-asset-positions">Same-asset positions</h4>
 <p>Generally, the liquidation price in a specific asset assumes that the prices of all <em>other</em> assets are frozen. Certain lenders, however, allow borrowing and collateralizing the same asset at the same time. These lenders are Aave V3, Lendle, Compound V2 and all respective forks.</p>
 <p>For this case, we cannot use the conventional liquidation price, since for a long position with a borrow position of less than the collateral, the liquidation risk in this specific asset is non-existent.</p>
+<p>Generally, there are two cases for liquidation prices of asset <em>k</em>, in both we calculate the net exposure in the asset and apply it to the liquidation price:</p>
+<h5 id="the-collateral-in-the-asset-is-higher-than-the-debt">The collateral in the asset is <em>higher</em> than the debt</h5>
+<ul>
+<li><strong>Long liquidation price</strong>: For this case, we have to net the exposure in the single asset. In this case, we reduce all amounts by the debt amounts.<p align="center">
+<img src="../assets/formulas/liquidation-price-long-special.svg">
+</p></li>
+<li><strong>Short liquidation price</strong>: <em>Infinity</em>, since there is no liquidation risk. </li>
+</ul>
+<h5 id="the-collateral-in-the-asset-is-lower-than-the-debt">The collateral in the asset is <em>lower</em> than the debt</h5>
+<ul>
+<li><strong>Long liquidation price</strong>: <em>Zero</em>, there is no long liquidation risk in this asset.</li>
+<li><strong>Short liquidation price</strong>: For this case, we also have to net the exposure in the single asset. This means that we use the conventional liquidation price and reduce all amounts by the respective collatreral amount.<p align="center">
+<img src="../assets/formulas/liquidation-price-short-special.svg">
+</p>
+
+
+</li>
+</ul>
 <h2 id="leverage">Leverage</h2>
-<p>The leverage is a good measure for exposure. It can be provided on an overall basis or just in the ontext of a single asset.</p>
+<p>The leverage is a good measure for exposure. It can be provided on an overall basis or just in the context of a single asset.</p>
 <p align="center">
   <img src="../assets/formulas/exposure-params.svg">
 </p>
@@ -438,10 +458,10 @@
   <img src="../assets/formulas/leverage.svg">
 </p>
 
-<p>It is important to note that in this case, the maximum leverage for a single asset is dependent on the collateral asset only. As such, measuring the leverage for the short asset only depends on the collateral used (in this case, it is usually a stablecoin).</p>
+<p>It is important to note that in this case, the maximum leverage for a single asset is dependent on the collateral assetn and its <strong>borrow collateral factor</strong> only. As such, measuring the leverage for the short asset only depends on the collateral used (in this case, it is usually a stablecoin).</p>
 <p>Certain lenders like Euler Finance use borrow factors to weight borrow positions differently, too.</p>
 <footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2023-12-20 23:30:38
+2023-12-21 01:22:57
 </span></div></div></footer>
                                 
                                 </section>
@@ -485,7 +505,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Metrics","level":"1.5.1","depth":2,"next":{"title":"Contract API","level":"1.6","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.6.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.6.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.6.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.6.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.6.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"previous":{"title":"Lenders","level":"1.5","depth":1,"path":"lenders/summary.md","ref":"./lenders/summary.md","articles":[{"title":"Metrics","level":"1.5.1","depth":2,"path":"lenders/metrics.md","ref":"./lenders/metrics.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"lenders/metrics.md","mtime":"2023-12-20T23:30:38.499Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-12-20T23:30:40.673Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Metrics","level":"1.5.1","depth":2,"next":{"title":"Contract API","level":"1.6","depth":1,"path":"api/summary.md","ref":"./api/summary.md","articles":[{"title":"Money Market","level":"1.6.1","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.6.2","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.6.3","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.6.4","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.6.5","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}]},"previous":{"title":"Lenders","level":"1.5","depth":1,"path":"lenders/summary.md","ref":"./lenders/summary.md","articles":[{"title":"Metrics","level":"1.5.1","depth":2,"path":"lenders/metrics.md","ref":"./lenders/metrics.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"lenders/metrics.md","mtime":"2023-12-21T01:22:57.892Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2023-12-21T01:29:45.891Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

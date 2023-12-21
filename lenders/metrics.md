@@ -29,7 +29,7 @@ Liquidation prices in return are indicators as to how much a single asset price 
 
 This is done by setting the health factor to one and solving for the USD amount of the desired asset.
 
-The **liquidation price for a long asset** (indeed with *k*) can be calculated via assuming that the USD amount of asset *k* is dependent on all other given parameters as follows:
+The **liquidation price for a long asset** (indexed with *k*) can be calculated via assuming that the USD amount of asset *k* is dependent on all other given parameters as follows:
 
 <p align="center">
   <img src="../assets/formulas/liquidation-price-long.svg" />

@@ -23,7 +23,7 @@ The collateral parameters and heath factor are calculated in the following manne
 
 An account is flagged for liquidation if the **health factor** is below 1.
 
-### Liquidation Price
+## Liquidation Price
 
 Liquidation prices in return are indicators as to how much a single asset price can move until an account get liquidated. 
 

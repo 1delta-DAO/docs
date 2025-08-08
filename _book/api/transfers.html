@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Collateral Swap · 1delta docs</title>
+        <title>Transfers · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -76,10 +76,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="margin-open.html" />
+    <link rel="next" href="lending.html" />
     
     
-    <link rel="prev" href="borrow-swap.html" />
+    <link rel="prev" href="operations.html" />
     
 
     </head>
@@ -297,7 +297,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.2.1" data-path="transfers.html">
+        <li class="chapter active" data-level="1.7.2.1" data-path="transfers.html">
             
                 <a href="transfers.html">
             
@@ -373,7 +373,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.7.5" data-path="collateral-swap.html">
+        <li class="chapter " data-level="1.7.5" data-path="collateral-swap.html">
             
                 <a href="collateral-swap.html">
             
@@ -447,7 +447,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Collateral Swap</a>
+        <a href=".." >Transfers</a>
     </h1>
 </div>
 
@@ -462,98 +462,184 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="collateral-swap-functions">Collateral Swap Functions</h1>
-<hr>
-<p><strong>Function:</strong> <code>swapCollateralExactIn</code>
-This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a single-pool trade, specifying the exact input amount.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (ExactInputCollateralSingleParamsBase memory): A struct containing parameters for the single-pool trade.</p>
-<ul>
-<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token.</p>
-</li>
-<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
-</li>
-<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token.</p>
-</li>
-<li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
-<hr>
-<p><strong>Function:</strong> <code>swapCollateralExactInMulti</code></p>
-<p>This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a multi-pool trade, specifying the exact input amount.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (ExactInputCollateralMultiParams memory): A struct containing parameters for the multi-pool trade.</p>
-<ul>
-<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-</li>
-<li><p><code>amountIn</code> (<code>uint256</code>): The exact amount of input tokens to be swapped.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
-<hr>
-<p><strong>Function:</strong> <code>swapCollateralExactOut</code>
-This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a single-pool trade, specifying the exact output amount.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (ExactOutputCollateralSingleParamsBase memory): A struct containing parameters for the single-pool trade.</p>
-<ul>
-<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token.</p>
-</li>
-<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
-</li>
-<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token.</p>
-</li>
-<li><p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens to be received.</p>
-</li>
-<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used in the swap.</p>
-<hr>
-<p><strong>Function:</strong> <code>swapCollateralExactOutMulti</code></p>
-<p>This function allows a user to swap collateral from one token (tokenIn) to another (tokenOut) in a multi-pool trade, specifying the exact output amount.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (ExactOutputCollateralMultiParams memory): A struct containing parameters for the multi-pool trade.</p>
-<ul>
-<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-</li>
-<li><p><code>amountOut</code> (<code>uint256</code>): The exact amount of output tokens to be received.</p>
-</li>
-<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used in the swap.</p>
-<hr>
-<p><strong>Function:</strong> <code>swapCollateralAllIn</code></p>
-<p>This function allows a user to swap all the collateral from one token (tokenIn) to another (tokenOut) in a single-pool trade.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (AllInputSingleParamsBase calldata): A struct containing parameters for the single-pool trade.</p>
-<ul>
-<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token.</p>
-</li>
-<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
-</li>
-<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token.</p>
-</li>
-<li><p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens allowed to be received.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
-<hr>
-<p><strong>Function:</strong> <code>swapCollateralAllInMulti</code></p>
-<p>This function allows a user to swap all the collateral from one token (tokenIn) to another (tokenOut) in a multi-pool trade.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (AllInputCollateralMultiParamsBase calldata): A struct containing parameters for the multi-pool trade.</p>
-<ul>
-<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-</li>
-<li><p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens allowed to be received.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-08-07 21:20:21
-</span></div></div></footer><p></p>
-
+                                <h1 id="transfers">Transfers</h1>
+<p>Lead type: <code>ComposerCommands.TRANSFERS</code>.</p>
+<p>The sub types are dcefined by the following enum:</p>
+<pre><code class="lang-Typescript"><span class="hljs-built_in">enum</span> TransferIds {
+    TRANSFER_FROM = <span class="hljs-number">0</span>, <span class="hljs-comment">// pull funds from caller</span>
+    SWEEP = <span class="hljs-number">1</span>, <span class="hljs-comment">// send funds from this contract</span>
+    UNWRAP_WNATIVE = <span class="hljs-number">3</span>, <span class="hljs-comment">// unwrap</span>
+    PERMIT2_TRANSFER_FROM = <span class="hljs-number">4</span>, <span class="hljs-comment">// permitTransfer</span>
+    APPROVE = <span class="hljs-number">5</span>, <span class="hljs-comment">// approve target</span>
+}
+</code></pre>
+<p>To encode an operation, te caller has to append</p>
+<pre><code class="lang-Solidity">abi.encodePacked(
+    uint8(ComposerCommands.TRANSFERS),
+    uint8(TransferIds.[Operation]),
+    ...params
+    )
+</code></pre>
+<p>to the array of composer commands.</p>
+<h2 id="transferfrom">TRANSFER_FROM</h2>
+<p>Pull funds from the caller to a receiver address.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>asset <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>20</td>
+<td>receiver <code>address</code></td>
+</tr>
+<tr>
+<td>40</td>
+<td>16</td>
+<td>amount <code>uint128</code></td>
+</tr>
+</tbody>
+</table>
+<p>If <code>amount</code> is <code>0</code>, we pull <code>asset.balanceOf(caller)</code>.</p>
+<h2 id="sweep">SWEEP</h2>
+<p>Pull funds from this contract to a provided address.</p>
+<p>Can be used to run slippage checks.</p>
+<pre><code class="lang-TypeScript"><span class="hljs-built_in">enum</span> SweepType {
+    VALIDATE, <span class="hljs-comment">// check if `balanceOf(address(this) &gt;= amount, if true, transfer it, if not, revert</span>
+    AMOUNT <span class="hljs-comment">// transfer the amount without further checks</span>
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>asset <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>20</td>
+<td>receiver <code>address</code></td>
+</tr>
+<tr>
+<td>40</td>
+<td>1</td>
+<td>sweepType <code>SweepType</code></td>
+</tr>
+<tr>
+<td>41</td>
+<td>16</td>
+<td>amount <code>uint128</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note that <code>asset</code> can be the zero address for native currency.</p>
+<p>To <code>wrap</code> the native currency to wrapped native, you can just use <code>asset=address(0),receicer=wrappedNativeAddress</code>.</p>
+<h2 id="approve">APPROVE</h2>
+<p>Approve an asset - typically for a leder operation or external call.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>token <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>20</td>
+<td>target <code>address</code></td>
+</tr>
+</tbody>
+</table>
+<p>ERC20-Approve the <code>target</code> via <code>token</code>, always uses infitie approve, the approval is stored and skipped if already done in the past.</p>
+<h2 id="unwrap">UNWRAP</h2>
+<p>Unwrap native asset and transfer if needed.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>wrappedNativeAddress <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>20</td>
+<td>receiver <code>address</code></td>
+</tr>
+<tr>
+<td>40</td>
+<td>1</td>
+<td>sweepType <code>SweepType</code></td>
+</tr>
+<tr>
+<td>41</td>
+<td>16</td>
+<td>amount <code>uint128</code></td>
+</tr>
+</tbody>
+</table>
+<p>Note that we do not hard-code the wrapped native address as some chains have duplicate wnative implementations.</p>
+<h2 id="permit2transferfrom">PERMIT2_TRANSFER_FROM</h2>
+<p>Execute a transfer via permit2. We only support the canonical Unsiwap permit2 at address <code>0x000000000022D473030F116dDEE9F6B43aC78BA3</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>asset <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>20</td>
+<td>receiver <code>address</code></td>
+</tr>
+<tr>
+<td>40</td>
+<td>16</td>
+<td>amount <code>uint128</code></td>
+</tr>
+</tbody>
+</table>
+<footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2025-08-08 09:54:26
+</span></div></div></footer>
                                 
                                 </section>
                             
@@ -580,12 +666,12 @@ This function allows a user to swap collateral from one token (tokenIn) to anoth
 
             
                 
-                <a href="borrow-swap.html" class="navigation navigation-prev " aria-label="Previous page: Borrow Swap">
+                <a href="operations.html" class="navigation navigation-prev " aria-label="Previous page: Operations">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="margin-open.html" class="navigation navigation-next " aria-label="Next page: Open Margin Position">
+                <a href="lending.html" class="navigation navigation-next " aria-label="Next page: Lending">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -596,7 +682,7 @@ This function allows a user to swap collateral from one token (tokenIn) to anoth
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Collateral Swap","level":"1.7.5","depth":2,"next":{"title":"Open Margin Position","level":"1.7.6","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},"previous":{"title":"Borrow Swap","level":"1.7.4","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/collateral-swap.md","mtime":"2025-08-07T21:20:21.624Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2025-08-08T10:22:35.027Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Transfers","level":"1.7.2.1","depth":3,"next":{"title":"Lending","level":"1.7.2.2","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.2.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]}]},"previous":{"title":"Operations","level":"1.7.2","depth":2,"path":"api/operations.md","ref":"./api/operations.md","articles":[{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},{"title":"Lending","level":"1.7.2.2","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.2.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/transfers.md","mtime":"2025-08-08T09:54:26.151Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2025-08-08T10:22:35.027Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

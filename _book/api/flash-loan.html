@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Contract API · 1delta docs</title>
+        <title>Flash Loan · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -76,10 +76,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="entrypoint.html" />
+    <link rel="next" href="flash-loan/standardized-interface.html" />
     
     
-    <link rel="prev" href="../contract-addresses/summary.html" />
+    <link rel="prev" href="lending/compound-v3.html" />
     
 
     </head>
@@ -256,7 +256,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.7" data-path="summary.html">
+        <li class="chapter " data-level="1.7" data-path="summary.html">
             
                 <a href="summary.html">
             
@@ -355,7 +355,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.3" data-path="flash-loan.html">
+        <li class="chapter active" data-level="1.7.2.3" data-path="flash-loan.html">
             
                 <a href="flash-loan.html">
             
@@ -492,7 +492,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Contract API</a>
+        <a href=".." >Flash Loan</a>
     </h1>
 </div>
 
@@ -507,25 +507,30 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="contract-interfaces">Contract Interfaces</h1>
-<p>The following subsections describe the smart contract api for both the brokerage/aggregation contract. </p>
+                                <h1 id="flash-loans">Flash Loans</h1>
+<p>Lead type: <code>ComposerCommands.FLASH_LOAN</code>.</p>
+<p>The sub types are dcefined by the following enum:</p>
+<pre><code class="lang-Typescript"><span class="hljs-built_in">enum</span> FlashLoanIds {
+    MORPHO = <span class="hljs-number">0</span>, <span class="hljs-comment">// this is Morpho Blue</span>
+    BALANCER_V2 = <span class="hljs-number">1</span>, <span class="hljs-comment">// covers the fork Swaap, too</span>
+    AAVE_V3 = <span class="hljs-number">2</span>, <span class="hljs-comment">// covers many forks</span>
+    AAVE_V2 = <span class="hljs-number">3</span>, <span class="hljs-comment">// covers many forks</span>
+}
+</code></pre>
+<p>to the array of composer commands.</p>
+<p>To encode an operation, te caller has to append this data to the call.</p>
+<pre><code class="lang-Solidity">abi.encodePacked(
+    uint8(ComposerCommands.FLASH_LOAN),
+    uint8(FlashLoanIds.[FlashLoanProvider]),
+    ...params
+    )
+</code></pre>
+<p>Alternative sources can be Uniswap V4 and Balancer V3. Thsese are triggered via the lead type: <code>ComposerCommands.GEN_2025_SINGELTONS</code>. We elaborate on these later.</p>
+<h2 id="specific-lenders">Specific lenders</h2>
 <ul>
-<li><a href="entrypoint.html">Entrypoint</a></li>
-<li><a href="operations.html">Operations</a><ul>
-<li><a href="transfers.html">Transfers</a></li>
-<li><a href="lending.html">Lending</a><ul>
-<li><a href="lending/aave.html">Aave</a></li>
-<li><a href="lending/compound-v3.html">Compound V3</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="money-market.html">Money Market</a></li>
-<li><a href="borrow-swap.html">Borrow Swap</a></li>
-<li><a href="collateral-swap.html">Collateral Swap</a></li>
-<li><a href="margin-open.html">Open Margin Position</a></li>
-<li><a href="margin-close.html">Close Margin Position</a><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-08-08 13:01:35
+<li><a href="flash-loan/standardized-interface.html">Aave V2 &amp; V3 &amp; forks</a></li>
+<li><a href="flash-loan/singletons.md">Singletons</a><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2025-08-08 13:40:10
 </span></div></div></footer></li>
 </ul>
 
@@ -555,12 +560,12 @@
 
             
                 
-                <a href="../contract-addresses/summary.html" class="navigation navigation-prev " aria-label="Previous page: Contract Addresses">
+                <a href="lending/compound-v3.html" class="navigation navigation-prev " aria-label="Previous page: Compound V3">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="entrypoint.html" class="navigation navigation-next " aria-label="Next page: Entrypoint">
+                <a href="flash-loan/standardized-interface.html" class="navigation navigation-next " aria-label="Next page: Standardized Interface">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -571,7 +576,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Contract API","level":"1.7","depth":1,"next":{"title":"Entrypoint","level":"1.7.1","depth":2,"path":"api/entrypoint.md","ref":"./api/entrypoint.md","articles":[]},"previous":{"title":"Contract Addresses","level":"1.6","depth":1,"path":"contract-addresses/summary.md","ref":"./contract-addresses/summary.md","articles":[]},"articles":[{"title":"Entrypoint","level":"1.7.1","depth":2,"path":"api/entrypoint.md","ref":"./api/entrypoint.md","articles":[]},{"title":"Operations","level":"1.7.2","depth":2,"path":"api/operations.md","ref":"./api/operations.md","articles":[{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},{"title":"Lending","level":"1.7.2.2","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.2.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.2.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}]},{"title":"Flash Loan","level":"1.7.2.3","depth":3,"path":"api/flash-loan.md","ref":"./api/flash-loan.md","articles":[{"title":"Standardized Interface","level":"1.7.2.3.1","depth":4,"path":"api/flash-loan/standardized-interface.md","ref":"./api/flash-loan/standardized-interface.md","articles":[]}]}]},{"title":"Money Market","level":"1.7.3","depth":2,"path":"api/money-market.md","ref":"./api/money-market.md","articles":[]},{"title":"Borrow Swap","level":"1.7.4","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},{"title":"Collateral Swap","level":"1.7.5","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},{"title":"Open Margin Position","level":"1.7.6","depth":2,"path":"api/margin-open.md","ref":"./api/margin-open.md","articles":[]},{"title":"Close Margin Position","level":"1.7.7","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/summary.md","mtime":"2025-08-08T13:01:35.297Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2025-08-08T13:40:12.664Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Flash Loan","level":"1.7.2.3","depth":3,"next":{"title":"Standardized Interface","level":"1.7.2.3.1","depth":4,"path":"api/flash-loan/standardized-interface.md","ref":"./api/flash-loan/standardized-interface.md","articles":[]},"previous":{"title":"Compound V3","level":"1.7.2.2.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]},"articles":[{"title":"Standardized Interface","level":"1.7.2.3.1","depth":4,"path":"api/flash-loan/standardized-interface.md","ref":"./api/flash-loan/standardized-interface.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/flash-loan.md","mtime":"2025-08-08T13:40:10.300Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2025-08-08T13:40:12.664Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

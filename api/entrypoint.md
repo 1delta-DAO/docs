@@ -24,3 +24,43 @@ enum ComposerCommands {
     BRIDGING; // bridge execution (callForwarder only)
 }
 ```
+
+To create an operation `OPERATION` with that has e.g. the following parameters
+
+| Offset | Length (bytes) | Description          |
+| ------ | -------------- | -------------------- |
+| 0      | 20             | underlying `address` |
+| 20     | 16             | amount `uint128`     |
+| 36     | 20             | receiver `address`   |
+| 76     | 20             | comet `address`      |
+
+the caller has to encode it as follows:
+
+```Solidity
+
+bytes memory operation = abi.encodePacked(
+    uint8(ComposerCommands.[OPERATION]),
+    address(underlying),
+    uint128(amount),
+    address(receiver),
+    address(comet)
+)
+
+composer.deltaCompose(operation);
+```
+
+It is designed so that the caller can always append any sort of operations.
+
+```Solidity
+
+bytes memory operation = abi.encodePacked(
+    operation0, // (as bytes memory) add another operation to the start
+    uint8(ComposerCommands.[OPERATION]), // then just continue the next one
+    address(underlying),
+    uint128(amount),
+    address(receiver),
+    address(comet)
+)
+
+composer.deltaCompose(operation);
+```

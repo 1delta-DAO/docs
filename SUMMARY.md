@@ -16,6 +16,8 @@
         * [Lending](./api/lending.md)
             * [Aave](./api/lending/aave.md)
             * [Compound V3](./api/lending/compound-v3.md)
+        * [Flash Loan](./api/flash-loan.md)
+            * [Standardized Interface](./api/flash-loan/standardized-interface.md)
     * [Money Market](./api/money-market.md)
     * [Borrow Swap](./api/borrow-swap.md)
     * [Collateral Swap](./api/collateral-swap.md)

@@ -30,6 +30,7 @@ Note that
 - The composer re-enters itself here
 - The caller address is forwarderd from the origninal call source
 - The validation logic is hard-coded, as such, only a limited set of `pool`s are allowed to be called.
+- Some flash loan sources are DEXs - e.g. Balancer V2 - this means that swaps thorugh it are not possible any longer as the DEX is typically re-entrancy protected. This also applies to Uniswap V4.
 
 They can be used as follows for e.g. looping USDC in a Aaave type lender.
 

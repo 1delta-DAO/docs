@@ -43,3 +43,4 @@ abi.encodePacked(
 ## Specific lenders
 
 * [Aave V2 & V3 & forks](./lending/aave.md)
+* [Compound V3 markets](./lending/compound-v3.md)

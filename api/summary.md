@@ -7,6 +7,7 @@ The following subsections describe the smart contract api for both the brokerage
     * [Transfers](transfers.md)
     * [Lending](lending.md)
         * [Aave](./lending/aave.md)
+        * [Compound V3](./lending/compound-v3.md)
 * [Money Market](money-market.md)
 * [Borrow Swap](borrow-swap.md)
 * [Collateral Swap](collateral-swap.md)

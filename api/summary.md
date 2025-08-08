@@ -1,7 +1,9 @@
 # Contract Interfaces
 
-The following subsections describe the smart contract api for both the brokerage/aggregation contract as well as for abstract account contracts. 
+The following subsections describe the smart contract api for both the brokerage/aggregation contract. 
 
+* [Entrypoint](entrypoint.md)
+* [Operations](operations.md)
 * [Money Market](money-market.md)
 * [Borrow Swap](borrow-swap.md)
 * [Collateral Swap](collateral-swap.md)

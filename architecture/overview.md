@@ -12,7 +12,6 @@ On the other hand, we have protocols that *do not allow this type of delegation*
 
 
 * [Delegation Architecture](delegation.md)
-* [Abstract Account Architecture](abstract-accounts.md)
 
 
 

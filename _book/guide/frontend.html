@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Abstract Accounts · 1delta docs</title>
+        <title>Frontend · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 4.0.7">
@@ -76,10 +76,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../architecture/overview.html" />
+    <link rel="next" href="programmatically.html" />
     
     
-    <link rel="prev" href="delegation.html" />
+    <link rel="prev" href="overview.html" />
     
 
     </head>
@@ -148,12 +148,12 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.3.1" data-path="delegation.html">
+        <li class="chapter active" data-level="1.3.1" data-path="frontend.html">
             
-                <a href="delegation.html">
+                <a href="frontend.html">
             
                     
-                    Borrow Delegation
+                    Frontend
             
                 </a>
             
@@ -161,12 +161,12 @@
             
         </li>
     
-        <li class="chapter active" data-level="1.3.2" data-path="abstract-accounts.html">
+        <li class="chapter " data-level="1.3.2" data-path="programmatically.html">
             
-                <a href="abstract-accounts.html">
+                <a href="programmatically.html">
             
                     
-                    Abstract Accounts
+                    Programmatically
             
                 </a>
             
@@ -199,19 +199,6 @@
             
                     
                     Borrow Delegation
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.4.2" data-path="../architecture/abstract-account.html">
-            
-                <a href="../architecture/abstract-account.html">
-            
-                    
-                    Abstract Accounts
             
                 </a>
             
@@ -267,51 +254,6 @@
             
 
             
-            <ul class="articles">
-                
-    
-        <li class="chapter " data-level="1.6.1" data-path="../contract-addresses/aave-v3.html">
-            
-                <a href="../contract-addresses/aave-v3.html">
-            
-                    
-                    Aave V3
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.2" data-path="../contract-addresses/compound-v3.html">
-            
-                <a href="../contract-addresses/compound-v3.html">
-            
-                    
-                    Compound V3
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.6.3" data-path="../contract-addresses/lendle.html">
-            
-                <a href="../contract-addresses/lendle.html">
-            
-                    
-                    Lendle
-            
-                </a>
-            
-
-            
-        </li>
-    
-
-            </ul>
-            
         </li>
     
         <li class="chapter " data-level="1.7" data-path="../api/summary.html">
@@ -328,7 +270,33 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.1" data-path="../api/money-market.html">
+        <li class="chapter " data-level="1.7.1" data-path="../api/entrypoint.html">
+            
+                <a href="../api/entrypoint.html">
+            
+                    
+                    Entrypoint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../api/operations.html">
+            
+                <a href="../api/operations.html">
+            
+                    
+                    Operations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.3" data-path="../api/money-market.html">
             
                 <a href="../api/money-market.html">
             
@@ -341,7 +309,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2" data-path="../api/borrow-swap.html">
+        <li class="chapter " data-level="1.7.4" data-path="../api/borrow-swap.html">
             
                 <a href="../api/borrow-swap.html">
             
@@ -354,7 +322,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.3" data-path="../api/collateral-swap.html">
+        <li class="chapter " data-level="1.7.5" data-path="../api/collateral-swap.html">
             
                 <a href="../api/collateral-swap.html">
             
@@ -367,7 +335,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.4" data-path="../api/margin-open.html">
+        <li class="chapter " data-level="1.7.6" data-path="../api/margin-open.html">
             
                 <a href="../api/margin-open.html">
             
@@ -380,7 +348,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.5" data-path="../api/margin-close.html">
+        <li class="chapter " data-level="1.7.7" data-path="../api/margin-close.html">
             
                 <a href="../api/margin-close.html">
             
@@ -428,7 +396,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Abstract Accounts</a>
+        <a href=".." >Frontend</a>
     </h1>
 </div>
 
@@ -443,23 +411,71 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="how-to-create-and-use-1delta-abstract-accounts">How to create and use 1delta abstract accounts</h1>
-<p>We will describe how to use 1delta to trade on top of a lending protocol.</p>
-<h2 id="create-an-account">Create an account</h2>
-<p>To begin trading, you will need to create a 1Delta account. The account provides you with flexibility, control and is very cheap to create — only minor gas fees are incurred.</p>
-<p><img src="../assets/account-create.png" alt="Account Creation" title="Create Account!"></p>
-<h2 id="deposit-collateral">Deposit collateral</h2>
-<p>Once the account is created, you can deposit funds to the lending protocol. If you do not currently own the token you want to deposit, you can also swap and then supply in the same transaction using a Uniswap-style interface:</p>
-<p><img src="../assets/swap-in-account.png" alt="Swap In" title="Swap In!"></p>
-<h2 id="open-a-margin-position---borrow-swap-and-supply-in-a-single-click">Open a margin position - Borrow, Swap and Supply in a single Click</h2>
-<p>It is now time to trade on margin. With your deposited collateral you can now use the full capacity of your borrowing power. The following screenshot shows an indication of a position increase where WETH is borrowed and sold for USDC - which is directly deposited. All the relevant risk parameters are shown, in the scenario, the user sees a warning that the account will get close to liquidation after execution.</p>
-<p><img src="../assets/margin-trade-account.png" alt="Open" title="Trade on margin!"></p>
-<h2 id="close-a-margin-position---withdraw-swap-and-repay-in-a-single-click">Close a margin position - Withdraw, Swap and Repay in a single Click</h2>
-<p>If our health factor gets very low, the manual withdraw-swap-repay cycle would lead to a significant hassle when trying to unwind the position, all while 1Delta executes the interactions in a single transaction:</p>
-<p><img src="../assets/close-account.png" alt="Close" title="Trade on margin!">
-<em>Our health factor is immediately restored if we trim the full position by selecting the maximum output amount on the right hand side. The dApp will also make sure that there is no dust left.</em></p>
-<p>We can see that the health factor jumps up and the LTV drops to zero. On top of that, 1delta&apos;s implementation prevents dust if you pick the maximum amount for closing a position.</p><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2023-04-27 15:38:06
+                                <h1 id="how-to-use-1deltas-margin-aggregator">How to use 1delta&apos;s margin aggregator</h1>
+<p>In this guide, we will outline the process of utilizing the 1delta margin trading implementation to manage lending positions within the AAVE lending protocol.</p>
+<h2 id="deposit--withdraw--borrow--repay">Deposit / Withdraw / Borrow / Repay</h2>
+<p>First-off, we support all basic lending interactions. These can be triggered in multiple ways.</p>
+<ol>
+<li>Through the main panel (only of you have no deposits)</li>
+<li>Using the tables undernath the chart with the &quot;My Wallet&quot; or &quot;Markets&quot; tabs</li>
+</ol>
+<p>Clicking the button will trigger a quick action panel that allows you to execute any transaction that you could execute with a lending protocol.</p>
+<p></p><p align="center">
+  <img src="../assets/quick-action/quick-action-panel.png">
+</p>
+<em>The quick action panel allows you to execute all direct transactions with the lenders. The left hand side shows the general view, whereas the right hand side shows a configuration where the trader wants to execute a swap before depositing. On input, the bottom of the panel shows a post-transaction indication.</em><p></p>
+<p>The top button row allows you to pick the transactions while the currency dropdowns allow you to pick the currencies for the interaction. In the quick action panel, your wallet balance is always shown at the top, indicated by the wallet icon.</p>
+<p>If an additional transaction is required before the transfer, the UI will instruct you to either approve spending (in case of deposits, withdrawals and repayments) or approve borrow delegation.</p>
+<p>After execution, you will see your balance in the &quot;positions&quot;-tab in the table:</p>
+<p></p><p align="center">
+  <img src="../assets/quick-action/balance-post-deposit.png">
+</p>
+<em>The amount deposited will be display once the deposit transaction is confirmed.</em><p></p>
+<h2 id="open-a-margin-position">Open a margin position</h2>
+<p>With collateral in place, we can now proceed to open a margin position by selecting a borrow currency at the top and a the collateral currency at the bottom. You also have to make sure that the &quot;open&quot; option is selected at the top.</p>
+<p>In our example, we want to sell the maximum amount MWNT possible given our collateral. This value is auto-selected when clicking on the MAX button. As a collateral, we select the currency that we deposited, USDC. The Account panel on the left hand side allows you to simulate the trade on your position by enabling the &quot;Simulation&quot; switch at the bottom.</p>
+<p></p><p align="center">
+  <img src="../assets/margin/margin-open.png">
+</p>
+<em>On the left hand side, the account panel simulates the user position post-trade. For the given trade on the right hand side, the APR rises by 103 percentage points, the assets and debt rise by about $17.50 and our leverage shoots up to 4.83x.</em><p></p>
+<p>A value can be typed into either panel. After entering a value, a trade will be calculated that leads to the best price. The button will be inactive if you are not allowed to execute the trade (e.g. if your selected trade is too large). Otherwise, a click on the button will trigger your wallet to approve the trade.</p>
+<p>If any sort of approval is required, the UI will show an approval button instead. Just approve the respective spending or delegation to be able to proceed with the trade.</p>
+<p>The balanes in the &quot;Positions&quot; tab swiftly update and we can see the result after executing the trade selected above:</p>
+<p></p><p align="center">
+  <img src="../assets/margin/balance-post-open.png">
+</p>
+<em>A borrow position with a lender is flagges as a &quot;Short&quot; position in 1delta, whereas collateral positions are &quot;Long&quot; positions.</em><p></p>
+<h2 id="swap-debt-or-collateral">Swap debt or collateral</h2>
+<p>With 1delta, we can effortlessly exchange our debt or collateral positions in just a single click. The &quot;Swap&quot;-option in the main panel enables a sub-selection with &quot;Collateral&quot; and &quot;Debt&quot; option.</p>
+<ul>
+<li>Collateral: Executing a collateral swap - a transactions where you can withdraw the top currency, swap it to the bottom currency and deposit it directly.<ul>
+<li>An execution requires you to own the withdrawal currency, meaning that you can only execute a trade where the top amount is lower or equal your existing collateral</li>
+<li>No restrictions apply to the bottom panel </li>
+</ul>
+</li>
+<li>Debt: Executing a debt swap - a transaction that borrows the top currency, swaps it to the bottom one and directly repays it.<ul>
+<li>An execution requires you to hold a debt position in the bottom currency.</li>
+<li>No restriction to the top currency applies</li>
+</ul>
+</li>
+</ul>
+<p></p><p align="center">
+  <img src="../assets/margin/collateral-debt-swaps.png">
+</p>
+*Collateral- and debt swaps allow you to easily change your exposure in a single trade. In this screenshot, we see the 4.57 USDC obtained after a swap from 10 MNT. <p></p>
+<h2 id="closing-a-margin-position">Closing a margin position</h2>
+<p>Closing a position (withdraw, swap an repay) is similarly easy. The &quot;Close&quot; tab in top button row allows you to execute the following three interactions in one transaction:</p>
+<ul>
+<li>Withdraw one of your collaterals</li>
+<li>Trade the currency against another one</li>
+<li>Repay an outstanding loan</li>
+</ul>
+<p>You can either pick the maximum collateral amount to withdraw or the maximum debt amount to repay. Our implementation makes sure that no borrow dust will be left.</p>
+<p></p><p align="center">
+  <img src="../assets/margin/close.png">
+</p>
+<em>Closing a position allows you to repay a debt position with ease. The simulations on the left hand side shows that our leverage and APR come down to the levels before the position was opened.</em><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2025-08-07 21:20:21
 </span></div></div></footer><p></p>
 
                                 
@@ -488,12 +504,12 @@
 
             
                 
-                <a href="delegation.html" class="navigation navigation-prev " aria-label="Previous page: Borrow Delegation">
+                <a href="overview.html" class="navigation navigation-prev " aria-label="Previous page: Guide">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../architecture/overview.html" class="navigation navigation-next " aria-label="Next page: Architecture">
+                <a href="programmatically.html" class="navigation navigation-next " aria-label="Next page: Programmatically">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -504,7 +520,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Abstract Accounts","level":"1.3.2","depth":2,"next":{"title":"Architecture","level":"1.4","depth":1,"path":"architecture/overview.md","ref":"./architecture/overview.md","articles":[{"title":"Borrow Delegation","level":"1.4.1","depth":2,"path":"architecture/delegation.md","ref":"./architecture/delegation.md","articles":[]},{"title":"Abstract Accounts","level":"1.4.2","depth":2,"path":"architecture/abstract-account.md","ref":"./architecture/abstract-account.md","articles":[]}]},"previous":{"title":"Borrow Delegation","level":"1.3.1","depth":2,"path":"guide/delegation.md","ref":"./guide/delegation.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/abstract-accounts.md","mtime":"2023-04-27T15:38:06.714Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2024-01-12T09:05:46.095Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Frontend","level":"1.3.1","depth":2,"next":{"title":"Programmatically","level":"1.3.2","depth":2,"path":"guide/programmatically.md","ref":"./guide/programmatically.md","articles":[]},"previous":{"title":"Guide","level":"1.3","depth":1,"path":"guide/overview.md","ref":"./guide/overview.md","articles":[{"title":"Frontend","level":"1.3.1","depth":2,"path":"guide/frontend.md","ref":"./guide/frontend.md","articles":[]},{"title":"Programmatically","level":"1.3.2","depth":2,"path":"guide/programmatically.md","ref":"./guide/programmatically.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/frontend.md","mtime":"2025-08-07T21:20:21.647Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2025-08-07T22:17:36.510Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

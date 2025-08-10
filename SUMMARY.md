@@ -5,7 +5,6 @@
     * [Frontend](./guide/frontend.md)
     * [Programmatically](./guide/programmatically.md)
 * [Architecture](./architecture/overview.md)
-    * [Borrow Delegation](./architecture/delegation.md)
 * [Lenders](./lenders/summary.md)
     * [Metrics](./lenders/metrics.md)
 * [Contract Addresses](./contract-addresses/summary.md)

@@ -31,5 +31,5 @@ The selections map to the trade types as follows.
 
 Dependent on which lender you want to trade with, the mechanics can vary
 
-### [With Delegation (Aave, Compound V3)](delegation.md)
-### [Using Abstract Accounts (Compound V2)](abstract-accounts.md)
+### [Via UI](frontend.md)
+### [Programmatically](programmatically.md)

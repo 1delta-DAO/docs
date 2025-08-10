@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: cimg/node:18.20
+      - image: cimg/node:22.5
     parameters:
       domain:
         type: string
@@ -12,8 +12,7 @@ jobs:
       - run:
           name: Build static files
           command: |
-            rm -rf node_modules package-lock.json
-            npm ci
+            npm install
             npx honkit build
       - persist_to_workspace:
           root: ~/project
@@ -22,7 +21,7 @@ jobs:
 
   push:
     docker:
-      - image: cimg/node:18.20
+      - image: cimg/node:22.5
     parameters:
       cfpage:
         type: string

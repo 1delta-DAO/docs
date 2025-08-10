@@ -6,7 +6,7 @@
         <title>Metrics · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.3">
         
         
         
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-fontsettings/website.css">
                 
             
         
@@ -512,14 +512,14 @@
 <h2 id="general-parameters">General Parameters</h2>
 <p>All lenders define in one or another form the following parameters:</p>
 <p align="center">
-  <img src="../assets/formulas/definitions-lenders.svg">
+  <img src="../assets/formulas/definitions-lenders.svg"></img>
 </p>
 
 <p>Note that the liquidation collateral factors are usually higher than the borrow collateral factors. Lenders in general allow opening positions at maximum LTV equal to the debt divided by borrow-adjusted collateral.</p>
 <h2 id="risk-metrics">Risk Metrics</h2>
 <p>The collateral parameters and heath factor are calculated in the following manner:</p>
 <p align="center">
-  <img src="../assets/formulas/simple-params-lenders.svg">
+  <img src="../assets/formulas/simple-params-lenders.svg"></img>
 </p>
 
 <p>An account is flagged for liquidation if the <strong>health factor</strong> is below 1.</p>
@@ -528,24 +528,24 @@
 <p>This is done by setting the health factor to one and solving for the USD amount of the desired asset.</p>
 <p>The <strong>liquidation price for a long asset</strong> (indexed with <em>k</em>) can be calculated via assuming that the USD amount of asset <em>k</em> is dependent on all other given parameters as follows:</p>
 <p align="center">
-  <img src="../assets/formulas/liquidation-price-long.svg">
+  <img src="../assets/formulas/liquidation-price-long.svg"></img>
 </p>
 
 
 <p>Dividing the last amount by the collateral amount in question yields the liquidation price for a long position in asset <em>k</em>:</p>
 <p align="center">
-  <img src="../assets/formulas/liq-price-long-final.svg">
+  <img src="../assets/formulas/liq-price-long-final.svg"></img>
 </p>
 
 <p>For a <strong>short asset</strong>, we solve for the debt USD amount of asset <em>k</em>:</p>
 <p align="center">
-  <img src="../assets/formulas/liquidation-price-short.svg">
+  <img src="../assets/formulas/liquidation-price-short.svg"></img>
 </p>
 
 
 <p>Dividing the last amount by the debt amount in question yields the liquidation price for the short position in asset <em>k</em>:</p>
 <p align="center">
-  <img src="../assets/formulas/liq-price-short-final.svg" stroke="red" fill="red" color="red">
+  <img src="../assets/formulas/liq-price-short-final.svg" stroke="red" fill="red" color="red"></img>
 </p>
 
 <h4 id="same-asset-positions">Same-asset positions</h4>
@@ -555,7 +555,7 @@
 <h5 id="the-collateral-in-the-asset-is-higher-than-the-debt">The collateral in the asset is <em>higher</em> than the debt</h5>
 <ul>
 <li><strong>Long liquidation price</strong>: For this case, we have to net the exposure in the single asset. In this case, we reduce all amounts by the debt amounts.<p align="center">
-<img src="../assets/formulas/liquidation-price-long-special.svg">
+<img src="../assets/formulas/liquidation-price-long-special.svg"></img>
 </p></li>
 <li><strong>Short liquidation price</strong>: <em>Infinity</em>, since there is no liquidation risk. </li>
 </ul>
@@ -563,7 +563,7 @@
 <ul>
 <li><strong>Long liquidation price</strong>: <em>Zero</em>, there is no long liquidation risk in this asset.</li>
 <li><strong>Short liquidation price</strong>: For this case, we also have to net the exposure in the single asset. This means that we use the conventional liquidation price and reduce all amounts by the respective collatreral amount.<p align="center">
-<img src="../assets/formulas/liquidation-price-short-special.svg">
+<img src="../assets/formulas/liquidation-price-short-special.svg"></img>
 </p>
 
 
@@ -572,18 +572,18 @@
 <h2 id="leverage">Leverage</h2>
 <p>The leverage is a good measure for exposure. It can be provided on an overall basis or just in the context of a single asset.</p>
 <p align="center">
-  <img src="../assets/formulas/exposure-params.svg">
+  <img src="../assets/formulas/exposure-params.svg"></img>
 </p>
 
 
 <p>The <strong>overall leverage</strong> is just the quotient of collateral and debt. The <strong>maximum leverage</strong> for a single asset is calculated using the collateral factor of the collateral asset. </p>
 <p align="center">
-  <img src="../assets/formulas/leverage.svg">
+  <img src="../assets/formulas/leverage.svg"></img>
 </p>
 
 <p>It is important to note that in this case, the maximum leverage for a single asset is dependent on the collateral assetn and its <strong>borrow collateral factor</strong> only. As such, measuring the leverage for the short asset only depends on the collateral used (in this case, it is usually a stablecoin).</p>
 <p>Certain lenders like Euler Finance use borrow factors to weight borrow positions differently, too.</p>
-<footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+<footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
 2025-08-07 21:20:21
 </span></div></div></footer>
                                 
@@ -628,7 +628,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Metrics","level":"1.5.1","depth":2,"next":{"title":"Contract Addresses","level":"1.6","depth":1,"path":"contract-addresses/summary.md","ref":"./contract-addresses/summary.md","articles":[]},"previous":{"title":"Lenders","level":"1.5","depth":1,"path":"lenders/summary.md","ref":"./lenders/summary.md","articles":[{"title":"Metrics","level":"1.5.1","depth":2,"path":"lenders/metrics.md","ref":"./lenders/metrics.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"lenders/metrics.md","mtime":"2025-08-07T21:20:21.647Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2025-08-08T13:40:12.664Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Metrics","level":"1.5.1","depth":2,"next":{"title":"Contract Addresses","level":"1.6","depth":1,"path":"contract-addresses/summary.md","ref":"./contract-addresses/summary.md","articles":[]},"previous":{"title":"Lenders","level":"1.5","depth":1,"path":"lenders/summary.md","ref":"./lenders/summary.md","articles":[{"title":"Metrics","level":"1.5.1","depth":2,"path":"lenders/metrics.md","ref":"./lenders/metrics.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"lenders/metrics.md","mtime":"2025-08-07T21:20:21.647Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-10T18:01:45.751Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -710,7 +710,7 @@
         
     
         
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        <script src="../gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
         
     
 

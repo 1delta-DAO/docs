@@ -6,7 +6,7 @@
         <title>Lending · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.3">
         
         
         
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-fontsettings/website.css">
                 
             
         
@@ -510,23 +510,23 @@
                                 <h1 id="lending">Lending</h1>
 <p>Lead type: <code>ComposerCommands.LENDING</code>.</p>
 <p>The sub types are dcefined by the following enum:</p>
-<pre><code class="lang-Typescript"><span class="hljs-built_in">enum</span> LenderOps {
-    DEPOSIT = <span class="hljs-number">0</span>, <span class="hljs-comment">// deposit (collateral)</span>
-    BORROW = <span class="hljs-number">1</span>, <span class="hljs-comment">// borrow from lender</span>
-    REPAY = <span class="hljs-number">2</span>, <span class="hljs-comment">// repay to lender</span>
-    WITHDRAW = <span class="hljs-number">3</span>, <span class="hljs-comment">// withdraw from lender</span>
-    DEPOSIT_LENDING_TOKEN = <span class="hljs-number">4</span>, <span class="hljs-comment">// deposit lending token (e.g. for Morpho Blue)</span>
-    WITHDRAW_LENDING_TOKEN = <span class="hljs-number">5</span>, <span class="hljs-comment">// withdraw lending token (e.g. for Morpho Blue)</span>
+<pre><code class="lang-Typescript"><span class="hljs-keyword">enum</span> <span class="hljs-title class_">LenderOps</span> {
+    <span class="hljs-variable constant_">DEPOSIT</span> = <span class="hljs-number">0</span>, <span class="hljs-comment">// deposit (collateral)</span>
+    <span class="hljs-variable constant_">BORROW</span> = <span class="hljs-number">1</span>, <span class="hljs-comment">// borrow from lender</span>
+    <span class="hljs-variable constant_">REPAY</span> = <span class="hljs-number">2</span>, <span class="hljs-comment">// repay to lender</span>
+    <span class="hljs-variable constant_">WITHDRAW</span> = <span class="hljs-number">3</span>, <span class="hljs-comment">// withdraw from lender</span>
+    <span class="hljs-variable constant_">DEPOSIT_LENDING_TOKEN</span> = <span class="hljs-number">4</span>, <span class="hljs-comment">// deposit lending token (e.g. for Morpho Blue)</span>
+    <span class="hljs-variable constant_">WITHDRAW_LENDING_TOKEN</span> = <span class="hljs-number">5</span>, <span class="hljs-comment">// withdraw lending token (e.g. for Morpho Blue)</span>
 }
 </code></pre>
 <p>to the array of composer commands.</p>
 <p>We ecode lender types as follows:</p>
-<pre><code class="lang-Typescript"><span class="hljs-built_in">enum</span> LenderIds {
-    UP_TO_AAVE_V3 = <span class="hljs-number">1000</span>,
-    UP_TO_AAVE_V2 = <span class="hljs-number">2000</span>,
-    UP_TO_COMPOUND_V3 = <span class="hljs-number">3000</span>,
-    UP_TO_COMPOUND_V2 = <span class="hljs-number">4000</span>,
-    UP_TO_MORPHO = <span class="hljs-number">5000</span>,
+<pre><code class="lang-Typescript"><span class="hljs-keyword">enum</span> <span class="hljs-title class_">LenderIds</span> {
+    <span class="hljs-variable constant_">UP_TO_AAVE_V3</span> = <span class="hljs-number">1000</span>,
+    <span class="hljs-variable constant_">UP_TO_AAVE_V2</span> = <span class="hljs-number">2000</span>,
+    <span class="hljs-variable constant_">UP_TO_COMPOUND_V3</span> = <span class="hljs-number">3000</span>,
+    <span class="hljs-variable constant_">UP_TO_COMPOUND_V2</span> = <span class="hljs-number">4000</span>,
+    <span class="hljs-variable constant_">UP_TO_MORPHO</span> = <span class="hljs-number">5000</span>,
 }
 </code></pre>
 <p>To encode an operation, te caller has to append this data to the call.</p>
@@ -540,7 +540,7 @@
 <h2 id="specific-lenders">Specific lenders</h2>
 <ul>
 <li><a href="lending/aave.html">Aave V2 &amp; V3 &amp; forks</a></li>
-<li><a href="lending/compound-v3.html">Compound V3 markets</a><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+<li><a href="lending/compound-v3.html">Compound V3 markets</a><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
 2025-08-08 12:50:11
 </span></div></div></footer></li>
 </ul>
@@ -587,7 +587,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Lending","level":"1.7.2.2","depth":3,"next":{"title":"Aave","level":"1.7.2.2.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},"previous":{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},"articles":[{"title":"Aave","level":"1.7.2.2.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.2.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/lending.md","mtime":"2025-08-08T12:50:11.893Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2025-08-08T13:40:12.664Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Lending","level":"1.7.2.2","depth":3,"next":{"title":"Aave","level":"1.7.2.2.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},"previous":{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},"articles":[{"title":"Aave","level":"1.7.2.2.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.2.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/lending.md","mtime":"2025-08-08T12:50:11.893Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-10T18:01:45.751Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -669,7 +669,7 @@
         
     
         
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        <script src="../gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
         
     
 

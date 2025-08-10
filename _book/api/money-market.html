@@ -6,7 +6,7 @@
         <title>Money Market · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
-        <meta name="generator" content="HonKit 4.0.7">
+        <meta name="generator" content="HonKit 6.0.3">
         
         
         
@@ -44,7 +44,7 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-fontsettings/website.css">
                 
             
         
@@ -511,7 +511,7 @@
 <p>Functions that allow a swap aggreagated with a single money market interactions.</p>
 <h2 id="supplying-to-a-lender">Supplying to a lender</h2>
 <p>Supply functions connected with swaps.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapAndSupplyExactIn</code></p>
 <p>This function allows the user to swap a specified amount of input tokens (tokenIn) and supply the resulting output tokens to a lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -523,7 +523,7 @@
 </li>
 </ul>
 <p><strong>No return values</strong></p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapETHAndSupplyExactIn</code></p>
 <p>This function allows the user to swap a specified amount of Ether for output tokens and supply the resulting tokens to a lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -535,7 +535,7 @@
 </li>
 </ul>
 <p><strong>No return values</strong></p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapAndSupplyExactOut</code></p>
 <p>This function allows the user to swap tokens to receive a specified amount of output tokens (tokenOut) and supply the resulting tokens to a lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -551,7 +551,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens used for the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapETHAndSupplyExactOut</code></p>
 <p>This function allows the user to swap Ether to receive a specified amount of output tokens (tokenOut) and supply the resulting tokens to a lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -563,7 +563,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether used for the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapETHAndSupplyExactOut</code></p>
 <p>This function allows the user to swap Ether to receive a specified amount of output tokens (tokenOut) and supply the resulting tokens to a lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -575,10 +575,10 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether used for the swap.</p>
-<hr>
+<hr></hr>
 <h2 id="withdrawals-from-existing-deposits">Withdrawals from existing deposits</h2>
 <p>Withdrawal functions connected with swaps</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapExactIn</code></p>
 <p>This function allows the user to withdraw a specified amount of input tokens (tokenIn) from a lending protocol and swap them to receive output tokens.</p>
 <p><strong>Parameters:</strong></p>
@@ -590,7 +590,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapExactInToETH</code></p>
 <p>This function allows the user to withdraw a specified amount of input tokens (tokenIn) from a lending protocol and swap them to receive Ether.</p>
 <p><strong>Parameters:</strong></p>
@@ -602,7 +602,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether received from the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapExactOut</code></p>
 <p>This function allows the user to withdraw input tokens (tokenIn) from a lending protocol and swap them to receive a specified amount of output tokens (tokenOut).</p>
 <p><strong>Parameters:</strong></p>
@@ -618,7 +618,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens withdrawn for the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapExactOutToETH</code></p>
 <p>This function allows the user to withdraw input tokens (tokenIn) from a lending protocol and swap them to receive a specified amount of Ether.</p>
 <p><strong>Parameters:</strong></p>
@@ -635,7 +635,7 @@
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens withdrawn for the swap.</p>
 <h3 id="functions-withdeawing-the-full-balances">Functions withdeawing the full balances</h3>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapAllIn</code></p>
 <p>This function allows the user to withdraw their entire balance of input tokens (tokenIn) from the lending protocol and swap them for output tokens (tokenOut).</p>
 <p><strong>Parameters:</strong></p>
@@ -646,7 +646,7 @@
 <li><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens that must be received.</li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>withdrawAndSwapAllInToETH</code></p>
 <p>This function allows the user to withdraw their entire balance of input tokens (tokenIn) from the lending protocol and swap them for Ether.</p>
 <p><strong>Parameters:</strong></p>
@@ -658,7 +658,7 @@
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether received from the swap.</p>
 <h2 id="borrowing">Borrowing</h2>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>borrowAndSwapExactIn</code></p>
 <p>This function allows the user to borrow a specified amount of input tokens (tokenIn) and swap them to receive output tokens.</p>
 <p><strong>Parameters:</strong></p>
@@ -674,7 +674,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens received from the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>borrowAndSwapExactInToETH</code></p>
 <p>This function allows the user to borrow a specified amount of input tokens (tokenIn) and swap them to receive Ether.</p>
 <p><strong>Parameters:</strong></p>
@@ -690,7 +690,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether received from the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>borrowAndSwapExactOut</code></p>
 <p>This function allows the user to borrow input tokens (tokenIn) and swap them to receive a specified amount of output tokens (tokenOut).</p>
 <p><strong>Parameters:</strong></p>
@@ -706,7 +706,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens borrowed for the swap.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>borrowAndSwapExactOutToETH</code></p>
 <p>This function allows the user to borrow input tokens (tokenIn) and swap them to receive a specified amount of Ether.</p>
 <p><strong>Parameters:</strong></p>
@@ -722,10 +722,10 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens borrowed for the swap.</p>
-<hr>
+<hr></hr>
 <h2 id="repay">Repay</h2>
 <p>Allows the user to repay borrow balances with a lender with any currency.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapAndRepayExactIn</code></p>
 <p>This function allows the user to swap a specified amount of input tokens (tokenIn) and repay a debt in the lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -738,7 +738,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens repaid to the lending protocol.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapETHAndRepayExactIn</code></p>
 <p>This function allows the user to swap a specified amount of Ether and repay a debt in the lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -751,7 +751,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens repaid to the lending protocol.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapAndRepayExactOut</code></p>
 <p>This function allows the user to swap input tokens (tokenIn) to repay a specified amount of output tokens (tokenOut) to the lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -767,7 +767,7 @@
 </li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens swapped for the repayment.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapETHAndRepayExactOut</code></p>
 <p>This function allows the user to swap Ether to repay a specified amount of output tokens (tokenOut) to the lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -782,7 +782,7 @@
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether swapped for the repayment.</p>
 <h3 id="functions-repaying-the-full-loan">Functions repaying the full loan</h3>
 <p>Repaying with these will not left any borrow dust.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapAndRepayAllOut</code></p>
 <p>This function allows the user to swap input tokens (tokenIn) to repay their entire debt balance of output tokens (tokenOut) in the lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -793,7 +793,7 @@
 <li><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be swapped.</li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens swapped for the repayment.</p>
-<hr>
+<hr></hr>
 <p><strong>Function:</strong> <code>swapETHAndRepayAllOut</code></p>
 <p>This function allows the user to swap Ether to repay their entire debt balance of output tokens (tokenOut) in the lending protocol.</p>
 <p><strong>Parameters:</strong></p>
@@ -804,7 +804,7 @@
 <li><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of Ether allowed to be swapped.</li>
 </ul>
 <p><strong>Returns:</strong> <code>uint256</code>: The amount of Ether swapped for the repayment.</p>
-<footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br><br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+<footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
 2025-08-07 21:20:21
 </span></div></div></footer>
                                 
@@ -849,7 +849,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Money Market","level":"1.7.3","depth":2,"next":{"title":"Borrow Swap","level":"1.7.4","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},"previous":{"title":"Standardized Interface","level":"1.7.2.3.1","depth":4,"path":"api/flash-loan/standardized-interface.md","ref":"./api/flash-loan/standardized-interface.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/money-market.md","mtime":"2025-08-07T21:20:21.624Z","type":"markdown"},"gitbook":{"version":"4.0.7","time":"2025-08-08T13:40:12.664Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Money Market","level":"1.7.3","depth":2,"next":{"title":"Borrow Swap","level":"1.7.4","depth":2,"path":"api/borrow-swap.md","ref":"./api/borrow-swap.md","articles":[]},"previous":{"title":"Standardized Interface","level":"1.7.2.3.1","depth":4,"path":"api/flash-loan/standardized-interface.md","ref":"./api/flash-loan/standardized-interface.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/money-market.md","mtime":"2025-08-07T21:20:21.624Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-10T18:01:45.751Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -931,7 +931,7 @@
         
     
         
-        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        <script src="../gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
         
     
 

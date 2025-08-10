@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Open Margin Position · 1delta docs</title>
+        <title>External Call · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 6.0.3">
@@ -76,10 +76,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="margin-close.html" />
+    <link rel="next" href="lending.html" />
     
     
-    <link rel="prev" href="collateral-swap.html" />
+    <link rel="prev" href="transfers.html" />
     
 
     </head>
@@ -310,7 +310,20 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.2" data-path="lending.html">
+        <li class="chapter active" data-level="1.7.2.2" data-path="external-call.html">
+            
+                <a href="external-call.html">
+            
+                    
+                    External Call
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="lending.html">
             
                 <a href="lending.html">
             
@@ -324,7 +337,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.2.2.1" data-path="lending/aave.html">
+        <li class="chapter " data-level="1.7.2.3.1" data-path="lending/aave.html">
             
                 <a href="lending/aave.html">
             
@@ -337,7 +350,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.2.2" data-path="lending/compound-v3.html">
+        <li class="chapter " data-level="1.7.2.3.2" data-path="lending/compound-v3.html">
             
                 <a href="lending/compound-v3.html">
             
@@ -355,7 +368,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.3" data-path="flash-loan.html">
+        <li class="chapter " data-level="1.7.2.4" data-path="flash-loan.html">
             
                 <a href="flash-loan.html">
             
@@ -369,7 +382,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.2.3.1" data-path="flash-loan/standardized-interface.html">
+        <li class="chapter " data-level="1.7.2.4.1" data-path="flash-loan/standardized-interface.html">
             
                 <a href="flash-loan/standardized-interface.html">
             
@@ -387,73 +400,21 @@
             
         </li>
     
+        <li class="chapter " data-level="1.7.2.5" data-path="margin/general.html">
+            
+                <a href="margin/general.html">
+            
+                    
+                    Margin
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.3" data-path="money-market.html">
-            
-                <a href="money-market.html">
-            
-                    
-                    Money Market
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.4" data-path="borrow-swap.html">
-            
-                <a href="borrow-swap.html">
-            
-                    
-                    Borrow Swap
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.5" data-path="collateral-swap.html">
-            
-                <a href="collateral-swap.html">
-            
-                    
-                    Collateral Swap
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter active" data-level="1.7.6" data-path="margin-open.html">
-            
-                <a href="margin-open.html">
-            
-                    
-                    Open Margin Position
-            
-                </a>
-            
-
-            
-        </li>
-    
-        <li class="chapter " data-level="1.7.7" data-path="margin-close.html">
-            
-                <a href="margin-close.html">
-            
-                    
-                    Close Margin Position
-            
-                </a>
-            
-
             
         </li>
     
@@ -492,7 +453,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Open Margin Position</a>
+        <a href=".." >External Call</a>
     </h1>
 </div>
 
@@ -507,87 +468,179 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="open-margin-position">Open Margin Position</h1>
-<p>Allows opening a margin positions using a lender.</p>
-<h2 id="prequisites">Prequisites</h2>
-<p>Supports single-pool swaps and multi-hop swaps. In this case, <code>tokenIn</code> and <code>tokenOut</code> are provided together with the <code>fee</code> parameter to identify the swap pool.</p>
-<p>In case of a multi-hop swaps, the swap-path is provided as encoded <code>bytes</code>.</p>
-<h2 id="functions">Functions</h2>
-<hr></hr>
-<p><strong>Function:</strong> <code>openMarginPositionExactIn</code></p>
-<p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut). The user provides the debt amount as input.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (MarginSwapParamsExactIn memory): A struct containing parameters for opening the margin position.</p>
+                                <h1 id="external-calls-in-the-composer-contracts">External calls in the composer contracts</h1>
+<p>To provide the caller with full flexibility, we allow them to call any arbitrary target indirectly via a <code>callForwarder</code> contract that has the onl entrypoint function <code>deltaForwardCompose(bytes)</code></p>
+<p>The <code>composer</code> contract can call <strong>arbitrary targets</strong> with that fixed selector, whereas the <code>callForwarder</code> can call <strong>any target</strong> whith <strong>any selector</strong> (there are exceptions like the <code>permit2</code> address and <code>transferFrom</code> selector)</p>
+<p>To facilitate an external call with <code>data</code> on <code>target</code>, one needs to</p>
 <ul>
-<li><p><code>tokenIn</code> (address): The address of the input token to borrow.</p>
-</li>
-<li><p><code>fee</code> (uint24): The fee tier of the pool to be used for the swap.</p>
-</li>
-<li><p><code>tokenOut</code> (address): The address of the output token (collateral).</p>
-</li>
-<li><p><code>amountIn</code> (uint256): The amount of input tokens to borrow.</p>
-</li>
-<li><p><code>interestRateMode</code> (uint256): The interest rate mode (stable or variable) for the borrowed tokens.</p>
-</li>
-<li><p><code>amountOutMinimum</code> (uint256): The minimum amount of output tokens (collateral) allowed to be received.</p>
-</li>
+<li>pull caller funds (directly to <code>callForwarder</code>)</li>
+<li>execute <code>ComposerCommands.EXT_CALL</code> with the parameters on the <code>callForwarder</code> on the <code>composer</code> where the operation forwarded is also <code>ComposerCommands.EXT_CALL</code> with the provided data and target</li>
 </ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens (collateral) received from the swap.</p>
-<hr></hr>
-<p><strong>Function:</strong> <code>openMarginPositionExactOut</code></p>
-<p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut). The user provides the collateral amount as input.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (MarginSwapParamsExactOut memory): A struct containing parameters for opening the margin position.</p>
-<ul>
-<li><p><code>tokenIn</code> (<code>address</code>): The address of the input token to borrow.</p>
-</li>
-<li><p><code>fee</code> (<code>uint24</code>): The fee tier of the pool to be used for the swap.</p>
-</li>
-<li><p><code>tokenOut</code> (<code>address</code>): The address of the output token (collateral).</p>
-</li>
-<li><p><code>amountOut</code> (<code>uint256</code>): The amount of output tokens (collateral) to receive.</p>
-</li>
-<li><p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the borrowed tokens.</p>
-</li>
-<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be borrowed.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens (borrowed) used for the swap.</p>
-<hr></hr>
-<p><strong>Function:</strong> <code>openMarginPositionExactInMulti</code></p>
-<p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut) using a multi-pool path. The user provides the debt amount as input.</p>
-<p><strong>Parameters:</strong></p>
-<p><code>params</code> (MarginSwapParamsMultiExactIn memory): A struct containing parameters for opening the margin position.</p>
-<ul>
-<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-</li>
-<li><p><code>amountIn</code> (<code>uint256</code>): The amount of input tokens to borrow.</p>
-</li>
-<li><p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the borrowed tokens.</p>
-</li>
-<li><p><code>amountOutMinimum</code> (<code>uint256</code>): The minimum amount of output tokens (collateral) allowed to be received.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of output tokens (collateral) received from the swap.</p>
-<hr></hr>
-<p><strong>Function:</strong> <code>openMarginPositionExactOutMulti</code></p>
-<p>This function allows a user to open a margin position by borrowing a token (tokenIn) and selling it against collateral (tokenOut) using a multi-pool path. The user provides the collateral amount as input.</p>
-<p><strong><strong>Parameters:</strong></strong></p>
-<p><code>params</code> (MarginSwapParamsMultiExactOut memory): A struct containing parameters for opening the margin position.</p>
-<ul>
-<li><p><code>path</code> (<code>bytes</code>): A byte-encoded representation of the tokenIn, tokenOut, and fee of each pool to be used in the trade.</p>
-</li>
-<li><p><code>amountOut</code> (<code>uint256</code>): The amount of output tokens (collateral) to receive.</p>
-</li>
-<li><p><code>interestRateMode</code> (<code>uint256</code>): The interest rate mode (stable or variable) for the borrowed tokens.</p>
-</li>
-<li><p><code>amountInMaximum</code> (<code>uint256</code>): The maximum amount of input tokens allowed to be borrowed.</p>
-</li>
-</ul>
-<p><strong>Returns:</strong> <code>uint256</code>: The amount of input tokens (borrowed) used for the swap.</p><footer class="page-footer"><div class="custom page-footer">© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-08-07 21:20:21
-</span></div></div></footer><p></p>
+<p>While this approach seems to be inefficient, it is necessary to prevent malicious callers to execute bad calldata on the <code>composer</code> contract (e.g. trying to execute <code>transferFrom</code> from a prior caller that approved the <code>composer</code>)</p>
+<p>The operation parameters for the composer are given as follows.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>target <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>16</td>
+<td>value <code>uint128</code></td>
+</tr>
+<tr>
+<td>36</td>
+<td>20</td>
+<td>dataLength <code>address</code></td>
+</tr>
+<tr>
+<td>38</td>
+<td>dataLength</td>
+<td>data <code>address</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>value</code> is the native currency amount to attach.</p>
+<p>The <code>value</code> has a high bit that indicates whether to use the <code>selfbalance</code></p>
+<p>To encode an operation, te caller has to append this data to the call.</p>
+<pre><code class="lang-Solidity">abi.encodePacked(
+        uint8(ComposerCommands.EXT_CALL),
+        target,
+        uint128(value),
+        uint16(data.length),
+        data
+    );
+</code></pre>
+<p>Note that for arbitrary calls, we need to use the callForwarder, then it looks like this.</p>
+<pre><code class="lang-Solidity">
+// this is the default forwarder address
+address callForwarderAddress = 0xfCa1154C643C32638AEe9a43eeE7f377f515c801;
 
+// create the call for the forwarder
+// the target can e.g. be the 1inch aggregation router
+bytes memory callForwarderCall  = abi.encodePacked(
+        uint8(ComposerCommands.EXT_CALL),
+        target,
+        uint128(value),
+        uint16(data.length),
+        data
+    );
+
+// prepare the composer call
+bytes memory composerCall  = abi.encodePacked(
+        uint8(ComposerCommands.EXT_CALL),
+        callForwarderAddress, // it is important to use the forwarder on the composer level
+        uint128(value),
+        uint16(callForwarderCall.length),
+        callForwarderCall
+    );
+</code></pre>
+<p>It is important to note that the call for the forwarder needs to be prepared.</p>
+<h2 id="example-1inch-meta-aggregation">Example: 1inch meta-aggregation</h2>
+<p>Hrere we illustrate the creation of the call for a swap from <code>USDC</code> to <code>WETH</code> using 1inch.</p>
+<p>The following steps need to be executed:</p>
+<ol>
+<li><code>callForwarder</code> calls<ul>
+<li>create approve if needed</li>
+<li>create external call to router</li>
+<li>sweep funds to receiver and check slippage if desired</li>
+</ul>
+</li>
+<li><code>composer</code> calls<ul>
+<li>transfer funds from caller to <code>callForwarder</code></li>
+<li>execute external call through <code>callForwarder</code></li>
+</ul>
+</li>
+</ol>
+<p>The reason why we use the forwarder is to peserve the statelessness of the composer while still allowing calls to any target without requiring whiltelists.</p>
+<pre><code class="lang-Solidity">
+uint256 swapAmount = 4000.0e6;
+
+// this is the default forwarder address
+address callForwarderAddress = 0xfCa1154C643C32638AEe9a43eeE7f377f515c801;
+
+// create the call for the forwarder
+// the target can e.g. be the 1inch aggregation router
+bytes memory callForwarderCall  = abi.encodePacked(
+        uint8(ComposerCommands.EXT_CALL),
+        address(oneInchAggregationRouter),
+        uint128(0), // ERC20 has no value
+        uint16(data.length),
+        data
+    );
+
+// we need to approve the 1inch router on the callForwarder level
+// note that the approval is skipped if it was already done in the past
+bytes memory approve1inch = abi.encodePacked(
+        uint8(ComposerCommands.TRANSFERS),
+        uint8(TransferIds.APPROVE),
+        address(USDC),
+        address(oneInchAggregationRouter)
+    );
+
+// expect to receive 1 WETH
+// revert if we receive less
+uint256 amountExpected = 1.0e18;
+
+// in case the aggregators does not transfer directly to the user
+bytes memory sweepAndCheckSlippage = abi.encodePacked(
+        uint8(ComposerCommands.TRANSFERS),
+        uint8(TransferIds.SWEEP),
+        address(WETH),
+        address(receiver), // this is the receiver of the WETH
+        uint8(SweepType.AMOUNT),
+        amountExpected
+    );
+
+
+// combine the operations
+callForwarderCall = abi.encodePacked(
+    approve1inch,
+    callForwarderCall,
+    sweepAndCheckSlippage
+);
+
+
+// prepare the composer call
+// this executes callForwader.deltaForwardCompose(callForwarderCall)
+bytes memory composerCall  = abi.encodePacked(
+        uint8(ComposerCommands.EXT_CALL),
+        callForwarderAddress, // it is important to use the forwarder on the composer level
+        uint128(value),
+        uint16(callForwarderCall.length),
+        callForwarderCall
+    );
+
+// we need to make sure that teh callForwarder receives the funds directly
+bytes memory transferToForwarder = abi.encodePacked(
+        uint8(ComposerCommands.TRANSFERS),
+        uint8(TransferIds.TRANSFER_FROM),
+        address(USDC),
+        callForwarderAddress,
+        uint128(swapAmount)
+    );
+
+// combine the call to the composer
+composerCall = abi.encodePacked(
+        transferToForwarder,
+        composerCall
+    );
+
+// execute the operations
+composer.deltaCompose(composerCall);
+</code></pre>
+<footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2025-08-10 19:05:41
+</span></div></div></footer>
                                 
                                 </section>
                             
@@ -614,12 +667,12 @@
 
             
                 
-                <a href="collateral-swap.html" class="navigation navigation-prev " aria-label="Previous page: Collateral Swap">
+                <a href="transfers.html" class="navigation navigation-prev " aria-label="Previous page: Transfers">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="margin-close.html" class="navigation navigation-next " aria-label="Next page: Close Margin Position">
+                <a href="lending.html" class="navigation navigation-next " aria-label="Next page: Lending">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -630,7 +683,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Open Margin Position","level":"1.7.6","depth":2,"next":{"title":"Close Margin Position","level":"1.7.7","depth":2,"path":"api/margin-close.md","ref":"./api/margin-close.md","articles":[]},"previous":{"title":"Collateral Swap","level":"1.7.5","depth":2,"path":"api/collateral-swap.md","ref":"./api/collateral-swap.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div class='custom page-footer'>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://app.1delta.io/favicon.png","style":"background: none;width: 180px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin-open.md","mtime":"2025-08-07T21:20:21.624Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-10T18:01:45.751Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"External Call","level":"1.7.2.2","depth":3,"next":{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}]},"previous":{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/external-call.md","mtime":"2025-08-10T19:05:41.519Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-10T20:02:20.893Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

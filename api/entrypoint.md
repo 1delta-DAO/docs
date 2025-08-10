@@ -32,7 +32,7 @@ To create an operation `OPERATION` with that has e.g. the following parameters
 | 0      | 20             | underlying `address` |
 | 20     | 16             | amount `uint128`     |
 | 36     | 20             | receiver `address`   |
-| 76     | 20             | comet `address`      |
+| 56     | 20             | comet `address`      |
 
 the caller has to encode it as follows:
 

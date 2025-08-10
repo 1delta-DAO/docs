@@ -40,7 +40,7 @@ They can be used as follows for e.g. looping USDC in a Aaave type lender.
 uint128 amount = uint128(1000000.0e6);
 
 bytes memory innerOperation = abi.encodePacked(
-    encodeDeposit(...,USDC, amount,...) // deposit USDC amount to lendrer
+    encodeDeposit(...,USDC, amount,...) // deposit USDC amount to lender
     encodeBorrow(...,USDC, amount,...) // borrow USDC amount from lender
 )
 

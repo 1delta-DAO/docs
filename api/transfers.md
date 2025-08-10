@@ -46,8 +46,8 @@ Can be used to run slippage checks.
 
 ```TypeScript
 enum SweepType {
-    VALIDATE, // check if `balanceOf(address(this) >= amount, if true, transfer it, if not, revert
-    AMOUNT // transfer the amount without further checks
+    VALIDATE = 0, // check if `balanceOf(address(this) >= amount, if true, transfer it, if not, revert
+    AMOUNT = 1 // transfer the amount without further checks
 }
 ```
 

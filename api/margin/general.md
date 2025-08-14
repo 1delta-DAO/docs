@@ -21,3 +21,8 @@ In general, assuming the caller has existing balances with the lender, there aer
 Lending operations that take funds need **approvals** (see [Transfers](../transfers.md) section for that) and sometimes need to unwrap the flash loaned amount to native.
 
 Lending operations that pull funds on the user's behalf need to be **permissioned** by the user.
+
+
+## Operations
+
+- [Leverage](./leverage.md)

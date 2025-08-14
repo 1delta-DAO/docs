@@ -19,3 +19,4 @@
         * [Flash Loan](./api/flash-loan.md)
             * [Standardized Interface](./api/flash-loan/standardized-interface.md)
         * [Margin](./api/margin/general.md)
+            * [Leverage](./api/margin/leverage.md)

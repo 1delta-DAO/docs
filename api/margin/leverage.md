@@ -1,32 +1,34 @@
 # Leveraging (Borrow & Deposit)
 
-In this section we cover the leveraging method.
+In this section, we cover the leveraging method in detail.
 
-This includes borrowing, typically swapping and then deposit the return amounts.
+This process involves borrowing assets, typically swapping the borrowed amount for another asset, and then depositing the resulting funds as collateral.  
+We will illustrate how to create the calldata required for this operation.
 
-We illustrate how to create the calldata for this operation.
-
-Let us assume we want to create a leveraged position on Aave V3 where we
+Our example will demonstrate creating a leveraged position on **Aave V3**, where we:
 
 - Deposit collateral
 - Borrow
-- Swap with 1inch
-- Deposit
+- Swap via 1inch
+- Deposit the swapped assets
 
-To construc this, we need a [Flash Loan](../flash-loan.md) that wraps the entire operation.To be extra efficient, we only facilitate a single deposit.
+To construct this sequence, we will use a [Flash Loan](../flash-loan.md) that wraps the entire operation.  
+To maximize efficiency, we will perform only a single deposit.
 
-Let us take the example of a USDC-WETH position (we borrow USDC).
+Let’s assume we want to create a **USDC–WETH** leveraged position, borrowing USDC.
 
-We identify the flash loan source first, let us assume that Morpho Blue is the best options (as is the case for Ethereum and e.g. Base).
+First, we identify the flash loan source. For this example, we will assume that **Morpho Blue** is the best option (which is typically the case for Ethereum and, for example, Base).
 
-Let us say we have 1 ETH and want to create a position with 3 WETH in collateral and 8,000 USDC in debt.
+**Example parameters**:  
+We start with **1 ETH** and want to create a position with **3 WETH** as collateral and **8,000 USDC** as debt.
 
-We first create the inner operations.
+We will build this step-by-step, starting with the inner operations.
+
+---
 
 ## Constants
 
 ```Solidity
-
 // the deposit amount
 uint256 USER_AMOUNT = 1.0e18;
 
@@ -44,15 +46,16 @@ address oneInchAggregationRouter = address(0x111...);
 
 // falash loan source Morpho
 address MORPHO_BLUE = address(0xbbb...);
-
 ```
 
-## Pull funds
+---
 
-We define the operation to pull the ETH from the user and convert it to WETH.
+## Pull Funds
+
+First, we define the operation to pull ETH from the user and convert it into WETH.
+Here, we use an efficient version of wrapping to avoid unnecessary intermediate steps.
 
 ```Solidity
-
 bytes memory transferIn = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.TRANSFER_FROM),
@@ -60,18 +63,19 @@ bytes memory transferIn = abi.encodePacked(
     address(WETH), // transfer to WETH (this is an efficent version of wrapping)
     uint128(USER_AMOUNT) // 1 ETH
 );
-
 ```
+
+---
 
 ## Deposit
 
-We depoist funds to Aave V3. It is important that respective permissions are granted (see Approval).
+We deposit the funds into Aave V3.
+It is important to ensure that all required permissions have been granted in advance (see the **Approval** section).
 
-The amount used is `0` as we want to deposit the user amount plus whatever we receive from the swapper.
+Here, the deposit amount is set to `0`, meaning we will deposit **both** the user-provided ETH and whatever WETH we receive from the swapper.
 
 ```Solidity
-
-bytes memory depoist = abi.encodePacked(
+bytes memory deposit = abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(LenderOps.DEPOSIT),
     uint16(LenderIds.UP_TO_AAVE_V3 - 1), // general Aave V3
@@ -80,17 +84,18 @@ bytes memory depoist = abi.encodePacked(
     address(user), // receiver of the deposit
     address(AAVE_V3_POOL) // the Aave V3 pool address
 );
-
 ```
+
+---
 
 ## Borrow
 
-We need to ensure that we borrow the exact flash loan amount. f the flash loan has a fee, we ould be required to borrow the amount plus the fee.
+We must ensure that we borrow **exactly** the flash loan amount.
+If the flash loan incurs a fee, we need to borrow **the amount plus the fee**.
 
-The receiver is the `CALL_FORWARDER` - this saves us an additional transfer operation.
+The borrowed USDC is sent to the `CALL_FORWARDER`, which saves us an additional transfer step.
 
 ```Solidity
-
 bytes memory borrow = abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(LenderOps.BORROW),
@@ -101,17 +106,18 @@ bytes memory borrow = abi.encodePacked(
     uint8(2), // variable IR mode
     address(AAVE_V3_POOL) // the Aave V3 pool address
 );
-
 ```
+
+---
 
 ## Approvals
 
-We nee to permission all operations. These have to be executed once per deployment as the composer contract approves the maximum amount every time.
+We need to grant permissions for all operations.
+These approvals are only required once per deployment, as the composer contract always approves the maximum amount.
 
-If the approval was already done, our contracts skip it to save gas.
+If approvals have already been set, our contracts will skip them to save gas.
 
 ```Solidity
-
 // approval for the deposit
 bytes memory approvePool = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
@@ -127,17 +133,17 @@ bytes memory approveMorpho = abi.encodePacked(
     address(USDC),// underlying USDC
     address(MORPHO_BLUE) // the Morpho Blue address
 );
-
 ```
+
+---
 
 ## Meta Swap
 
-The mata swap follows the same approach as described in [External Call](../external-call.md).
+The meta swap follows the same approach as described in [External Call](../external-call.md).
 
-The difference is that we skip the manual transfer as we already facilitated that in the borrow.
+The difference here is that we skip the manual transfer step, because the funds are already transferred during the borrow.
 
 ```Solidity
-
 // create the call for the forwarder
 // the target can e.g. be the 1inch aggregation router
 bytes memory callForwarderCall  = abi.encodePacked(
@@ -169,14 +175,12 @@ bytes memory sweepAndCheckSlippage = abi.encodePacked(
         amountExpected
     );
 
-
 // combine the operations
 callForwarderCall = abi.encodePacked(
     approve1inch,
     callForwarderCall,
     sweepAndCheckSlippage
 );
-
 
 // prepare the composer call
 // this executes callForwader.deltaForwardCompose(callForwarderCall)
@@ -187,15 +191,19 @@ bytes memory metaSwap  = abi.encodePacked(
         uint16(callForwarderCall.length),
         callForwarderCall
     );
-
 ```
 
-## The leverage call
+---
 
-We put everything together. The inner operations are the
+## The Leverage Call
+
+Finally, we assemble the complete calldata sequence.
+
+The **inner operation** performs the swap of the flash-loaned amount, deposits **all available funds** (including the user’s contribution), and then borrows the required amount to repay the Morpho flash loan.
+
+Note that this has to be permissioned via `IDebtToken(USDC_DEBT_TOKEN).approveDelegation(...)`.
 
 ```Solidity
-
 // select 8000 USDC (= the borrow amount)
 uint128 amount = uint128(8000.0e6);
 
@@ -230,5 +238,4 @@ bytes memory composerOps = abi.encodePacked(
 
 // execute call and attach user ETH
 composer.deltaCompose{value: USER_AMOUNT}(composerOps);
-
 ```

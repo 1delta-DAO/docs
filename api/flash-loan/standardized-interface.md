@@ -34,7 +34,7 @@ Note that
 
 They can be used as follows for e.g. looping USDC in a Aaave type lender.
 
-```Solidity
+```solidity
 
 // select 1M USDC
 uint128 amount = uint128(1000000.0e6);

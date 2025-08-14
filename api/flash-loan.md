@@ -4,7 +4,7 @@ Lead type: `ComposerCommands.FLASH_LOAN`.
 
 The sub types are dcefined by the following enum:
 
-```Typescript
+```typescript
 enum FlashLoanIds {
     MORPHO = 0, // this is Morpho Blue
     BALANCER_V2 = 1, // covers the fork Swaap, too
@@ -17,7 +17,7 @@ to the array of composer commands.
 
 To encode an operation, te caller has to append this data to the call.
 
-```Solidity
+```solidity
 abi.encodePacked(
     uint8(ComposerCommands.FLASH_LOAN),
     uint8(FlashLoanIds.[FlashLoanProvider]),

@@ -26,7 +26,7 @@ The `value` has a high bit that indicates whether to use the `selfbalance`
 
 To encode an operation, te caller has to append this data to the call.
 
-```Solidity
+```solidity
 abi.encodePacked(
         uint8(ComposerCommands.EXT_CALL),
         target,
@@ -38,7 +38,7 @@ abi.encodePacked(
 
 Note that for arbitrary calls, we need to use the callForwarder, then it looks like this.
 
-```Solidity
+```solidity
 
 // this is the default forwarder address
 address callForwarderAddress = 0xfCa1154C643C32638AEe9a43eeE7f377f515c801;
@@ -81,7 +81,7 @@ The following steps need to be executed:
 
 The reason why we use the forwarder is to peserve the statelessness of the composer while still allowing calls to any target without requiring whiltelists.
 
-```Solidity
+```solidity
 
 uint256 swapAmount = 4000.0e6;
 

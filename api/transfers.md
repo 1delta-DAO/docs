@@ -4,7 +4,7 @@ Lead type: `ComposerCommands.TRANSFERS`.
 
 The sub types are dcefined by the following enum:
 
-```Typescript
+```typescript
 enum TransferIds {
     TRANSFER_FROM = 0, // pull funds from caller
     SWEEP = 1, // send funds from this contract
@@ -16,7 +16,7 @@ enum TransferIds {
 
 To encode an operation, te caller has to append
 
-```Solidity
+```solidity
 abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.[Operation]),
@@ -44,7 +44,7 @@ Pull funds from this contract to a provided address.
 
 Can be used to run slippage checks.
 
-```TypeScript
+```typescript
 enum SweepType {
     VALIDATE = 0, // check if `balanceOf(address(this) >= amount, if true, transfer it, if not, revert
     AMOUNT = 1 // transfer the amount without further checks

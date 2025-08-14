@@ -40,10 +40,6 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/@honkit/honkit-plugin-highlight/website.css">
-                
-            
-                
                 <link rel="stylesheet" href="../../gitbook/@honkit/honkit-plugin-fontsettings/website.css">
                 
             
@@ -483,182 +479,182 @@
 <p>We will build this step-by-step, starting with the inner operations.</p>
 <hr></hr>
 <h2 id="constants">Constants</h2>
-<pre><code class="lang-Solidity">// the deposit amount
-uint256 USER_AMOUNT = 1.0e18;
-
-// this is the default forwarder address
-address CALL_FORWARDER = 0xfCa1154C643C32638AEe9a43eeE7f377f515c801;
-
-// 1delta composer
-IComposer composer = IComposer(0x...);
-
-// aave address, can be replaced with any fork
-address AAVE_V3_POOL = address(0x...);
-
-// meta swap call target
-address oneInchAggregationRouter = address(0x111...);
-
-// falash loan source Morpho
-address MORPHO_BLUE = address(0xbbb...);
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// the deposit amount</span></span>
+<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> USER_AMOUNT = </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e18</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// this is the default forwarder address</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> CALL_FORWARDER = </span><span style="color: #B5CEA8">0xfCa1154C643C32638AEe9a43eeE7f377f515c801</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// 1delta composer</span></span>
+<span class="line"><span style="color: #D4D4D4">IComposer composer = </span><span style="color: #DCDCAA">IComposer</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// aave address, can be replaced with any fork</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> AAVE_V3_POOL = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// meta swap call target</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> oneInchAggregationRouter = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0x111</span><span style="color: #D4D4D4">...);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// falash loan source Morpho</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> MORPHO_BLUE = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0xbbb</span><span style="color: #D4D4D4">...);</span></span>
+<span class="line"></span></code></pre></code></pre>
 <hr></hr>
 <h2 id="pull-funds">Pull Funds</h2>
 <p>First, we define the operation to pull ETH from the user and convert it into WETH.
 Here, we use an efficient version of wrapping to avoid unnecessary intermediate steps.</p>
-<pre><code class="lang-Solidity">bytes memory transferIn = abi.encodePacked(
-    uint8(ComposerCommands.TRANSFERS),
-    uint8(TransferIds.TRANSFER_FROM),
-    address(0),// we transfer ETH
-    address(WETH), // transfer to WETH (this is an efficent version of wrapping)
-    uint128(USER_AMOUNT) // 1 ETH
-);
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> transferIn = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.TRANSFER_FROM),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),</span><span style="color: #6A9955">// we transfer ETH</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH), </span><span style="color: #6A9955">// transfer to WETH (this is an efficent version of wrapping)</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(USER_AMOUNT) </span><span style="color: #6A9955">// 1 ETH</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
 <hr></hr>
 <h2 id="deposit">Deposit</h2>
 <p>We deposit the funds into Aave V3.
 It is important to ensure that all required permissions have been granted in advance (see the <strong>Approval</strong> section).</p>
 <p>Here, the deposit amount is set to <code>0</code>, meaning we will deposit <strong>both</strong> the user-provided ETH and whatever WETH we receive from the swapper.</p>
-<pre><code class="lang-Solidity">bytes memory deposit = abi.encodePacked(
-    uint8(ComposerCommands.LENDING),
-    uint8(LenderOps.DEPOSIT),
-    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // general Aave V3
-    address(WETH),// underlying ETH
-    uint128(0), // 0 means whatever is in the contract at the time of execution
-    address(user), // receiver of the deposit
-    address(AAVE_V3_POOL) // the Aave V3 pool address
-);
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> deposit = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.LENDING),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(LenderOps.DEPOSIT),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(LenderIds.UP_TO_AAVE_V3 - </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// general Aave V3</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span><span style="color: #6A9955">// underlying ETH</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// 0 means whatever is in the contract at the time of execution</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(user), </span><span style="color: #6A9955">// receiver of the deposit</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL) </span><span style="color: #6A9955">// the Aave V3 pool address</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
 <hr></hr>
 <h2 id="borrow">Borrow</h2>
 <p>We must ensure that we borrow <strong>exactly</strong> the flash loan amount.
 If the flash loan incurs a fee, we need to borrow <strong>the amount plus the fee</strong>.</p>
 <p>The borrowed USDC is sent to the <code>CALL_FORWARDER</code>, which saves us an additional transfer step.</p>
-<pre><code class="lang-Solidity">bytes memory borrow = abi.encodePacked(
-    uint8(ComposerCommands.LENDING),
-    uint8(LenderOps.BORROW),
-    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // general Aave V3
-    address(USDC),// underlying USDC
-    uint128(8000.0e6), // 8k USDC
-    address(CALL_FOWRARDER), // receiver of the call forwarder to avoid additional transfers
-    uint8(2), // variable IR mode
-    address(AAVE_V3_POOL) // the Aave V3 pool address
-);
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> borrow = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.LENDING),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(LenderOps.BORROW),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(LenderIds.UP_TO_AAVE_V3 - </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// general Aave V3</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span><span style="color: #6A9955">// underlying USDC</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">8000</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e6</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// 8k USDC</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(CALL_FOWRARDER), </span><span style="color: #6A9955">// receiver of the call forwarder to avoid additional transfers</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">2</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// variable IR mode</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL) </span><span style="color: #6A9955">// the Aave V3 pool address</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
 <hr></hr>
 <h2 id="approvals">Approvals</h2>
 <p>We need to grant permissions for all operations.
 These approvals are only required once per deployment, as the composer contract always approves the maximum amount.</p>
 <p>If approvals have already been set, our contracts will skip them to save gas.</p>
-<pre><code class="lang-Solidity">// approval for the deposit
-bytes memory approvePool = abi.encodePacked(
-    uint8(ComposerCommands.TRANSFERS),
-    uint8(TransferIds.APPROVE),
-    address(WETH),// underlying WETH
-    address(AAVE_V3_POOL) // the Aave V3 pool address
-);
-
-// Morpho flash loans pull the funds via `transferFrom`, as such, we have to approve the flash loan currency.
-bytes memory approveMorpho = abi.encodePacked(
-    uint8(ComposerCommands.TRANSFERS),
-    uint8(TransferIds.APPROVE),
-    address(USDC),// underlying USDC
-    address(MORPHO_BLUE) // the Morpho Blue address
-);
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// approval for the deposit</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approvePool = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span><span style="color: #6A9955">// underlying WETH</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL) </span><span style="color: #6A9955">// the Aave V3 pool address</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Morpho flash loans pull the funds via `transferFrom`, as such, we have to approve the flash loan currency.</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approveMorpho = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span><span style="color: #6A9955">// underlying USDC</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(MORPHO_BLUE) </span><span style="color: #6A9955">// the Morpho Blue address</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
 <hr></hr>
 <h2 id="meta-swap">Meta Swap</h2>
 <p>The meta swap follows the same approach as described in <a href="../external-call.html">External Call</a>.</p>
 <p>The difference here is that we skip the manual transfer step, because the funds are already transferred during the borrow.</p>
-<pre><code class="lang-Solidity">// create the call for the forwarder
-// the target can e.g. be the 1inch aggregation router
-bytes memory callForwarderCall  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        address(oneInchAggregationRouter),
-        uint128(0), // ERC20 has no value
-        uint16(data.length),
-        data
-    );
-
-bytes memory approve1inch = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.APPROVE),
-        address(USDC),
-        address(oneInchAggregationRouter)
-    );
-
-// expect to receive 2 WETH
-// revert if we receive less
-uint256 amountExpected = 2.0e18;
-
-// in case the aggregators does not transfer directly to the user
-bytes memory sweepAndCheckSlippage = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.SWEEP),
-        address(WETH),
-        address(receiver), // this is the receiver of the WETH
-        uint8(SweepType.AMOUNT),
-        amountExpected
-    );
-
-// combine the operations
-callForwarderCall = abi.encodePacked(
-    approve1inch,
-    callForwarderCall,
-    sweepAndCheckSlippage
-);
-
-// prepare the composer call
-// this executes callForwader.deltaForwardCompose(callForwarderCall)
-bytes memory metaSwap  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        callForwarderAddress, // it is important to use the forwarder on the composer level
-        uint128(value),
-        uint16(callForwarderCall.length),
-        callForwarderCall
-    );
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// create the call for the forwarder</span></span>
+<span class="line"><span style="color: #6A9955">// the target can e.g. be the 1inch aggregation router</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> callForwarderCall  = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(oneInchAggregationRouter),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// ERC20 has no value</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(data.length),</span></span>
+<span class="line"><span style="color: #D4D4D4">        data</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approve1inch = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(oneInchAggregationRouter)</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// expect to receive 2 WETH</span></span>
+<span class="line"><span style="color: #6A9955">// revert if we receive less</span></span>
+<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> amountExpected = </span><span style="color: #B5CEA8">2</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e18</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// in case the aggregators does not transfer directly to the user</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> sweepAndCheckSlippage = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(receiver), </span><span style="color: #6A9955">// this is the receiver of the WETH</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.AMOUNT),</span></span>
+<span class="line"><span style="color: #D4D4D4">        amountExpected</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// combine the operations</span></span>
+<span class="line"><span style="color: #D4D4D4">callForwarderCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    approve1inch,</span></span>
+<span class="line"><span style="color: #D4D4D4">    callForwarderCall,</span></span>
+<span class="line"><span style="color: #D4D4D4">    sweepAndCheckSlippage</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// prepare the composer call</span></span>
+<span class="line"><span style="color: #6A9955">// this executes callForwader.deltaForwardCompose(callForwarderCall)</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> metaSwap  = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
+<span class="line"><span style="color: #D4D4D4">        callForwarderAddress, </span><span style="color: #6A9955">// it is important to use the forwarder on the composer level</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(value),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callForwarderCall.length),</span></span>
+<span class="line"><span style="color: #D4D4D4">        callForwarderCall</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span></code></pre></code></pre>
 <hr></hr>
 <h2 id="the-leverage-call">The Leverage Call</h2>
 <p>Finally, we assemble the complete calldata sequence.</p>
 <p>The <strong>inner operation</strong> performs the swap of the flash-loaned amount, deposits <strong>all available funds</strong> (including the user’s contribution), and then borrows the required amount to repay the Morpho flash loan.</p>
 <p>Note that this has to be permissioned via <code>IDebtToken(USDC_DEBT_TOKEN).approveDelegation(...)</code>.</p>
-<pre><code class="lang-Solidity">// select 8000 USDC (= the borrow amount)
-uint128 amount = uint128(8000.0e6);
-
-// the inner operation swaps the flash loaned amounts,
-// deposits everything (incl the user funds) and borrows whatever we need to repay to morpho.
-bytes memory innerOperation = abi.encodePacked(
-    metaSwap,
-    deposit,
-    borrow,
-)
-
-bytes memory flashLoan = abi.encodePacked(
-    uint8(ComposerCommands.FLASH_LOAN), // then just continue the next one
-    uint8(FlashLoanIds.MORPHO_BLUE),
-    USDC,
-    MORPHO_BLUE_ADDRESS
-    amount,
-    uint16(innerOperation.length + 1),
-    uint8(0), // the original morpho blue has poolId 0.
-    innerOperation
-)
-
-// we ensure that everything that can be outside of the callback is outside
-// this saves gas as the flash loan calldata is smaller
-// relevant only for ETH mainnet.
-bytes memory composerOps = abi.encodePacked(
-    transferIn,
-    approvePool,
-    approveMorpho,
-    flashLoan
-);
-
-// execute call and attach user ETH
-composer.deltaCompose{value: USER_AMOUNT}(composerOps);
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// select 8000 USDC (= the borrow amount)</span></span>
+<span class="line"><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4"> amount = </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">8000</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e6</span><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// the inner operation swaps the flash loaned amounts,</span></span>
+<span class="line"><span style="color: #6A9955">// deposits everything (incl the user funds) and borrows whatever we need to repay to morpho.</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> innerOperation = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    metaSwap,</span></span>
+<span class="line"><span style="color: #D4D4D4">    deposit,</span></span>
+<span class="line"><span style="color: #D4D4D4">    borrow,</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> flashLoan = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.FLASH_LOAN), </span><span style="color: #6A9955">// then just continue the next one</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(FlashLoanIds.MORPHO_BLUE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    USDC,</span></span>
+<span class="line"><span style="color: #D4D4D4">    MORPHO_BLUE_ADDRESS</span></span>
+<span class="line"><span style="color: #D4D4D4">    amount,</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(innerOperation.length + </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// the original morpho blue has poolId 0.</span></span>
+<span class="line"><span style="color: #D4D4D4">    innerOperation</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// we ensure that everything that can be outside of the callback is outside</span></span>
+<span class="line"><span style="color: #6A9955">// this saves gas as the flash loan calldata is smaller</span></span>
+<span class="line"><span style="color: #6A9955">// relevant only for ETH mainnet.</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> composerOps = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    transferIn,</span></span>
+<span class="line"><span style="color: #D4D4D4">    approvePool,</span></span>
+<span class="line"><span style="color: #D4D4D4">    approveMorpho,</span></span>
+<span class="line"><span style="color: #D4D4D4">    flashLoan</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// execute call and attach user ETH</span></span>
+<span class="line"><span style="color: #D4D4D4">composer.deltaCompose{value: USER_AMOUNT}(composerOps);</span></span>
+<span class="line"></span></code></pre></code></pre>
 <footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-08-14 10:42:20
+2025-08-14 11:11:01
 </span></div></div></footer>
                                 
                                 </section>
@@ -698,7 +694,7 @@ composer.deltaCompose{value: USER_AMOUNT}(composerOps);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Leverage","level":"1.7.2.5.1","depth":4,"previous":{"title":"Margin","level":"1.7.2.5","depth":3,"path":"api/margin/general.md","ref":"./api/margin/general.md","articles":[{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/leverage.md","mtime":"2025-08-14T10:42:20.930Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-14T10:42:31.377Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Leverage","level":"1.7.2.5.1","depth":4,"previous":{"title":"Margin","level":"1.7.2.5","depth":3,"path":"api/margin/general.md","ref":"./api/margin/general.md","articles":[{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/leverage.md","mtime":"2025-08-14T11:11:01.481Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-14T11:11:11.415Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -773,6 +769,10 @@ composer.deltaCompose{value: USER_AMOUNT}(composerOps);
     
         
         <script src="../../gitbook/honkit-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

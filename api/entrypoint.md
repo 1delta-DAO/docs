@@ -10,7 +10,7 @@ The `deltaCompose` function consumes byte-encoded operations that are sequential
 
 The operations themselves are categorized via human-readable enum values as follows
 
-```Typescript
+```typescript
 enum ComposerCommands {
     SWAPS; // swap paths
     EXT_CALL; // external calls (`deltaForwardCompose`)
@@ -36,7 +36,7 @@ To create an operation `OPERATION` with that has e.g. the following parameters
 
 the caller has to encode it as follows:
 
-```Solidity
+```solidity
 
 bytes memory operation = abi.encodePacked(
     uint8(ComposerCommands.[OPERATION]),
@@ -51,7 +51,7 @@ composer.deltaCompose(operation);
 
 It is designed so that the caller can always append any sort of operations.
 
-```Solidity
+```solidity
 
 bytes memory operation = abi.encodePacked(
     operation0, // (as bytes memory) add another operation to the start

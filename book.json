@@ -9,6 +9,9 @@
   },
   
   "plugins": [
+    "-highlight",
+    "honkit-plugin-shiki",
+
     "add-js-css",
     "edit-link",
     "flexible-alerts",

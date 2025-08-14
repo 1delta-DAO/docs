@@ -4,7 +4,7 @@ Lead type: `ComposerCommands.LENDING`.
 
 The sub types are dcefined by the following enum:
 
-```Typescript
+```typescript
 enum LenderOps {
     DEPOSIT = 0, // deposit (collateral)
     BORROW = 1, // borrow from lender
@@ -19,7 +19,7 @@ to the array of composer commands.
 
 We ecode lender types as follows:
 
-```Typescript
+```typescript
 enum LenderIds {
     UP_TO_AAVE_V3 = 1000,
     UP_TO_AAVE_V2 = 2000,
@@ -31,7 +31,7 @@ enum LenderIds {
 
 To encode an operation, te caller has to append this data to the call.
 
-```Solidity
+```solidity
 abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(TransferIds.[Operation]),

@@ -28,7 +28,7 @@ We will build this step-by-step, starting with the inner operations.
 
 ## Constants
 
-```Solidity
+```solidity
 // the deposit amount
 uint256 USER_AMOUNT = 1.0e18;
 
@@ -55,7 +55,7 @@ address MORPHO_BLUE = address(0xbbb...);
 First, we define the operation to pull ETH from the user and convert it into WETH.
 Here, we use an efficient version of wrapping to avoid unnecessary intermediate steps.
 
-```Solidity
+```solidity
 bytes memory transferIn = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.TRANSFER_FROM),
@@ -74,7 +74,7 @@ It is important to ensure that all required permissions have been granted in adv
 
 Here, the deposit amount is set to `0`, meaning we will deposit **both** the user-provided ETH and whatever WETH we receive from the swapper.
 
-```Solidity
+```solidity
 bytes memory deposit = abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(LenderOps.DEPOSIT),
@@ -95,7 +95,7 @@ If the flash loan incurs a fee, we need to borrow **the amount plus the fee**.
 
 The borrowed USDC is sent to the `CALL_FORWARDER`, which saves us an additional transfer step.
 
-```Solidity
+```solidity
 bytes memory borrow = abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(LenderOps.BORROW),
@@ -117,7 +117,7 @@ These approvals are only required once per deployment, as the composer contract 
 
 If approvals have already been set, our contracts will skip them to save gas.
 
-```Solidity
+```solidity
 // approval for the deposit
 bytes memory approvePool = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
@@ -143,7 +143,7 @@ The meta swap follows the same approach as described in [External Call](../exter
 
 The difference here is that we skip the manual transfer step, because the funds are already transferred during the borrow.
 
-```Solidity
+```solidity
 // create the call for the forwarder
 // the target can e.g. be the 1inch aggregation router
 bytes memory callForwarderCall  = abi.encodePacked(
@@ -203,7 +203,7 @@ The **inner operation** performs the swap of the flash-loaned amount, deposits *
 
 Note that this has to be permissioned via `IDebtToken(USDC_DEBT_TOKEN).approveDelegation(...)`.
 
-```Solidity
+```solidity
 // select 8000 USDC (= the borrow amount)
 uint128 amount = uint128(8000.0e6);
 
@@ -213,7 +213,7 @@ bytes memory innerOperation = abi.encodePacked(
     metaSwap,
     deposit,
     borrow,
-)
+);
 
 bytes memory flashLoan = abi.encodePacked(
     uint8(ComposerCommands.FLASH_LOAN), // then just continue the next one
@@ -224,7 +224,7 @@ bytes memory flashLoan = abi.encodePacked(
     uint16(innerOperation.length + 1),
     uint8(0), // the original morpho blue has poolId 0.
     innerOperation
-)
+);
 
 // we ensure that everything that can be outside of the callback is outside
 // this saves gas as the flash loan calldata is smaller

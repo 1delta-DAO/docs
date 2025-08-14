@@ -40,10 +40,6 @@
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-highlight/website.css">
-                
-            
-                
                 <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-fontsettings/website.css">
                 
             
@@ -512,38 +508,38 @@
 <p><code>value</code> is the native currency amount to attach.</p>
 <p>The <code>value</code> has a high bit that indicates whether to use the <code>selfbalance</code></p>
 <p>To encode an operation, te caller has to append this data to the call.</p>
-<pre><code class="lang-Solidity">abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        target,
-        uint128(value),
-        uint16(data.length),
-        data
-    );
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
+<span class="line"><span style="color: #D4D4D4">        target,</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(value),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(data.length),</span></span>
+<span class="line"><span style="color: #D4D4D4">        data</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span></code></pre></code></pre>
 <p>Note that for arbitrary calls, we need to use the callForwarder, then it looks like this.</p>
-<pre><code class="lang-Solidity">
-// this is the default forwarder address
-address callForwarderAddress = 0xfCa1154C643C32638AEe9a43eeE7f377f515c801;
-
-// create the call for the forwarder
-// the target can e.g. be the 1inch aggregation router
-bytes memory callForwarderCall  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        target,
-        uint128(value),
-        uint16(data.length),
-        data
-    );
-
-// prepare the composer call
-bytes memory composerCall  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        callForwarderAddress, // it is important to use the forwarder on the composer level
-        uint128(value),
-        uint16(callForwarderCall.length),
-        callForwarderCall
-    );
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"></span>
+<span class="line"><span style="color: #6A9955">// this is the default forwarder address</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> callForwarderAddress = </span><span style="color: #B5CEA8">0xfCa1154C643C32638AEe9a43eeE7f377f515c801</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// create the call for the forwarder</span></span>
+<span class="line"><span style="color: #6A9955">// the target can e.g. be the 1inch aggregation router</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> callForwarderCall  = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
+<span class="line"><span style="color: #D4D4D4">        target,</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(value),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(data.length),</span></span>
+<span class="line"><span style="color: #D4D4D4">        data</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// prepare the composer call</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> composerCall  = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
+<span class="line"><span style="color: #D4D4D4">        callForwarderAddress, </span><span style="color: #6A9955">// it is important to use the forwarder on the composer level</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(value),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callForwarderCall.length),</span></span>
+<span class="line"><span style="color: #D4D4D4">        callForwarderCall</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span></code></pre></code></pre>
 <p>It is important to note that the call for the forwarder needs to be prepared.</p>
 <h2 id="example-1inch-meta-aggregation">Example: 1inch meta-aggregation</h2>
 <p>Hrere we illustrate the creation of the call for a swap from <code>USDC</code> to <code>WETH</code> using 1inch.</p>
@@ -562,84 +558,84 @@ bytes memory composerCall  = abi.encodePacked(
 </li>
 </ol>
 <p>The reason why we use the forwarder is to peserve the statelessness of the composer while still allowing calls to any target without requiring whiltelists.</p>
-<pre><code class="lang-Solidity">
-uint256 swapAmount = 4000.0e6;
-
-// this is the default forwarder address
-address callForwarderAddress = 0xfCa1154C643C32638AEe9a43eeE7f377f515c801;
-
-// create the call for the forwarder
-// the target can e.g. be the 1inch aggregation router
-bytes memory callForwarderCall  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        address(oneInchAggregationRouter),
-        uint128(0), // ERC20 has no value
-        uint16(data.length),
-        data
-    );
-
-// we need to approve the 1inch router on the callForwarder level
-// note that the approval is skipped if it was already done in the past
-bytes memory approve1inch = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.APPROVE),
-        address(USDC),
-        address(oneInchAggregationRouter)
-    );
-
-// expect to receive 1 WETH
-// revert if we receive less
-uint256 amountExpected = 1.0e18;
-
-// in case the aggregators does not transfer directly to the user
-bytes memory sweepAndCheckSlippage = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.SWEEP),
-        address(WETH),
-        address(receiver), // this is the receiver of the WETH
-        uint8(SweepType.AMOUNT),
-        amountExpected
-    );
-
-
-// combine the operations
-callForwarderCall = abi.encodePacked(
-    approve1inch,
-    callForwarderCall,
-    sweepAndCheckSlippage
-);
-
-
-// prepare the composer call
-// this executes callForwader.deltaForwardCompose(callForwarderCall)
-bytes memory composerCall  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        callForwarderAddress, // it is important to use the forwarder on the composer level
-        uint128(value),
-        uint16(callForwarderCall.length),
-        callForwarderCall
-    );
-
-// we need to make sure that teh callForwarder receives the funds directly
-bytes memory transferToForwarder = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.TRANSFER_FROM),
-        address(USDC),
-        callForwarderAddress,
-        uint128(swapAmount)
-    );
-
-// combine the call to the composer
-composerCall = abi.encodePacked(
-        transferToForwarder,
-        composerCall
-    );
-
-// execute the operations
-composer.deltaCompose(composerCall);
-</code></pre>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"></span>
+<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> swapAmount = </span><span style="color: #B5CEA8">4000</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e6</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// this is the default forwarder address</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> callForwarderAddress = </span><span style="color: #B5CEA8">0xfCa1154C643C32638AEe9a43eeE7f377f515c801</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// create the call for the forwarder</span></span>
+<span class="line"><span style="color: #6A9955">// the target can e.g. be the 1inch aggregation router</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> callForwarderCall  = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(oneInchAggregationRouter),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// ERC20 has no value</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(data.length),</span></span>
+<span class="line"><span style="color: #D4D4D4">        data</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// we need to approve the 1inch router on the callForwarder level</span></span>
+<span class="line"><span style="color: #6A9955">// </span><span style="color: #569CD6">note</span><span style="color: #6A9955"> that the approval is skipped if it was already done in the past</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approve1inch = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(oneInchAggregationRouter)</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// expect to receive 1 WETH</span></span>
+<span class="line"><span style="color: #6A9955">// revert if we receive less</span></span>
+<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> amountExpected = </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e18</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// in case the aggregators does not transfer directly to the user</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> sweepAndCheckSlippage = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(receiver), </span><span style="color: #6A9955">// this is the receiver of the WETH</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.AMOUNT),</span></span>
+<span class="line"><span style="color: #D4D4D4">        amountExpected</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// combine the operations</span></span>
+<span class="line"><span style="color: #D4D4D4">callForwarderCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    approve1inch,</span></span>
+<span class="line"><span style="color: #D4D4D4">    callForwarderCall,</span></span>
+<span class="line"><span style="color: #D4D4D4">    sweepAndCheckSlippage</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// prepare the composer call</span></span>
+<span class="line"><span style="color: #6A9955">// this executes callForwader.deltaForwardCompose(callForwarderCall)</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> composerCall  = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
+<span class="line"><span style="color: #D4D4D4">        callForwarderAddress, </span><span style="color: #6A9955">// it is important to use the forwarder on the composer level</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(value),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callForwarderCall.length),</span></span>
+<span class="line"><span style="color: #D4D4D4">        callForwarderCall</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// we need to make sure that teh callForwarder receives the funds directly</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> transferToForwarder = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.TRANSFER_FROM),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
+<span class="line"><span style="color: #D4D4D4">        callForwarderAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(swapAmount)</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// combine the call to the composer</span></span>
+<span class="line"><span style="color: #D4D4D4">composerCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        transferToForwarder,</span></span>
+<span class="line"><span style="color: #D4D4D4">        composerCall</span></span>
+<span class="line"><span style="color: #D4D4D4">    );</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// execute the operations</span></span>
+<span class="line"><span style="color: #D4D4D4">composer.</span><span style="color: #DCDCAA">deltaCompose</span><span style="color: #D4D4D4">(composerCall);</span></span>
+<span class="line"></span></code></pre></code></pre>
 <footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-08-14 09:29:03
+2025-08-14 11:11:01
 </span></div></div></footer>
                                 
                                 </section>
@@ -683,7 +679,7 @@ composer.deltaCompose(composerCall);
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"External Call","level":"1.7.2.2","depth":3,"next":{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}]},"previous":{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"highlight":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/external-call.md","mtime":"2025-08-14T09:29:03.925Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-14T10:42:31.377Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"External Call","level":"1.7.2.2","depth":3,"next":{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}]},"previous":{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/external-call.md","mtime":"2025-08-14T11:11:01.469Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-14T11:11:11.415Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -758,6 +754,10 @@ composer.deltaCompose(composerCall);
     
         
         <script src="../gitbook/honkit-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

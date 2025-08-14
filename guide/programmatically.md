@@ -12,7 +12,7 @@ This package contains all lender data that is needed for on-chain actions (e.g. 
 pnpm add @1delta/calldata-sdk @1delta/asset-registry
 ```
 
-```Typescript
+```typescript
 // enums for operations
 import {QuickActionType, MarginTradeType} from "@1delta/calldata-sdk"
 // for direct lending actions
@@ -28,7 +28,7 @@ import {Lender} from "@1delta/asset-registry"
 
 Deposits assets to Aave. The caller needs to ensure that the contract has enough permissions (e.g. `token.approve(...)`)
 
-```Typescript
+```typescript
 // --- Configuration for chain ---
 const chainId = "10"
 const composer = COMPOSER_PROXIES[chainId]
@@ -74,7 +74,7 @@ const { calldata, value } = ComposerDirectLending.composeDirectMoneyMarketAction
 
 Open a position on Aave. The caller needs to ensure that the contract has enough permissions (e.g. via `debtToken.approveDelegation(...)`)
 
-```Typescript
+```typescript
 // Example: Opening a short position on 1 WETH using USDC as collateral
 
 const chainId = "10"

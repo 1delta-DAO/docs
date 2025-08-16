@@ -23,4 +23,4 @@
             * [Close](./api/margin/close.md)
             * [Collateral Swap](./api/margin/collateral-swap.md)
             * [Debt Swap](./api/margin/debt-swap.md)
-            * [Further Operations](./api/margin/further-operations.md)
+            * [Migration](./api/margin/migration.md)

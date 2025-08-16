@@ -1,0 +1,854 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Migration · 1delta docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/3896835351e91f08a9ea7a74eaf41e2f-footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/e62fe9222b0aa80d2d1649e52d559bc9-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="debt-swap.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../../margin-aggregation.html">
+            
+                <a href="../../margin-aggregation.html">
+            
+                    
+                    Margin Aggregation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../../guide/overview.html">
+            
+                <a href="../../guide/overview.html">
+            
+                    
+                    Guide
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../../guide/frontend.html">
+            
+                <a href="../../guide/frontend.html">
+            
+                    
+                    Frontend
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../../guide/programmatically.html">
+            
+                <a href="../../guide/programmatically.html">
+            
+                    
+                    Programmatically
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../../architecture/overview.html">
+            
+                <a href="../../architecture/overview.html">
+            
+                    
+                    Architecture
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../../lenders/summary.html">
+            
+                <a href="../../lenders/summary.html">
+            
+                    
+                    Lenders
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../../lenders/metrics.html">
+            
+                <a href="../../lenders/metrics.html">
+            
+                    
+                    Metrics
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../../contract-addresses/summary.html">
+            
+                <a href="../../contract-addresses/summary.html">
+            
+                    
+                    Contract Addresses
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="../summary.html">
+            
+                <a href="../summary.html">
+            
+                    
+                    Contract API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="../entrypoint.html">
+            
+                <a href="../entrypoint.html">
+            
+                    
+                    Entrypoint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="../operations.html">
+            
+                <a href="../operations.html">
+            
+                    
+                    Operations
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="../transfers.html">
+            
+                <a href="../transfers.html">
+            
+                    
+                    Transfers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="../external-call.html">
+            
+                <a href="../external-call.html">
+            
+                    
+                    External Call
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="../lending.html">
+            
+                <a href="../lending.html">
+            
+                    
+                    Lending
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.3.1" data-path="../lending/aave.html">
+            
+                <a href="../lending/aave.html">
+            
+                    
+                    Aave
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3.2" data-path="../lending/compound-v3.html">
+            
+                <a href="../lending/compound-v3.html">
+            
+                    
+                    Compound V3
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="../flash-loan.html">
+            
+                <a href="../flash-loan.html">
+            
+                    
+                    Flash Loan
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.4.1" data-path="../flash-loan/standardized-interface.html">
+            
+                <a href="../flash-loan/standardized-interface.html">
+            
+                    
+                    Standardized Interface
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.5" data-path="general.html">
+            
+                <a href="general.html">
+            
+                    
+                    Margin
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.5.1" data-path="leverage.html">
+            
+                <a href="leverage.html">
+            
+                    
+                    Leverage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.5.2" data-path="close.html">
+            
+                <a href="close.html">
+            
+                    
+                    Close
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.5.3" data-path="collateral-swap.html">
+            
+                <a href="collateral-swap.html">
+            
+                    
+                    Collateral Swap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.5.4" data-path="debt-swap.html">
+            
+                <a href="debt-swap.html">
+            
+                    
+                    Debt Swap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.2.5.5" data-path="migration.html">
+            
+                <a href="migration.html">
+            
+                    
+                    Migration
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >Migration</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="position-migration">Position Migration</h1>
+<p>Position migrations involve moving a leveraged position from one lending protocol to another without changing the underlying assets or requiring swaps.</p>
+<p>Let's demonstrate migrating an Aave V3 position to a Compound V3 position while maintaining the same collateral and debt composition.</p>
+<h2 id="migration-strategy">Migration Strategy</h2>
+<p>The execution combines elements of both leverage and close operations:</p>
+<ol>
+<li><strong>Flash loan the debt asset</strong> from the Aave V3 position</li>
+<li><strong>Repay the Aave V3 debt</strong> completely</li>
+<li><strong>Withdraw the Aave V3 collateral</strong></li>
+<li><strong>Deposit collateral into Compound V3</strong></li>
+<li><strong>Borrow from Compound V3</strong> to cover flash loan repayment</li>
+<li><strong>Repay the flash loan</strong> with borrowed funds</li>
+<li><strong>Refund any leftover dust</strong> to the user</li>
+</ol>
+<h2 id="example-scenario">Example Scenario</h2>
+<p><strong>Starting Position (Aave V3):</strong></p>
+<ul>
+<li>Collateral: 3 WETH</li>
+<li>Debt: 8,000 USDC</li>
+</ul>
+<p><strong>Target Position (Compound V3):</strong></p>
+<ul>
+<li>Collateral: 3 WETH</li>
+<li>Debt: 8,000 USDC</li>
+</ul>
+<hr></hr>
+<h1 id="constants">Constants</h1>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Flash loan amount (slightly higher than debt to ensure full repayment)</span></span>
+<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> FLASH_LOAN_AMOUNT = </span><span style="color: #B5CEA8">8000</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">1e6</span><span style="color: #D4D4D4">; </span><span style="color: #6A9955">// 8,000.1 USDC (0.1 USDC buffer)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Default forwarder address</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> CALL_FORWARDER = </span><span style="color: #B5CEA8">0xfCa1154C643C32638AEe9a43eeE7f377f515c801</span><span style="color: #D4D4D4">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// 1Delta composer</span></span>
+<span class="line"><span style="color: #D4D4D4">IComposer composer = </span><span style="color: #DCDCAA">IComposer</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Protocol addresses</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> AAVE_V3_POOL = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> COMPOUND_V3_COMET = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...); </span><span style="color: #6A9955">// USDC market comet</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> AAVE_V3_A_TOKEN_WETH = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> AAVE_V3_USDC_V_TOKEN = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Flash loan source</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> MORPHO_BLUE = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0xbbb</span><span style="color: #D4D4D4">...);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Asset addresses</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> WETH = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0xC02</span><span style="color: #D4D4D4">...);</span></span>
+<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> USDC = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0xA0b</span><span style="color: #D4D4D4">...);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<hr></hr>
+<h1 id="operation-sequence">Operation Sequence</h1>
+<h2 id="1-repay-aave-v3-debt">1. Repay Aave V3 Debt</h2>
+<p>Use the flash-loaned USDC to completely repay the existing Aave V3 debt. Using <code>amount=0xffffffffffffffffffffffffffff</code> ensures we repay the minimum of contract balance and actual debt.</p>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> repayAave = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.LENDING),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(LenderOps.REPAY),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(LenderIds.UP_TO_AAVE_V3 - </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// Aave V3 identifier</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),                        </span><span style="color: #6A9955">// Asset to repay</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0xffffffffffffffffffffffffffff</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// Repay full debt or balance</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(user),                       </span><span style="color: #6A9955">// Debt owner</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">2</span><span style="color: #D4D4D4">),                           </span><span style="color: #6A9955">// Variable rate mode</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_USDC_V_TOKEN),       </span><span style="color: #6A9955">// Variable debt token</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL)               </span><span style="color: #6A9955">// Aave V3 pool</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="2-withdraw-aave-v3-collateral">2. Withdraw Aave V3 Collateral</h2>
+<p>Withdraw the entire WETH collateral from Aave V3. The collateral goes directly to the composer for the next operation.</p>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> withdrawAave = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.LENDING),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(LenderOps.WITHDRAW),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(LenderIds.UP_TO_AAVE_V3 - </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// Aave V3 identifier</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),                        </span><span style="color: #6A9955">// Asset to withdraw</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0xffffffffffffffffffffffffffff</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// Withdraw full balance</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(composer),                    </span><span style="color: #6A9955">// Temporary recipient</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_A_TOKEN_WETH),       </span><span style="color: #6A9955">// Collateral token</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL)               </span><span style="color: #6A9955">// Aave V3 pool</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="3-deposit-to-compound-v3">3. Deposit to Compound V3</h2>
+<p>Deposit the withdrawn WETH collateral into Compound V3. Using <code>amount=0</code> deposits the contract's entire WETH balance.</p>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> depositCompound = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.LENDING),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(LenderOps.DEPOSIT),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(LenderIds.UP_TO_COMPOUND_V3 - </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// Compound V3 identifier</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),                        </span><span style="color: #6A9955">// Asset to deposit</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),                          </span><span style="color: #6A9955">// Deposit entire balance</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(user),                       </span><span style="color: #6A9955">// Deposit recipient</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(COMPOUND_V3_COMET)           </span><span style="color: #6A9955">// Compound V3 comet address</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="4-borrow-from-compound-v3">4. Borrow from Compound V3</h2>
+<p>Borrow enough USDC from Compound V3 to repay the flash loan plus any fees.</p>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> borrowCompound = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.LENDING),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(LenderOps.BORROW),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(LenderIds.UP_TO_COMPOUND_V3 - </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// Compound V3 identifier</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),                        </span><span style="color: #6A9955">// Asset to borrow</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(FLASH_LOAN_AMOUNT),          </span><span style="color: #6A9955">// Exact flash loan repayment amount</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(composer),                    </span><span style="color: #6A9955">// Temporary recipient</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(COMPOUND_V3_COMET)           </span><span style="color: #6A9955">// Compound V3 comet address</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="5-refund-excess-usdc">5. Refund Excess USDC</h2>
+<p>Transfer any remaining USDC balance back to the user after flash loan repayment.</p>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> refundExcess = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),                       </span><span style="color: #6A9955">// Asset to sweep</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(user),                       </span><span style="color: #6A9955">// Recipient</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">)                          </span><span style="color: #6A9955">// Send remaining balance</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="6-required-approvals">6. Required Approvals</h2>
+<p>Set up all necessary approvals for the operation:</p>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Approve Aave V3 pool to spend USDC for repayment</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approveAavePool = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL)</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Approve Compound V3 comet to spend WETH for collateral deposit</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approveCompoundComet = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(COMPOUND_V3_COMET)</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Approve Morpho Blue for flash loan repayment</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approveMorpho = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(MORPHO_BLUE)</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<hr></hr>
+<h1 id="complete-migration-assembly">Complete Migration Assembly</h1>
+<p>Putting it all together with the flash loan wrapper:</p>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Inner operations executed within flash loan callback</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> innerOperation = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    repayAave,           </span><span style="color: #6A9955">// Repay existing Aave V3 debt</span></span>
+<span class="line"><span style="color: #D4D4D4">    withdrawAave,        </span><span style="color: #6A9955">// Withdraw Aave V3 collateral</span></span>
+<span class="line"><span style="color: #D4D4D4">    depositCompound,     </span><span style="color: #6A9955">// Deposit collateral to Compound V3</span></span>
+<span class="line"><span style="color: #D4D4D4">    borrowCompound,      </span><span style="color: #6A9955">// Borrow from Compound V3 to repay flash loan</span></span>
+<span class="line"><span style="color: #D4D4D4">    refundExcess         </span><span style="color: #6A9955">// Refund any excess USDC to user</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Flash loan wrapper</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> flashLoan = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.FLASH_LOAN),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(FlashLoanIds.MORPHO_BLUE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),                       </span><span style="color: #6A9955">// Flash loan asset</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(MORPHO_BLUE),                </span><span style="color: #6A9955">// Flash loan provider</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(FLASH_LOAN_AMOUNT),         </span><span style="color: #6A9955">// Flash loan amount with buffer</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(innerOperation.length + </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">),   </span><span style="color: #6A9955">// Callback data length</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),                           </span><span style="color: #6A9955">// Morpho Blue pool ID</span></span>
+<span class="line"><span style="color: #D4D4D4">    innerOperation                       </span><span style="color: #6A9955">// Operations to execute</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Complete migration sequence</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> migrationOps = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    approveAavePool,         </span><span style="color: #6A9955">// Pre-approve Aave pool</span></span>
+<span class="line"><span style="color: #D4D4D4">    approveCompoundComet,    </span><span style="color: #6A9955">// Pre-approve Compound comet</span></span>
+<span class="line"><span style="color: #D4D4D4">    approveMorpho,          </span><span style="color: #6A9955">// Pre-approve Morpho Blue</span></span>
+<span class="line"><span style="color: #D4D4D4">    flashLoan               </span><span style="color: #6A9955">// Execute migration with flash loan</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Execute the complete position migration</span></span>
+<span class="line"><span style="color: #D4D4D4">composer.</span><span style="color: #DCDCAA">deltaCompose</span><span style="color: #D4D4D4">(migrationOps);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<hr></hr>
+<h1 id="key-considerations">Key Considerations</h1>
+<h2 id="1-dust-management">1. <strong>Dust Management</strong></h2>
+<p>The borrow-repay process will leave dust since we must use a fixed flash loan amount larger than the exact Aave V3 debt to ensure complete repayment. The excess is automatically refunded to the user.</p>
+<h2 id="2-flash-loan-buffer">2. <strong>Flash Loan Buffer</strong></h2>
+<p>To ensure we can repay the flash loan completely, we borrow the Aave V3 debt amount plus a safety margin (e.g., 0.1 USDC buffer). This accounts for:</p>
+<ul>
+<li>Interest accrual between quote and execution</li>
+<li>Flash loan fees (if any)</li>
+<li>Rounding differences in debt calculations</li>
+</ul>
+<h2 id="3-protocol-permissions">3. <strong>Protocol Permissions</strong></h2>
+<p>The operation requires pre-approval on both protocols:</p>
+<ul>
+<li><strong>Aave V3:</strong> Approve composer for collateral withdrawal: <code>IERC20(AAVE_V3_A_TOKEN_WETH).approve(composer, type(uint256).max)</code></li>
+<li><strong>Compound V3:</strong> Allow composer for operations: <code>IComet(COMPOUND_V3_COMET).allow(composer, true)</code></li>
+</ul>
+<h2 id="4-market-compatibility">4. <strong>Market Compatibility</strong></h2>
+<p>Ensure the target Compound V3 market accepts the same collateral asset and allows borrowing the same debt asset. Compound V3 markets are isolated and each supports specific asset combinations.</p>
+<h2 id="5-risk-parameter-changes">5. <strong>Risk Parameter Changes</strong></h2>
+<p>Different protocols have different:</p>
+<ul>
+<li>Loan-to-value ratios</li>
+<li>Liquidation thresholds</li>
+<li>Interest rate models</li>
+</ul>
+<p>Verify the position remains healthy after migration and adjust if necessary.</p>
+<h2 id="6-atomic-execution">6. <strong>Atomic Execution</strong></h2>
+<p>The entire migration is atomic - either all steps succeed or the transaction reverts, ensuring no partial migrations that could leave positions in an inconsistent state.</p>
+<h2 id="7-gas-optimization">7. <strong>Gas Optimization</strong></h2>
+<ul>
+<li>All approvals are performed outside the flash loan callback</li>
+<li>Using <code>amount=0</code> and max values reduces the need for exact balance calculations</li>
+<li>Direct transfers between operations minimize intermediate steps<footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2025-08-16 19:05:38
+</span></div></div></footer></li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="debt-swap.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: Debt Swap">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Migration","level":"1.7.2.5.5","depth":4,"previous":{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/migration.md","mtime":"2025-08-16T19:05:38.966Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-08-16T19:06:48.635Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-add-js-css/c6acec9863540c95a87010d506ec3551-asciinema-player.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/honkit-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/honkit-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="../../gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

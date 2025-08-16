@@ -1,245 +1,247 @@
 # Debt Swap (Borrow & Repay)
 
-In this section, we cover the debt swap method in detail.
+This guide covers debt swaps, which allow users to change their debt composition without closing positions or affecting collateral balances.
 
-This process involves borrowing assets, typically swapping the borrowed amount for another asset, and then repaying debt via the the resulting funds.  
-We will illustrate how to create the calldata required for this operation.
+## Overview
 
-Our example will demonstrate swithing debt in a leveraged position on **Aave V3** - without ever de-leveraging - where we:
+Debt swaps involve borrowing a new asset, swapping it for the currency needed to repay existing debt, then repaying the original debt. This maintains your leveraged position while switching between debt assets (e.g., from USDC debt to USDT debt).
 
-- Borrow
-- Swap via 1inch
-- Repay the swapped assets
-- Refund any excess if needed
+The entire operation is wrapped in a flash loan to ensure atomicity and capital efficiency.
 
-To construct this sequence, we will use a [Flash Loan](../flash-loan.md) that wraps the entire operation.  
-To maximize efficiency, we will perform only a single deposit.
+## Example Scenario
 
-Let’s assume we want to switch a **USDC–WETH** leveraged position - borrowing USDC - to one where we borrow USDT instead.
+We'll demonstrate switching debt on **Aave V3** from USDC to USDT while maintaining the same collateral position. The process involves:
 
-First, we identify the flash loan source. For this example, we will assume that **Morpho Blue** is the best option (which is typically the case for Ethereum and, for example, Base).
+1. Flash loan USDT
+2. Swap USDT to USDC via 1inch
+3. Repay existing USDC debt
+4. Borrow new USDT debt to repay flash loan
+5. Refund any excess to user
 
-**Example parameters**:  
-We start with **3 WETH** in collateral and **8,000 USDC** in debt and want to swap the USDC to **8,000 USDT**.
+**Starting Position:**
 
-We will build this step-by-step, starting with the inner operations.
+- Collateral: 3 WETH
+- Debt: 8,000 USDC
+
+**Target:**
+
+- Same collateral: 3 WETH
+- New debt: 8,000 USDT
+
+We'll use **Morpho Blue** as our flash loan provider for optimal rates.
 
 ---
 
 ## Constants
 
 ```solidity
-// the deposit amount
-uint256 USER_AMOUNT = 8000.0e6;
+// The debt amount to swap
+uint256 DEBT_AMOUNT = 8000.0e6;
 
-// this is the default forwarder address
+// Default forwarder address
 address CALL_FORWARDER = 0xfCa1154C643C32638AEe9a43eeE7f377f515c801;
 
-// 1delta composer
+// 1Delta composer
 IComposer composer = IComposer(0x...);
 
-// aave address, can be replaced with any fork
+// Aave V3 pool address
 address AAVE_V3_POOL = address(0x...);
 
-// aave v token address for output
+// Aave V3 variable debt tokens
 address AAVE_V3_USDC_V_TOKEN = address(0x...);
-
-// aave v token address for inpout
 address AAVE_V3_USDT_V_TOKEN = address(0x...);
 
-// meta swap call target
+// 1inch aggregation router
 address oneInchAggregationRouter = address(0x111...);
 
-// falash loan source Morpho
+// Morpho Blue flash loan source
 address MORPHO_BLUE = address(0xbbb...);
 ```
 
 ---
 
-## Repay
+## Operation Sequence
 
-We repay the funds to Aave V3.
-It is important to ensure that all required permissions have been granted in advance (see the **Approval** section).
+### 1. Repay Existing Debt
 
-Here, the repay amount is set to `0` - this will ensure that we repay the minimum of the receipt funds and the user debt amount. In case we expect tor repay everything, we add a safety-sweep to refund any excess to the user.
+After receiving USDC from the swap, we repay the existing USDC debt. Setting amount to `0` repays up to the contract's balance or total debt, whichever is smaller.
+
+**Important:** Ensure all required approvals are granted beforehand (see Approvals section).
 
 ```solidity
 bytes memory repay = abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(LenderOps.REPAY),
-    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // general Aave V3
-    address(USDC),// underlying USDT
-    uint128(0), // 0 means whatever is in the contract at the time of execution
-    address(user), // receiver of the repay
-    uint8(2), // the mode is variable, as usual
-    address(AAVE_V3_USDC_V_TOKEN), // the Aave V3 pool address
-    address(AAVE_V3_POOL) // the Aave V3 pool address
+    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // Aave V3 identifier
+    address(USDC),                        // Asset to repay
+    uint128(0),                          // 0 = repay up to balance/debt
+    address(user),                       // Debt owner
+    uint8(2),                           // Variable rate mode
+    address(AAVE_V3_USDC_V_TOKEN),       // Variable debt token
+    address(AAVE_V3_POOL)               // Aave V3 pool address
 );
 
+// Refund any excess USDC to user
 bytes memory transferToUser = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.SWEEP),
-    address(USDC), // repay asset
-    address(user),// the user address
-    uint128(0) // whatever is left
+    address(USDC),                       // Asset to transfer
+    address(user),                       // Recipient
+    uint128(0)                          // Send remaining balance
 );
 
-// combine this call
-withdraw = abi.encodePacked(
+// Combine repay with refund
+bytes memory repayAndRefund = abi.encodePacked(
     repay,
     transferToUser
 );
 ```
 
----
+### 2. Borrow New Debt
 
-## Borrow
-
-We must ensure that we borrow **exactly** the flash loan amount.
-If the flash loan incurs a fee, we need to borrow **the amount plus the fee**.
-
-The borrowed USDT is sent to the `CALL_FORWARDER`, which saves us an additional transfer step.
+We borrow exactly the flash loan amount (plus any fees) in USDT. The borrowed funds go directly to the forwarder to minimize transfers.
 
 ```solidity
 bytes memory borrow = abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(LenderOps.BORROW),
-    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // general Aave V3
-    address(USDT),// underlying USDT
-    uint128(8000.0e6), // 8k USDT
-    address(CALL_FOWRARDER), // receiver of the call forwarder to avoid additional transfers
-    uint8(2), // variable IR mode
-    address(AAVE_V3_POOL) // the Aave V3 pool address
+    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // Aave V3 identifier
+    address(USDT),                        // Asset to borrow
+    uint128(DEBT_AMOUNT),                // Flash loan repayment amount
+    address(CALL_FORWARDER),             // Send directly to forwarder
+    uint8(2),                           // Variable rate mode
+    address(AAVE_V3_POOL)               // Aave V3 pool address
 );
 ```
 
----
+### 3. Approvals
 
-## Approvals
-
-We need to grant permissions for all operations.
-These approvals are only required once per deployment, as the composer contract always approves the maximum amount.
-
-If approvals have already been set, our contracts will skip them to save gas.
+Required approvals for the operation to succeed:
 
 ```solidity
-// approval for the deposit
+// Approve Aave V3 pool to spend USDC for debt repayment
 bytes memory approvePool = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.APPROVE),
-    address(USDC),// underlying to repay USDT
-    address(AAVE_V3_POOL) // the Aave V3 pool address
+    address(USDC),                       // Asset to approve
+    address(AAVE_V3_POOL)               // Spender
 );
 
-// Morpho flash loans pull the funds via `transferFrom`, as such, we have to approve the flash loan currency.
+// Approve Morpho Blue to pull USDT for flash loan repayment
 bytes memory approveMorpho = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.APPROVE),
-    address(USDT),// underlying USDT
-    address(MORPHO_BLUE) // the Morpho Blue address
+    address(USDT),                       // Asset to approve
+    address(MORPHO_BLUE)                 // Spender
 );
 ```
 
----
+### 4. Meta Swap Configuration
 
-## Meta Swap
-
-The meta swap follows the same approach as described in [External Call](../external-call.md).
-
-The difference here is that we skip the manual transfer step, because the funds are already transferred during the borrow.
+The swap operation converts borrowed USDT to USDC for debt repayment. Since funds are already at the forwarder from the borrow operation, we skip manual transfers.
 
 ```solidity
-// create the call for the forwarder
-// the target can e.g. be the 1inch aggregation router
-bytes memory callForwarderCall  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        address(oneInchAggregationRouter),
-        uint128(0), // ERC20 has no value
-        uint16(data.length),
-        data
-    );
+// Configure the forwarder call to 1inch
+bytes memory callForwarderCall = abi.encodePacked(
+    uint8(ComposerCommands.EXT_CALL),
+    address(oneInchAggregationRouter),   // Target contract
+    uint128(0),                          // No ETH value for ERC20 swap
+    uint16(data.length),                 // Call data length
+    data                                 // 1inch swap call data
+);
 
+// Approve 1inch to spend USDT
 bytes memory approve1inch = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.APPROVE),
-        address(USDT),
-        address(oneInchAggregationRouter)
-    );
+    uint8(ComposerCommands.TRANSFERS),
+    uint8(TransferIds.APPROVE),
+    address(USDT),                       // Asset to approve
+    address(oneInchAggregationRouter)    // Spender
+);
 
-// expect to receive 8,000 USDC
-// revert if we receive less
-uint256 amountExpected = 8000.0e6;
+// Verify minimum output and transfer to composer
+uint256 amountExpected = 8000.0e6; // Expected USDC amount
 
-// in case the aggregators does not transfer directly to the user
 bytes memory sweepAndCheckSlippage = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.SWEEP),
-        address(USDC),
-        address(receiver), // this is the receiver of the USDC
-        uint8(SweepType.AMOUNT),
-        amountExpected
-    );
+    uint8(ComposerCommands.TRANSFERS),
+    uint8(TransferIds.SWEEP),
+    address(USDC),                       // Asset to sweep
+    address(composer),                   // Send to composer for repay
+    uint8(SweepType.AMOUNT),
+    amountExpected                       // Minimum required amount
+);
 
-// combine the operations
+// Combine forwarder operations
 callForwarderCall = abi.encodePacked(
     approve1inch,
     callForwarderCall,
     sweepAndCheckSlippage
 );
 
-// prepare the composer call
-// this executes callForwader.deltaForwardCompose(callForwarderCall)
-bytes memory metaSwap  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        callForwarderAddress, // it is important to use the forwarder on the composer level
-        uint128(value),
-        uint16(callForwarderCall.length),
-        callForwarderCall
-    );
+// Create meta swap call through forwarder
+bytes memory metaSwap = abi.encodePacked(
+    uint8(ComposerCommands.EXT_CALL),
+    address(CALL_FORWARDER),             // Forwarder contract
+    uint128(0),                          // No ETH value
+    uint16(callForwarderCall.length),    // Call data length
+    callForwarderCall                    // Forwarder operations
+);
 ```
 
 ---
 
-## The Debt Swap Call
+## Complete Operation Assembly
 
-Finally, we assemble the complete calldata sequence.
-
-The **inner operation** performs the swap of the flash-loaned amount, deposits **all available funds** (including the user’s contribution), and then borrows the required amount to repay the Morpho flash loan.
-
-Note that this has to be permissioned via `IDebtToken(AAVE_V3_USDT_V_TOKEN).approveDelegation(...)`.
+Putting it all together with the flash loan wrapper:
 
 ```solidity
-// select 8000 USDT (= the borrow amount)
-uint128 amount = uint128(8000.0e6);
+uint128 flashLoanAmount = uint128(DEBT_AMOUNT); // Amount to flash loan
 
-// the inner operation swaps the flash loaned amounts,
-// deposits everything (incl the user funds) and borrows whatever we need to repay to morpho.
+// Inner operations executed within flash loan callback
 bytes memory innerOperation = abi.encodePacked(
-    metaSwap,
-    repay,
-    borrow,
+    borrow,              // Borrow USDT and send to forwarder
+    metaSwap,            // Swap USDT to USDC via forwarder
+    repayAndRefund       // Repay USDC debt and refund excess
 );
 
+// Flash loan wrapper
 bytes memory flashLoan = abi.encodePacked(
-    uint8(ComposerCommands.FLASH_LOAN), // then just continue the next one
+    uint8(ComposerCommands.FLASH_LOAN),
     uint8(FlashLoanIds.MORPHO_BLUE),
-    USDT,
-    MORPHO_BLUE_ADDRESS
-    amount,
-    uint16(innerOperation.length + 1),
-    uint8(0), // the original morpho blue has poolId 0.
-    innerOperation
+    address(USDT),                       // Flash loan asset
+    address(MORPHO_BLUE),                // Flash loan provider
+    flashLoanAmount,                     // Flash loan amount
+    uint16(innerOperation.length + 1),   // Callback data length
+    uint8(0),                           // Morpho Blue pool ID
+    innerOperation                       // Operations to execute
 );
 
-// we ensure that everything that can be outside of the callback is outside
-// this saves gas as the flash loan calldata is smaller
-// relevant only for ETH mainnet.
+// Complete operation sequence
 bytes memory composerOps = abi.encodePacked(
-    approvePool,
-    approveMorpho,
-    flashLoan
+    approvePool,      // Pre-approve Aave pool for USDC
+    approveMorpho,    // Pre-approve Morpho Blue for USDT
+    flashLoan         // Execute flash loan with inner operations
 );
 
-// execute call
+// Execute the complete debt swap
 composer.deltaCompose(composerOps);
 ```
+
+---
+
+## Key Considerations
+
+1. **Debt Delegation:** The operation requires prior debt delegation approval: `IDebtToken(AAVE_V3_USDT_V_TOKEN).approveDelegation(composer, type(uint256).max)`
+
+2. **Flash Loan Fees:** The borrow amount must account for any flash loan fees to ensure complete repayment.
+
+3. **Slippage Protection:** The sweep operation with `SweepType.AMOUNT` ensures you receive sufficient USDC to repay the debt.
+
+4. **Gas Optimization:**
+
+   - Approvals are placed outside the flash loan callback to reduce callback data size
+   - Direct transfers to the forwarder eliminate unnecessary token movements
+   - One-time approvals with maximum amounts reduce future gas costs
+
+5. **Atomic Execution:** The entire operation succeeds or fails as one transaction, preventing partial execution risks.
+
+6. **Excess Handling:** Any excess USDC from the swap is automatically refunded to the user, ensuring no funds are stuck.

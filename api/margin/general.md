@@ -29,4 +29,4 @@ Lending operations that pull funds on the user's behalf need to be **permissione
 - [Close](./close.md)
 - [Collateral Swap](./collateral-swap.md)
 - [Debt Swap](./debt-swap.md)
-- [Further Operations](./further-operations.md)
+- [Postion Migration](./migration.md)

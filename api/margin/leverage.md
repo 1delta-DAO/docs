@@ -1,241 +1,250 @@
 # Leveraging (Borrow & Deposit)
 
-In this section, we cover the leveraging method in detail.
+This guide covers leveraging operations, which allow users to increase their position size by borrowing against deposited collateral and reinvesting the borrowed funds.
 
-This process involves borrowing assets, typically swapping the borrowed amount for another asset, and then depositing the resulting funds as collateral.  
-We will illustrate how to create the calldata required for this operation.
+## Overview
 
-Our example will demonstrate creating a leveraged position on **Aave V3**, where we:
+Leveraging involves borrowing assets against your collateral, swapping the borrowed assets for more collateral, then depositing the additional collateral. This amplifies your exposure to the collateral asset while maintaining efficient capital usage through flash loans.
 
-- Deposit collateral
-- Borrow
-- Swap via 1inch
-- Deposit the swapped assets
+The entire operation is atomic, ensuring that either all steps succeed or the transaction reverts completely.
 
-To construct this sequence, we will use a [Flash Loan](../flash-loan.md) that wraps the entire operation.  
-To maximize efficiency, we will perform only a single deposit.
+## Example Scenario
 
-Let’s assume we want to create a **USDC–WETH** leveraged position, borrowing USDC.
+We'll demonstrate creating a leveraged WETH position on **Aave V3** using borrowed USDC. The process involves:
 
-First, we identify the flash loan source. For this example, we will assume that **Morpho Blue** is the best option (which is typically the case for Ethereum and, for example, Base).
+1. Flash loan USDC
+2. Swap USDC to WETH via 1inch
+3. Deposit user's ETH + swapped WETH as collateral
+4. Borrow USDC to repay flash loan
 
-**Example parameters**:  
-We start with **1 ETH** and want to create a position with **3 WETH** as collateral and **8,000 USDC** as debt.
+**Starting Capital:**
 
-We will build this step-by-step, starting with the inner operations.
+- User contribution: 1 ETH
+
+**Target Position:**
+
+- Total collateral: 3 WETH (1 from user + 2 from leverage)
+- Debt: 8,000 USDC
+
+We'll use **Morpho Blue** as our flash loan provider for optimal rates.
 
 ---
 
 ## Constants
 
 ```solidity
-// the deposit amount
+// User's initial contribution
 uint256 USER_AMOUNT = 1.0e18;
 
-// this is the default forwarder address
+// Default forwarder address
 address CALL_FORWARDER = 0xfCa1154C643C32638AEe9a43eeE7f377f515c801;
 
-// 1delta composer
+// 1Delta composer
 IComposer composer = IComposer(0x...);
 
-// aave address, can be replaced with any fork
+// Aave V3 pool address
 address AAVE_V3_POOL = address(0x...);
 
-// meta swap call target
+// 1inch aggregation router
 address oneInchAggregationRouter = address(0x111...);
 
-// falash loan source Morpho
+// Morpho Blue flash loan source
 address MORPHO_BLUE = address(0xbbb...);
+
+// WETH contract address
+address WETH = address(0xC02...);
 ```
 
 ---
 
-## Pull Funds
+## Operation Sequence
 
-First, we define the operation to pull ETH from the user and convert it into WETH.
-Here, we use an efficient version of wrapping to avoid unnecessary intermediate steps.
+### 1. Pull User Funds
+
+First, we transfer the user's ETH and efficiently convert it to WETH in a single operation.
 
 ```solidity
 bytes memory transferIn = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.TRANSFER_FROM),
-    address(0),// we transfer ETH
-    address(WETH), // transfer to WETH (this is an efficent version of wrapping)
-    uint128(USER_AMOUNT) // 1 ETH
+    address(0),                          // Transfer ETH (address(0))
+    address(WETH),                       // Convert to WETH directly
+    uint128(USER_AMOUNT)                 // Amount: 1 ETH
 );
 ```
 
----
+### 2. Deposit Total Collateral
 
-## Deposit
+We deposit all available WETH (user's contribution plus swapped amount) into Aave V3. Setting amount to `0` deposits the contract's entire WETH balance.
 
-We deposit the funds into Aave V3.
-It is important to ensure that all required permissions have been granted in advance (see the **Approval** section).
-
-Here, the deposit amount is set to `0`, meaning we will deposit **both** the user-provided ETH and whatever WETH we receive from the swapper.
+**Important:** Ensure all required approvals are granted beforehand (see Approvals section).
 
 ```solidity
 bytes memory deposit = abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(LenderOps.DEPOSIT),
-    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // general Aave V3
-    address(WETH),// underlying ETH
-    uint128(0), // 0 means whatever is in the contract at the time of execution
-    address(user), // receiver of the deposit
-    address(AAVE_V3_POOL) // the Aave V3 pool address
+    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // Aave V3 identifier
+    address(WETH),                        // Asset to deposit
+    uint128(0),                          // 0 = deposit entire balance
+    address(user),                       // Deposit recipient
+    address(AAVE_V3_POOL)               // Aave V3 pool address
 );
 ```
 
----
+### 3. Borrow Against Collateral
 
-## Borrow
-
-We must ensure that we borrow **exactly** the flash loan amount.
-If the flash loan incurs a fee, we need to borrow **the amount plus the fee**.
-
-The borrowed USDC is sent to the `CALL_FORWARDER`, which saves us an additional transfer step.
+We borrow exactly the flash loan repayment amount (plus any fees) in USDC. The borrowed funds go directly to the forwarder to minimize transfers.
 
 ```solidity
 bytes memory borrow = abi.encodePacked(
     uint8(ComposerCommands.LENDING),
     uint8(LenderOps.BORROW),
-    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // general Aave V3
-    address(USDC),// underlying USDC
-    uint128(8000.0e6), // 8k USDC
-    address(CALL_FOWRARDER), // receiver of the call forwarder to avoid additional transfers
-    uint8(2), // variable IR mode
-    address(AAVE_V3_POOL) // the Aave V3 pool address
+    uint16(LenderIds.UP_TO_AAVE_V3 - 1), // Aave V3 identifier
+    address(USDC),                        // Asset to borrow
+    uint128(8000.0e6),                   // Flash loan repayment amount
+    address(CALL_FORWARDER),             // Send directly to forwarder
+    uint8(2),                           // Variable rate mode
+    address(AAVE_V3_POOL)               // Aave V3 pool address
 );
 ```
 
----
+### 4. Approvals
 
-## Approvals
-
-We need to grant permissions for all operations.
-These approvals are only required once per deployment, as the composer contract always approves the maximum amount.
-
-If approvals have already been set, our contracts will skip them to save gas.
+Required approvals for the operation to succeed:
 
 ```solidity
-// approval for the deposit
+// Approve Aave V3 pool to spend WETH for collateral deposit
 bytes memory approvePool = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.APPROVE),
-    address(WETH),// underlying WETH
-    address(AAVE_V3_POOL) // the Aave V3 pool address
+    address(WETH),                       // Asset to approve
+    address(AAVE_V3_POOL)               // Spender
 );
 
-// Morpho flash loans pull the funds via `transferFrom`, as such, we have to approve the flash loan currency.
+// Approve Morpho Blue to pull USDC for flash loan repayment
 bytes memory approveMorpho = abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.APPROVE),
-    address(USDC),// underlying USDC
-    address(MORPHO_BLUE) // the Morpho Blue address
+    address(USDC),                       // Asset to approve
+    address(MORPHO_BLUE)                 // Spender
 );
 ```
 
----
+### 5. Meta Swap Configuration
 
-## Meta Swap
-
-The meta swap follows the same approach as described in [External Call](../external-call.md).
-
-The difference here is that we skip the manual transfer step, because the funds are already transferred during the borrow.
+The swap operation converts flash-loaned USDC to WETH for additional collateral. Since funds are already at the forwarder from the flash loan, we skip manual transfers.
 
 ```solidity
-// create the call for the forwarder
-// the target can e.g. be the 1inch aggregation router
-bytes memory callForwarderCall  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        address(oneInchAggregationRouter),
-        uint128(0), // ERC20 has no value
-        uint16(data.length),
-        data
-    );
+// Configure the forwarder call to 1inch
+bytes memory callForwarderCall = abi.encodePacked(
+    uint8(ComposerCommands.EXT_CALL),
+    address(oneInchAggregationRouter),   // Target contract
+    uint128(0),                          // No ETH value for ERC20 swap
+    uint16(data.length),                 // Call data length
+    data                                 // 1inch swap call data
+);
 
+// Approve 1inch to spend USDC
 bytes memory approve1inch = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.APPROVE),
-        address(USDC),
-        address(oneInchAggregationRouter)
-    );
+    uint8(ComposerCommands.TRANSFERS),
+    uint8(TransferIds.APPROVE),
+    address(USDC),                       // Asset to approve
+    address(oneInchAggregationRouter)    // Spender
+);
 
-// expect to receive 2 WETH
-// revert if we receive less
-uint256 amountExpected = 2.0e18;
+// Verify minimum output and transfer to composer
+uint256 amountExpected = 2.0e18; // Expected 2 WETH from swap
 
-// in case the aggregators does not transfer directly to the user
 bytes memory sweepAndCheckSlippage = abi.encodePacked(
-        uint8(ComposerCommands.TRANSFERS),
-        uint8(TransferIds.SWEEP),
-        address(WETH),
-        address(receiver), // this is the receiver of the WETH
-        uint8(SweepType.AMOUNT),
-        amountExpected
-    );
+    uint8(ComposerCommands.TRANSFERS),
+    uint8(TransferIds.SWEEP),
+    address(WETH),                       // Asset to sweep
+    address(composer),                   // Send to composer for deposit
+    uint8(SweepType.AMOUNT),
+    amountExpected                       // Minimum required amount
+);
 
-// combine the operations
+// Combine forwarder operations
 callForwarderCall = abi.encodePacked(
     approve1inch,
     callForwarderCall,
     sweepAndCheckSlippage
 );
 
-// prepare the composer call
-// this executes callForwader.deltaForwardCompose(callForwarderCall)
-bytes memory metaSwap  = abi.encodePacked(
-        uint8(ComposerCommands.EXT_CALL),
-        callForwarderAddress, // it is important to use the forwarder on the composer level
-        uint128(value),
-        uint16(callForwarderCall.length),
-        callForwarderCall
-    );
+// Create meta swap call through forwarder
+bytes memory metaSwap = abi.encodePacked(
+    uint8(ComposerCommands.EXT_CALL),
+    address(CALL_FORWARDER),             // Forwarder contract
+    uint128(0),                          // No ETH value
+    uint16(callForwarderCall.length),    // Call data length
+    callForwarderCall                    // Forwarder operations
+);
 ```
 
 ---
 
-## The Leverage Call
+## Complete Operation Assembly
 
-Finally, we assemble the complete calldata sequence.
-
-The **inner operation** performs the swap of the flash-loaned amount, deposits **all available funds** (including the user’s contribution), and then borrows the required amount to repay the Morpho flash loan.
-
-Note that this has to be permissioned via `IDebtToken(USDC_DEBT_TOKEN).approveDelegation(...)`.
+Putting it all together with the flash loan wrapper:
 
 ```solidity
-// select 8000 USDC (= the borrow amount)
-uint128 amount = uint128(8000.0e6);
+uint128 flashLoanAmount = uint128(8000.0e6); // USDC amount to flash loan
 
-// the inner operation swaps the flash loaned amounts,
-// deposits everything (incl the user funds) and borrows whatever we need to repay to morpho.
+// Inner operations executed within flash loan callback
 bytes memory innerOperation = abi.encodePacked(
-    metaSwap,
-    deposit,
-    borrow,
+    metaSwap,            // Swap flash-loaned USDC to WETH
+    deposit,             // Deposit all WETH as collateral
+    borrow               // Borrow USDC to repay flash loan
 );
 
+// Flash loan wrapper
 bytes memory flashLoan = abi.encodePacked(
-    uint8(ComposerCommands.FLASH_LOAN), // then just continue the next one
+    uint8(ComposerCommands.FLASH_LOAN),
     uint8(FlashLoanIds.MORPHO_BLUE),
-    USDC,
-    MORPHO_BLUE_ADDRESS
-    amount,
-    uint16(innerOperation.length + 1),
-    uint8(0), // the original morpho blue has poolId 0.
-    innerOperation
+    address(USDC),                       // Flash loan asset
+    address(MORPHO_BLUE),                // Flash loan provider
+    flashLoanAmount,                     // Flash loan amount
+    uint16(innerOperation.length + 1),   // Callback data length
+    uint8(0),                           // Morpho Blue pool ID
+    innerOperation                       // Operations to execute
 );
 
-// we ensure that everything that can be outside of the callback is outside
-// this saves gas as the flash loan calldata is smaller
-// relevant only for ETH mainnet.
+// Complete operation sequence
 bytes memory composerOps = abi.encodePacked(
-    transferIn,
-    approvePool,
-    approveMorpho,
-    flashLoan
+    transferIn,       // Pull user's ETH and convert to WETH
+    approvePool,      // Pre-approve Aave pool for WETH
+    approveMorpho,    // Pre-approve Morpho Blue for USDC
+    flashLoan         // Execute flash loan with inner operations
 );
 
-// execute call and attach user ETH
+// Execute the complete leverage operation
 composer.deltaCompose{value: USER_AMOUNT}(composerOps);
 ```
+
+---
+
+## Key Considerations
+
+1. **Debt Delegation:** The operation requires prior debt delegation approval for borrowing: `IDebtToken(AAVE_V3_USDC_V_TOKEN).approveDelegation(composer, type(uint256).max)`
+
+2. **Flash Loan Fees:** The borrow amount must account for any flash loan fees to ensure complete repayment.
+
+3. **Slippage Protection:** The sweep operation with `SweepType.AMOUNT` ensures you receive sufficient WETH to make the leverage worthwhile.
+
+4. **Efficient ETH Handling:** The `TRANSFER_FROM` operation with WETH as the target efficiently converts ETH to WETH without separate wrapping steps.
+
+5. **Gas Optimization Strategies:**
+
+   - User fund transfers and approvals are placed outside the flash loan callback
+   - Direct transfers to the forwarder eliminate unnecessary token movements
+   - Maximum approvals reduce future transaction costs
+
+6. **Risk Management:**
+
+   - The entire operation is atomic - partial execution is impossible
+   - Minimum output requirements protect against excessive slippage
+   - Flash loans eliminate the need for upfront borrowing capital
+
+7. **Position Health:** Ensure the final position maintains a healthy collateralization ratio based on Aave V3's risk parameters for WETH/USDC.
+
+8. **ETH Value Attachment:** The `{value: USER_AMOUNT}` ensures the user's ETH is sent with the transaction for the initial collateral contribution.

@@ -64,3 +64,21 @@ bytes memory operation = abi.encodePacked(
 
 composer.deltaCompose(operation);
 ```
+
+Typically the calldata will be built in TypeScript or Rust, we write the descriptions in Solidity to have it consistent across all frameworks, e.g. for using viem, it would look like this:
+
+```typescript
+
+const operations = solidityPack(
+    ["bytes", "uint8", "address", "uint128", "address", "address"],
+    [operation0, ComposerCommands.[OPERATION], underlying amount, receiver, comet]
+)
+
+const contractCall = encodeFunctionData({
+  abi: composerAbi,
+  functionName: "deltaCompose",
+  args: [operations]
+})
+
+```
+

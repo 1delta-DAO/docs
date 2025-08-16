@@ -21,7 +21,7 @@ abi.encodePacked(
     uint8(ComposerCommands.TRANSFERS),
     uint8(TransferIds.[Operation]),
     ...params
-    )
+);
 ```
 
 to the array of composer commands.

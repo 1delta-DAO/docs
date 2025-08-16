@@ -20,3 +20,7 @@
             * [Standardized Interface](./api/flash-loan/standardized-interface.md)
         * [Margin](./api/margin/general.md)
             * [Leverage](./api/margin/leverage.md)
+            * [Close](./api/margin/close.md)
+            * [Collateral Swap](./api/margin/collateral-swap.md)
+            * [Debt Swap](./api/margin/debt-swap.md)
+            * [Further Operations](./api/margin/further-operations.md)

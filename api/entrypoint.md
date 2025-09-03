@@ -22,6 +22,12 @@ The `deltaCompose` function is the primary interface for executing batched opera
 
 ## Operation Encoding Structure
 
+### Reference Enums
+
+For enum definitions used in the examples below, see:
+
+-   [TransferIds and SweepType](./transfers.md#transferids-sweeptype)
+
 ### Composer Commands
 
 Operations are categorized using the following command identifiers:

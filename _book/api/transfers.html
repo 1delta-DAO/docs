@@ -518,16 +518,67 @@
                                 
                                 <h1 id="transfers">Transfers</h1>
 <p>Lead type: <code>ComposerCommands.TRANSFERS</code>.</p>
-<p>The sub types are dcefined by the following enum:</p>
-<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #569CD6">enum</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">TransferIds</span><span style="color: #D4D4D4"> {</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4FC1FF">TRANSFER_FROM</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// pull funds from caller</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4FC1FF">SWEEP</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// send funds from this contract</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4FC1FF">UNWRAP_WNATIVE</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">3</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// unwrap</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4FC1FF">PERMIT2_TRANSFER_FROM</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">4</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// permitTransfer</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4FC1FF">APPROVE</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">5</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// approve target</span></span>
-<span class="line"><span style="color: #D4D4D4">}</span></span>
-<span class="line"></span></code></pre></code></pre>
-<p>To encode an operation, te caller has to append</p>
+<p>The sub types are defined by the following enum:</p>
+<h4 id="transferids-enum"><code>TransferIds</code> Enum</h4>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><a href="#transfer-from-operation"><code>TRANSFER_FROM</code></a></td>
+<td>Pull funds from caller</td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#sweep-operation"><code>SWEEP</code></a></td>
+<td>Send funds from this contract</td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#unwrap-wnative-operation"><code>UNWRAP_WNATIVE</code></a></td>
+<td>Unwrap native currency</td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#permit2-transfer-from-operation"><code>PERMIT2_TRANSFER_FROM</code></a></td>
+<td>Permit2 transfer</td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#approve-operation"><code>APPROVE</code></a></td>
+<td>Approve target</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sweeptype-enum">SweepType Enum</h4>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>VALIDATE</code></td>
+<td>Check if <code>balanceOf(address(this)) &gt;= amount</code>, if true transfer it, if not revert</td>
+</tr>
+<tr>
+<td>1</td>
+<td><code>AMOUNT</code></td>
+<td>Transfer the amount without validation</td>
+</tr>
+</tbody>
+</table>
+<p>To encode an operation, the caller has to append</p>
 <pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
 <span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
 <span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.[Operation]),</span></span>
@@ -535,8 +586,9 @@
 <span class="line"><span style="color: #D4D4D4">);</span></span>
 <span class="line"></span></code></pre></code></pre>
 <p>to the array of composer commands.</p>
-<h2 id="transferfrom">TRANSFER_FROM</h2>
+<h2 id="transfer-from-operation">Transfer From Operation</h2>
 <p>Pull funds from the caller to a receiver address.</p>
+<h3 id="parameters">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -563,15 +615,27 @@
 </tr>
 </tbody>
 </table>
+<h3 id="notes">Notes</h3>
 <p>If <code>amount</code> is <code>0</code>, we pull <code>asset.balanceOf(caller)</code>.</p>
-<h2 id="sweep">SWEEP</h2>
-<p>Pull funds from this contract to a provided address.</p>
-<p>Can be used to run slippage checks.</p>
-<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #569CD6">enum</span><span style="color: #D4D4D4"> </span><span style="color: #4EC9B0">SweepType</span><span style="color: #D4D4D4"> {</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4FC1FF">VALIDATE</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// check if `balanceOf(address(this) &gt;= amount, if true, transfer it, if not, revert</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4FC1FF">AMOUNT</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4"> </span><span style="color: #6A9955">// transfer the amount without further checks</span></span>
-<span class="line"><span style="color: #D4D4D4">}</span></span>
+<h3 id="encoding-example">Encoding Example</h3>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Solidity</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> transferFromOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.TRANSFER_FROM),</span></span>
+<span class="line"><span style="color: #D4D4D4">    assetAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    receiverAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(amount)</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
 <span class="line"></span></code></pre></code></pre>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// TypeScript</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">transferFromOp</span><span style="color: #D4D4D4"> = </span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    [</span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint128"</span><span style="color: #D4D4D4">],</span></span>
+<span class="line"><span style="color: #D4D4D4">    [</span><span style="color: #4FC1FF">TRANSFERS_COMMAND</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">TransferIds</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">TRANSFER_FROM</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">assetAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">receiverAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">amount</span><span style="color: #D4D4D4">]</span></span>
+<span class="line"><span style="color: #D4D4D4">)</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="sweep-operation">Sweep Operation</h2>
+<p>Pull funds from this contract to a provided address.</p>
+<h3 id="parameters">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -603,34 +667,71 @@
 </tr>
 </tbody>
 </table>
+<h3 id="enums-used">Enums Used</h3>
+<ul>
+<li><a href="#sweeptype-enum">SweepType Enum</a> - Validation mode for the sweep operation</li>
+</ul>
+<h3 id="notes">Notes</h3>
 <p>Note that <code>asset</code> can be the zero address for native currency.</p>
-<p>To <code>wrap</code> the native currency to wrapped native, you can just use <code>asset=address(0),receicer=wrappedNativeAddress</code>.</p>
-<h2 id="approve">APPROVE</h2>
-<p>Approve an asset - typically for a leder operation or external call.</p>
-<table>
-<thead>
-<tr>
-<th>Offset</th>
-<th>Length (bytes)</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>20</td>
-<td>token <code>address</code></td>
-</tr>
-<tr>
-<td>20</td>
-<td>20</td>
-<td>target <code>address</code></td>
-</tr>
-</tbody>
-</table>
-<p>ERC20-Approve the <code>target</code> via <code>token</code>, always uses infitie approve, the approval is stored and skipped if already done in the past.</p>
-<h2 id="unwrap">UNWRAP</h2>
+<h3 id="encoding-examples">Encoding Examples</h3>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Solidity - Basic sweep</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> sweepOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
+<span class="line"><span style="color: #D4D4D4">    assetAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    receiverAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.AMOUNT),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(amount)</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// TypeScript - Basic sweep</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">sweepOp</span><span style="color: #D4D4D4"> = </span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    [</span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint128"</span><span style="color: #D4D4D4">],</span></span>
+<span class="line"><span style="color: #D4D4D4">    [</span><span style="color: #4FC1FF">TRANSFERS_COMMAND</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">TransferIds</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">SWEEP</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">assetAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">receiverAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">SweepType</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">AMOUNT</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">amount</span><span style="color: #D4D4D4">]</span></span>
+<span class="line"><span style="color: #D4D4D4">)</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="sweeping-full-balance">Sweeping Full Balance</h2>
+<p>To sweep the entire balance of an asset without knowing the exact amount, set <code>amount = 0</code> and use <code>SweepType.VALIDATE</code>:</p>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Sweep entire token balance</span></span>
+<span class="line"><span style="color: #569CD6">function</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">encodeSweepFullBalance</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">asset</span><span style="color: #D4D4D4">: </span><span style="color: #4EC9B0">string</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">receiver</span><span style="color: #D4D4D4">: </span><span style="color: #4EC9B0">string</span><span style="color: #D4D4D4">) {</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #C586C0">return</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">ComposerCommands</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">TRANSFERS</span><span style="color: #D4D4D4">),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">TransferIds</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">SWEEP</span><span style="color: #D4D4D4">),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #9CDCFE">asset</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #9CDCFE">receiver</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">SweepType</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">VALIDATE</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// fetch actual balance and validate</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">) </span><span style="color: #6A9955">// amount = 0 triggers balanceOf lookup</span></span>
+<span class="line"><span style="color: #D4D4D4">    )</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"></span></code></pre></code></pre>
+<p>This works because:</p>
+<ul>
+<li><code>SweepType.VALIDATE</code> fetches the actual balance using <code>balanceOf(address(this))</code></li>
+<li><code>amount = 0</code> ensures the validation always passes (balance &gt;= 0)</li>
+<li>The full balance is transferred to the receiver</li>
+</ul>
+<h2 id="wrapping-native-currency">Wrapping Native Currency</h2>
+<p>To <code>wrap</code> the native currency to wrapped native, you can just use <code>asset=address(0),receiver=wrappedNativeAddress</code>.</p>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Wrap native currency using SWEEP operation</span></span>
+<span class="line"><span style="color: #569CD6">function</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">encodeWrap</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">amount</span><span style="color: #D4D4D4">: </span><span style="color: #4EC9B0">bigint</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">wrapTarget</span><span style="color: #D4D4D4">: </span><span style="color: #4EC9B0">string</span><span style="color: #D4D4D4">) {</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #C586C0">return</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">ComposerCommands</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">TRANSFERS</span><span style="color: #D4D4D4">),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">TransferIds</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">SWEEP</span><span style="color: #D4D4D4">),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// signals native asset</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #9CDCFE">wrapTarget</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// wrapped native contract address</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">SweepType</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">AMOUNT</span><span style="color: #D4D4D4">),</span></span>
+<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #DCDCAA">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">amount</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"><span style="color: #D4D4D4">    )</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"></span></code></pre></code></pre>
+<p>This works because:</p>
+<ul>
+<li><code>asset = address(0)</code> tells the system to handle native currency</li>
+<li>The wrapped native contract's <code>receive()</code> or <code>fallback()</code> function automatically wraps incoming native currency</li>
+</ul>
+<h2 id="unwrap-wnative-operation">Unwrap WNative Operation</h2>
 <p>Unwrap native asset and transfer if needed.</p>
+<h3 id="parameters">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -662,9 +763,32 @@
 </tr>
 </tbody>
 </table>
+<h3 id="enums-used">Enums Used</h3>
+<ul>
+<li><a href="#sweeptype-enum">SweepType Enum</a> - Validation mode for the unwrap operation</li>
+</ul>
+<h3 id="notes">Notes</h3>
 <p>Note that we do not hard-code the wrapped native address as some chains have duplicate wnative implementations.</p>
-<h2 id="permit2transferfrom">PERMIT2_TRANSFER_FROM</h2>
-<p>Execute a transfer via permit2. We only support the canonical Unsiwap permit2 at address <code>0x000000000022D473030F116dDEE9F6B43aC78BA3</code>.</p>
+<h3 id="encoding-example">Encoding Example</h3>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Solidity</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> unwrapOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.UNWRAP_WNATIVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    wrappedNativeAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    receiverAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.AMOUNT),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(amount)</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// TypeScript</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">unwrapOp</span><span style="color: #D4D4D4"> = </span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    [</span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint128"</span><span style="color: #D4D4D4">],</span></span>
+<span class="line"><span style="color: #D4D4D4">    [</span><span style="color: #4FC1FF">TRANSFERS_COMMAND</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">TransferIds</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">UNWRAP_WNATIVE</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">wrappedNativeAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">receiverAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">SweepType</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">AMOUNT</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">amount</span><span style="color: #D4D4D4">]</span></span>
+<span class="line"><span style="color: #D4D4D4">)</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="permit2-transfer-from-operation">Permit2 Transfer From Operation</h2>
+<p>Execute a transfer via permit2. We only support the canonical Uniswap permit2 at address <code>0x000000000022D473030F116dDEE9F6B43aC78BA3</code>.</p>
+<h3 id="parameters">Parameters</h3>
 <table>
 <thead>
 <tr>
@@ -691,8 +815,64 @@
 </tr>
 </tbody>
 </table>
+<h3 id="notes">Notes</h3>
+<p>If <code>amount</code> is <code>0</code>, we pull <code>asset.balanceOf(caller)</code>.</p>
+<h3 id="encoding-example">Encoding Example</h3>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Solidity</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> permit2TransferOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.PERMIT2_TRANSFER_FROM),</span></span>
+<span class="line"><span style="color: #D4D4D4">    assetAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    receiverAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(amount)</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// TypeScript</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">permit2TransferOp</span><span style="color: #D4D4D4"> = </span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    [</span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint128"</span><span style="color: #D4D4D4">],</span></span>
+<span class="line"><span style="color: #D4D4D4">    [</span><span style="color: #4FC1FF">TRANSFERS_COMMAND</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">TransferIds</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">PERMIT2_TRANSFER_FROM</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">assetAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">receiverAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">amount</span><span style="color: #D4D4D4">]</span></span>
+<span class="line"><span style="color: #D4D4D4">)</span></span>
+<span class="line"></span></code></pre></code></pre>
+<h2 id="approve-operation">Approve Operation</h2>
+<p>Approve an asset - typically for a lender operation or external call.</p>
+<h3 id="parameters">Parameters</h3>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>token <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>20</td>
+<td>target <code>address</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="notes">Notes</h3>
+<p>ERC20-Approve the <code>target</code> via <code>token</code>, always uses infinite approve, the approval is stored and skipped if already done in the past.</p>
+<h3 id="encoding-example">Encoding Example</h3>
+<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Solidity</span></span>
+<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approveOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
+<span class="line"><span style="color: #D4D4D4">    tokenAddress,</span></span>
+<span class="line"><span style="color: #D4D4D4">    targetAddress</span></span>
+<span class="line"><span style="color: #D4D4D4">);</span></span>
+<span class="line"></span></code></pre></code></pre>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// TypeScript</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">approveOp</span><span style="color: #D4D4D4"> = </span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">([</span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"uint8"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">, </span><span style="color: #CE9178">"address"</span><span style="color: #D4D4D4">], [</span><span style="color: #4FC1FF">TRANSFERS_COMMAND</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">TransferIds</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">APPROVE</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">tokenAddress</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">targetAddress</span><span style="color: #D4D4D4">])</span></span>
+<span class="line"></span></code></pre></code></pre>
 <footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-09-03 06:14:50
+2025-09-03 09:36:54
 </span></div></div></footer>
                                 
                                 </section>
@@ -736,7 +916,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Transfers","level":"1.7.2.1","depth":3,"next":{"title":"External Call","level":"1.7.2.2","depth":3,"path":"api/external-call.md","ref":"./api/external-call.md","articles":[]},"previous":{"title":"Operations","level":"1.7.2","depth":2,"path":"api/operations.md","ref":"./api/operations.md","articles":[{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},{"title":"External Call","level":"1.7.2.2","depth":3,"path":"api/external-call.md","ref":"./api/external-call.md","articles":[]},{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}]},{"title":"Flash Loan","level":"1.7.2.4","depth":3,"path":"api/flash-loan.md","ref":"./api/flash-loan.md","articles":[{"title":"Standardized Interface","level":"1.7.2.4.1","depth":4,"path":"api/flash-loan/standardized-interface.md","ref":"./api/flash-loan/standardized-interface.md","articles":[]}]},{"title":"Margin","level":"1.7.2.5","depth":3,"path":"api/margin/general.md","ref":"./api/margin/general.md","articles":[{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},{"title":"Close","level":"1.7.2.5.2","depth":4,"path":"api/margin/close.md","ref":"./api/margin/close.md","articles":[]},{"title":"Collateral Swap","level":"1.7.2.5.3","depth":4,"path":"api/margin/collateral-swap.md","ref":"./api/margin/collateral-swap.md","articles":[]},{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},{"title":"Migration","level":"1.7.2.5.5","depth":4,"path":"api/margin/migration.md","ref":"./api/margin/migration.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/transfers.md","mtime":"2025-09-03T06:14:50.207Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-03T07:17:30.588Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Transfers","level":"1.7.2.1","depth":3,"next":{"title":"External Call","level":"1.7.2.2","depth":3,"path":"api/external-call.md","ref":"./api/external-call.md","articles":[]},"previous":{"title":"Operations","level":"1.7.2","depth":2,"path":"api/operations.md","ref":"./api/operations.md","articles":[{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},{"title":"External Call","level":"1.7.2.2","depth":3,"path":"api/external-call.md","ref":"./api/external-call.md","articles":[]},{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}]},{"title":"Flash Loan","level":"1.7.2.4","depth":3,"path":"api/flash-loan.md","ref":"./api/flash-loan.md","articles":[{"title":"Standardized Interface","level":"1.7.2.4.1","depth":4,"path":"api/flash-loan/standardized-interface.md","ref":"./api/flash-loan/standardized-interface.md","articles":[]}]},{"title":"Margin","level":"1.7.2.5","depth":3,"path":"api/margin/general.md","ref":"./api/margin/general.md","articles":[{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},{"title":"Close","level":"1.7.2.5.2","depth":4,"path":"api/margin/close.md","ref":"./api/margin/close.md","articles":[]},{"title":"Collateral Swap","level":"1.7.2.5.3","depth":4,"path":"api/margin/collateral-swap.md","ref":"./api/margin/collateral-swap.md","articles":[]},{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},{"title":"Migration","level":"1.7.2.5.5","depth":4,"path":"api/margin/migration.md","ref":"./api/margin/migration.md","articles":[]}]}]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/transfers.md","mtime":"2025-09-03T09:36:54.898Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-03T09:40:22.745Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

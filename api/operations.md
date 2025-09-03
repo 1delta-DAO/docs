@@ -113,14 +113,13 @@ Modern DEX operations support Balancer V3 and Uniswap V4 features.
 
 ### 8. Bridge Operations (`BRIDGING = 0x90`)
 
-Bridge operations enable cross-chain transfers and interactions.
+Bridge operations enable cross-chain transfers and interactions (only call forwarder)
 
 **Key Features:**
 
 -   Cross-chain transfers
 -   Bridge protocol integration
--   Multi-chain strategies
--   LayerZero/Stargate integration
+-   Across/Stargate integration
 
 ## Encoding Structure
 

@@ -23,6 +23,7 @@
             -   [Morpho Blue](./api/lending/morpho.md)
         -   [Flash Loan](./api/flash-loan.md)
             -   [Standardized Interface](./api/flash-loan/standardized-interface.md)
+            -   [Singletons](./api/flash-loan/singletons.md)
         -   [Margin](./api/margin/general.md)
             -   [Leverage](./api/margin/leverage.md)
             -   [Close](./api/margin/close.md)

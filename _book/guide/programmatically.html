@@ -16,23 +16,11 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/000a7422ccf1c8cc3f26daf362853295-footer.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/c459563c02e09e58ef33c91554d24a1e-prism-okaidia.css">
-                
-            
-                
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/a7e0e775e45122c306152e5095d6066a-code.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/9126ee2b524e451535a83b807a1790d6-asciinema-player.css">
                 
             
                 
@@ -461,6 +449,19 @@
             
         </li>
     
+        <li class="chapter " data-level="1.7.2.4.2" data-path="../api/flash-loan/singletons.html">
+            
+                <a href="../api/flash-loan/singletons.html">
+            
+                    
+                    Singletons
+            
+                </a>
+            
+
+            
+        </li>
+    
 
             </ul>
             
@@ -605,202 +606,204 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <html><head></head><body><h1 id="how-to-use-1deltas-margin-aggregator-programmatically">How to use 1delta's margin aggregator programmatically</h1>
+                                <h1 id="how-to-use-1deltas-margin-aggregator-programmatically">How to use 1delta's margin aggregator programmatically</h1>
 <p>1delta's smart contracts can be used via our Typescript SDK (which is also the one used for our UI).</p>
 <p>It is using out asset-registry package <a href="https://www.npmjs.com/package/@1delta/asset-registry" target="_blank">here</a>.</p>
 <p>This package contains all lender data that is needed for on-chain actions (e.g. Aave lending tokens, Venus comptrollers etc.). The SDK automatically identifies a lender via the provided enum.</p>
 <h2 id="packages">Packages</h2>
-<pre class="language-"><code class="lang-bash"><span class="token function">pnpm</span> <span class="token function">add</span> @1delta/calldata-sdk @1delta/asset-registry
-</code></pre>
-<pre class="language-"><code class="lang-typescript"><span class="token comment">// enums for operations</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span>QuickActionType<span class="token punctuation">,</span> MarginTradeType<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@1delta/calldata-sdk"</span>
-<span class="token comment">// for direct lending actions</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span>ComposerDirectLending<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@1delta/calldata-sdk"</span>
-<span class="token comment">// margin operations</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span>ComposerMargin<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@1delta/calldata-sdk"</span>
-<span class="token comment">// enums</span>
-<span class="token keyword">import</span> <span class="token punctuation">{</span>Lender<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"@1delta/asset-registry"</span>
-</code></pre>
+<pre><code class="lang-bash"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #DCDCAA">pnpm</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">add</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">@1delta/calldata-sdk</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">@1delta/asset-registry</span></span>
+<span class="line"></span></code></pre></code></pre>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// enums for operations</span></span>
+<span class="line"><span style="color: #C586C0">import</span><span style="color: #D4D4D4"> {</span><span style="color: #9CDCFE">QuickActionType</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">MarginTradeType</span><span style="color: #D4D4D4">} </span><span style="color: #C586C0">from</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"@1delta/calldata-sdk"</span></span>
+<span class="line"><span style="color: #6A9955">// for direct lending actions</span></span>
+<span class="line"><span style="color: #C586C0">import</span><span style="color: #D4D4D4"> {</span><span style="color: #9CDCFE">ComposerDirectLending</span><span style="color: #D4D4D4">} </span><span style="color: #C586C0">from</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"@1delta/calldata-sdk"</span></span>
+<span class="line"><span style="color: #6A9955">// margin operations</span></span>
+<span class="line"><span style="color: #C586C0">import</span><span style="color: #D4D4D4"> {</span><span style="color: #9CDCFE">ComposerMargin</span><span style="color: #D4D4D4">} </span><span style="color: #C586C0">from</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"@1delta/calldata-sdk"</span></span>
+<span class="line"><span style="color: #6A9955">// enums</span></span>
+<span class="line"><span style="color: #C586C0">import</span><span style="color: #D4D4D4"> {</span><span style="color: #9CDCFE">Lender</span><span style="color: #D4D4D4">} </span><span style="color: #C586C0">from</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"@1delta/asset-registry"</span></span>
+<span class="line"></span></code></pre></code></pre>
 <h2 id="example-usage-for-depositing-to-aave-v3">Example usage for depositing to Aave V3</h2>
 <p>Deposits assets to Aave. The caller needs to ensure that the contract has enough permissions (e.g. <code>token.approve(...)</code>)</p>
-<pre class="language-"><code class="lang-typescript"><span class="token comment">// --- Configuration for chain ---</span>
-<span class="token keyword">const</span> chainId <span class="token operator">=</span> <span class="token string">"10"</span>
-<span class="token keyword">const</span> composer <span class="token operator">=</span> <span class="token constant">COMPOSER_PROXIES</span><span class="token punctuation">[</span>chainId<span class="token punctuation">]</span>
-
-<span class="token comment">// --- Asset and amount ---</span>
-<span class="token comment">// Example: deposit 1000 USDC (1e9 = 1000 * 1e6 in smallest units)</span>
-<span class="token keyword">const</span> input <span class="token operator">=</span> <span class="token number">1_000_000_000n</span> <span class="token comment">// 1e9</span>
-<span class="token keyword">const</span> depositAsset <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token builtin">symbol</span><span class="token operator">:</span> <span class="token string">"USDC"</span><span class="token punctuation">,</span>
-  name<span class="token operator">:</span> <span class="token string">"USDC"</span><span class="token punctuation">,</span>
-  address<span class="token operator">:</span> <span class="token string">"0x0b2c639c533813f4aa9d7837caf62653d097ff85"</span><span class="token punctuation">,</span>
-  chainId
-<span class="token punctuation">}</span>
-
-<span class="token comment">// --- Caller account ---</span>
-<span class="token keyword">const</span> account <span class="token operator">=</span> <span class="token string">"0x..."</span>
-
-<span class="token comment">// --- Lender and action type ---</span>
-<span class="token keyword">const</span> lender <span class="token operator">=</span> Lender<span class="token punctuation">.</span><span class="token constant">AAVE_V3</span>
-<span class="token keyword">const</span> action <span class="token operator">=</span> QuickActionType<span class="token punctuation">.</span>Deposit
-
-<span class="token comment">// --- Operation parameters ---</span>
-<span class="token keyword">const</span> operation <span class="token operator">=</span> <span class="token punctuation">{</span>
-  params<span class="token operator">:</span> <span class="token punctuation">{</span>
-    lender<span class="token punctuation">,</span>
-    amount<span class="token operator">:</span> <span class="token punctuation">{</span> currency<span class="token operator">:</span> depositAsset<span class="token punctuation">,</span> amount<span class="token operator">:</span> input <span class="token punctuation">}</span>
-  <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  receiver<span class="token operator">:</span> account<span class="token punctuation">,</span> <span class="token comment">// Caller deposits on their own behalf</span>
-  isAll<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>      <span class="token comment">// Only used for withdraw &amp; repay operations</span>
-  inIsNative<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// If true, use native asset (ETH) to deposit — operation will wrap ETH</span>
-  outIsNative<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span><span class="token comment">// If true, unwraps output (e.g. withdraw WETH and unwrap to ETH)</span>
-  composerAddress<span class="token operator">:</span> composer<span class="token punctuation">,</span>
-  permitData<span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span>   <span class="token comment">// No permit used</span>
-  morphoParams<span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span> <span class="token comment">// No Morpho parameters</span>
-  useOverride<span class="token operator">:</span> <span class="token keyword">undefined</span>   <span class="token comment">// No custom Aave fork override</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">// --- Generate calldata and value for transaction ---</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span> calldata<span class="token punctuation">,</span> value <span class="token punctuation">}</span> <span class="token operator">=</span> ComposerDirectLending<span class="token punctuation">.</span><span class="token function">composeDirectMoneyMarketAction</span><span class="token punctuation">(</span>operation<span class="token punctuation">)</span>
-</code></pre>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// --- Configuration for chain ---</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">chainId</span><span style="color: #D4D4D4"> = </span><span style="color: #CE9178">"10"</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">composer</span><span style="color: #D4D4D4"> = </span><span style="color: #4FC1FF">COMPOSER_PROXIES</span><span style="color: #D4D4D4">[</span><span style="color: #9CDCFE">chainId</span><span style="color: #D4D4D4">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// --- Asset and amount ---</span></span>
+<span class="line"><span style="color: #6A9955">// Example: deposit 1000 USDC (1e9 = 1000 * 1e6 in smallest units)</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">input</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">1_000_000_000</span><span style="color: #569CD6">n</span><span style="color: #D4D4D4"> </span><span style="color: #6A9955">// 1e9</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">depositAsset</span><span style="color: #D4D4D4"> = {</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">symbol:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"USDC"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">name:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"USDC"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">address:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"0x0b2c639c533813f4aa9d7837caf62653d097ff85"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">chainId</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// --- Caller account ---</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">account</span><span style="color: #D4D4D4"> = </span><span style="color: #CE9178">"0x..."</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// --- Lender and action type ---</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">lender</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">Lender</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">AAVE_V3</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">action</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">QuickActionType</span><span style="color: #D4D4D4">.</span><span style="color: #9CDCFE">Deposit</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// --- Operation parameters ---</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">operation</span><span style="color: #D4D4D4"> = {</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">params:</span><span style="color: #D4D4D4"> {</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">lender</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">amount:</span><span style="color: #D4D4D4"> { </span><span style="color: #9CDCFE">currency:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">depositAsset</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">amount:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">input</span><span style="color: #D4D4D4"> }</span></span>
+<span class="line"><span style="color: #D4D4D4">  },</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">receiver:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">account</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// Caller deposits on their own behalf</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">isAll:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">,      </span><span style="color: #6A9955">// Only used for withdraw &amp; repay operations</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">inIsNative:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// If true, use native asset (ETH) to deposit — operation will wrap ETH</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">outIsNative:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">,</span><span style="color: #6A9955">// If true, unwraps output (e.g. withdraw WETH and unwrap to ETH)</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">composerAddress:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">composer</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">permitData:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">undefined</span><span style="color: #D4D4D4">,   </span><span style="color: #6A9955">// No permit used</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">morphoParams:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">undefined</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// No Morpho parameters</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">useOverride:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">undefined</span><span style="color: #D4D4D4">   </span><span style="color: #6A9955">// No custom Aave fork override</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// --- Generate calldata and value for transaction ---</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> { </span><span style="color: #4FC1FF">calldata</span><span style="color: #D4D4D4">, </span><span style="color: #4FC1FF">value</span><span style="color: #D4D4D4"> } = </span><span style="color: #9CDCFE">ComposerDirectLending</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">composeDirectMoneyMarketAction</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">operation</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"></span></code></pre></code></pre>
 <h2 id="example-usage-for-opening-a-position-on-aave-v3">Example usage for opening a position on Aave V3</h2>
 <p>Open a position on Aave. The caller needs to ensure that the contract has enough permissions (e.g. via <code>debtToken.approveDelegation(...)</code>)</p>
-<pre class="language-"><code class="lang-typescript"><span class="token comment">// Example: Opening a short position on 1 WETH using USDC as collateral</span>
-
-<span class="token keyword">const</span> chainId <span class="token operator">=</span> <span class="token string">"10"</span>
-<span class="token keyword">const</span> composer <span class="token operator">=</span> <span class="token constant">COMPOSER_PROXIES</span><span class="token punctuation">[</span>chainId<span class="token punctuation">]</span>
-
-<span class="token comment">// The caller's account address</span>
-<span class="token keyword">const</span> account <span class="token operator">=</span> <span class="token string">"0x..."</span>
-
-<span class="token comment">// Operation type</span>
-<span class="token class-name"><span class="token keyword">const</span></span> marginTradeType <span class="token operator">=</span> <span class="token string">"Open"</span>
-
-<span class="token comment">// Intended input amount (in wei)</span>
-<span class="token keyword">const</span> input <span class="token operator">=</span> <span class="token number">1_000_000_000_000_000_000n</span> <span class="token comment">// 1e18</span>
-
-<span class="token comment">// Assets</span>
-<span class="token keyword">const</span> assetIn <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token builtin">symbol</span><span class="token operator">:</span> <span class="token string">"WETH"</span><span class="token punctuation">,</span>
-  name<span class="token operator">:</span> <span class="token string">"WETH"</span><span class="token punctuation">,</span>
-  address<span class="token operator">:</span> <span class="token string">"0x4200000000000000000000000000000000000006"</span><span class="token punctuation">,</span>
-  chainId
-<span class="token punctuation">}</span>
-<span class="token keyword">const</span> assetOut <span class="token operator">=</span> <span class="token punctuation">{</span>
-  <span class="token builtin">symbol</span><span class="token operator">:</span> <span class="token string">"USDC"</span><span class="token punctuation">,</span>
-  name<span class="token operator">:</span> <span class="token string">"USDC"</span><span class="token punctuation">,</span>
-  address<span class="token operator">:</span> <span class="token string">"0x0b2c639c533813f4aa9d7837caf62653d097ff85"</span><span class="token punctuation">,</span>
-  chainId
-<span class="token punctuation">}</span>
-
-<span class="token comment">// Lender to use (refer to the `Lender` enum in asset-registry)</span>
-<span class="token keyword">const</span> lender <span class="token operator">=</span> Lender<span class="token punctuation">.</span><span class="token constant">AAVE_V3</span>
-
-<span class="token comment">// --- Step 1: Fetch flash liquidity ---</span>
-<span class="token comment">// Example return value:</span>
-<span class="token comment">//</span>
-<span class="token comment">// [</span>
-<span class="token comment">//   {</span>
-<span class="token comment">//     "id": 0,</span>
-<span class="token comment">//     "name": "AAVE_V3",</span>
-<span class="token comment">//     "type": 2,</span>
-<span class="token comment">//     "source": "0x794a61358D6845594F94dc1DB02A252b5b4814aD",</span>
-<span class="token comment">//     "fee": "5",</span>
-<span class="token comment">//     "availableRaw": "7742114549858607894570",</span>
-<span class="token comment">//     "available": 7742.11454985861</span>
-<span class="token comment">//   },</span>
-<span class="token comment">//   ...</span>
-<span class="token comment">// ]</span>
-
-<span class="token keyword">const</span> assetLiquidities <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span>
-  <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://margin-data.1delta.io/flashloan-asset/10/0x4200000000000000000000000000000000000006</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment">// Pick the first source (ideally choose the lowest-fee source)</span>
-<span class="token keyword">const</span> flashLoanSource <span class="token operator">=</span> assetLiquidities<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
-
-<span class="token comment">// Flash loan fee is used to adjust the quote input</span>
-<span class="token keyword">const</span> flashFee <span class="token operator">=</span> <span class="token function">BigInt</span><span class="token punctuation">(</span>flashLoanSource<span class="token punctuation">.</span>fee<span class="token punctuation">)</span>
-
-
-<span class="token comment">// --- Step 2: Fetch trade ---</span>
-<span class="token comment">// With a 5 bps flash fee, we can calculate the adjusted input to borrow exactly 1 WETH:</span>
-<span class="token keyword">const</span> amendedInput <span class="token operator">=</span> <span class="token punctuation">(</span>input <span class="token operator">*</span> <span class="token number">10_000n</span><span class="token punctuation">)</span> <span class="token operator">/</span> <span class="token punctuation">(</span><span class="token number">10_000n</span> <span class="token operator">+</span> flashFee<span class="token punctuation">)</span>
-
-<span class="token comment">// Query the swap provider API</span>
-<span class="token comment">// Important: Set the receiver to the composer contract</span>
-<span class="token keyword">const</span> apiBody <span class="token operator">=</span> <span class="token punctuation">{</span> <span class="token operator">...</span><span class="token punctuation">,</span> amountIn<span class="token operator">:</span> amendedInput<span class="token punctuation">,</span> receiver<span class="token operator">:</span> composer <span class="token punctuation">}</span>
-<span class="token keyword">const</span> apiReturn <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span>
-  <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://www.quote.odos....</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-<span class="token comment">// Get calldata from the API (varies by provider)</span>
-<span class="token keyword">const</span> <span class="token punctuation">{</span> calldata<span class="token punctuation">,</span> target <span class="token punctuation">}</span> <span class="token operator">=</span> <span class="token keyword">await</span> <span class="token punctuation">(</span>
-  <span class="token keyword">await</span> <span class="token function">fetch</span><span class="token punctuation">(</span><span class="token template-string"><span class="token template-punctuation string">`</span><span class="token string">https://www.assemble.odos....</span><span class="token template-punctuation string">`</span></span><span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-
-
-<span class="token comment">// --- Step 3: Prepare trade object for SDK ---</span>
-
-<span class="token keyword">const</span> trade<span class="token operator">:</span> GenericTrade <span class="token operator">=</span> <span class="token punctuation">{</span>
-  tradeType<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token comment">// exact in</span>
-  inputAmount<span class="token operator">:</span> <span class="token punctuation">{</span> currency<span class="token operator">:</span> assetIn<span class="token punctuation">,</span> amount<span class="token operator">:</span> amendedInput <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  outputAmount<span class="token operator">:</span> <span class="token punctuation">{</span> currency<span class="token operator">:</span> assetOut<span class="token punctuation">,</span> amount<span class="token operator">:</span> apiReturn<span class="token punctuation">.</span>output <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token comment">// Output amount is unused in calldata</span>
-  target<span class="token punctuation">,</span> <span class="token comment">// Call target</span>
-  approvalTarget<span class="token operator">:</span> target<span class="token punctuation">,</span> <span class="token comment">// Usually same as call target, may differ for some aggregators</span>
-  <span class="token comment">// Set to `true` if `apiBody` does not allow specifying a receiver</span>
-  sweepToReceiver<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">const</span> externalCall <span class="token operator">=</span> <span class="token punctuation">{</span>
-  target<span class="token punctuation">,</span>
-  calldata<span class="token punctuation">,</span>
-  value<span class="token operator">:</span> <span class="token string">"0"</span><span class="token punctuation">,</span> <span class="token comment">// Default (only used for native asset as input)</span>
-  useSelfbalance<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>
-  callForwarder<span class="token operator">:</span> <span class="token constant">FORWARDER</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">const</span> marginData <span class="token operator">=</span> <span class="token punctuation">{</span>
-  marginTradeType<span class="token punctuation">,</span>
-  <span class="token comment">// STABLE is disabled for most Aave forks</span>
-  irModeIn<span class="token operator">:</span> AaveInterestMode<span class="token punctuation">.</span><span class="token constant">VARIABLE</span><span class="token punctuation">,</span>
-  <span class="token comment">// Unused</span>
-  irModeOut<span class="token operator">:</span> AaveInterestMode<span class="token punctuation">.</span><span class="token constant">NONE</span><span class="token punctuation">,</span>
-  lender<span class="token punctuation">,</span>
-  morphoParams<span class="token operator">:</span> <span class="token keyword">undefined</span><span class="token punctuation">,</span> <span class="token comment">// No Morpho execution</span>
-  permitData<span class="token operator">:</span> <span class="token keyword">undefined</span> <span class="token comment">// No permits in this example</span>
-<span class="token punctuation">}</span>
-
-<span class="token comment">// This returns a bytes string for the 1delta composer</span>
-<span class="token keyword">const</span> composerOperation <span class="token operator">=</span> ComposerMargin<span class="token punctuation">.</span><span class="token function">createMarginFlashLoan</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  trade<span class="token punctuation">,</span>
-  externalCall<span class="token punctuation">,</span>
-  marginData<span class="token punctuation">,</span>
-  maxIn<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// Default (only for non-open operations)</span>
-  maxOut<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span> <span class="token comment">// Default (only for non-open operations)</span>
-  composerOverride<span class="token operator">:</span> composer<span class="token punctuation">,</span> <span class="token comment">// Composer address</span>
-  flashInfoOverride<span class="token operator">:</span> flashLoanSource <span class="token comment">// Flash loan source info</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-
-
-<span class="token comment">// Note: Any composer operation can be prepended, e.g.:</span>
-<span class="token comment">//</span>
-<span class="token comment">// This is the calldata for the composer.</span>
-<span class="token comment">// For example, `ComposerDirectLending.composeDirectMoneyMarketAction(...)`</span>
-<span class="token comment">// could be used to generate a deposit calldata set, which can then be prepended:</span>
-<span class="token comment">//</span>
-<span class="token comment">// const depositAndOpen = encodePacked(</span>
-<span class="token comment">//   ["bytes", "bytes"],</span>
-<span class="token comment">//   [depositCalldata, composerOperation]</span>
-<span class="token comment">// )</span>
-
-<span class="token keyword">const</span> contractCall <span class="token operator">=</span> <span class="token function">encodeFunctionData</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  abi<span class="token operator">:</span> composerAbi<span class="token punctuation">,</span>
-  functionName<span class="token operator">:</span> <span class="token string">"deltaCompose"</span><span class="token punctuation">,</span>
-  args<span class="token operator">:</span> <span class="token punctuation">[</span>composerOperation<span class="token punctuation">]</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span>
-</code></pre>
-</body></html>
+<pre><code class="lang-typescript"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Example: Opening a short position on 1 WETH using USDC as collateral</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">chainId</span><span style="color: #D4D4D4"> = </span><span style="color: #CE9178">"10"</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">composer</span><span style="color: #D4D4D4"> = </span><span style="color: #4FC1FF">COMPOSER_PROXIES</span><span style="color: #D4D4D4">[</span><span style="color: #9CDCFE">chainId</span><span style="color: #D4D4D4">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// The caller's account address</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">account</span><span style="color: #D4D4D4"> = </span><span style="color: #CE9178">"0x..."</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Operation type</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">marginTradeType</span><span style="color: #D4D4D4"> = </span><span style="color: #CE9178">"Open"</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Intended input amount (in wei)</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">input</span><span style="color: #D4D4D4"> = </span><span style="color: #B5CEA8">1_000_000_000_000_000_000</span><span style="color: #569CD6">n</span><span style="color: #D4D4D4"> </span><span style="color: #6A9955">// 1e18</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Assets</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">assetIn</span><span style="color: #D4D4D4"> = {</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">symbol:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"WETH"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">name:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"WETH"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">address:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"0x4200000000000000000000000000000000000006"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">chainId</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">assetOut</span><span style="color: #D4D4D4"> = {</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">symbol:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"USDC"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">name:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"USDC"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">address:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"0x0b2c639c533813f4aa9d7837caf62653d097ff85"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">chainId</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Lender to use (refer to the `Lender` enum in asset-registry)</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">lender</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">Lender</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">AAVE_V3</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// --- Step 1: Fetch flash liquidity ---</span></span>
+<span class="line"><span style="color: #6A9955">// Example return value:</span></span>
+<span class="line"><span style="color: #6A9955">//</span></span>
+<span class="line"><span style="color: #6A9955">// [</span></span>
+<span class="line"><span style="color: #6A9955">//   {</span></span>
+<span class="line"><span style="color: #6A9955">//     "id": 0,</span></span>
+<span class="line"><span style="color: #6A9955">//     "name": "AAVE_V3",</span></span>
+<span class="line"><span style="color: #6A9955">//     "type": 2,</span></span>
+<span class="line"><span style="color: #6A9955">//     "source": "0x794a61358D6845594F94dc1DB02A252b5b4814aD",</span></span>
+<span class="line"><span style="color: #6A9955">//     "fee": "5",</span></span>
+<span class="line"><span style="color: #6A9955">//     "availableRaw": "7742114549858607894570",</span></span>
+<span class="line"><span style="color: #6A9955">//     "available": 7742.11454985861</span></span>
+<span class="line"><span style="color: #6A9955">//   },</span></span>
+<span class="line"><span style="color: #6A9955">//   ...</span></span>
+<span class="line"><span style="color: #6A9955">// ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">assetLiquidities</span><span style="color: #D4D4D4"> = </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> (</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">fetch</span><span style="color: #D4D4D4">(</span><span style="color: #CE9178">`https://margin-data.1delta.io/flashloan-asset/10/0x4200000000000000000000000000000000000006`</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"><span style="color: #D4D4D4">).</span><span style="color: #DCDCAA">json</span><span style="color: #D4D4D4">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Pick the first source (ideally choose the lowest-fee source)</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">flashLoanSource</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">assetLiquidities</span><span style="color: #D4D4D4">[</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Flash loan fee is used to adjust the quote input</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">flashFee</span><span style="color: #D4D4D4"> = </span><span style="color: #DCDCAA">BigInt</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">flashLoanSource</span><span style="color: #D4D4D4">.</span><span style="color: #9CDCFE">fee</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// --- Step 2: Fetch trade ---</span></span>
+<span class="line"><span style="color: #6A9955">// With a 5 bps flash fee, we can calculate the adjusted input to borrow exactly 1 WETH:</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">amendedInput</span><span style="color: #D4D4D4"> = (</span><span style="color: #9CDCFE">input</span><span style="color: #D4D4D4"> * </span><span style="color: #B5CEA8">10_000</span><span style="color: #569CD6">n</span><span style="color: #D4D4D4">) / (</span><span style="color: #B5CEA8">10_000</span><span style="color: #569CD6">n</span><span style="color: #D4D4D4"> + </span><span style="color: #9CDCFE">flashFee</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Query the swap provider API</span></span>
+<span class="line"><span style="color: #6A9955">// Important: Set the receiver to the composer contract</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">apiBody</span><span style="color: #D4D4D4"> = { ..., </span><span style="color: #9CDCFE">amountIn:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">amendedInput</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">receiver:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">composer</span><span style="color: #D4D4D4"> }</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">apiReturn</span><span style="color: #D4D4D4"> = </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> (</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">fetch</span><span style="color: #D4D4D4">(</span><span style="color: #CE9178">`https://www.quote.odos....`</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"><span style="color: #D4D4D4">).</span><span style="color: #DCDCAA">json</span><span style="color: #D4D4D4">()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Get calldata from the API (varies by provider)</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> { </span><span style="color: #4FC1FF">calldata</span><span style="color: #D4D4D4">, </span><span style="color: #4FC1FF">target</span><span style="color: #D4D4D4"> } = </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> (</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">fetch</span><span style="color: #D4D4D4">(</span><span style="color: #CE9178">`https://www.assemble.odos....`</span><span style="color: #D4D4D4">)</span></span>
+<span class="line"><span style="color: #D4D4D4">).</span><span style="color: #DCDCAA">json</span><span style="color: #D4D4D4">()</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// --- Step 3: Prepare trade object for SDK ---</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">trade</span><span style="color: #D4D4D4">: </span><span style="color: #4EC9B0">GenericTrade</span><span style="color: #D4D4D4"> = {</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">tradeType:</span><span style="color: #D4D4D4"> </span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// exact in</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">inputAmount:</span><span style="color: #D4D4D4"> { </span><span style="color: #9CDCFE">currency:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">assetIn</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">amount:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">amendedInput</span><span style="color: #D4D4D4"> },</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">outputAmount:</span><span style="color: #D4D4D4"> { </span><span style="color: #9CDCFE">currency:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">assetOut</span><span style="color: #D4D4D4">, </span><span style="color: #9CDCFE">amount:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">apiReturn</span><span style="color: #D4D4D4">.</span><span style="color: #9CDCFE">output</span><span style="color: #D4D4D4"> }, </span><span style="color: #6A9955">// Output amount is unused in calldata</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">target</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// Call target</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">approvalTarget:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">target</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// Usually same as call target, may differ for some aggregators</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #6A9955">// Set to `true` if `apiBody` does not allow specifying a receiver</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">sweepToReceiver:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">externalCall</span><span style="color: #D4D4D4"> = {</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">target</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">calldata</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">value:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"0"</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// Default (only used for native asset as input)</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">useSelfbalance:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">callForwarder:</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">FORWARDER</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">marginData</span><span style="color: #D4D4D4"> = {</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">marginTradeType</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #6A9955">// STABLE is disabled for most Aave forks</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">irModeIn:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">AaveInterestMode</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">VARIABLE</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #6A9955">// Unused</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">irModeOut:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">AaveInterestMode</span><span style="color: #D4D4D4">.</span><span style="color: #4FC1FF">NONE</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">lender</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">morphoParams:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">undefined</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// No Morpho execution</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">permitData:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">undefined</span><span style="color: #D4D4D4"> </span><span style="color: #6A9955">// No permits in this example</span></span>
+<span class="line"><span style="color: #D4D4D4">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// This returns a bytes string for the 1delta composer</span></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">composerOperation</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">ComposerMargin</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">createMarginFlashLoan</span><span style="color: #D4D4D4">({</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">trade</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">externalCall</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">marginData</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">maxIn:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// Default (only for non-open operations)</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">maxOut:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// Default (only for non-open operations)</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">composerOverride:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">composer</span><span style="color: #D4D4D4">, </span><span style="color: #6A9955">// Composer address</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">flashInfoOverride:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">flashLoanSource</span><span style="color: #D4D4D4"> </span><span style="color: #6A9955">// Flash loan source info</span></span>
+<span class="line"><span style="color: #D4D4D4">})</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color: #6A9955">// Note: Any composer operation can be prepended, e.g.:</span></span>
+<span class="line"><span style="color: #6A9955">//</span></span>
+<span class="line"><span style="color: #6A9955">// This is the calldata for the composer.</span></span>
+<span class="line"><span style="color: #6A9955">// For example, `ComposerDirectLending.composeDirectMoneyMarketAction(...)`</span></span>
+<span class="line"><span style="color: #6A9955">// could be used to generate a deposit calldata set, which can then be prepended:</span></span>
+<span class="line"><span style="color: #6A9955">//</span></span>
+<span class="line"><span style="color: #6A9955">// const depositAndOpen = encodePacked(</span></span>
+<span class="line"><span style="color: #6A9955">//   ["bytes", "bytes"],</span></span>
+<span class="line"><span style="color: #6A9955">//   [depositCalldata, composerOperation]</span></span>
+<span class="line"><span style="color: #6A9955">// )</span></span>
+<span class="line"></span>
+<span class="line"><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">contractCall</span><span style="color: #D4D4D4"> = </span><span style="color: #DCDCAA">encodeFunctionData</span><span style="color: #D4D4D4">({</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">abi:</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">composerAbi</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">functionName:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">"deltaCompose"</span><span style="color: #D4D4D4">,</span></span>
+<span class="line"><span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">args:</span><span style="color: #D4D4D4"> [</span><span style="color: #9CDCFE">composerOperation</span><span style="color: #D4D4D4">]</span></span>
+<span class="line"><span style="color: #D4D4D4">})</span></span>
+<span class="line"></span></code></pre></code></pre>
+<footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
+2025-09-03 06:14:50
+</span></div></div></footer>
                                 
                                 </section>
                             
@@ -843,7 +846,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Programmatically","level":"1.3.2","depth":2,"next":{"title":"Architecture","level":"1.4","depth":1,"path":"architecture/overview.md","ref":"./architecture/overview.md","articles":[]},"previous":{"title":"Frontend","level":"1.3.1","depth":2,"path":"guide/frontend.md","ref":"./guide/frontend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js"],"css":["./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/programmatically.md","mtime":"2025-09-04T10:28:30.423Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T11:30:08.996Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Programmatically","level":"1.3.2","depth":2,"next":{"title":"Architecture","level":"1.4","depth":1,"path":"architecture/overview.md","ref":"./architecture/overview.md","articles":[]},"previous":{"title":"Frontend","level":"1.3.1","depth":2,"path":"guide/frontend.md","ref":"./guide/frontend.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"guide/programmatically.md","mtime":"2025-09-03T06:14:50.276Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T10:55:02.805Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -897,11 +900,7 @@
     <script src="../gitbook/theme.js"></script>
     
         
-        <script src="../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-add-js-css/b97f14b103e988bf094faf9ea9f6d77c-code-header.js"></script>
+        <script src="../gitbook/gitbook-plugin-add-js-css/e5f66c57646e52f3a8966ea585b6a700-asciinema-player.js"></script>
         
     
         
@@ -922,6 +921,10 @@
     
         
         <script src="../gitbook/honkit-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

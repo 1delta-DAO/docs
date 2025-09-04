@@ -139,6 +139,8 @@ This works because:
 -   `amount = 0` ensures the validation always passes (balance >= 0)
 -   The full balance is transferred to the receiver
 
+> **Important:** if the balance is zero and `amount = 0`, the validation passes and the contract skips the empty transfer execution - this is ideal for refunding dust.
+
 ## Wrapping Native Currency
 
 To `wrap` the native currency to wrapped native, you can just use `asset=address(0),receiver=wrappedNativeAddress`.

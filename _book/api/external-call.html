@@ -16,11 +16,23 @@
     
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/000a7422ccf1c8cc3f26daf362853295-footer.css">
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism.css">
                 
             
                 
-                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/9126ee2b524e451535a83b807a1790d6-asciinema-player.css">
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/c459563c02e09e58ef33c91554d24a1e-prism-okaidia.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/a7e0e775e45122c306152e5095d6066a-code.css">
                 
             
                 
@@ -606,7 +618,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="call-forwarder-operations">Call Forwarder Operations</h1>
+                                <html><head></head><body><h1 id="call-forwarder-operations">Call Forwarder Operations</h1>
 <p>The Call Forwarder (<code>CallForwarder.sol</code>) extends the composer's functionality by providing a secure execution environment for complex operations. The main composer first validates calls, then forwards them to the Call Forwarder which can execute external calls.</p>
 <h2 id="overview">Overview</h2>
 <p>The Call Forwarder supports the following operations:</p>
@@ -644,41 +656,41 @@
 <h2 id="security-model">Security Model</h2>
 <p>The external calls are facilitated by the call forwarder, while this approach seems to be inefficien, it is necessary to prevent malicious callers to execute bad calldata on the <code>composer</code> (e.g. trying to execute <code>transferFrom</code> from a prior caller that approved the <code>composer</code>), also external calls to <code>permit2</code> contract are blocked by the composer for the same reason.</p>
 <h2 id="entry-point">Entry Point</h2>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #569CD6">function</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">deltaForwardCompose</span><span style="color: #D4D4D4">(</span><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">calldata</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">data</span><span style="color: #D4D4D4">) </span><span style="color: #569CD6">external</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">payable</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token keyword">function</span> <span class="token function">deltaForwardCompose</span><span class="token punctuation">(</span><span class="token builtin">bytes</span> <span class="token keyword">calldata</span> data<span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">payable</span>
+</code></pre>
 <p>All operations are encoded in the <code>data</code> parameter and executed atomically.</p>
 <h2 id="hierarchical-calling-structure">Hierarchical Calling Structure</h2>
 <p>The system uses a <strong>two-layer architecture</strong> for secure external interactions:</p>
-<pre><code>Main Composer
+<pre class="language-"><code>Main Composer
     ↓ EXT_CALL (blocking transferFrom and permit2 calls)
 Call Forwarder
     ↓ deltaForwardCompose
     ↓ Executes: EXT_CALL, EXT_TRY_CALL, TRANSFERS, BRIDGING
 External Contracts (Arbitrary selectors allowed)
 </code></pre><h3 id="example-structure">Example Structure</h3>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Step 1: Encode operations for Call Forwarder</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> callForwarderOperations = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #6A9955">// Call Forwarder operations here</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
-<span class="line"><span style="color: #D4D4D4">    assetAddress,</span></span>
-<span class="line"><span style="color: #D4D4D4">    receiverAddress,</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.AMOUNT),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(amount)</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Step 2: Wrap in EXT_CALL to Call Forwarder</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> composerCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
-<span class="line"><span style="color: #D4D4D4">    callForwarderAddress,           </span><span style="color: #6A9955">// Call Forwarder as target</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),                     </span><span style="color: #6A9955">// No native value needed</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callForwarderOperations.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">    callForwarderOperations         </span><span style="color: #6A9955">// Operations for Call Forwarder</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Step 3: Execute on main composer</span></span>
-<span class="line"><span style="color: #D4D4D4">composer.</span><span style="color: #DCDCAA">deltaCompose</span><span style="color: #D4D4D4">(composerCall);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// Step 1: Encode operations for Call Forwarder</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> callForwarderOperations <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token comment">// Call Forwarder operations here</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>SWEEP<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    assetAddress<span class="token punctuation">,</span>
+    receiverAddress<span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>SweepType<span class="token punctuation">.</span>AMOUNT<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Step 2: Wrap in EXT_CALL to Call Forwarder</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> composerCall <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    callForwarderAddress<span class="token punctuation">,</span>           <span class="token comment">// Call Forwarder as target</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                     <span class="token comment">// No native value needed</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>callForwarderOperations<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    callForwarderOperations         <span class="token comment">// Operations for Call Forwarder</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Step 3: Execute on main composer</span>
+composer<span class="token punctuation">.</span><span class="token function">deltaCompose</span><span class="token punctuation">(</span>composerCall<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h2 id="extcall-operation">EXT_CALL Operation</h2>
 <p>Execute external calls with built-in safety checks.</p>
 <h3 id="parameters">Parameters</h3>
@@ -721,22 +733,22 @@ External Contracts (Arbitrary selectors allowed)
 <li><strong>Execution</strong>: Reverts on failure with the original error</li>
 </ul>
 <h3 id="encoding-example">Encoding Example</h3>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> callForwarderOperations = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),  </span><span style="color: #6A9955">// Operation for Call Forwarder</span></span>
-<span class="line"><span style="color: #D4D4D4">    targetAddress,</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(nativeValue),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callData.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">    callData</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> composerCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),     </span><span style="color: #6A9955">// EXT_CALL to Call Forwarder</span></span>
-<span class="line"><span style="color: #D4D4D4">    callForwarderAddress,                  </span><span style="color: #6A9955">// Call Forwarder as target</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),                           </span><span style="color: #6A9955">// No native value for Call Forwarder</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callForwarderOperations.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">    callForwarderOperations</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> callForwarderOperations <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">// Operation for Call Forwarder</span>
+    targetAddress<span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>nativeValue<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>callData<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    callData
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> composerCall <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>     <span class="token comment">// EXT_CALL to Call Forwarder</span>
+    callForwarderAddress<span class="token punctuation">,</span>                  <span class="token comment">// Call Forwarder as target</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                           <span class="token comment">// No native value for Call Forwarder</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>callForwarderOperations<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    callForwarderOperations
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h2 id="exttrycall-operation">EXT_TRY_CALL Operation</h2>
 <p>Execute external calls with error handling and fallback options.</p>
 <h3 id="parameters">Parameters</h3>
@@ -797,27 +809,27 @@ External Contracts (Arbitrary selectors allowed)
 <li><strong><code>catchData</code></strong>: Operations to execute if the external call fails</li>
 </ul>
 <h3 id="encoding-example">Encoding Example</h3>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// With error handling - e.g. sweep tokens back to user on failure</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> catchOperations = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),           </span><span style="color: #6A9955">// asset to sweep</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(user),           </span><span style="color: #6A9955">// receiver (user who initiated the call)</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.VALIDATE), </span><span style="color: #6A9955">// validate balance before sweeping</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">)               </span><span style="color: #6A9955">// amount = 0 means sweep entire balance</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> tryCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_TRY_CALL),</span></span>
-<span class="line"><span style="color: #D4D4D4">    targetAddress,</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(nativeValue),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callData.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">    callData, </span><span style="color: #6A9955">// the calldata that should be executed</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// catchHandling: exit on failure</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(catchOperations.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">    catchOperations </span><span style="color: #6A9955">// the calldata to execute in case of error</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// With error handling - e.g. sweep tokens back to user on failure</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> catchOperations <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>SWEEP<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>           <span class="token comment">// asset to sweep</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">,</span>           <span class="token comment">// receiver (user who initiated the call)</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>SweepType<span class="token punctuation">.</span>VALIDATE<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// validate balance before sweeping</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>               <span class="token comment">// amount = 0 means sweep entire balance</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> tryCall <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_TRY_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    targetAddress<span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>nativeValue<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>callData<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    callData<span class="token punctuation">,</span> <span class="token comment">// the calldata that should be executed</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// catchHandling: exit on failure</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>catchOperations<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    catchOperations <span class="token comment">// the calldata to execute in case of error</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h2 id="transfers-operations">TRANSFERS Operations</h2>
 <p>All transfer operations are supported in the Call Forwarder. See the <a href="transfers.html">Transfers documentation</a> for detailed information about:</p>
 <ul>
@@ -828,15 +840,15 @@ External Contracts (Arbitrary selectors allowed)
 <li><strong>PERMIT2_TRANSFER_FROM</strong>: Permit2 transfers</li>
 </ul>
 <h3 id="usage-in-call-forwarder">Usage in Call Forwarder</h3>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> transferOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
-<span class="line"><span style="color: #D4D4D4">    assetAddress,</span></span>
-<span class="line"><span style="color: #D4D4D4">    receiverAddress,</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.AMOUNT),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(amount)</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> transferOp <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>SWEEP<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    assetAddress<span class="token punctuation">,</span>
+    receiverAddress<span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>SweepType<span class="token punctuation">.</span>AMOUNT<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h2 id="bridging-operations">BRIDGING Operations</h2>
 <p>Execute cross-chain bridge operations through supported bridge protocols. See the <a href="bridge/bridge.html">detailed bridge documentation</a> for comprehensive information about all supported bridge protocols.</p>
 <h3 id="basic-parameters">Basic Parameters</h3>
@@ -862,11 +874,11 @@ External Contracts (Arbitrary selectors allowed)
 </tbody>
 </table>
 <h3 id="encoding-example">Encoding Example</h3>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> bridgeOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.BRIDGING),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #6A9955">// Bridge-specific parameters...</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> bridgeOp <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>BRIDGING<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">// Bridge-specific parameters...</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <p>For detailed information about each bridge protocol, including parameter layouts and encoding examples, see:</p>
 <ul>
 <li><a href="bridge/bridge.html">Bridge Operations Overview</a></li>
@@ -876,7 +888,7 @@ External Contracts (Arbitrary selectors allowed)
 <h2 id="example-1inch-meta-aggregation">Example: 1inch Meta-Aggregation</h2>
 <p>Here we illustrate the complete two-layer calling structure for a swap from <code>USDC</code> to <code>WETH</code> using 1inch.</p>
 <h3 id="two-layer-security-flow">Two-Layer Security Flow</h3>
-<pre><code>Main Composer
+<pre class="language-"><code>Main Composer
     ↓ EXT_CALL validation
 Call Forwarder
     ↓ deltaForwardCompose validation
@@ -893,85 +905,83 @@ External Contracts (Arbitrary selectors allowed)
 </ul>
 </li>
 </ol>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"></span>
-<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> swapAmount = </span><span style="color: #B5CEA8">4000</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e6</span><span style="color: #D4D4D4">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// this is the default forwarder address</span></span>
-<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> callForwarderAddress = </span><span style="color: #B5CEA8">0xfCa1154C643C32638AEe9a43eeE7f377f515c801</span><span style="color: #D4D4D4">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// create the call for the forwarder</span></span>
-<span class="line"><span style="color: #6A9955">// the target can e.g. be the 1inch aggregation router</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> callForwarderCall  = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(oneInchAggregationRouter),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// ERC20 has no value</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(data.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">        data</span></span>
-<span class="line"><span style="color: #D4D4D4">    );</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// we need to approve the 1inch router on the callForwarder level</span></span>
-<span class="line"><span style="color: #6A9955">// </span><span style="color: #569CD6">note</span><span style="color: #6A9955"> that the approval is skipped if it was already done in the past</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approve1inch = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(oneInchAggregationRouter)</span></span>
-<span class="line"><span style="color: #D4D4D4">    );</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// expect to receive 1 WETH</span></span>
-<span class="line"><span style="color: #6A9955">// revert if we receive less</span></span>
-<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> amountExpected = </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e18</span><span style="color: #D4D4D4">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// in case the aggregators does not transfer directly to the user</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> sweepAndCheckSlippage = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(receiver), </span><span style="color: #6A9955">// this is the receiver of the WETH</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.AMOUNT),</span></span>
-<span class="line"><span style="color: #D4D4D4">        amountExpected</span></span>
-<span class="line"><span style="color: #D4D4D4">    );</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// combine the operations</span></span>
-<span class="line"><span style="color: #D4D4D4">callForwarderCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    approve1inch,</span></span>
-<span class="line"><span style="color: #D4D4D4">    callForwarderCall,</span></span>
-<span class="line"><span style="color: #D4D4D4">    sweepAndCheckSlippage</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// prepare the composer call</span></span>
-<span class="line"><span style="color: #6A9955">// this executes callForwader.deltaForwardCompose(callForwarderCall)</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> composerCall  = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
-<span class="line"><span style="color: #D4D4D4">        callForwarderAddress, </span><span style="color: #6A9955">// it is important to use the forwarder on the composer level</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(value),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callForwarderCall.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">        callForwarderCall</span></span>
-<span class="line"><span style="color: #D4D4D4">    );</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// we need to make sure that teh callForwarder receives the funds directly</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> transferToForwarder = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.TRANSFER_FROM),</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
-<span class="line"><span style="color: #D4D4D4">        callForwarderAddress,</span></span>
-<span class="line"><span style="color: #D4D4D4">        </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(swapAmount)</span></span>
-<span class="line"><span style="color: #D4D4D4">    );</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// combine the call to the composer</span></span>
-<span class="line"><span style="color: #D4D4D4">composerCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">        transferToForwarder,</span></span>
-<span class="line"><span style="color: #D4D4D4">        composerCall</span></span>
-<span class="line"><span style="color: #D4D4D4">    );</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// execute the operations</span></span>
-<span class="line"><span style="color: #D4D4D4">composer.</span><span style="color: #DCDCAA">deltaCompose</span><span style="color: #D4D4D4">(composerCall);</span></span>
-<span class="line"></span></code></pre></code></pre>
-<footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-09-04 09:10:01
-</span></div></div></footer>
+<pre class="language-"><code class="lang-solidity">
+<span class="token builtin">uint256</span> swapAmount <span class="token operator">=</span> <span class="token number">4000.0e6</span><span class="token punctuation">;</span>
+
+<span class="token comment">// this is the default forwarder address</span>
+<span class="token builtin">address</span> callForwarderAddress <span class="token operator">=</span> <span class="token number">0xfCa1154C643C32638AEe9a43eeE7f377f515c801</span><span class="token punctuation">;</span>
+
+<span class="token comment">// create the call for the forwarder</span>
+<span class="token comment">// the target can e.g. be the 1inch aggregation router</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> callForwarderCall  <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">address</span><span class="token punctuation">(</span>oneInchAggregationRouter<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// ERC20 has no value</span>
+        <span class="token builtin">uint16</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        data
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// we need to approve the 1inch router on the callForwarder level</span>
+<span class="token comment">// note that the approval is skipped if it was already done in the past</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> approve1inch <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>APPROVE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">address</span><span class="token punctuation">(</span>oneInchAggregationRouter<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// expect to receive 1 WETH</span>
+<span class="token comment">// revert if we receive less</span>
+<span class="token builtin">uint256</span> amountExpected <span class="token operator">=</span> <span class="token number">1.0e18</span><span class="token punctuation">;</span>
+
+<span class="token comment">// in case the aggregators does not transfer directly to the user</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> sweepAndCheckSlippage <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>SWEEP<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">address</span><span class="token punctuation">(</span>WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">address</span><span class="token punctuation">(</span>receiver<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// this is the receiver of the WETH</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>SweepType<span class="token punctuation">.</span>AMOUNT<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        amountExpected
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">// combine the operations</span>
+callForwarderCall <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    approve1inch<span class="token punctuation">,</span>
+    callForwarderCall<span class="token punctuation">,</span>
+    sweepAndCheckSlippage
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+<span class="token comment">// prepare the composer call</span>
+<span class="token comment">// this executes callForwader.deltaForwardCompose(callForwarderCall)</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> composerCall  <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        callForwarderAddress<span class="token punctuation">,</span> <span class="token comment">// it is important to use the forwarder on the composer level</span>
+        <span class="token builtin">uint128</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint16</span><span class="token punctuation">(</span>callForwarderCall<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        callForwarderCall
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// we need to make sure that teh callForwarder receives the funds directly</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> transferToForwarder <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>TRANSFER_FROM<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        callForwarderAddress<span class="token punctuation">,</span>
+        <span class="token builtin">uint128</span><span class="token punctuation">(</span>swapAmount<span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// combine the call to the composer</span>
+composerCall <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+        transferToForwarder<span class="token punctuation">,</span>
+        composerCall
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// execute the operations</span>
+composer<span class="token punctuation">.</span><span class="token function">deltaCompose</span><span class="token punctuation">(</span>composerCall<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</body></html>
                                 
                                 </section>
                             
@@ -1014,7 +1024,7 @@ External Contracts (Arbitrary selectors allowed)
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"External Call","level":"1.7.2.2","depth":3,"next":{"title":"Bridging","level":"1.7.2.2.1","depth":4,"path":"api/bridge/bridge.md","ref":"./api/bridge/bridge.md","articles":[{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},{"title":"Across","level":"1.7.2.2.1.2","depth":5,"path":"api/bridge/across.md","ref":"./api/bridge/across.md","articles":[]}]},"previous":{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},"articles":[{"title":"Bridging","level":"1.7.2.2.1","depth":4,"path":"api/bridge/bridge.md","ref":"./api/bridge/bridge.md","articles":[{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},{"title":"Across","level":"1.7.2.2.1.2","depth":5,"path":"api/bridge/across.md","ref":"./api/bridge/across.md","articles":[]}]}],"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/external-call.md","mtime":"2025-09-04T09:10:01.843Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T10:55:02.805Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"External Call","level":"1.7.2.2","depth":3,"next":{"title":"Bridging","level":"1.7.2.2.1","depth":4,"path":"api/bridge/bridge.md","ref":"./api/bridge/bridge.md","articles":[{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},{"title":"Across","level":"1.7.2.2.1.2","depth":5,"path":"api/bridge/across.md","ref":"./api/bridge/across.md","articles":[]}]},"previous":{"title":"Transfers","level":"1.7.2.1","depth":3,"path":"api/transfers.md","ref":"./api/transfers.md","articles":[]},"articles":[{"title":"Bridging","level":"1.7.2.2.1","depth":4,"path":"api/bridge/bridge.md","ref":"./api/bridge/bridge.md","articles":[{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},{"title":"Across","level":"1.7.2.2.1.2","depth":5,"path":"api/bridge/across.md","ref":"./api/bridge/across.md","articles":[]}]}],"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js"],"css":["./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/external-call.md","mtime":"2025-09-04T10:28:33.850Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T11:33:05.982Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
@@ -1068,7 +1078,11 @@ External Contracts (Arbitrary selectors allowed)
     <script src="../gitbook/theme.js"></script>
     
         
-        <script src="../gitbook/gitbook-plugin-add-js-css/e5f66c57646e52f3a8966ea585b6a700-asciinema-player.js"></script>
+        <script src="../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-add-js-css/b97f14b103e988bf094faf9ea9f6d77c-code-header.js"></script>
         
     
         
@@ -1089,10 +1103,6 @@ External Contracts (Arbitrary selectors allowed)
     
         
         <script src="../gitbook/honkit-plugin-search-plus/search.js"></script>
-        
-    
-        
-        <script src="../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

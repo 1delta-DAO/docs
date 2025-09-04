@@ -16,11 +16,23 @@
     
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/000a7422ccf1c8cc3f26daf362853295-footer.css">
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/9126ee2b524e451535a83b807a1790d6-asciinema-player.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/c459563c02e09e58ef33c91554d24a1e-prism-okaidia.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/a7e0e775e45122c306152e5095d6066a-code.css">
                 
             
                 
@@ -606,7 +618,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="bridging-operations">BRIDGING Operations</h2>
+                                <html><head></head><body><h2 id="bridging-operations">BRIDGING Operations</h2>
 <p><a href="../operations.html">Operations</a> → <a href="../external-call.html">External Call Operations</a> → Bridge Operations <em>(Call Forwarder)</em></p>
 <p>Execute cross-chain bridge operations through supported bridge protocols.</p>
 <h3 id="supported-bridges">Supported Bridges</h3>
@@ -676,37 +688,35 @@
 </tbody>
 </table>
 <h3 id="encoding-example">Encoding Example</h3>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> bridgeOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.BRIDGING),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(BridgeIds.STARGATE_V2),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #6A9955">// Stargate V2 specific parameters...</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> bridgeOp <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>BRIDGING<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>BridgeIds<span class="token punctuation">.</span>STARGATE_V2<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">// Stargate V2 specific parameters...</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h2 id="usage-context">Usage Context</h2>
 <p><strong>Important</strong>: Bridge operations can only be executed through the Call Forwarder and require a two-layer calling structure:</p>
 <h3 id="example">Example</h3>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// 1. Create the bridge operation for Call Forwarder</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> bridgeOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.BRIDGING),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(BridgeIds.STARGATE_V2),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #6A9955">// ... bridge parameters</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// 2. Wrap in EXT_CALL to Call Forwarder</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> fullCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(callForwarder),      </span><span style="color: #6A9955">// Call Forwarder address</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),                  </span><span style="color: #6A9955">// No native value for Call Forwarder</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(bridgeOp.length),     </span><span style="color: #6A9955">// Bridge operation length</span></span>
-<span class="line"><span style="color: #D4D4D4">    bridgeOp                     </span><span style="color: #6A9955">// Bridge operation data</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// 3. Execute on main composer</span></span>
-<span class="line"><span style="color: #D4D4D4">composer.</span><span style="color: #DCDCAA">deltaCompose</span><span style="color: #D4D4D4">(fullCall);</span></span>
-<span class="line"></span></code></pre></code></pre>
-<footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-09-04 09:08:37
-</span></div></div></footer>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// 1. Create the bridge operation for Call Forwarder</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> bridgeOp <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>BRIDGING<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>BridgeIds<span class="token punctuation">.</span>STARGATE_V2<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">// ... bridge parameters</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2. Wrap in EXT_CALL to Call Forwarder</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> fullCall <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>callForwarder<span class="token punctuation">)</span><span class="token punctuation">,</span>      <span class="token comment">// Call Forwarder address</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                  <span class="token comment">// No native value for Call Forwarder</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>bridgeOp<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>     <span class="token comment">// Bridge operation length</span>
+    bridgeOp                     <span class="token comment">// Bridge operation data</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 3. Execute on main composer</span>
+composer<span class="token punctuation">.</span><span class="token function">deltaCompose</span><span class="token punctuation">(</span>fullCall<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</body></html>
                                 
                                 </section>
                             
@@ -749,7 +759,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Bridging","level":"1.7.2.2.1","depth":4,"next":{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},"previous":{"title":"External Call","level":"1.7.2.2","depth":3,"path":"api/external-call.md","ref":"./api/external-call.md","articles":[{"title":"Bridging","level":"1.7.2.2.1","depth":4,"path":"api/bridge/bridge.md","ref":"./api/bridge/bridge.md","articles":[{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},{"title":"Across","level":"1.7.2.2.1.2","depth":5,"path":"api/bridge/across.md","ref":"./api/bridge/across.md","articles":[]}]}]},"articles":[{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},{"title":"Across","level":"1.7.2.2.1.2","depth":5,"path":"api/bridge/across.md","ref":"./api/bridge/across.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/bridge/bridge.md","mtime":"2025-09-04T09:08:37.360Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T10:55:02.805Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Bridging","level":"1.7.2.2.1","depth":4,"next":{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},"previous":{"title":"External Call","level":"1.7.2.2","depth":3,"path":"api/external-call.md","ref":"./api/external-call.md","articles":[{"title":"Bridging","level":"1.7.2.2.1","depth":4,"path":"api/bridge/bridge.md","ref":"./api/bridge/bridge.md","articles":[{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},{"title":"Across","level":"1.7.2.2.1.2","depth":5,"path":"api/bridge/across.md","ref":"./api/bridge/across.md","articles":[]}]}]},"articles":[{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},{"title":"Across","level":"1.7.2.2.1.2","depth":5,"path":"api/bridge/across.md","ref":"./api/bridge/across.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js"],"css":["./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/bridge/bridge.md","mtime":"2025-09-04T10:28:33.849Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T11:33:05.982Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -803,7 +813,11 @@
     <script src="../../gitbook/theme.js"></script>
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/e5f66c57646e52f3a8966ea585b6a700-asciinema-player.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-add-js-css/b97f14b103e988bf094faf9ea9f6d77c-code-header.js"></script>
         
     
         
@@ -824,10 +838,6 @@
     
         
         <script src="../../gitbook/honkit-plugin-search-plus/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

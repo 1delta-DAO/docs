@@ -16,11 +16,23 @@
     
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/000a7422ccf1c8cc3f26daf362853295-footer.css">
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/9126ee2b524e451535a83b807a1790d6-asciinema-player.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/c459563c02e09e58ef33c91554d24a1e-prism-okaidia.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/a7e0e775e45122c306152e5095d6066a-code.css">
                 
             
                 
@@ -606,7 +618,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="close-operation-withdraw--repay">Close Operation (Withdraw &amp; Repay)</h1>
+                                <html><head></head><body><h1 id="close-operation-withdraw--repay">Close Operation (Withdraw &amp; Repay)</h1>
 <p>This section provides a detailed guide for implementing the close operation, which allows users to exit leveraged positions efficiently.</p>
 <h2 id="overview">Overview</h2>
 <p>The close operation enables users to exit a leveraged position by:</p>
@@ -631,185 +643,185 @@
 <h2 id="implementation">Implementation</h2>
 <h3 id="constants-and-setup">Constants and Setup</h3>
 <p>Define the necessary addresses and amounts for the operation:</p>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Core parameters</span></span>
-<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> USER_AMOUNT = </span><span style="color: #B5CEA8">2</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e18</span><span style="color: #D4D4D4">;  </span><span style="color: #6A9955">// Amount of WETH to swap</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Protocol addresses</span></span>
-<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> CALL_FORWARDER = </span><span style="color: #B5CEA8">0xfCa1154C643C32638AEe9a43eeE7f377f515c801</span><span style="color: #D4D4D4">;  </span><span style="color: #6A9955">// Default forwarder</span></span>
-<span class="line"><span style="color: #D4D4D4">IComposer composer = </span><span style="color: #DCDCAA">IComposer</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);  </span><span style="color: #6A9955">// 1delta composer</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Aave V3 addresses</span></span>
-<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> AAVE_V3_POOL = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);</span></span>
-<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> AAVE_V3_USDC_V_TOKEN = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);  </span><span style="color: #6A9955">// Variable debt token</span></span>
-<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> AAVE_V3_A_TOKEN_WETH = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">x...);  </span><span style="color: #6A9955">// Collateral aToken</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// External protocols</span></span>
-<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> oneInchAggregationRouter = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0x111</span><span style="color: #D4D4D4">...);  </span><span style="color: #6A9955">// Swap router</span></span>
-<span class="line"><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4"> MORPHO_BLUE = </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0xbbb</span><span style="color: #D4D4D4">...);  </span><span style="color: #6A9955">// Flash loan provider</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// Core parameters</span>
+<span class="token builtin">uint256</span> USER_AMOUNT <span class="token operator">=</span> <span class="token number">2.0e18</span><span class="token punctuation">;</span>  <span class="token comment">// Amount of WETH to swap</span>
+
+<span class="token comment">// Protocol addresses</span>
+<span class="token builtin">address</span> CALL_FORWARDER <span class="token operator">=</span> <span class="token number">0xfCa1154C643C32638AEe9a43eeE7f377f515c801</span><span class="token punctuation">;</span>  <span class="token comment">// Default forwarder</span>
+IComposer composer <span class="token operator">=</span> <span class="token function">IComposer</span><span class="token punctuation">(</span><span class="token number">0</span>x<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 1delta composer</span>
+
+<span class="token comment">// Aave V3 addresses</span>
+<span class="token builtin">address</span> AAVE_V3_POOL <span class="token operator">=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span>x<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token builtin">address</span> AAVE_V3_USDC_V_TOKEN <span class="token operator">=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span>x<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Variable debt token</span>
+<span class="token builtin">address</span> AAVE_V3_A_TOKEN_WETH <span class="token operator">=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0</span>x<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Collateral aToken</span>
+
+<span class="token comment">// External protocols</span>
+<span class="token builtin">address</span> oneInchAggregationRouter <span class="token operator">=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0x111</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Swap router</span>
+<span class="token builtin">address</span> MORPHO_BLUE <span class="token operator">=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0xbbb</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Flash loan provider</span>
+</code></pre>
 <h3 id="step-1-repay-operation">Step 1: Repay Operation</h3>
 <p>Configure the repayment of USDC debt to Aave V3. Setting the amount to <code>0</code> ensures we repay the minimum of received funds and outstanding debt.</p>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> repay = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.LENDING),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(LenderOps.REPAY),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(LenderIds.UP_TO_AAVE_V3 - </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">),  </span><span style="color: #6A9955">// Aave V3 identifier</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),                         </span><span style="color: #6A9955">// Asset to repay</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),                           </span><span style="color: #6A9955">// 0 = use all available funds</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(user),                        </span><span style="color: #6A9955">// Beneficiary of the repayment</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">2</span><span style="color: #D4D4D4">),                            </span><span style="color: #6A9955">// Variable rate mode</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_USDC_V_TOKEN),      </span><span style="color: #6A9955">// Variable debt token</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL)                </span><span style="color: #6A9955">// Pool address</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Safety sweep for excess funds</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> transferToUser = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(user),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">)  </span><span style="color: #6A9955">// Transfer any remaining balance</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Combine operations</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> repayOperation = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(repay, transferToUser);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> repay <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>LENDING<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>LenderOps<span class="token punctuation">.</span>REPAY<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>LenderIds<span class="token punctuation">.</span>UP_TO_AAVE_V3 <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">// Aave V3 identifier</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>                         <span class="token comment">// Asset to repay</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                           <span class="token comment">// 0 = use all available funds</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">,</span>                        <span class="token comment">// Beneficiary of the repayment</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                            <span class="token comment">// Variable rate mode</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>AAVE_V3_USDC_V_TOKEN<span class="token punctuation">)</span><span class="token punctuation">,</span>      <span class="token comment">// Variable debt token</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>AAVE_V3_POOL<span class="token punctuation">)</span>                <span class="token comment">// Pool address</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Safety sweep for excess funds</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> transferToUser <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>SWEEP<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment">// Transfer any remaining balance</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Combine operations</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> repayOperation <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>repay<span class="token punctuation">,</span> transferToUser<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="step-2-withdraw-operation">Step 2: Withdraw Operation</h3>
 <p>Withdraw collateral and distribute it between the swap forwarder and user. This approach eliminates an extra transfer step and ensures no dust remains.</p>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Withdraw entire collateral balance</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> withdraw = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.LENDING),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(LenderOps.WITHDRAW),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(LenderIds.UP_TO_AAVE_V3 - </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),                        </span><span style="color: #6A9955">// Collateral asset</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),                           </span><span style="color: #6A9955">// 0 = withdraw all</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(COMPOSER_ADDRESS),            </span><span style="color: #6A9955">// Initial receiver for splitting</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_A_TOKEN_WETH),       </span><span style="color: #6A9955">// aToken address</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL)</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Transfer swap amount to forwarder</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> transferToForwarder = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(CALL_FORWARDER),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(USER_AMOUNT)  </span><span style="color: #6A9955">// Exact amount for swap</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Transfer remainder to user</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> transferToUser = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(user),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">)  </span><span style="color: #6A9955">// Transfer remaining balance</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Combine operations</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> withdrawOperation = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    withdraw,</span></span>
-<span class="line"><span style="color: #D4D4D4">    transferToForwarder,</span></span>
-<span class="line"><span style="color: #D4D4D4">    transferToUser</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// Withdraw entire collateral balance</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> withdraw <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>LENDING<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>LenderOps<span class="token punctuation">.</span>WITHDRAW<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>LenderIds<span class="token punctuation">.</span>UP_TO_AAVE_V3 <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>                        <span class="token comment">// Collateral asset</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                           <span class="token comment">// 0 = withdraw all</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>COMPOSER_ADDRESS<span class="token punctuation">)</span><span class="token punctuation">,</span>            <span class="token comment">// Initial receiver for splitting</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>AAVE_V3_A_TOKEN_WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>       <span class="token comment">// aToken address</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>AAVE_V3_POOL<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Transfer swap amount to forwarder</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> transferToForwarder <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>SWEEP<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>CALL_FORWARDER<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>USER_AMOUNT<span class="token punctuation">)</span>  <span class="token comment">// Exact amount for swap</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Transfer remainder to user</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> transferToUser <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>SWEEP<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>user<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>  <span class="token comment">// Transfer remaining balance</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Combine operations</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> withdrawOperation <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    withdraw<span class="token punctuation">,</span>
+    transferToForwarder<span class="token punctuation">,</span>
+    transferToUser
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="step-3-configure-approvals">Step 3: Configure Approvals</h3>
 <p>Set up one-time approvals for all protocols. The composer automatically approves maximum amounts, and subsequent calls skip redundant approvals to save gas.</p>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Approve Aave V3 for USDC repayment</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approvePool = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(AAVE_V3_POOL)</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Approve Morpho for WETH flash loan (uses transferFrom)</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approveMorpho = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(MORPHO_BLUE)</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// Approve Aave V3 for USDC repayment</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> approvePool <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>APPROVE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>AAVE_V3_POOL<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Approve Morpho for WETH flash loan (uses transferFrom)</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> approveMorpho <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>APPROVE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>MORPHO_BLUE<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="step-4-meta-swap-configuration">Step 4: Meta Swap Configuration</h3>
 <p>Set up the swap operation through the forwarder. This follows the pattern described in the <a href="../external-call.html">External Call</a> documentation, but skips manual transfers since funds are already positioned.</p>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// Configure 1inch router call</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> callForwarderCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(oneInchAggregationRouter),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),  </span><span style="color: #6A9955">// No ETH value for ERC20 swap</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(data.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">    data  </span><span style="color: #6A9955">// 1inch swap calldata</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Approve 1inch to spend WETH</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> approve1inch = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.APPROVE),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(oneInchAggregationRouter)</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Set slippage protection (expecting 8,000 USDC)</span></span>
-<span class="line"><span style="color: #4EC9B0">uint256</span><span style="color: #D4D4D4"> amountExpected = </span><span style="color: #B5CEA8">8000</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e6</span><span style="color: #D4D4D4">;</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> sweepAndCheckSlippage = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.TRANSFERS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(TransferIds.SWEEP),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(receiver),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(SweepType.AMOUNT),</span></span>
-<span class="line"><span style="color: #D4D4D4">    amountExpected  </span><span style="color: #6A9955">// Revert if less than expected</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Combine swap operations</span></span>
-<span class="line"><span style="color: #D4D4D4">callForwarderCall = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    approve1inch,</span></span>
-<span class="line"><span style="color: #D4D4D4">    callForwarderCall,</span></span>
-<span class="line"><span style="color: #D4D4D4">    sweepAndCheckSlippage</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Wrap in composer call</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> metaSwap = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(CALL_FORWARDER),  </span><span style="color: #6A9955">// Must use forwarder at composer level</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(callForwarderCall.length),</span></span>
-<span class="line"><span style="color: #D4D4D4">    callForwarderCall</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// Configure 1inch router call</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> callForwarderCall <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>oneInchAggregationRouter<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">// No ETH value for ERC20 swap</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>data<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    data  <span class="token comment">// 1inch swap calldata</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Approve 1inch to spend WETH</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> approve1inch <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>APPROVE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>oneInchAggregationRouter<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Set slippage protection (expecting 8,000 USDC)</span>
+<span class="token builtin">uint256</span> amountExpected <span class="token operator">=</span> <span class="token number">8000.0e6</span><span class="token punctuation">;</span>
+
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> sweepAndCheckSlippage <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>TransferIds<span class="token punctuation">.</span>SWEEP<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>receiver<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>SweepType<span class="token punctuation">.</span>AMOUNT<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    amountExpected  <span class="token comment">// Revert if less than expected</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Combine swap operations</span>
+callForwarderCall <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    approve1inch<span class="token punctuation">,</span>
+    callForwarderCall<span class="token punctuation">,</span>
+    sweepAndCheckSlippage
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Wrap in composer call</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> metaSwap <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>CALL_FORWARDER<span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">// Must use forwarder at composer level</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>callForwarderCall<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    callForwarderCall
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="step-5-assemble-complete-transaction">Step 5: Assemble Complete Transaction</h3>
 <p>Combine all operations within a flash loan wrapper for atomic execution:</p>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4"> amount = </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">2</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e18</span><span style="color: #D4D4D4">);  </span><span style="color: #6A9955">// Flash loan amount (2 WETH)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Inner operations: swap → repay → withdraw</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> innerOperation = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    metaSwap,</span></span>
-<span class="line"><span style="color: #D4D4D4">    repayOperation,</span></span>
-<span class="line"><span style="color: #D4D4D4">    withdrawOperation</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Wrap in flash loan</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> flashLoan = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.FLASH_LOAN),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(FlashLoanIds.MORPHO_BLUE),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(WETH),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(MORPHO_BLUE),</span></span>
-<span class="line"><span style="color: #D4D4D4">    amount,</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(innerOperation.length + </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),  </span><span style="color: #6A9955">// Morpho Blue pool ID 0</span></span>
-<span class="line"><span style="color: #D4D4D4">    innerOperation</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Place approvals outside flash loan callback for gas optimization</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> composerOps = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    approvePool,</span></span>
-<span class="line"><span style="color: #D4D4D4">    approveMorpho,</span></span>
-<span class="line"><span style="color: #D4D4D4">    flashLoan</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// Execute the complete operation</span></span>
-<span class="line"><span style="color: #D4D4D4">composer.</span><span style="color: #DCDCAA">deltaCompose</span><span style="color: #D4D4D4">(composerOps);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token builtin">uint128</span> amount <span class="token operator">=</span> <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">2.0e18</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// Flash loan amount (2 WETH)</span>
+
+<span class="token comment">// Inner operations: swap → repay → withdraw</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> innerOperation <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    metaSwap<span class="token punctuation">,</span>
+    repayOperation<span class="token punctuation">,</span>
+    withdrawOperation
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Wrap in flash loan</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> flashLoan <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>FLASH_LOAN<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>FlashLoanIds<span class="token punctuation">.</span>MORPHO_BLUE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>MORPHO_BLUE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    amount<span class="token punctuation">,</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>innerOperation<span class="token punctuation">.</span>length <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  <span class="token comment">// Morpho Blue pool ID 0</span>
+    innerOperation
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Place approvals outside flash loan callback for gas optimization</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> composerOps <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    approvePool<span class="token punctuation">,</span>
+    approveMorpho<span class="token punctuation">,</span>
+    flashLoan
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Execute the complete operation</span>
+composer<span class="token punctuation">.</span><span class="token function">deltaCompose</span><span class="token punctuation">(</span>composerOps<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h2 id="key-considerations">Key Considerations</h2>
 <ol>
 <li><strong>Permissions</strong>: Ensure <code>ERC20(AAVE_V3_A_TOKEN_WETH).approve(...)</code> is called before execution</li>
@@ -826,11 +838,9 @@
 <ul>
 <li><a href="../flash-loan.html">Flash Loan Operations</a></li>
 <li><a href="../external-call.html">External Call Patterns</a></li>
-<li><a href="../approvals.md">Approval Management</a><footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-09-04 10:51:23
-</span></div></div></footer></li>
+<li><a href="../approvals.md">Approval Management</a></li>
 </ul>
-
+</body></html>
                                 
                                 </section>
                             
@@ -873,7 +883,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Close","level":"1.7.2.5.2","depth":4,"next":{"title":"Collateral Swap","level":"1.7.2.5.3","depth":4,"path":"api/margin/collateral-swap.md","ref":"./api/margin/collateral-swap.md","articles":[]},"previous":{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/close.md","mtime":"2025-09-04T10:51:23.826Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T10:55:02.805Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Close","level":"1.7.2.5.2","depth":4,"next":{"title":"Collateral Swap","level":"1.7.2.5.3","depth":4,"path":"api/margin/collateral-swap.md","ref":"./api/margin/collateral-swap.md","articles":[]},"previous":{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js"],"css":["./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/close.md","mtime":"2025-09-04T10:28:30.421Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T11:33:05.982Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -927,7 +937,11 @@
     <script src="../../gitbook/theme.js"></script>
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/e5f66c57646e52f3a8966ea585b6a700-asciinema-player.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-add-js-css/b97f14b103e988bf094faf9ea9f6d77c-code-header.js"></script>
         
     
         
@@ -948,10 +962,6 @@
     
         
         <script src="../../gitbook/honkit-plugin-search-plus/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

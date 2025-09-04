@@ -16,11 +16,23 @@
     
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/000a7422ccf1c8cc3f26daf362853295-footer.css">
+                <link rel="stylesheet" href="../../gitbook/honkit-plugin-prism/prism.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/9126ee2b524e451535a83b807a1790d6-asciinema-player.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/c459563c02e09e58ef33c91554d24a1e-prism-okaidia.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/a7e0e775e45122c306152e5095d6066a-code.css">
                 
             
                 
@@ -606,7 +618,7 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h2 id="across-bridge">Across Bridge</h2>
+                                <html><head></head><body><h2 id="across-bridge">Across Bridge</h2>
 <p><a href="../operations.html">Operations</a> → <a href="../external-call.html">External Call Operations</a> → <a href="bridge.html">Bridge Operations</a> → Across Bridge <em>(Call Forwarder)</em></p>
 <p>Across is a cross-chain bridge protocol optimized for fast and efficient asset transfers.</p>
 <h3 id="parameters">Parameters</h3>
@@ -690,56 +702,54 @@
 <li><strong><code>message</code></strong>: Optional message to include with the bridge (variable length)</li>
 </ul>
 <h3 id="encoding-example">Encoding Example</h3>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> acrossBridge = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.BRIDGING),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(BridgeIds.ACROSS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(spokePool),              </span><span style="color: #6A9955">// Across spoke pool</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(depositor),              </span><span style="color: #6A9955">// depositor address</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(inputToken),             </span><span style="color: #6A9955">// input token address</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">bytes32</span><span style="color: #D4D4D4">(receivingAssetId),       </span><span style="color: #6A9955">// destination asset ID</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(amount),                 </span><span style="color: #6A9955">// amount to bridge</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(fixedFee),               </span><span style="color: #6A9955">// fixed fee</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint32</span><span style="color: #D4D4D4">(feePercentage),           </span><span style="color: #6A9955">// fee percentage</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint32</span><span style="color: #D4D4D4">(destinationChainId),      </span><span style="color: #6A9955">// destination chain</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">bytes32</span><span style="color: #D4D4D4">(</span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(receiver)), </span><span style="color: #6A9955">// receiver address</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(message.length),          </span><span style="color: #6A9955">// message length</span></span>
-<span class="line"><span style="color: #D4D4D4">    message                         </span><span style="color: #6A9955">// message bytes</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> acrossBridge <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>BRIDGING<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>BridgeIds<span class="token punctuation">.</span>ACROSS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>spokePool<span class="token punctuation">)</span><span class="token punctuation">,</span>              <span class="token comment">// Across spoke pool</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>depositor<span class="token punctuation">)</span><span class="token punctuation">,</span>              <span class="token comment">// depositor address</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>inputToken<span class="token punctuation">)</span><span class="token punctuation">,</span>             <span class="token comment">// input token address</span>
+    <span class="token builtin">bytes32</span><span class="token punctuation">(</span>receivingAssetId<span class="token punctuation">)</span><span class="token punctuation">,</span>       <span class="token comment">// destination asset ID</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">,</span>                 <span class="token comment">// amount to bridge</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>fixedFee<span class="token punctuation">)</span><span class="token punctuation">,</span>               <span class="token comment">// fixed fee</span>
+    <span class="token builtin">uint32</span><span class="token punctuation">(</span>feePercentage<span class="token punctuation">)</span><span class="token punctuation">,</span>           <span class="token comment">// fee percentage</span>
+    <span class="token builtin">uint32</span><span class="token punctuation">(</span>destinationChainId<span class="token punctuation">)</span><span class="token punctuation">,</span>      <span class="token comment">// destination chain</span>
+    <span class="token builtin">bytes32</span><span class="token punctuation">(</span>abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>receiver<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// receiver address</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>          <span class="token comment">// message length</span>
+    message                         <span class="token comment">// message bytes</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h2 id="complete-usage-example">Complete Usage Example</h2>
 <p><strong>Important</strong>: Across bridge operations must be executed through the Call Forwarder. Here's the complete calling structure:</p>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"><span style="color: #6A9955">// 1. Create Across bridge operation for Call Forwarder</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> acrossOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.BRIDGING),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(BridgeIds.ACROSS),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(acrossSpokePool),           </span><span style="color: #6A9955">// Across spoke pool contract</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(</span><span style="color: #569CD6">msg.sender</span><span style="color: #D4D4D4">),                </span><span style="color: #6A9955">// depositor address</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(USDC),                      </span><span style="color: #6A9955">// input token (USDC)</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">bytes32</span><span style="color: #D4D4D4">(destinationAssetId),        </span><span style="color: #6A9955">// destination asset ID</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(amountToBridge),            </span><span style="color: #6A9955">// amount to bridge</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(fixedBridgeFee),            </span><span style="color: #6A9955">// fixed fee for bridging</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint32</span><span style="color: #D4D4D4">(fee),                        </span><span style="color: #6A9955">// fee percentage</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint32</span><span style="color: #D4D4D4">(destinationChainId),         </span><span style="color: #6A9955">// destination chain ID</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">bytes32</span><span style="color: #D4D4D4">(</span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(receiver)), </span><span style="color: #6A9955">// receiver address</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(message.length),             </span><span style="color: #6A9955">// message length</span></span>
-<span class="line"><span style="color: #D4D4D4">    message                            </span><span style="color: #6A9955">// optional message bytes</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// 2. Wrap in EXT_CALL to Call Forwarder</span></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> callForwarderOp = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.EXT_CALL),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">address</span><span style="color: #D4D4D4">(callForwarder),             </span><span style="color: #6A9955">// Call Forwarder address</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">),                        </span><span style="color: #6A9955">// No native fee needed for Across</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(acrossOp.length),           </span><span style="color: #6A9955">// Bridge operation length</span></span>
-<span class="line"><span style="color: #D4D4D4">    acrossOp                           </span><span style="color: #6A9955">// Bridge operation data</span></span>
-<span class="line"><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #6A9955">// 3. Execute on main composer</span></span>
-<span class="line"><span style="color: #D4D4D4">composer.</span><span style="color: #DCDCAA">deltaCompose</span><span style="color: #D4D4D4">(callForwarderOp);</span></span>
-<span class="line"></span></code></pre></code></pre>
-<footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-09-04 09:08:04
-</span></div></div></footer>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// 1. Create Across bridge operation for Call Forwarder</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> acrossOp <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>BRIDGING<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>BridgeIds<span class="token punctuation">.</span>ACROSS<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>acrossSpokePool<span class="token punctuation">)</span><span class="token punctuation">,</span>           <span class="token comment">// Across spoke pool contract</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">)</span><span class="token punctuation">,</span>                <span class="token comment">// depositor address</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>                      <span class="token comment">// input token (USDC)</span>
+    <span class="token builtin">bytes32</span><span class="token punctuation">(</span>destinationAssetId<span class="token punctuation">)</span><span class="token punctuation">,</span>        <span class="token comment">// destination asset ID</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>amountToBridge<span class="token punctuation">)</span><span class="token punctuation">,</span>            <span class="token comment">// amount to bridge</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>fixedBridgeFee<span class="token punctuation">)</span><span class="token punctuation">,</span>            <span class="token comment">// fixed fee for bridging</span>
+    <span class="token builtin">uint32</span><span class="token punctuation">(</span>fee<span class="token punctuation">)</span><span class="token punctuation">,</span>                        <span class="token comment">// fee percentage</span>
+    <span class="token builtin">uint32</span><span class="token punctuation">(</span>destinationChainId<span class="token punctuation">)</span><span class="token punctuation">,</span>         <span class="token comment">// destination chain ID</span>
+    <span class="token builtin">bytes32</span><span class="token punctuation">(</span>abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>receiver<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// receiver address</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>message<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>             <span class="token comment">// message length</span>
+    message                            <span class="token comment">// optional message bytes</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2. Wrap in EXT_CALL to Call Forwarder</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> callForwarderOp <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>EXT_CALL<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>callForwarder<span class="token punctuation">)</span><span class="token punctuation">,</span>             <span class="token comment">// Call Forwarder address</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>                        <span class="token comment">// No native fee needed for Across</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>acrossOp<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>           <span class="token comment">// Bridge operation length</span>
+    acrossOp                           <span class="token comment">// Bridge operation data</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 3. Execute on main composer</span>
+composer<span class="token punctuation">.</span><span class="token function">deltaCompose</span><span class="token punctuation">(</span>callForwarderOp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+</body></html>
                                 
                                 </section>
                             
@@ -782,7 +792,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Across","level":"1.7.2.2.1.2","depth":5,"next":{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]},{"title":"Compound V2","level":"1.7.2.3.3","depth":4,"path":"api/lending/compound-v2.md","ref":"./api/lending/compound-v2.md","articles":[]},{"title":"Morpho Blue","level":"1.7.2.3.4","depth":4,"path":"api/lending/morpho.md","ref":"./api/lending/morpho.md","articles":[]}]},"previous":{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/bridge/across.md","mtime":"2025-09-04T09:08:04.674Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T10:55:02.805Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Across","level":"1.7.2.2.1.2","depth":5,"next":{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]},{"title":"Compound V2","level":"1.7.2.3.3","depth":4,"path":"api/lending/compound-v2.md","ref":"./api/lending/compound-v2.md","articles":[]},{"title":"Morpho Blue","level":"1.7.2.3.4","depth":4,"path":"api/lending/morpho.md","ref":"./api/lending/morpho.md","articles":[]}]},"previous":{"title":"Stargate V2","level":"1.7.2.2.1.1","depth":5,"path":"api/bridge/stargate.md","ref":"./api/bridge/stargate.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js"],"css":["./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/bridge/across.md","mtime":"2025-09-04T10:28:33.849Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T11:33:05.982Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -836,7 +846,11 @@
     <script src="../../gitbook/theme.js"></script>
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/e5f66c57646e52f3a8966ea585b6a700-asciinema-player.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-add-js-css/b97f14b103e988bf094faf9ea9f6d77c-code-header.js"></script>
         
     
         
@@ -857,10 +871,6 @@
     
         
         <script src="../../gitbook/honkit-plugin-search-plus/search.js"></script>
-        
-    
-        
-        <script src="../../gitbook/gitbook-plugin-livereload/plugin.js"></script>
         
     
         

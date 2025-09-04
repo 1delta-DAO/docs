@@ -29,14 +29,31 @@ All operations are encoded in the `data` parameter and executed atomically.
 
 The system uses a **two-layer architecture** for secure external interactions:
 
-```
-Main Composer
-    ↓ EXT_CALL (blocking transferFrom and permit2 calls)
-Call Forwarder
-    ↓ deltaForwardCompose
-    ↓ Executes: EXT_CALL, EXT_TRY_CALL, TRANSFERS, BRIDGING
-External Contracts (Arbitrary selectors allowed)
-```
+<p align="center">
+  <img src="../assets/general/call-forwarder.png" alt="Call-Forwarders" title="We allow calling an arbitrary contract with a specified selector" width="300"/>
+</p>
+
+### Call Architecture Summary
+
+- **Main Composer**
+  - Issues `EXT_CALL` operations.
+  - Calls the `Call Forwarder` contract via `deltaForwardCompose`.
+
+
+- **Call Forwarder**
+  - Receives and executes forwarded calls.
+  - Supports operations:
+    - `EXT_CALL` - any smart contract call (`permit2` target is prohibited and so is the `transferFrom` selector)
+    - `EXT_TRY_CALL` - any call that will enter a fallback operation in case of an error
+    - Token `TRANSFERS`
+    - Cross-chain `BRIDGING`
+  - Provides controlled execution to avoid exposing the Composer directly to malicious calls.
+
+
+- **External Contracts**
+  - Arbitrary selectors can be targeted.
+  - Ensures flexibility while safeguarding Composer from unsafe external interactions.
+
 
 ### Example Structure
 

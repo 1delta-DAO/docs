@@ -22,7 +22,7 @@ We'll demonstrate how to switch debt in a leveraged position on **Aave V3** with
 -   **Flash Loan Provider**: Morpho Blue (optimal for Ethereum and Base)
 -   **Swap Provider**: 1inch Aggregation Router
 
-> **Important**: The caller must ensure the swap is quoted to receive at least the full debt amount. Otherwise, the transaction will fail.
+> **Important**: The mechainc has a fail-safe so that in case the swap does not return enough funds to repay the entire debt, it will only repay the available amounts.
 
 ## Implementation
 

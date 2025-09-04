@@ -3,7 +3,7 @@
 <html lang="" >
     <head>
         <meta charset="UTF-8">
-        <title>Standardized Interface · 1delta docs</title>
+        <title>Compound V2 · 1delta docs</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="HonKit 6.0.3">
@@ -72,10 +72,10 @@
     <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../margin/general.html" />
+    <link rel="next" href="morpho.html" />
     
     
-    <link rel="prev" href="../flash-loan.html" />
+    <link rel="prev" href="compound-v3.html" />
     
 
     </head>
@@ -365,9 +365,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.7.2.3.1" data-path="../lending/aave.html">
+        <li class="chapter " data-level="1.7.2.3.1" data-path="aave.html">
             
-                <a href="../lending/aave.html">
+                <a href="aave.html">
             
                     
                     Aave
@@ -378,9 +378,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.3.2" data-path="../lending/compound-v3.html">
+        <li class="chapter " data-level="1.7.2.3.2" data-path="compound-v3.html">
             
-                <a href="../lending/compound-v3.html">
+                <a href="compound-v3.html">
             
                     
                     Compound V3
@@ -391,9 +391,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.3.3" data-path="../lending/compound-v2.html">
+        <li class="chapter active" data-level="1.7.2.3.3" data-path="compound-v2.html">
             
-                <a href="../lending/compound-v2.html">
+                <a href="compound-v2.html">
             
                     
                     Compound V2
@@ -404,9 +404,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.3.4" data-path="../lending/morpho.html">
+        <li class="chapter " data-level="1.7.2.3.4" data-path="morpho.html">
             
-                <a href="../lending/morpho.html">
+                <a href="morpho.html">
             
                     
                     Morpho Blue
@@ -436,9 +436,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.7.2.4.1" data-path="standardized-interface.html">
+        <li class="chapter " data-level="1.7.2.4.1" data-path="../flash-loan/standardized-interface.html">
             
-                <a href="standardized-interface.html">
+                <a href="../flash-loan/standardized-interface.html">
             
                     
                     Standardized Interface
@@ -578,7 +578,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../.." >Standardized Interface</a>
+        <a href="../.." >Compound V2</a>
     </h1>
 </div>
 
@@ -593,16 +593,12 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="standardized-flash-loan-interface">Standardized flash loan interface.</h1>
-<p>While flash loans implementations are nearly all the same, the explicit usage and interface vary.</p>
-<p>In this section we cover the flash laons provided by</p>
-<ul>
-<li>Balancer V2 and Swaap</li>
-<li>Aave V2 &amp; V3</li>
-<li>Morpho Blue</li>
-</ul>
-<h2 id="flash-loan">Flash loan</h2>
-<p>The following parameters need to be provided for Aave V2, V3 and Morpho Blue:</p>
+                                <h1 id="compound-v2-markets">Compound V2 markets</h1>
+<p><a href="../operations.html">Operations</a> → <a href="../lending.html">Lending</a> → Compound V2 <em>(Composer)</em></p>
+<p>All Compound V2 markets behave the same way. The market is specified by the <code>cToken</code> parameter. Note that Compound V2 supports both native tokens (ETH) and ERC20 tokens.</p>
+<h2 id="deposit">Deposit</h2>
+<p>Deposit the underlying to the lender for the given <code>cToken</code>.</p>
+<p>If <code>amount=0</code>, we use the contract balance via <code>underlying.balanceOf(address(this))</code>. This is recommended when executing this operation after a swap.</p>
 <table>
 <thead>
 <tr>
@@ -615,69 +611,127 @@
 <tr>
 <td>0</td>
 <td>20</td>
-<td>asset <code>address</code></td>
+<td>underlying <code>address</code></td>
 </tr>
 <tr>
 <td>20</td>
-<td>20</td>
-<td>pool <code>address</code></td>
-</tr>
-<tr>
-<td>40</td>
 <td>16</td>
 <td>amount <code>uint128</code></td>
 </tr>
 <tr>
-<td>56</td>
-<td>2</td>
-<td>paramsLength + 1 <code>uint16</code></td>
+<td>36</td>
+<td>20</td>
+<td>receiver <code>address</code></td>
 </tr>
 <tr>
-<td>58</td>
-<td>1</td>
-<td>poolId <code>uint8</code></td>
-</tr>
-<tr>
-<td>59 + paramsLength</td>
-<td>paramsLength</td>
-<td>params <code>bytes</code> (packed)</td>
+<td>76</td>
+<td>20</td>
+<td>cToken <code>address</code></td>
 </tr>
 </tbody>
 </table>
-<p>The way how the end data is structured is based on the validation logic. Since flash loans use callbacks, we need <code>poolId</code> to validate that the callback was triggred by a trusted Aave or Morpho pool.</p>
-<p><code>params</code> is a packed set of composer operations.</p>
-<p>Note that</p>
-<ul>
-<li>The composer re-enters itself here</li>
-<li>The caller address is forwarderd from the origninal call source</li>
-<li>The validation logic is hard-coded, as such, only a limited set of <code>pool</code>s are allowed to be called.</li>
-<li>Some flash loan sources are DEXs - e.g. Balancer V2 - this means that swaps thorugh it are not possible any longer as the DEX is typically re-entrancy protected. This also applies to Uniswap V4.</li>
-</ul>
-<p>They can be used as follows for e.g. looping USDC in a Aaave type lender.</p>
-<pre><code class="lang-solidity"><pre class="shiki dark-plus" style="background-color: #1E1E1E" tabindex="0"><code><span class="line"></span>
-<span class="line"><span style="color: #6A9955">// select 1M USDC</span></span>
-<span class="line"><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4"> amount = </span><span style="color: #4EC9B0">uint128</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">1000000</span><span style="color: #D4D4D4">.</span><span style="color: #B5CEA8">0e6</span><span style="color: #D4D4D4">);</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> innerOperation = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #DCDCAA">encodeDeposit</span><span style="color: #D4D4D4">(...,USDC, amount,...) </span><span style="color: #6A9955">// deposit USDC amount to lender</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #DCDCAA">encodeBorrow</span><span style="color: #D4D4D4">(...,USDC, amount,...) </span><span style="color: #6A9955">// borrow USDC amount from lender</span></span>
-<span class="line"><span style="color: #D4D4D4">)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #4EC9B0">bytes</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">memory</span><span style="color: #D4D4D4"> operation = </span><span style="color: #569CD6">abi</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">encodePacked</span><span style="color: #D4D4D4">(</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(ComposerCommands.FLASH_LOAN), </span><span style="color: #6A9955">// then just continue the next one</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(FlashLoanIds.MORPHO_BLUE),</span></span>
-<span class="line"><span style="color: #D4D4D4">    USDC,</span></span>
-<span class="line"><span style="color: #D4D4D4">    MORPHO_BLUE_ADDRESS</span></span>
-<span class="line"><span style="color: #D4D4D4">    amount,</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint16</span><span style="color: #D4D4D4">(innerOperation.length + </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">),</span></span>
-<span class="line"><span style="color: #D4D4D4">    </span><span style="color: #4EC9B0">uint8</span><span style="color: #D4D4D4">(</span><span style="color: #B5CEA8">0</span><span style="color: #D4D4D4">), </span><span style="color: #6A9955">// the original morpho blue has poolId 0.</span></span>
-<span class="line"><span style="color: #D4D4D4">    innerOperation</span></span>
-<span class="line"><span style="color: #D4D4D4">)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color: #D4D4D4">composer.</span><span style="color: #DCDCAA">deltaCompose</span><span style="color: #D4D4D4">(operation);</span></span>
-<span class="line"></span></code></pre></code></pre>
+<h2 id="withdraw">Withdraw</h2>
+<p>Withdraw from the lender. Note that this requires that the caller approved the composer to spend <code>cToken</code> on their behalf.</p>
+<p>If <code>amount=0xffffffffffffffffffffffffffff</code>, we read the user's full balance and withdraw without leaving dust.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>underlying <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>16</td>
+<td>amount <code>uint128</code></td>
+</tr>
+<tr>
+<td>36</td>
+<td>20</td>
+<td>receiver <code>address</code></td>
+</tr>
+<tr>
+<td>76</td>
+<td>20</td>
+<td>cToken <code>address</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="borrow">Borrow</h2>
+<p>Borrow from the lender. The prerequisite is that the caller approved the composer contract to borrow on their behalf.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>underlying <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>16</td>
+<td>amount <code>uint128</code></td>
+</tr>
+<tr>
+<td>36</td>
+<td>20</td>
+<td>receiver <code>address</code></td>
+</tr>
+<tr>
+<td>76</td>
+<td>20</td>
+<td>cToken <code>address</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="repay">Repay</h2>
+<p>Repay to the lender. In this case, use <code>amount=0</code> to repay <code>underlying.balanceOf(address(this))</code>, the contract balance. If <code>amount=0xffffffffffffffffffffffffffff</code>, repay the minimum of the contract balance and the caller debt.</p>
+<table>
+<thead>
+<tr>
+<th>Offset</th>
+<th>Length (bytes)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>20</td>
+<td>underlying <code>address</code></td>
+</tr>
+<tr>
+<td>20</td>
+<td>16</td>
+<td>amount <code>uint128</code></td>
+</tr>
+<tr>
+<td>36</td>
+<td>20</td>
+<td>receiver <code>address</code></td>
+</tr>
+<tr>
+<td>76</td>
+<td>20</td>
+<td>cToken <code>address</code></td>
+</tr>
+</tbody>
+</table>
 <footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-09-03 06:58:00
+2025-09-04 09:09:10
 </span></div></div></footer>
                                 
                                 </section>
@@ -705,12 +759,12 @@
 
             
                 
-                <a href="../flash-loan.html" class="navigation navigation-prev " aria-label="Previous page: Flash Loan">
+                <a href="compound-v3.html" class="navigation navigation-prev " aria-label="Previous page: Compound V3">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../margin/general.html" class="navigation navigation-next " aria-label="Next page: Margin">
+                <a href="morpho.html" class="navigation navigation-next " aria-label="Next page: Morpho Blue">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -721,7 +775,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Standardized Interface","level":"1.7.2.4.1","depth":4,"next":{"title":"Margin","level":"1.7.2.5","depth":3,"path":"api/margin/general.md","ref":"./api/margin/general.md","articles":[{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},{"title":"Close","level":"1.7.2.5.2","depth":4,"path":"api/margin/close.md","ref":"./api/margin/close.md","articles":[]},{"title":"Collateral Swap","level":"1.7.2.5.3","depth":4,"path":"api/margin/collateral-swap.md","ref":"./api/margin/collateral-swap.md","articles":[]},{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},{"title":"Migration","level":"1.7.2.5.5","depth":4,"path":"api/margin/migration.md","ref":"./api/margin/migration.md","articles":[]}]},"previous":{"title":"Flash Loan","level":"1.7.2.4","depth":3,"path":"api/flash-loan.md","ref":"./api/flash-loan.md","articles":[{"title":"Standardized Interface","level":"1.7.2.4.1","depth":4,"path":"api/flash-loan/standardized-interface.md","ref":"./api/flash-loan/standardized-interface.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/flash-loan/standardized-interface.md","mtime":"2025-09-03T06:58:00.296Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T09:14:58.843Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Compound V2","level":"1.7.2.3.3","depth":4,"next":{"title":"Morpho Blue","level":"1.7.2.3.4","depth":4,"path":"api/lending/morpho.md","ref":"./api/lending/morpho.md","articles":[]},"previous":{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/lending/compound-v2.md","mtime":"2025-09-04T09:09:10.990Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T09:14:58.843Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

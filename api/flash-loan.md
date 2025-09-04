@@ -1,17 +1,19 @@
 # Flash Loans
 
+[Operations](./operations.md) → Flash Loans _(Composer)_
+
 Lead type: `ComposerCommands.FLASH_LOAN`.
 
-The sub types are dcefined by the following enum:
+The sub types are defined by the following enum:
 
-```typescript
-enum FlashLoanIds {
-    MORPHO = 0, // this is Morpho Blue
-    BALANCER_V2 = 1, // covers the fork Swaap, too
-    AAVE_V3 = 2, // covers many forks
-    AAVE_V2 = 3, // covers many forks
-}
-```
+#### `FlashLoanIds` Enum
+
+| Value | Name          | Description                 |
+| ----- | ------------- | --------------------------- |
+| 0     | `MORPHO`      | Morpho Blue flash loans     |
+| 1     | `BALANCER_V2` | Balancer V2 (covers Swaap)  |
+| 2     | `AAVE_V3`     | Aave V3 (covers many forks) |
+| 3     | `AAVE_V2`     | Aave V2 (covers many forks) |
 
 to the array of composer commands.
 
@@ -29,5 +31,5 @@ Alternative sources can be Uniswap V4 and Balancer V3. Thsese are triggered via 
 
 ## Specific lenders
 
-- [Aave V2 & V3 & forks](./flash-loan/standardized-interface.md)
-- [Singletons](./flash-loan/singletons.md)
+-   [Aave V2 & V3 & forks](./flash-loan/standardized-interface.md)
+-   [Singletons](./flash-loan/singletons.md)

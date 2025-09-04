@@ -298,6 +298,57 @@
             
 
             
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.2.1" data-path="../bridge/bridge.html">
+            
+                <a href="../bridge/bridge.html">
+            
+                    
+                    Bridging
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.2.1.1" data-path="../bridge/stargate.html">
+            
+                <a href="../bridge/stargate.html">
+            
+                    
+                    Stargate V2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2.1.2" data-path="../bridge/across.html">
+            
+                <a href="../bridge/across.html">
+            
+                    
+                    Across
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
         </li>
     
         <li class="chapter " data-level="1.7.2.3" data-path="../lending.html">
@@ -333,6 +384,32 @@
             
                     
                     Compound V3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3.3" data-path="compound-v2.html">
+            
+                <a href="compound-v2.html">
+            
+                    
+                    Compound V2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3.4" data-path="morpho.html">
+            
+                <a href="morpho.html">
+            
+                    
+                    Morpho Blue
             
                 </a>
             
@@ -517,7 +594,8 @@
                                 <section class="normal markdown-section">
                                 
                                 <h1 id="aave-v2--v3--forks">Aave V2 &amp; V3 &amp; Forks</h1>
-<p>Aave V2 and V3 behave very similar for all operations. The caller only needs to dustinguish them via <code>LenderIds</code>, the rest is handled by the contract logic.</p>
+<p><a href="../operations.html">Operations</a> → <a href="../lending.html">Lending</a> → Aave V2 &amp; V3 <em>(Composer)</em></p>
+<p>Aave V2 and V3 behave very similar for all operations. The caller only needs to distinguish them via <code>LenderIds</code>, the rest is handled by the contract logic.</p>
 <h2 id="deposit">Deposit</h2>
 <p>Deposit the underlying to the lender for the given <code>pool</code>.</p>
 <p>If <code>amount=0</code>, we use the contract balance via <code>underlying.balanceOf(address(this))</code>. This is recommended when executing this operation after a swap.</p>
@@ -592,8 +670,8 @@
 </tbody>
 </table>
 <h2 id="borrow">Borrow</h2>
-<p>Borrow from the lender. The prequisite is that the caller approved the composer contract to borrow on thei behalf via <code>debtToken.approveDelegation(...)</code>.</p>
-<p>It is important that the <code>mode</code> is provided here, most Aave forks only support <code>mode=2</code> (variable). If the selector withotu <code>mode</code> is used, one needs to set <code>mode=0</code>.</p>
+<p>Borrow from the lender. The prerequisite is that the caller approved the composer contract to borrow on their behalf via <code>debtToken.approveDelegation(...)</code>.</p>
+<p>It is important that the <code>mode</code> is provided here, most Aave forks only support <code>mode=2</code> (variable). If the selector without <code>mode</code> is used, one needs to set <code>mode=0</code>.</p>
 <table>
 <thead>
 <tr>
@@ -674,7 +752,7 @@
 </tbody>
 </table>
 <footer class="page-footer"><div>© 1delta <a href="https://1delta.io/" target="_blank">https://1delta.io/</a><br></br>Found an error in the docs? The source code can be found <a href="https://github.com/1delta-DAO/docs/blob/main/README.md" target="_blank">here</a>. Please feel free to edit and contribute a merge request<div><span class="footer-modification">Modified at: 
-2025-09-03 06:57:50
+2025-09-04 09:09:03
 </span></div></div></footer>
                                 
                                 </section>
@@ -718,7 +796,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Aave","level":"1.7.2.3.1","depth":4,"next":{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]},"previous":{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/lending/aave.md","mtime":"2025-09-03T06:57:50.988Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-03T13:01:43.766Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Aave","level":"1.7.2.3.1","depth":4,"next":{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]},"previous":{"title":"Lending","level":"1.7.2.3","depth":3,"path":"api/lending.md","ref":"./api/lending.md","articles":[{"title":"Aave","level":"1.7.2.3.1","depth":4,"path":"api/lending/aave.md","ref":"./api/lending/aave.md","articles":[]},{"title":"Compound V3","level":"1.7.2.3.2","depth":4,"path":"api/lending/compound-v3.md","ref":"./api/lending/compound-v3.md","articles":[]},{"title":"Compound V2","level":"1.7.2.3.3","depth":4,"path":"api/lending/compound-v2.md","ref":"./api/lending/compound-v2.md","articles":[]},{"title":"Morpho Blue","level":"1.7.2.3.4","depth":4,"path":"api/lending/morpho.md","ref":"./api/lending/morpho.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-shiki","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus","livereload"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"livereload":{},"pagefooter":{},"add-js-css":{"js":["./scripts/asciinema-player.js"],"css":["./style/footer.css","./style/asciinema-player.css"]},"fontsettings":{"theme":"white","family":"sans","size":2},"honkit-plugin-shiki":{},"page-footer":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/lending/aave.md","mtime":"2025-09-04T09:09:03.876Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T09:14:58.843Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>

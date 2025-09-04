@@ -1,5 +1,7 @@
 # Transfers
 
+[Operations](./operations.md) → Transfers _(Composer and Call Forwarder)_
+
 Lead type: `ComposerCommands.TRANSFERS`.
 
 The sub types are defined by the following enum:

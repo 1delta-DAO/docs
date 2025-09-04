@@ -179,16 +179,9 @@ bytes memory transferOp = abi.encodePacked(
 
 ## BRIDGING Operations
 
-Execute cross-chain bridge operations through supported bridge protocols.
+Execute cross-chain bridge operations through supported bridge protocols. See the [detailed bridge documentation](./bridge/bridge.md) for comprehensive information about all supported bridge protocols.
 
-### Supported Bridges
-
-| Bridge      | ID     | Description                 |
-| ----------- | ------ | --------------------------- |
-| Stargate V2 | `0x00` | Stargate V2 bridge protocol |
-| Across      | `0x0A` | Across bridge protocol      |
-
-### Parameters
+### Basic Parameters
 
 | Offset | Length (bytes) | Description                |
 | ------ | -------------- | -------------------------- |
@@ -200,10 +193,15 @@ Execute cross-chain bridge operations through supported bridge protocols.
 ```solidity
 bytes memory bridgeOp = abi.encodePacked(
     uint8(ComposerCommands.BRIDGING),
-    uint8(BridgeIds.STARGATE_V2),
-    // Stargate V2 specific parameters...
+    // Bridge-specific parameters...
 );
 ```
+
+For detailed information about each bridge protocol, including parameter layouts and encoding examples, see:
+
+-   [Bridge Operations Overview](./bridge/bridge.md)
+-   [Stargate V2 Bridge](./bridge/stargate.md)
+-   [Across Bridge](./bridge/across.md)
 
 ## Example: 1inch Meta-Aggregation
 

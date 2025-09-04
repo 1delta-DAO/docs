@@ -131,17 +131,17 @@ All operations follow a consistent encoding pattern:
 
 ### Command Byte Values
 
-```solidity
-enum ComposerCommands {
-    SWAPS = 0x10,              // DEX swap operations
-    EXT_CALL = 0x20,           // External contract calls
-    EXT_TRY_CALL = 0x21,       // External calls with fallback
-    LENDING = 0x30,            // Lending protocol operations
-    TRANSFERS = 0x40,          // Token transfers and approvals
-    PERMIT = 0x50,             // Permit operations
-    FLASH_LOAN = 0x60,         // Flash loan operations
-    ERC4626 = 0x70,            // ERC4626 vault operations
-    GEN_2025_SINGELTONS = 0x80,// Modern DEX operations
-    BRIDGING = 0x90            // Cross-chain bridge operations
-}
-```
+#### `ComposerCommands` Enum
+
+| Value  | Name                  | Description                   |
+| ------ | --------------------- | ----------------------------- |
+| `0x10` | `SWAPS`               | DEX swap operations           |
+| `0x20` | `EXT_CALL`            | External contract calls       |
+| `0x21` | `EXT_TRY_CALL`        | External calls with fallback  |
+| `0x30` | `LENDING`             | Lending protocol operations   |
+| `0x40` | `TRANSFERS`           | Token transfers and approvals |
+| `0x50` | `PERMIT`              | Permit operations             |
+| `0x60` | `FLASH_LOAN`          | Flash loan operations         |
+| `0x70` | `ERC4626`             | ERC4626 vault operations      |
+| `0x80` | `GEN_2025_SINGELTONS` | Modern DEX operations         |
+| `0x90` | `BRIDGING`            | Cross-chain bridge operations |

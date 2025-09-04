@@ -29,5 +29,5 @@ Alternative sources can be Uniswap V4 and Balancer V3. These are triggered via t
 
 ## Specific lenders
 
--   [Aave V2 & V3 & forks](./flash-loan/standardized-interface.md)
+-   [Standard providers](./flash-loan/standardized-interface.md)
 -   [Singletons](./flash-loan/singletons.md)

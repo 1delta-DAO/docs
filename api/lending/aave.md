@@ -1,6 +1,8 @@
 # Aave V2 & V3 & Forks
 
-Aave V2 and V3 behave very similar for all operations. The caller only needs to dustinguish them via `LenderIds`, the rest is handled by the contract logic.
+[Operations](../operations.md) → [Lending](../lending.md) → Aave V2 & V3 _(Composer)_
+
+Aave V2 and V3 behave very similar for all operations. The caller only needs to distinguish them via `LenderIds`, the rest is handled by the contract logic.
 
 ## Deposit
 
@@ -31,9 +33,9 @@ If `amount=0xffffffffffffffffffffffffffff`, we read `underlying.balanceOf(caller
 
 ## Borrow
 
-Borrow from the lender. The prequisite is that the caller approved the composer contract to borrow on thei behalf via `debtToken.approveDelegation(...)`.
+Borrow from the lender. The prerequisite is that the caller approved the composer contract to borrow on their behalf via `debtToken.approveDelegation(...)`.
 
-It is important that the `mode` is provided here, most Aave forks only support `mode=2` (variable). If the selector withotu `mode` is used, one needs to set `mode=0`.
+It is important that the `mode` is provided here, most Aave forks only support `mode=2` (variable). If the selector without `mode` is used, one needs to set `mode=0`.
 
 | Offset | Length (bytes) | Description          |
 | ------ | -------------- | -------------------- |

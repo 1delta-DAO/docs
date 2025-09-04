@@ -1,0 +1,950 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <title>Margin · 1delta docs</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="HonKit 6.0.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/63654e1b596cb2089644283fd05dd0e4-night.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/000a7422ccf1c8cc3f26daf362853295-footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/9126ee2b524e451535a83b807a1790d6-asciinema-player.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/84ba87115ca7c3c04df8ebdf4324a9e7-prism-okaidia.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/f1c68718168135cb2e5ce12a8fec8524-code.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-add-js-css/64284539b805db2b7a9f78be6e890e1c-sidebar.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-flexible-alerts/style.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-insert-logo/plugin.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-pagefooter/footer.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/honkit-plugin-search-plus/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/@honkit/honkit-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="margin/leverage.html" />
+    
+    
+    <link rel="prev" href="flash-loan/singletons.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book honkit-cloak">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="../margin-aggregation.html">
+            
+                <a href="../margin-aggregation.html">
+            
+                    
+                    Margin Aggregation
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="../guide/overview.html">
+            
+                <a href="../guide/overview.html">
+            
+                    
+                    Guide
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.3.1" data-path="../guide/frontend.html">
+            
+                <a href="../guide/frontend.html">
+            
+                    
+                    Frontend
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3.2" data-path="../guide/programmatically.html">
+            
+                <a href="../guide/programmatically.html">
+            
+                    
+                    Programmatically
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="../architecture/overview.html">
+            
+                <a href="../architecture/overview.html">
+            
+                    
+                    Architecture Design
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="../lenders/summary.html">
+            
+                <a href="../lenders/summary.html">
+            
+                    
+                    Lenders
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.5.1" data-path="../lenders/metrics.html">
+            
+                <a href="../lenders/metrics.html">
+            
+                    
+                    Metrics
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="../contract-addresses/summary.html">
+            
+                <a href="../contract-addresses/summary.html">
+            
+                    
+                    Contract Addresses 
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="summary.html">
+            
+                <a href="summary.html">
+            
+                    
+                    Contract API
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.1" data-path="entrypoint.html">
+            
+                <a href="entrypoint.html">
+            
+                    
+                    Entrypoint
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2" data-path="operations.html">
+            
+                <a href="operations.html">
+            
+                    
+                    Operations
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.1" data-path="transfers.html">
+            
+                <a href="transfers.html">
+            
+                    
+                    Transfers
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2" data-path="external-call.html">
+            
+                <a href="external-call.html">
+            
+                    
+                    External Call
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.2.1" data-path="bridge/bridge.html">
+            
+                <a href="bridge/bridge.html">
+            
+                    
+                    Bridging
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.2.1.1" data-path="bridge/stargate.html">
+            
+                <a href="bridge/stargate.html">
+            
+                    
+                    Stargate V2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.2.1.2" data-path="bridge/across.html">
+            
+                <a href="bridge/across.html">
+            
+                    
+                    Across
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3" data-path="lending.html">
+            
+                <a href="lending.html">
+            
+                    
+                    Lending
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.3.1" data-path="lending/aave.html">
+            
+                <a href="lending/aave.html">
+            
+                    
+                    Aave
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3.2" data-path="lending/compound-v3.html">
+            
+                <a href="lending/compound-v3.html">
+            
+                    
+                    Compound V3
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3.3" data-path="lending/compound-v2.html">
+            
+                <a href="lending/compound-v2.html">
+            
+                    
+                    Compound V2
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.3.4" data-path="lending/morpho.html">
+            
+                <a href="lending/morpho.html">
+            
+                    
+                    Morpho Blue
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4" data-path="flash-loan.html">
+            
+                <a href="flash-loan.html">
+            
+                    
+                    Flash Loan
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.4.1" data-path="flash-loan/standardized-interface.html">
+            
+                <a href="flash-loan/standardized-interface.html">
+            
+                    
+                    Standardized Interface
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.4.2" data-path="flash-loan/singletons.html">
+            
+                <a href="flash-loan/singletons.html">
+            
+                    
+                    Singletons
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.7.2.5" data-path="margin.html">
+            
+                <a href="margin.html">
+            
+                    
+                    Margin
+            
+                </a>
+            
+
+            
+            <ul class="articles">
+                
+    
+        <li class="chapter " data-level="1.7.2.5.1" data-path="margin/leverage.html">
+            
+                <a href="margin/leverage.html">
+            
+                    
+                    Leverage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.5.2" data-path="margin/close.html">
+            
+                <a href="margin/close.html">
+            
+                    
+                    Close
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.5.3" data-path="margin/collateral-swap.html">
+            
+                <a href="margin/collateral-swap.html">
+            
+                    
+                    Collateral Swap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.5.4" data-path="margin/debt-swap.html">
+            
+                <a href="margin/debt-swap.html">
+            
+                    
+                    Debt Swap
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7.2.5.5" data-path="margin/migration.html">
+            
+                <a href="margin/migration.html">
+            
+                    
+                    Migration
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+            </ul>
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://github.com/honkit/honkit" target="blank" class="gitbook-link">
+            Published with HonKit
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >Margin</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div class="search-plus" id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <html><head></head><body><h1 id="margin-operations">Margin Operations</h1>
+<p>Margin operations enable DeFi strategies by combining lending, borrowing, and swapping operations in atomic transactions.</p>
+<h2 id="supported-operations">Supported Operations</h2>
+<h3 id="core-margin-operations">Core Margin Operations</h3>
+<ul>
+<li><strong><a href="leverage.md">Leverage</a></strong> - Increase position size by borrowing against collateral and reinvesting</li>
+<li><strong><a href="close.md">Close</a></strong> - Exit leveraged positions by withdrawing collateral and repaying debt</li>
+<li><strong><a href="collateral-swap.md">Collateral Swap</a></strong> - Exchange collateral assets without closing positions</li>
+<li><strong><a href="debt-swap.md">Debt Swap</a></strong> - Change debt composition while maintaining collateral</li>
+<li><strong><a href="migration.md">Position Migration</a></strong> - Move positions between lending protocols</li>
+</ul>
+<h2 id="architecture-deep-dive">Architecture Deep Dive</h2>
+<h3 id="composer-pattern">Composer Pattern</h3>
+<p>The 1Delta margin system is built on composer pattern that enables multi-step DeFi operations to execute atomically. The <code>BaseComposer</code> contract serves as the foundation, with chain-specific implementations handling protocol integrations.</p>
+<pre class="language-"><code class="lang-solidity">abstract <span class="token keyword">contract</span> <span class="token class-name">BaseComposer</span> <span class="token keyword">is</span>
+    DeadLogger<span class="token punctuation">,</span>
+    Swaps<span class="token punctuation">,</span>
+    Gen2025DexActions<span class="token punctuation">,</span>
+    UniversalLending<span class="token punctuation">,</span>
+    ERC4626Operations<span class="token punctuation">,</span>
+    Transfers<span class="token punctuation">,</span>
+    Permits<span class="token punctuation">,</span>
+    ExternalCall
+<span class="token punctuation">{</span>
+    <span class="token keyword">function</span> <span class="token function">deltaCompose</span><span class="token punctuation">(</span><span class="token builtin">bytes</span> <span class="token keyword">calldata</span><span class="token punctuation">)</span> <span class="token keyword">external</span> <span class="token keyword">payable</span><span class="token punctuation">;</span>
+    <span class="token keyword">function</span> <span class="token function">_deltaComposeInternal</span><span class="token punctuation">(</span><span class="token builtin">address</span><span class="token punctuation">,</span> <span class="token builtin">uint256</span><span class="token punctuation">,</span> <span class="token builtin">uint256</span><span class="token punctuation">)</span> <span class="token keyword">internal</span> virtual<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="operation-execution-flow">Operation Execution Flow</h3>
+<p>All margin operations follow a standardized execution pattern within the composer's main loop:</p>
+<pre class="language-"><code class="lang-solidity"><span class="token keyword">function</span> <span class="token function">_deltaComposeInternal</span><span class="token punctuation">(</span><span class="token builtin">address</span> callerAddress<span class="token punctuation">,</span> <span class="token builtin">uint256</span> currentOffset<span class="token punctuation">,</span> <span class="token builtin">uint256</span> calldataLength<span class="token punctuation">)</span> <span class="token keyword">internal</span> virtual <span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token builtin">uint256</span> operation <span class="token operator">=</span> <span class="token function">shr</span><span class="token punctuation">(</span><span class="token number">248</span><span class="token punctuation">,</span> <span class="token function">calldataload</span><span class="token punctuation">(</span>currentOffset<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        currentOffset <span class="token operator">=</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> currentOffset<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// handle operations</span>
+
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>currentOffset <span class="token operator">&gt;=</span> maxIndex<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="architecture-overview">Architecture Overview</h2>
+<h3 id="key-components">Key Components</h3>
+<h4 id="1-flash-loan-providers">1. Flash Loan Providers</h4>
+<p>The system integrates multiple flash loan providers for optimal capital efficiency:</p>
+<blockquote>
+<p><strong>Morpho Blue</strong>, <strong>Aave V3</strong>, <strong>Aave V2</strong>, <strong>Balancer V2</strong>, <strong>Balancer V3</strong>, <strong>Uniswap V4</strong></p>
+</blockquote>
+<h4 id="2-dex-integration">2. DEX Integration</h4>
+<p>Operations support multiple DEX aggregators and protocols:</p>
+<blockquote>
+<p><strong>Uniswap</strong> (v2,v3,v4), <strong>Balancer</strong> (v2,v3), <strong>GMX</strong>, <strong>Dodo</strong>, ...</p>
+</blockquote>
+<h4 id="3-lending-protocol-support">3. Lending Protocol Support</h4>
+<p>Compatible with major lending protocols:</p>
+<blockquote>
+<p><strong>Aave</strong> (v2,v3 and forks), <strong>Compound</strong> (v2,v3 and forks), <strong>Morpho Blue</strong></p>
+</blockquote>
+<h3 id="lending-protocol-integration">Lending Protocol Integration</h3>
+<p>Margin operations leverage the lending protocol support through the unified Lending Operations interface.</p>
+<p>For detailed lending operation encoding and protocol-specific parameters, see the <a href="../lending.md">Lending Operations</a> documentation.</p>
+<h3 id="operation-command-structure">Operation Command Structure</h3>
+<p>Operations are encoded using compact byte packing:</p>
+<pre class="language-"><code>Operation Byte: [Command Type (1 byte)]
+Data Bytes: [Operation-specific data]
+</code></pre><h3 id="flash-loan-operations">Flash Loan Operations</h3>
+<p>Margin operations utilize flash loans through the standardized flash loan interface. The system supports multiple providers:</p>
+<p>For detailed flash loan encoding, provider-specific parameters, and integration patterns, see the <a href="../flash-loan.md">Flash Loan Operations</a> documentation.</p>
+<h3 id="technical-implementation">Technical Implementation</h3>
+<h4 id="operation-encoding">Operation Encoding</h4>
+<p>Operations are encoded as compact bytecode sequences:</p>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// Example: Flash loan + swap + deposit sequence</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> operation <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>FLASH_LOAN<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>FlashLoanIds<span class="token punctuation">.</span>MORPHO_BLUE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>asset<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>provider<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>callbackData<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>poolId<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    callbackCallData
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="security-architecture">Security Architecture</h2>
+<h3 id="access-control">Access Control</h3>
+<ul>
+<li><strong>Caller Validation</strong>: Strict validation of operation initiators</li>
+<li><strong>Callback Verification</strong>: Flash loan callbacks validate caller addresses</li>
+</ul>
+<h3 id="slippage-protection">Slippage Protection</h3>
+<p>Built-in slippage checks ensure operations meet minimum requirements:</p>
+<pre class="language-"><code class="lang-solidity"><span class="token keyword">assembly</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token function">gt</span><span class="token punctuation">(</span>minimumAmountReceived<span class="token punctuation">,</span> amountIn<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">mstore</span><span class="token punctuation">(</span><span class="token number">0x0</span><span class="token punctuation">,</span> SLIPPAGE<span class="token punctuation">)</span>
+        <span class="token keyword">revert</span><span class="token punctuation">(</span><span class="token number">0x0</span><span class="token punctuation">,</span> <span class="token number">0x4</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="gas-optimization-strategies">Gas Optimization Strategies</h2>
+<h3 id="1-packed-encoding">1. Packed Encoding</h3>
+<ul>
+<li>Minimize calldata size through tight byte packing</li>
+<li>Use uint128 for amounts, uint16 for lengths</li>
+<li>Combine related operations in single calls</li>
+</ul>
+<h3 id="2-approval-management">2. Approval Management</h3>
+<ul>
+<li>One-time maximum approvals reduce future gas costs</li>
+<li>Pre-approve operations outside flash loan callbacks</li>
+<li>Use permit signatures where supported</li>
+</ul>
+<h3 id="3-direct-transfers">3. Direct Transfers</h3>
+<ul>
+<li>Route funds directly between operations</li>
+<li>Eliminate intermediate token movements</li>
+<li>Use contract balance operations when possible</li>
+</ul>
+<h2 id="quick-start-examples">Quick Start Examples</h2>
+<h3 id="basic-leverage-operation">Basic Leverage Operation</h3>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// 1. Setup composer and addresses</span>
+IComposer composer <span class="token operator">=</span> <span class="token function">IComposer</span><span class="token punctuation">(</span>composerAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 2. Encode flash loan operation</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> flashLoan <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>FLASH_LOAN<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span>FlashLoanIds<span class="token punctuation">.</span>MORPHO_BLUE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    morphoBlueAddress<span class="token punctuation">,</span>
+    <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">8000e6</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint16</span><span class="token punctuation">(</span>innerOps<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token builtin">uint8</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">// pool ID</span>
+    innerOps
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 3. Execute operation</span>
+composer<span class="token punctuation">.</span><span class="token function">deltaCompose</span><span class="token punctuation">(</span>flashLoan<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="multi-protocol-operation">Multi-Protocol Operation</h3>
+<pre class="language-"><code class="lang-solidity"><span class="token comment">// Combine operations across protocols</span>
+<span class="token builtin">bytes</span> <span class="token keyword">memory</span> multiProtocolOps <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+    <span class="token comment">// Aave V3 deposit</span>
+    abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>LENDING<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>LenderOps<span class="token punctuation">.</span>DEPOSIT<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint16</span><span class="token punctuation">(</span>LenderIds<span class="token punctuation">.</span>AAVE_V3<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">address</span><span class="token punctuation">(</span>WETH<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        userAddress<span class="token punctuation">,</span>
+        aaveV3Pool
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token comment">// Morpho flash loan</span>
+    abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>FLASH_LOAN<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span>FlashLoanIds<span class="token punctuation">.</span>MORPHO_BLUE<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">address</span><span class="token punctuation">(</span>USDC<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        morphoAddress<span class="token punctuation">,</span>
+        <span class="token builtin">uint128</span><span class="token punctuation">(</span>amount<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint16</span><span class="token punctuation">(</span>callbackOps<span class="token punctuation">.</span>length<span class="token punctuation">)</span><span class="token punctuation">,</span>
+        <span class="token builtin">uint8</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+        callbackOps
+    <span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h2 id="integration-requirements">Integration Requirements</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li><strong>EOA Approval</strong>: User must approve composer for token operations</li>
+<li><strong>Protocol Permissions</strong>: Enable composer on target lending protocols</li>
+<li><strong>Flash Loan Access</strong>: Ensure flash loan providers are accessible</li>
+</ul>
+<h3 id="external-data-requirements">External Data Requirements</h3>
+<p>For swap operations, provide aggregator data as:</p>
+<ul>
+<li><code>calldata</code> - Raw transaction data from aggregator API</li>
+<li><code>target</code> - DEX router or aggregator contract address</li>
+<li><code>value</code> - ETH value for transaction (typically <code>0</code>)</li>
+</ul>
+<h2 id="next-steps">Next Steps</h2>
+<p>Explore specific operation types:</p>
+<ul>
+<li><a href="margin/leverage.html">Leverage Operations</a> - Position amplification</li>
+<li><a href="margin/close.html">Close Operations</a> - Position exit strategies</li>
+<li><a href="margin/collateral-swap.html">Collateral Swaps</a> - Asset rebalancing</li>
+<li><a href="margin/debt-swap.html">Debt Swaps</a> - Liability management</li>
+<li><a href="margin/migration.html">Position Migration</a> - Cross-protocol transfers</li>
+</ul>
+</body></html>
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="flash-loan/singletons.html" class="navigation navigation-prev " aria-label="Previous page: Singletons">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="margin/leverage.html" class="navigation navigation-next " aria-label="Next page: Leverage">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Margin","level":"1.7.2.5","depth":3,"next":{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},"previous":{"title":"Singletons","level":"1.7.2.4.2","depth":4,"path":"api/flash-loan/singletons.md","ref":"./api/flash-loan/singletons.md","articles":[]},"articles":[{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},{"title":"Close","level":"1.7.2.5.2","depth":4,"path":"api/margin/close.md","ref":"./api/margin/close.md","articles":[]},{"title":"Collateral Swap","level":"1.7.2.5.3","depth":4,"path":"api/margin/collateral-swap.md","ref":"./api/margin/collateral-swap.md","articles":[]},{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},{"title":"Migration","level":"1.7.2.5.5","depth":4,"path":"api/margin/migration.md","ref":"./api/margin/migration.md","articles":[]}],"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js","./scripts/sidebar.js"],"css":["./style/night.css","./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css","./style/sidebar.css"]},"fontsettings":{"theme":"night","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin.md","mtime":"2025-09-04T13:42:13.326Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T13:51:16.791Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <noscript>
+        <style>
+            .honkit-cloak {
+                display: block !important;
+            }
+        </style>
+    </noscript>
+    <script>
+        // Restore sidebar state as critical path for prevent layout shift
+        function __init__getSidebarState(defaultValue){
+            var baseKey = "";
+            var key = baseKey + ":sidebar";
+            try {
+                var value = localStorage[key];
+                if (value === undefined) {
+                    return defaultValue;
+                }
+                var parsed = JSON.parse(value);
+                return parsed == null ? defaultValue : parsed;
+            } catch (e) {
+                return defaultValue;
+            }
+        }
+        function __init__restoreLastSidebarState() {
+            var isMobile = window.matchMedia("(max-width: 600px)").matches;
+            if (isMobile) {
+                // Init last state if not mobile
+                return;
+            }
+            var sidebarState = __init__getSidebarState(true);
+            var book = document.querySelector(".book");
+            // Show sidebar if it enabled
+            if (sidebarState && book) {
+                book.classList.add("without-animation", "with-summary");
+            }
+        }
+
+        try {
+            __init__restoreLastSidebarState();
+        } finally {
+            var book = document.querySelector(".book");
+            book.classList.remove("honkit-cloak");
+        }
+    </script>
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-add-js-css/e5f66c57646e52f3a8966ea585b6a700-asciinema-player.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-add-js-css/6be327ed75c531de33a4cffa46e679f8-code-header.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-add-js-css/0b7d652afee1550d372bc2b9a01ca14f-sidebar.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-edit-link/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-flexible-alerts/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-insert-logo/plugin.js"></script>
+        
+    
+        
+        <script src="../gitbook/honkit-plugin-search-plus/jquery.mark.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/honkit-plugin-search-plus/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/@honkit/honkit-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

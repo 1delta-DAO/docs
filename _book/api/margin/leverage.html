@@ -20,27 +20,27 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/2847635eb7d6a959110f071deea3fb78-night.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/63654e1b596cb2089644283fd05dd0e4-night.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/000a7422ccf1c8cc3f26daf362853295-footer.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/9126ee2b524e451535a83b807a1790d6-asciinema-player.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/c459563c02e09e58ef33c91554d24a1e-prism-okaidia.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/84ba87115ca7c3c04df8ebdf4324a9e7-prism-okaidia.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/a7e0e775e45122c306152e5095d6066a-code.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/f1c68718168135cb2e5ce12a8fec8524-code.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/fe6ccc0e82cd9fb052fc8cac00b284e6-sidebar.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/64284539b805db2b7a9f78be6e890e1c-sidebar.css">
                 
             
                 
@@ -95,7 +95,7 @@
     <link rel="next" href="close.html" />
     
     
-    <link rel="prev" href="general.html" />
+    <link rel="prev" href="../margin.html" />
     
 
     </head>
@@ -487,9 +487,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.5" data-path="general.html">
+        <li class="chapter " data-level="1.7.2.5" data-path="../margin.html">
             
-                <a href="general.html">
+                <a href="../margin.html">
             
                     
                     Margin
@@ -674,6 +674,16 @@ IComposer composer <span class="token operator">=</span> <span class="token func
 </code></pre>
 <hr></hr>
 <h2 id="operation-sequence">Operation Sequence</h2>
+<h3 id="integration-checklist">Integration Checklist</h3>
+<ul>
+<li>[ ] Protocol permissions configured</li>
+<li>[ ] Token approvals set</li>
+<li>[ ] Health factor validated</li>
+<li>[ ] Slippage parameters configured</li>
+<li>[ ] Gas optimization applied</li>
+<li>[ ] Error handling implemented</li>
+<li>[ ] Position monitoring enabled</li>
+</ul>
 <h3 id="1-pull-user-funds">1. Pull User Funds</h3>
 <p>First, we transfer the user's ETH and efficiently convert it to WETH in a single operation.</p>
 <pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> transferIn <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
@@ -840,6 +850,13 @@ composer<span class="token punctuation">.</span>deltaCompose<span class="token p
 <li><p><strong>ETH Value Attachment:</strong> The <code>{value: USER_AMOUNT}</code> ensures the user's ETH is sent with the transaction for the initial collateral contribution.</p>
 </li>
 </ol>
+<h2 id="related-documentation">Related Documentation</h2>
+<ul>
+<li><a href="general.md">General Margin Operations</a> - Architecture overview</li>
+<li><a href="../flash-loan.html">Flash Loan Operations</a> - Provider details</li>
+<li><a href="../external-call.html">External Call Patterns</a> - Swap integration</li>
+<li><a href="../transfers.html#approve-operation">Approval Management</a> - Permission setup</li>
+</ul>
 </body></html>
                                 
                                 </section>
@@ -867,7 +884,7 @@ composer<span class="token punctuation">.</span>deltaCompose<span class="token p
 
             
                 
-                <a href="general.html" class="navigation navigation-prev " aria-label="Previous page: Margin">
+                <a href="../margin.html" class="navigation navigation-prev " aria-label="Previous page: Margin">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
@@ -883,7 +900,7 @@ composer<span class="token punctuation">.</span>deltaCompose<span class="token p
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Leverage","level":"1.7.2.5.1","depth":4,"next":{"title":"Close","level":"1.7.2.5.2","depth":4,"path":"api/margin/close.md","ref":"./api/margin/close.md","articles":[]},"previous":{"title":"Margin","level":"1.7.2.5","depth":3,"path":"api/margin/general.md","ref":"./api/margin/general.md","articles":[{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},{"title":"Close","level":"1.7.2.5.2","depth":4,"path":"api/margin/close.md","ref":"./api/margin/close.md","articles":[]},{"title":"Collateral Swap","level":"1.7.2.5.3","depth":4,"path":"api/margin/collateral-swap.md","ref":"./api/margin/collateral-swap.md","articles":[]},{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},{"title":"Migration","level":"1.7.2.5.5","depth":4,"path":"api/margin/migration.md","ref":"./api/margin/migration.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js","./scripts/sidebar.js"],"css":["./style/night.css","./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css","./style/sidebar.css"]},"fontsettings":{"theme":"night","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/leverage.md","mtime":"2025-09-04T10:28:30.421Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T12:44:18.142Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Leverage","level":"1.7.2.5.1","depth":4,"next":{"title":"Close","level":"1.7.2.5.2","depth":4,"path":"api/margin/close.md","ref":"./api/margin/close.md","articles":[]},"previous":{"title":"Margin","level":"1.7.2.5","depth":3,"path":"api/margin.md","ref":"./api/margin.md","articles":[{"title":"Leverage","level":"1.7.2.5.1","depth":4,"path":"api/margin/leverage.md","ref":"./api/margin/leverage.md","articles":[]},{"title":"Close","level":"1.7.2.5.2","depth":4,"path":"api/margin/close.md","ref":"./api/margin/close.md","articles":[]},{"title":"Collateral Swap","level":"1.7.2.5.3","depth":4,"path":"api/margin/collateral-swap.md","ref":"./api/margin/collateral-swap.md","articles":[]},{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},{"title":"Migration","level":"1.7.2.5.5","depth":4,"path":"api/margin/migration.md","ref":"./api/margin/migration.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js","./scripts/sidebar.js"],"css":["./style/night.css","./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css","./style/sidebar.css"]},"fontsettings":{"theme":"night","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/leverage.md","mtime":"2025-09-04T12:27:24.974Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T13:51:16.791Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -937,15 +954,15 @@ composer<span class="token punctuation">.</span>deltaCompose<span class="token p
     <script src="../../gitbook/theme.js"></script>
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/e5f66c57646e52f3a8966ea585b6a700-asciinema-player.js"></script>
         
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/b97f14b103e988bf094faf9ea9f6d77c-code-header.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/6be327ed75c531de33a4cffa46e679f8-code-header.js"></script>
         
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/d75eb8fa161f9144722a7b7170e137fb-sidebar.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/0b7d652afee1550d372bc2b9a01ca14f-sidebar.js"></script>
         
     
         

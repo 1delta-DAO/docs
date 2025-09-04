@@ -20,27 +20,27 @@
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/2847635eb7d6a959110f071deea3fb78-night.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/63654e1b596cb2089644283fd05dd0e4-night.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/3d91900d8e69e1fa40dcb544be882eaf-footer.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/000a7422ccf1c8cc3f26daf362853295-footer.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/909a4ef7af68c71df4d1f8e3cbeb2994-asciinema-player.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/9126ee2b524e451535a83b807a1790d6-asciinema-player.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/c459563c02e09e58ef33c91554d24a1e-prism-okaidia.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/84ba87115ca7c3c04df8ebdf4324a9e7-prism-okaidia.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/a7e0e775e45122c306152e5095d6066a-code.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/f1c68718168135cb2e5ce12a8fec8524-code.css">
                 
             
                 
-                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/fe6ccc0e82cd9fb052fc8cac00b284e6-sidebar.css">
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-add-js-css/64284539b805db2b7a9f78be6e890e1c-sidebar.css">
                 
             
                 
@@ -485,9 +485,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.7.2.5" data-path="general.html">
+        <li class="chapter " data-level="1.7.2.5" data-path="../margin.html">
             
-                <a href="general.html">
+                <a href="../margin.html">
             
                     
                     Margin
@@ -625,19 +625,19 @@
                                 <section class="normal markdown-section">
                                 
                                 <html><head></head><body><h1 id="position-migration">Position Migration</h1>
-<p>Position migrations involve moving a leveraged position from one lending protocol to another without changing the underlying assets or requiring swaps.</p>
-<p>Let's demonstrate migrating an Aave V3 position to a Compound V3 position while maintaining the same collateral and debt composition.</p>
-<h2 id="migration-strategy">Migration Strategy</h2>
-<p>The execution combines elements of both leverage and close operations:</p>
+<p>Position migrations enable seamless movement of leveraged positions between lending protocols while maintaining the same collateral and debt composition. This allows users to optimize for better rates, features, or risk profiles without closing and reopening positions.</p>
+<h2 id="overview">Overview</h2>
+<p>The migration process follows this atomic sequence:</p>
 <ol>
-<li><strong>Flash loan the debt asset</strong> from the Aave V3 position</li>
-<li><strong>Repay the Aave V3 debt</strong> completely</li>
-<li><strong>Withdraw the Aave V3 collateral</strong></li>
-<li><strong>Deposit collateral into Compound V3</strong></li>
-<li><strong>Borrow from Compound V3</strong> to cover flash loan repayment</li>
-<li><strong>Repay the flash loan</strong> with borrowed funds</li>
-<li><strong>Refund any leftover dust</strong> to the user</li>
+<li><strong>Flash Loan</strong>: Borrow debt asset for repayment</li>
+<li><strong>Repay</strong>: Clear debt on source protocol</li>
+<li><strong>Withdraw</strong>: Remove collateral from source protocol</li>
+<li><strong>Deposit</strong>: Add collateral to target protocol</li>
+<li><strong>Borrow</strong>: Take debt from target protocol</li>
+<li><strong>Repay</strong>: Return flash loan funds</li>
+<li><strong>Refund</strong>: Refund any leftover to the user</li>
 </ol>
+<p>All operations execute atomically - complete success or full revert.</p>
 <h2 id="example-scenario">Example Scenario</h2>
 <p><strong>Starting Position (Aave V3):</strong></p>
 <ul>
@@ -650,7 +650,7 @@
 <li>Debt: 8,000 USDC</li>
 </ul>
 <hr></hr>
-<h1 id="constants">Constants</h1>
+<h3 id="constants">Constants</h3>
 <pre class="language-"><code class="lang-solidity"><span class="token comment">// Flash loan amount (slightly higher than debt to ensure full repayment)</span>
 <span class="token builtin">uint256</span> FLASH_LOAN_AMOUNT <span class="token operator">=</span> <span class="token number">8000.1e6</span><span class="token punctuation">;</span> <span class="token comment">// 8,000.1 USDC (0.1 USDC buffer)</span>
 
@@ -673,9 +673,19 @@ IComposer composer <span class="token operator">=</span> <span class="token func
 <span class="token builtin">address</span> WETH <span class="token operator">=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0xC02</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token builtin">address</span> USDC <span class="token operator">=</span> <span class="token builtin">address</span><span class="token punctuation">(</span><span class="token number">0xA0b</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
+<h2 id="integration-checklist">Integration Checklist</h2>
+<ul>
+<li>[ ] Source protocol permissions configured</li>
+<li>[ ] Target protocol permissions set</li>
+<li>[ ] Health factor validation passed</li>
+<li>[ ] Protocol compatibility verified</li>
+<li>[ ] Flash loan provider selected</li>
+<li>[ ] Error handling implemented</li>
+<li>[ ] Migration cost estimated</li>
+</ul>
 <hr></hr>
-<h1 id="operation-sequence">Operation Sequence</h1>
-<h2 id="1-repay-aave-v3-debt">1. Repay Aave V3 Debt</h2>
+<h2 id="operation-sequence">Operation Sequence</h2>
+<h3 id="1-repay-aave-v3-debt">1. Repay Aave V3 Debt</h3>
 <p>Use the flash-loaned USDC to completely repay the existing Aave V3 debt. Using <code>amount=0xffffffffffffffffffffffffffff</code> ensures we repay the minimum of contract balance and actual debt.</p>
 <pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> repayAave <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
     <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>LENDING<span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -689,7 +699,7 @@ IComposer composer <span class="token operator">=</span> <span class="token func
     <span class="token builtin">address</span><span class="token punctuation">(</span>AAVE_V3_POOL<span class="token punctuation">)</span>               <span class="token comment">// Aave V3 pool</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="2-withdraw-aave-v3-collateral">2. Withdraw Aave V3 Collateral</h2>
+<h3 id="2-withdraw-aave-v3-collateral">2. Withdraw Aave V3 Collateral</h3>
 <p>Withdraw the entire WETH collateral from Aave V3. The collateral goes directly to the composer for the next operation.</p>
 <pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> withdrawAave <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
     <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>LENDING<span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -702,7 +712,7 @@ IComposer composer <span class="token operator">=</span> <span class="token func
     <span class="token builtin">address</span><span class="token punctuation">(</span>AAVE_V3_POOL<span class="token punctuation">)</span>               <span class="token comment">// Aave V3 pool</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="3-deposit-to-compound-v3">3. Deposit to Compound V3</h2>
+<h3 id="3-deposit-to-compound-v3">3. Deposit to Compound V3</h3>
 <p>Deposit the withdrawn WETH collateral into Compound V3. Using <code>amount=0</code> deposits the contract's entire WETH balance.</p>
 <pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> depositCompound <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
     <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>LENDING<span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -714,7 +724,7 @@ IComposer composer <span class="token operator">=</span> <span class="token func
     <span class="token builtin">address</span><span class="token punctuation">(</span>COMPOUND_V3_COMET<span class="token punctuation">)</span>           <span class="token comment">// Compound V3 comet address</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="4-borrow-from-compound-v3">4. Borrow from Compound V3</h2>
+<h3 id="4-borrow-from-compound-v3">4. Borrow from Compound V3</h3>
 <p>Borrow enough USDC from Compound V3 to repay the flash loan plus any fees.</p>
 <pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> borrowCompound <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
     <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>LENDING<span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -726,7 +736,7 @@ IComposer composer <span class="token operator">=</span> <span class="token func
     <span class="token builtin">address</span><span class="token punctuation">(</span>COMPOUND_V3_COMET<span class="token punctuation">)</span>           <span class="token comment">// Compound V3 comet address</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="5-refund-excess-usdc">5. Refund Excess USDC</h2>
+<h3 id="5-refund-excess-usdc">5. Refund Excess USDC</h3>
 <p>Transfer any remaining USDC balance back to the user after flash loan repayment.</p>
 <pre class="language-"><code class="lang-solidity"><span class="token builtin">bytes</span> <span class="token keyword">memory</span> refundExcess <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
     <span class="token builtin">uint8</span><span class="token punctuation">(</span>ComposerCommands<span class="token punctuation">.</span>TRANSFERS<span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -736,7 +746,7 @@ IComposer composer <span class="token operator">=</span> <span class="token func
     <span class="token builtin">uint128</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>                          <span class="token comment">// Send remaining balance</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<h2 id="6-required-approvals">6. Required Approvals</h2>
+<h3 id="6-required-approvals">6. Required Approvals</h3>
 <p>Set up all necessary approvals for the operation:</p>
 <pre class="language-"><code class="lang-solidity"><span class="token comment">// Approve Aave V3 pool to spend USDC for repayment</span>
 <span class="token builtin">bytes</span> <span class="token keyword">memory</span> approveAavePool <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
@@ -763,7 +773,7 @@ IComposer composer <span class="token operator">=</span> <span class="token func
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
 <hr></hr>
-<h1 id="complete-migration-assembly">Complete Migration Assembly</h1>
+<h2 id="complete-migration-assembly">Complete Migration Assembly</h2>
 <p>Putting it all together with the flash loan wrapper:</p>
 <pre class="language-"><code class="lang-solidity"><span class="token comment">// Inner operations executed within flash loan callback</span>
 <span class="token builtin">bytes</span> <span class="token keyword">memory</span> innerOperation <span class="token operator">=</span> abi<span class="token punctuation">.</span><span class="token function">encodePacked</span><span class="token punctuation">(</span>
@@ -797,26 +807,25 @@ IComposer composer <span class="token operator">=</span> <span class="token func
 <span class="token comment">// Execute the complete position migration</span>
 composer<span class="token punctuation">.</span><span class="token function">deltaCompose</span><span class="token punctuation">(</span>migrationOps<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre>
-<hr></hr>
-<h1 id="key-considerations">Key Considerations</h1>
-<h2 id="1-dust-management">1. <strong>Dust Management</strong></h2>
+<h2 id="key-considerations">Key Considerations</h2>
+<h3 id="1-dust-management">1. <strong>Dust Management</strong></h3>
 <p>The borrow-repay process will leave dust since we must use a fixed flash loan amount larger than the exact Aave V3 debt to ensure complete repayment. The excess is automatically refunded to the user.</p>
-<h2 id="2-flash-loan-buffer">2. <strong>Flash Loan Buffer</strong></h2>
+<h3 id="2-flash-loan-buffer">2. <strong>Flash Loan Buffer</strong></h3>
 <p>To ensure we can repay the flash loan completely, we borrow the Aave V3 debt amount plus a safety margin (e.g., 0.1 USDC buffer). This accounts for:</p>
 <ul>
 <li>Interest accrual between quote and execution</li>
 <li>Flash loan fees (if any)</li>
 <li>Rounding differences in debt calculations</li>
 </ul>
-<h2 id="3-protocol-permissions">3. <strong>Protocol Permissions</strong></h2>
+<h3 id="3-protocol-permissions">3. <strong>Protocol Permissions</strong></h3>
 <p>The operation requires pre-approval on both protocols:</p>
 <ul>
 <li><strong>Aave V3:</strong> Approve composer for collateral withdrawal: <code>IERC20(AAVE_V3_A_TOKEN_WETH).approve(composer, type(uint256).max)</code></li>
 <li><strong>Compound V3:</strong> Allow composer for operations: <code>IComet(COMPOUND_V3_COMET).allow(composer, true)</code></li>
 </ul>
-<h2 id="4-market-compatibility">4. <strong>Market Compatibility</strong></h2>
+<h3 id="4-market-compatibility">4. <strong>Market Compatibility</strong></h3>
 <p>Ensure the target Compound V3 market accepts the same collateral asset and allows borrowing the same debt asset. Compound V3 markets are isolated and each supports specific asset combinations.</p>
-<h2 id="5-risk-parameter-changes">5. <strong>Risk Parameter Changes</strong></h2>
+<h3 id="5-risk-parameter-changes">5. <strong>Risk Parameter Changes</strong></h3>
 <p>Different protocols have different:</p>
 <ul>
 <li>Loan-to-value ratios</li>
@@ -824,13 +833,20 @@ composer<span class="token punctuation">.</span><span class="token function">del
 <li>Interest rate models</li>
 </ul>
 <p>Verify the position remains healthy after migration and adjust if necessary.</p>
-<h2 id="6-atomic-execution">6. <strong>Atomic Execution</strong></h2>
+<h3 id="6-atomic-execution">6. <strong>Atomic Execution</strong></h3>
 <p>The entire migration is atomic - either all steps succeed or the transaction reverts, ensuring no partial migrations that could leave positions in an inconsistent state.</p>
-<h2 id="7-gas-optimization">7. <strong>Gas Optimization</strong></h2>
+<h3 id="7-gas-optimization">7. <strong>Gas Optimization</strong></h3>
 <ul>
 <li>All approvals are performed outside the flash loan callback</li>
 <li>Using <code>amount=0</code> and max values reduces the need for exact balance calculations</li>
 <li>Direct transfers between operations minimize intermediate steps</li>
+</ul>
+<h2 id="related-documentation">Related Documentation</h2>
+<ul>
+<li><a href="general.md">General Margin Operations</a> - Architecture overview</li>
+<li><a href="../flash-loan.html">Flash Loan Operations</a> - Provider details</li>
+<li><a href="../lending.html">Lending Operations</a> - Protocol interactions</li>
+<li><a href="../positions.md">Position Management</a> - Health factor monitoring</li>
 </ul>
 </body></html>
                                 
@@ -871,7 +887,7 @@ composer<span class="token punctuation">.</span><span class="token function">del
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Migration","level":"1.7.2.5.5","depth":4,"previous":{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js","./scripts/sidebar.js"],"css":["./style/night.css","./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css","./style/sidebar.css"]},"fontsettings":{"theme":"night","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/migration.md","mtime":"2025-09-04T10:28:30.421Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T12:44:18.142Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Migration","level":"1.7.2.5.5","depth":4,"previous":{"title":"Debt Swap","level":"1.7.2.5.4","depth":4,"path":"api/margin/debt-swap.md","ref":"./api/margin/debt-swap.md","articles":[]},"dir":"ltr"},"config":{"plugins":["-highlight","honkit-plugin-prism","add-js-css","edit-link","flexible-alerts","insert-logo","pagefooter","-lunr","-search","search-plus"],"root":".","styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"honkit-plugin-prism":{"theme":"solarized-dark"},"pagefooter":{"footer":"<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>","label":"Modified at: ","format":"YYYY-MM-DD HH:mm:ss","utc":true},"add-js-css":{"js":["./scripts/asciinema-player.js","./scripts/code-header.js","./scripts/sidebar.js"],"css":["./style/night.css","./style/footer.css","./style/asciinema-player.css","./style/prism-okaidia.css","./style/code.css","./style/sidebar.css"]},"fontsettings":{"theme":"night","family":"sans","size":2},"flexible-alerts":{"style":"callout","note":{"label":"Note","icon":"fa fa-info-circle","className":"info"},"tip":{"label":"Tip","icon":"fa fa-lightbulb-o","className":"tip"},"warning":{"label":"Warning","icon":"fa fa-exclamation-triangle","className":"warning"},"danger":{"label":"Attention","icon":"fa fa-ban","className":"danger"}},"edit-link":{"label":"Edit on GitHub","base":"https://github.com/1delta-DAO/docs/blob/main"},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false},"insert-logo":{"url":"https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg","style":"background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"},"search-plus":{}},"theme":"default","honkit":">=3.0.0","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56},"embedFonts":false},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"esversion":"2019","nodeversion":"12.13.0","npmversion":"6.12.0","triplebackticks":"```","console":"<a class=\"gitbook-plugin-js-console\" aria-hidden=\"true\"></a>"},"title":"1delta docs","gitbook":">=3.0.0"},"file":{"path":"api/margin/migration.md","mtime":"2025-09-04T12:16:11.549Z","type":"markdown"},"gitbook":{"version":"6.0.3","time":"2025-09-04T13:51:16.791Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
@@ -925,15 +941,15 @@ composer<span class="token punctuation">.</span><span class="token function">del
     <script src="../../gitbook/theme.js"></script>
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/a33932e9fa4924be93aca241a9233fd4-asciinema-player.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/e5f66c57646e52f3a8966ea585b6a700-asciinema-player.js"></script>
         
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/b97f14b103e988bf094faf9ea9f6d77c-code-header.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/6be327ed75c531de33a4cffa46e679f8-code-header.js"></script>
         
     
         
-        <script src="../../gitbook/gitbook-plugin-add-js-css/d75eb8fa161f9144722a7b7170e137fb-sidebar.js"></script>
+        <script src="../../gitbook/gitbook-plugin-add-js-css/0b7d652afee1550d372bc2b9a01ca14f-sidebar.js"></script>
         
     
         

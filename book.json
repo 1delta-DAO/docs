@@ -41,14 +41,17 @@
     "add-js-css": {
       "js": [
         "./scripts/asciinema-player.js",
-        "./scripts/code-header.js"
+        "./scripts/code-header.js",
+        "./scripts/sidebar.js"
       ],
       "css": [
         "./style/night.css",
         "./style/footer.css",
         "./style/asciinema-player.css",
         "./style/prism-okaidia.css",
-        "./style/code.css"
+        "./style/code.css",
+        "./style/sidebar.css"
+        
       ]
     },
 

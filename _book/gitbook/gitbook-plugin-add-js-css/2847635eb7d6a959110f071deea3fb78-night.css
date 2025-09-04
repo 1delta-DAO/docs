@@ -1,0 +1,26 @@
+/* Base (white) — minimal overrides; the default GitBook style is light */
+.book:not(.color-theme-1):not(.color-theme-2) {
+  /* optional: white theme tweaks */
+}
+
+/* Sepia */
+.book.color-theme-1 {
+  background: #f6f1e1;
+  color: #3b2f2a;
+}
+.book.color-theme-1 .book-summary { background: #efe7d2; }
+.book.color-theme-1 a { color: #9a6b39; }
+
+/* Night (your brand) */
+.book.color-theme-2 {
+  background-color: #0f1823;
+  color: #f8f8f2;
+}
+.book.color-theme-2 .book-summary {
+  background: #111a27;
+  color: #d0d4db;
+}
+.book.color-theme-2 a { color: #79b8ff; }
+.book.color-theme-2 a:hover { color: #a0cfff; }
+
+/* ...keep any extra blocks you already had, but scope them under .book.color-theme-2 */

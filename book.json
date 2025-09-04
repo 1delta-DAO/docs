@@ -22,7 +22,7 @@
   ],
   "pluginsConfig": {
     "honkit-plugin-prism": {
-      "theme": "solarized-dark" 
+      "theme": "solarized-dark"
     },
     "insert-logo": {
       "url": "https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg",
@@ -39,13 +39,23 @@
       "utc": true
     },
     "add-js-css": {
-      "js": ["./scripts/asciinema-player.js", "./scripts/code-header.js"],
+      "js": [
+        "./scripts/asciinema-player.js",
+        "./scripts/code-header.js"
+      ],
       "css": [
+        "./style/night.css",
         "./style/footer.css",
         "./style/asciinema-player.css",
         "./style/prism-okaidia.css",
         "./style/code.css"
       ]
+    },
+
+    "fontsettings": {
+      "size": 2,
+      "family": "sans",
+      "theme": "night"
     }
   },
 

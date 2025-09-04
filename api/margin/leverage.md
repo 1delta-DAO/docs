@@ -19,12 +19,12 @@ We'll demonstrate creating a leveraged WETH position on **Aave V3** using borrow
 
 **Starting Capital:**
 
-- User contribution: 1 ETH
+-   User contribution: 1 ETH
 
 **Target Position:**
 
-- Total collateral: 3 WETH (1 from user + 2 from leverage)
-- Debt: 8,000 USDC
+-   Total collateral: 3 WETH (1 from user + 2 from leverage)
+-   Debt: 8,000 USDC
 
 We'll use **Morpho Blue** as our flash loan provider for optimal rates.
 
@@ -58,6 +58,16 @@ address WETH = address(0xC02...);
 ---
 
 ## Operation Sequence
+
+### Integration Checklist
+
+-   [ ] Protocol permissions configured
+-   [ ] Token approvals set
+-   [ ] Health factor validated
+-   [ ] Slippage parameters configured
+-   [ ] Gas optimization applied
+-   [ ] Error handling implemented
+-   [ ] Position monitoring enabled
 
 ### 1. Pull User Funds
 
@@ -235,16 +245,23 @@ composer.deltaCompose{value: USER_AMOUNT}(composerOps);
 
 5. **Gas Optimization Strategies:**
 
-   - User fund transfers and approvals are placed outside the flash loan callback
-   - Direct transfers to the forwarder eliminate unnecessary token movements
-   - Maximum approvals reduce future transaction costs
+    - User fund transfers and approvals are placed outside the flash loan callback
+    - Direct transfers to the forwarder eliminate unnecessary token movements
+    - Maximum approvals reduce future transaction costs
 
 6. **Risk Management:**
 
-   - The entire operation is atomic - partial execution is impossible
-   - Minimum output requirements protect against excessive slippage
-   - Flash loans eliminate the need for upfront borrowing capital
+    - The entire operation is atomic - partial execution is impossible
+    - Minimum output requirements protect against excessive slippage
+    - Flash loans eliminate the need for upfront borrowing capital
 
 7. **Position Health:** Ensure the final position maintains a healthy collateralization ratio based on Aave V3's risk parameters for WETH/USDC.
 
 8. **ETH Value Attachment:** The `{value: USER_AMOUNT}` ensures the user's ETH is sent with the transaction for the initial collateral contribution.
+
+## Related Documentation
+
+-   [General Margin Operations](./general.md) - Architecture overview
+-   [Flash Loan Operations](../flash-loan.md) - Provider details
+-   [External Call Patterns](../external-call.md) - Swap integration
+-   [Approval Management](../transfers.md#approve-operation) - Permission setup

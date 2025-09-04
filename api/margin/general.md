@@ -1,32 +1,128 @@
 # General Margin Operations
 
-We provide a sketch to execute general margin operations here.
+This section provides an overview of the margin operations architecture, including the technical implementation details, supported protocols, and operational flow patterns.
 
-## The Flow
+## Architecture Deep Dive
 
-In general, assuming the caller has existing balances with the lender, there aer two major steps, the flash loan itself and the inner call
+### Composer Pattern
 
-1. We execute the flashLoan call with currency `X` and amount `x`
+The 1Delta margin system is built on composer pattern that enables multi-step DeFi operations to execute atomically. The `BaseComposer` contract serves as the foundation, with chain-specific implementations handling protocol integrations.
 
-   - Execute the **Inner Calls**
-   - swap `x` to currency `Y` and amount `y`
-   - put `y` into a lender to increase the credit line (e.g. deposit or repay)
-   - pull `x` from the lender (e.g. withdraw or borrow)
+```solidity
+abstract contract BaseComposer is
+    DeadLogger,
+    Swaps,
+    Gen2025DexActions,
+    UniversalLending,
+    ERC4626Operations,
+    Transfers,
+    Permits,
+    ExternalCall
+{
+    function deltaCompose(bytes calldata) external payable;
+    function _deltaComposeInternal(address, uint256, uint256) internal virtual;
+}
+```
 
+### Operation Execution Flow
 
-2. Repay the flash loan with funds `x`
+All margin operations follow a standardized execution pattern within the composer's main loop:
 
-## Considerations
+```solidity
+function _deltaComposeInternal(address callerAddress, uint256 currentOffset, uint256 calldataLength) internal virtual {
+    while (true) {
+        uint256 operation = shr(248, calldataload(currentOffset));
+        currentOffset = add(1, currentOffset);
 
-Lending operations that take funds need **approvals** (see [Transfers](../transfers.md) section for that) and sometimes need to unwrap the flash loaned amount to native.
+        // handle operations
 
-Lending operations that pull funds on the user's behalf need to be **permissioned** by the user.
+        if (currentOffset >= maxIndex) break;
+    }
+}
+```
 
+---
 
-## Operations
+### Lending Protocol Integration
 
-- [Leverage](./leverage.md)
-- [Close](./close.md)
-- [Collateral Swap](./collateral-swap.md)
-- [Debt Swap](./debt-swap.md)
-- [Postion Migration](./migration.md)
+Margin operations leverage the lending protocol support through the unified [Lending Operations](../lending.md) interface.
+
+For detailed lending operation encoding and protocol-specific parameters, see the [Lending Operations](../lending.md) documentation.
+
+---
+
+### Operation Command Structure
+
+Operations are encoded using compact byte packing:
+
+```
+Operation Byte: [Command Type (1 byte)]
+Data Bytes: [Operation-specific data]
+```
+
+---
+
+### Flash Loan Operations
+
+Margin operations utilize flash loans through the standardized [Flash Loan](../flash-loan.md) interface. The system supports multiple providers:
+
+| Provider        | Protocol |
+| --------------- | -------- |
+| **Morpho Blue** | Morpho   |
+| **Aave V3**     | Aave     |
+| **Aave V2**     | Aave     |
+| **Balancer V2** | Balancer |
+| **Balancer V3** | Balancer |
+| **Uniswap V4**  | Uniswap  |
+
+For detailed flash loan encoding, provider-specific parameters, and integration patterns, see the [Flash Loan Operations](../flash-loan.md) documentation.
+
+## Security Architecture
+
+### Access Control
+
+-   **Caller Validation**: Strict validation of operation initiators
+-   **Callback Verification**: Flash loan callbacks validate caller addresses
+
+### Slippage Protection
+
+Built-in slippage checks ensure operations meet minimum requirements:
+
+```solidity
+assembly {
+    if gt(minimumAmountReceived, amountIn) {
+        mstore(0x0, SLIPPAGE)
+        revert(0x0, 0x4)
+    }
+}
+```
+
+## Gas Optimization Strategies
+
+### 1. Packed Encoding
+
+-   Minimize calldata size through tight byte packing
+-   Use uint128 for amounts, uint16 for lengths
+-   Combine related operations in single calls
+
+### 2. Approval Management
+
+-   One-time maximum approvals reduce future gas costs
+-   Pre-approve operations outside flash loan callbacks
+-   Use permit signatures where supported
+
+### 3. Direct Transfers
+
+-   Route funds directly between operations
+-   Eliminate intermediate token movements
+-   Use contract balance operations when possible
+
+## Operation Categories
+
+Explore specific operation implementations:
+
+-   [Leverage Operations](./leverage.md) - Position amplification strategies
+-   [Close Operations](./close.md) - Position exit and unwind procedures
+-   [Collateral Swaps](./collateral-swap.md) - Asset rebalancing within positions
+-   [Debt Swaps](./debt-swap.md) - Liability management and refinancing
+-   [Position Migration](./migration.md) - Cross-protocol position transfers

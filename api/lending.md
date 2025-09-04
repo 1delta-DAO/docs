@@ -44,7 +44,7 @@ abi.encodePacked(
 
 ## Specific lenders
 
--   [Aave V2 & V3 & forks](./aave.md)
--   [Compound V3 markets](./compound-v3.md)
--   [Compound V2 markets](./compound-v2.md)
--   [Morpho Blue](./morpho.md)
+-   [Aave V2 & V3 & forks](./lending/aave.md)
+-   [Compound V3 markets](./lending/compound-v3.md)
+-   [Compound V2 markets](./lending/compound-v2.md)
+-   [Morpho Blue](./lending/morpho.md)

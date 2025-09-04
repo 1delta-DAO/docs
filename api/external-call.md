@@ -229,14 +229,6 @@ External Contracts (Arbitrary selectors allowed)
     - Call 1inch swap (EXT_CALL with security checks)
     - Sweep received WETH (TRANSFERS with security checks)
 
-### Security Benefits
-
--   **Layer 1 (Main Composer)**: Prevents malicious calls at the entry point
--   **Layer 2 (Call Forwarder)**: Provides backup security and specialized validation
--   **Stateless Main Composer**: Keeps the main contract simple and secure
--   **Flexible Call Forwarder**: Can execute complex DeFi operations safely
--   **Atomic Execution**: All operations succeed together or revert together
-
 ```solidity
 
 uint256 swapAmount = 4000.0e6;

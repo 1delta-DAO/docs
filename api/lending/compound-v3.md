@@ -1,5 +1,7 @@
 # Compound V3 markets
 
+[Operations](../operations.md) → [Lending](../lending.md) → Compound V3 _(Composer)_
+
 All Compound V3 markets behave the same way. The market is specified by the `comet` parameter.
 
 The markets are isolated from each other and only one currency is borrowable.
@@ -19,7 +21,7 @@ If `amount=0`, we use the contract balance via `underlying.balanceOf(address(thi
 
 ## Withdraw
 
-Withdraw for the lender. Note that this requires that the caller approved the composer to via `comet.allow(...)`.
+Withdraw for the lender. Note that this requires that the caller approved the composer via `comet.allow(...)`.
 
 If `amount=0xffffffffffffffffffffffffffff`, we read `underlying.balanceOf(callerAddress)` and withdraw the full balance without leaving dust.
 
@@ -31,11 +33,11 @@ If `amount=0xffffffffffffffffffffffffffff`, we read `underlying.balanceOf(caller
 | 76     | 1              | isBase `uint8`       |
 | 77     | 20             | comet `address`      |
 
-You need to provide the `isBase` flag if you want to withdraw the base asset. The reason for this is that Compound V3 has diffrerent ways to compute balances for the base asset.
+You need to provide the `isBase` flag if you want to withdraw the base asset. The reason for this is that Compound V3 has different ways to compute balances for the base asset.
 
 ## Borrow
 
-Borrow from the lender. The prequisite is that the caller approved the composer contract to borrow on their behalf via `comet.allow(...)`.
+Borrow from the lender. The prerequisite is that the caller approved the composer contract to borrow on their behalf via `comet.allow(...)`.
 
 | Offset | Length (bytes) | Description          |
 | ------ | -------------- | -------------------- |

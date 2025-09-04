@@ -5,6 +5,7 @@ This section provides a detailed guide for implementing the close operation, whi
 ## Overview
 
 The close operation enables users to exit a leveraged position by:
+
 1. Withdrawing collateral assets
 2. Swapping the withdrawn assets for the debt token
 3. Repaying the outstanding debt
@@ -16,14 +17,25 @@ This process maintains capital efficiency by executing all operations within a s
 
 We'll demonstrate how to switch debt in a leveraged position on **Aave V3** without de-leveraging. Our example:
 
-- **Initial Position**: 3 WETH collateral with 8,000 USDC debt
-- **Operation**: Withdraw ~2 WETH, swap to USDC, repay debt
-- **Flash Loan Provider**: Morpho Blue (optimal for Ethereum and Base)
-- **Swap Provider**: 1inch Aggregation Router
+-   **Initial Position**: 3 WETH collateral with 8,000 USDC debt
+-   **Operation**: Withdraw ~2 WETH, swap to USDC, repay debt
+-   **Flash Loan Provider**: Morpho Blue (optimal for Ethereum and Base)
+-   **Swap Provider**: 1inch Aggregation Router
 
-> **Important**: The caller must ensure the swap is quoted to receive at least the full debt amount. Otherwise, the transaction will fail.
+> **Important**: The mechainc has a fail-safe so that in case the swap does not return enough funds to repay the entire debt, it will only repay the available amounts.
 
 ## Implementation
+
+### Integration Checklist
+
+-   [ ] Protocol withdrawal permissions configured
+-   [ ] Debt repayment approvals set
+-   [ ] Swap quotes validated for sufficient output
+-   [ ] Health factor monitoring implemented
+-   [ ] Slippage protection configured
+-   [ ] Gas optimization strategies applied
+-   [ ] Error handling and fallback mechanisms
+-   [ ] Position state tracking enabled
 
 ### Constants and Setup
 
@@ -236,12 +248,14 @@ composer.deltaCompose(composerOps);
 2. **Slippage Protection**: Always set minimum expected amounts to prevent unfavorable swaps
 3. **Gas Optimization**: Keep operations outside the flash loan callback when possible
 4. **Error Handling**: The transaction will revert if:
-   - Insufficient collateral to withdraw
-   - Swap returns less than debt amount
-   - Flash loan cannot be repaid
+    - Insufficient collateral to withdraw
+    - Swap returns less than debt amount
+    - Flash loan cannot be repaid
 
 ## Related Documentation
 
-- [Flash Loan Operations](../flash-loan.md)
-- [External Call Patterns](../external-call.md)
-- [Approval Management](../approvals.md)
+-   [General Margin Operations](./general.md) - Architecture overview
+-   [Flash Loan Operations](../flash-loan.md) - Provider details
+-   [External Call Patterns](../external-call.md) - Swap integration
+-   [Lending Operations](../lending.md) - Protocol interactions
+-   [Approval Management](../transfers.md#approve-operation) - Permission setup

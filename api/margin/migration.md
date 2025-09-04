@@ -1,36 +1,36 @@
 # Position Migration
 
-Position migrations involve moving a leveraged position from one lending protocol to another without changing the underlying assets or requiring swaps.
+Position migrations enable seamless movement of leveraged positions between lending protocols while maintaining the same collateral and debt composition. This allows users to optimize for better rates, features, or risk profiles without closing and reopening positions.
 
-Let's demonstrate migrating an Aave V3 position to a Compound V3 position while maintaining the same collateral and debt composition.
+## Overview
 
-## Migration Strategy
+The migration process follows this atomic sequence:
 
-The execution combines elements of both leverage and close operations:
+1. **Flash Loan**: Borrow debt asset for repayment
+2. **Repay**: Clear debt on source protocol
+3. **Withdraw**: Remove collateral from source protocol
+4. **Deposit**: Add collateral to target protocol
+5. **Borrow**: Take debt from target protocol
+6. **Repay**: Return flash loan funds
+7. **Refund**: Refund any leftover to the user
 
-1. **Flash loan the debt asset** from the Aave V3 position
-2. **Repay the Aave V3 debt** completely
-3. **Withdraw the Aave V3 collateral**
-4. **Deposit collateral into Compound V3**
-5. **Borrow from Compound V3** to cover flash loan repayment
-6. **Repay the flash loan** with borrowed funds
-7. **Refund any leftover dust** to the user
+All operations execute atomically - complete success or full revert.
 
 ## Example Scenario
 
 **Starting Position (Aave V3):**
 
-- Collateral: 3 WETH
-- Debt: 8,000 USDC
+-   Collateral: 3 WETH
+-   Debt: 8,000 USDC
 
 **Target Position (Compound V3):**
 
-- Collateral: 3 WETH
-- Debt: 8,000 USDC
+-   Collateral: 3 WETH
+-   Debt: 8,000 USDC
 
 ---
 
-# Constants
+### Constants
 
 ```solidity
 // Flash loan amount (slightly higher than debt to ensure full repayment)
@@ -56,11 +56,21 @@ address WETH = address(0xC02...);
 address USDC = address(0xA0b...);
 ```
 
+## Integration Checklist
+
+-   [ ] Source protocol permissions configured
+-   [ ] Target protocol permissions set
+-   [ ] Health factor validation passed
+-   [ ] Protocol compatibility verified
+-   [ ] Flash loan provider selected
+-   [ ] Error handling implemented
+-   [ ] Migration cost estimated
+
 ---
 
-# Operation Sequence
+## Operation Sequence
 
-## 1. Repay Aave V3 Debt
+### 1. Repay Aave V3 Debt
 
 Use the flash-loaned USDC to completely repay the existing Aave V3 debt. Using `amount=0xffffffffffffffffffffffffffff` ensures we repay the minimum of contract balance and actual debt.
 
@@ -78,7 +88,7 @@ bytes memory repayAave = abi.encodePacked(
 );
 ```
 
-## 2. Withdraw Aave V3 Collateral
+### 2. Withdraw Aave V3 Collateral
 
 Withdraw the entire WETH collateral from Aave V3. The collateral goes directly to the composer for the next operation.
 
@@ -95,7 +105,7 @@ bytes memory withdrawAave = abi.encodePacked(
 );
 ```
 
-## 3. Deposit to Compound V3
+### 3. Deposit to Compound V3
 
 Deposit the withdrawn WETH collateral into Compound V3. Using `amount=0` deposits the contract's entire WETH balance.
 
@@ -111,7 +121,7 @@ bytes memory depositCompound = abi.encodePacked(
 );
 ```
 
-## 4. Borrow from Compound V3
+### 4. Borrow from Compound V3
 
 Borrow enough USDC from Compound V3 to repay the flash loan plus any fees.
 
@@ -127,7 +137,7 @@ bytes memory borrowCompound = abi.encodePacked(
 );
 ```
 
-## 5. Refund Excess USDC
+### 5. Refund Excess USDC
 
 Transfer any remaining USDC balance back to the user after flash loan repayment.
 
@@ -141,7 +151,7 @@ bytes memory refundExcess = abi.encodePacked(
 );
 ```
 
-## 6. Required Approvals
+### 6. Required Approvals
 
 Set up all necessary approvals for the operation:
 
@@ -173,7 +183,7 @@ bytes memory approveMorpho = abi.encodePacked(
 
 ---
 
-# Complete Migration Assembly
+## Complete Migration Assembly
 
 Putting it all together with the flash loan wrapper:
 
@@ -211,49 +221,54 @@ bytes memory migrationOps = abi.encodePacked(
 composer.deltaCompose(migrationOps);
 ```
 
----
+## Key Considerations
 
-# Key Considerations
-
-## 1. **Dust Management**
+### 1. **Dust Management**
 
 The borrow-repay process will leave dust since we must use a fixed flash loan amount larger than the exact Aave V3 debt to ensure complete repayment. The excess is automatically refunded to the user.
 
-## 2. **Flash Loan Buffer**
+### 2. **Flash Loan Buffer**
 
 To ensure we can repay the flash loan completely, we borrow the Aave V3 debt amount plus a safety margin (e.g., 0.1 USDC buffer). This accounts for:
 
-- Interest accrual between quote and execution
-- Flash loan fees (if any)
-- Rounding differences in debt calculations
+-   Interest accrual between quote and execution
+-   Flash loan fees (if any)
+-   Rounding differences in debt calculations
 
-## 3. **Protocol Permissions**
+### 3. **Protocol Permissions**
 
 The operation requires pre-approval on both protocols:
 
-- **Aave V3:** Approve composer for collateral withdrawal: `IERC20(AAVE_V3_A_TOKEN_WETH).approve(composer, type(uint256).max)`
-- **Compound V3:** Allow composer for operations: `IComet(COMPOUND_V3_COMET).allow(composer, true)`
+-   **Aave V3:** Approve composer for collateral withdrawal: `IERC20(AAVE_V3_A_TOKEN_WETH).approve(composer, type(uint256).max)`
+-   **Compound V3:** Allow composer for operations: `IComet(COMPOUND_V3_COMET).allow(composer, true)`
 
-## 4. **Market Compatibility**
+### 4. **Market Compatibility**
 
 Ensure the target Compound V3 market accepts the same collateral asset and allows borrowing the same debt asset. Compound V3 markets are isolated and each supports specific asset combinations.
 
-## 5. **Risk Parameter Changes**
+### 5. **Risk Parameter Changes**
 
 Different protocols have different:
 
-- Loan-to-value ratios
-- Liquidation thresholds
-- Interest rate models
+-   Loan-to-value ratios
+-   Liquidation thresholds
+-   Interest rate models
 
 Verify the position remains healthy after migration and adjust if necessary.
 
-## 6. **Atomic Execution**
+### 6. **Atomic Execution**
 
 The entire migration is atomic - either all steps succeed or the transaction reverts, ensuring no partial migrations that could leave positions in an inconsistent state.
 
-## 7. **Gas Optimization**
+### 7. **Gas Optimization**
 
-- All approvals are performed outside the flash loan callback
-- Using `amount=0` and max values reduces the need for exact balance calculations
-- Direct transfers between operations minimize intermediate steps
+-   All approvals are performed outside the flash loan callback
+-   Using `amount=0` and max values reduces the need for exact balance calculations
+-   Direct transfers between operations minimize intermediate steps
+
+## Related Documentation
+
+-   [General Margin Operations](./general.md) - Architecture overview
+-   [Flash Loan Operations](../flash-loan.md) - Provider details
+-   [Lending Operations](../lending.md) - Protocol interactions
+-   [Position Management](../positions.md) - Health factor monitoring

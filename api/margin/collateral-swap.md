@@ -18,12 +18,12 @@ We'll wrap this entire sequence in a [Flash Loan](../flash-loan.md) using **Morp
 
 **Starting Position:**
 
-- Collateral: 3 WETH
-- Debt: 8,000 USDC
+-   Collateral: 3 WETH
+-   Debt: 8,000 USDC
 
 **Target:**
 
-- Convert 3 WETH to 12,000 USDT as new collateral
+-   Convert 3 WETH to 12,000 USDT as new collateral
 
 ---
 
@@ -55,6 +55,18 @@ address MORPHO_BLUE = address(0xbbb...);
 ---
 
 ## Operation Sequence
+
+### Integration Checklist
+
+-   [ ] Collateral withdrawal permissions configured
+-   [ ] New collateral deposit approvals set
+-   [ ] Swap quotes validated for sufficient output
+-   [ ] Health factor impact assessed
+-   [ ] Slippage protection configured
+-   [ ] Cross-protocol compatibility verified
+-   [ ] Gas optimization strategies applied
+-   [ ] Error handling and fallback mechanisms
+-   [ ] Position value tracking enabled
 
 ### 1. Deposit New Collateral
 
@@ -239,3 +251,10 @@ composer.deltaCompose(composerOps);
 3. **Slippage Protection:** The sweep operation with `SweepType.AMOUNT` ensures you receive at least the expected minimum output from the swap.
 
 4. **Gas Optimization:** Using the forwarder pattern eliminates unnecessary token transfers between operations.
+
+## Related Documentation
+
+-   [General Margin Operations](./general.md) - Architecture overview
+-   [Flash Loan Operations](../flash-loan.md) - Provider details
+-   [External Call Patterns](../external-call.md) - Swap integration
+-   [Lending Operations](../lending.md) - Protocol interactions

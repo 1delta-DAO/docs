@@ -7,11 +7,10 @@
     "readme": "README.md",
     "summary": "SUMMARY.md"
   },
-  
+
   "plugins": [
     "-highlight",
-    "honkit-plugin-shiki",
-
+    "honkit-plugin-prism",
     "add-js-css",
     "edit-link",
     "flexible-alerts",
@@ -22,6 +21,9 @@
     "search-plus"
   ],
   "pluginsConfig": {
+    "honkit-plugin-prism": {
+      "theme": "solarized-dark"
+    },
     "insert-logo": {
       "url": "https://raw.githubusercontent.com/1delta-DAO/protocol-icons/main/1delta_logo.svg",
       "style": "background: #0f1823; width: 100%; padding: 20px; margin: 0px; border-radius: 15px;"
@@ -30,15 +32,33 @@
       "base": "https://github.com/1delta-DAO/docs/blob/main",
       "label": "Edit on GitHub"
     },
-    "page-footer": {
+    "pagefooter": {
       "footer": "<div>© 1delta <a href='https://1delta.io/'>https://1delta.io/</a></br>Found an error in the docs? The source code can be found <a href='https://github.com/1delta-DAO/docs/blob/main/README.md'>here</a>. Please feel free to edit and contribute a merge request<div>",
       "label": "Modified at: ",
       "format": "YYYY-MM-DD HH:mm:ss",
       "utc": true
     },
     "add-js-css": {
-      "js": ["./scripts/asciinema-player.js"],
-      "css": ["./style/footer.css", "./style/asciinema-player.css"]
+      "js": [
+        "./scripts/asciinema-player.js",
+        "./scripts/code-header.js",
+        "./scripts/sidebar.js"
+      ],
+      "css": [
+        "./style/night.css",
+        "./style/footer.css",
+        "./style/asciinema-player.css",
+        "./style/prism-okaidia.css",
+        "./style/code.css",
+        "./style/sidebar.css"
+        
+      ]
+    },
+
+    "fontsettings": {
+      "size": 2,
+      "family": "sans",
+      "theme": "night"
     }
   },
 

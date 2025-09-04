@@ -62,6 +62,18 @@ address MORPHO_BLUE = address(0xbbb...);
 
 ## Operation Sequence
 
+### Integration Checklist
+
+-   [ ] Debt delegation permissions configured
+-   [ ] Protocol borrowing approvals set
+-   [ ] Swap quotes validated for sufficient output
+-   [ ] Health factor impact assessed
+-   [ ] Slippage protection configured
+-   [ ] Cross-protocol compatibility verified
+-   [ ] Gas optimization strategies applied
+-   [ ] Error handling and fallback mechanisms
+-   [ ] Position rate tracking enabled
+
 ### 1. Repay Existing Debt
 
 After receiving USDC from the swap, we repay the existing USDC debt. Setting amount to `0` repays up to the contract's balance or total debt, whichever is smaller.
@@ -238,10 +250,17 @@ composer.deltaCompose(composerOps);
 
 4. **Gas Optimization:**
 
-   - Approvals are placed outside the flash loan callback to reduce callback data size
-   - Direct transfers to the forwarder eliminate unnecessary token movements
-   - One-time approvals with maximum amounts reduce future gas costs
+    - Approvals are placed outside the flash loan callback to reduce callback data size
+    - Direct transfers to the forwarder eliminate unnecessary token movements
+    - One-time approvals with maximum amounts reduce future gas costs
 
 5. **Atomic Execution:** The entire operation succeeds or fails as one transaction, preventing partial execution risks.
 
 6. **Excess Handling:** Any excess USDC from the swap is automatically refunded to the user, ensuring no funds are stuck.
+
+## Related Documentation
+
+-   [General Margin Operations](./general.md) - Architecture overview
+-   [Flash Loan Operations](../flash-loan.md) - Provider details
+-   [External Call Patterns](../external-call.md) - Swap integration
+-   [Lending Operations](../lending.md) - Protocol interactions

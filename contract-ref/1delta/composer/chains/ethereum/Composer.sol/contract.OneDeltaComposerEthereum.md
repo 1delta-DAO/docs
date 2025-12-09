@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\chains\ethereum\Composer.sol)
 
 **Inherits:**
-[BaseComposer](\contract-ref\1delta\composer\BaseComposer.sol\abstract.BaseComposer.md), [UniversalFlashLoan](\contract-ref\1delta\composer\chains\arbitrum-one\flashLoan\UniversalFlashLoan.sol\contract.UniversalFlashLoan.md), [SwapCallbacks](\contract-ref\1delta\composer\chains\arbitrum-one\flashSwap\SwapCallbacks.sol\contract.SwapCallbacks.md)
+[BaseComposer](\contract-ref\1delta\composer\BaseComposer.sol\abstract.BaseComposer.md), [UniversalFlashLoan](\contract-ref\1delta\composer\chains\ethereum\flashLoan\UniversalFlashLoan.sol\contract.UniversalFlashLoan.md), [SwapCallbacks](\contract-ref\1delta\composer\chains\ethereum\flashSwap\SwapCallbacks.sol\contract.SwapCallbacks.md)
 
 **Title:**
 Chain-dependent Universal aggregator contract.

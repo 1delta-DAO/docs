@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\BaseComposer.sol)
 
 **Inherits:**
-[DeadLogger](\contracts\1delta\shared\logs\DeadLogger.sol\abstract.DeadLogger.md), [Swaps](\contracts\1delta\composer\swappers\Swaps.sol\abstract.Swaps.md), [Gen2025DexActions](\contracts\1delta\composer\singletons\Gen2025DexActions.sol\abstract.Gen2025DexActions.md), [UniversalLending](\contracts\1delta\composer\lending\UniversalLending.sol\abstract.UniversalLending.md), [ERC4626Operations](\contracts\1delta\composer\ERC4626\ERC4626Operations.sol\abstract.ERC4626Operations.md), [Transfers](\contracts\1delta\composer\transfers\Transfers.sol\contract.Transfers.md), [Permits](\contracts\1delta\composer\permit\Permits.sol\abstract.Permits.md), [ExternalCall](\contracts\1delta\composer\generic\ExternalCall.sol\abstract.ExternalCall.md)
+[DeadLogger](\contract-ref\1delta\shared\logs\DeadLogger.sol\abstract.DeadLogger.md), [Swaps](\contract-ref\1delta\composer\swappers\Swaps.sol\abstract.Swaps.md), [Gen2025DexActions](\contract-ref\1delta\composer\singletons\Gen2025DexActions.sol\abstract.Gen2025DexActions.md), [UniversalLending](\contract-ref\1delta\composer\lending\UniversalLending.sol\abstract.UniversalLending.md), [ERC4626Operations](\contract-ref\1delta\composer\ERC4626\ERC4626Operations.sol\abstract.ERC4626Operations.md), [Transfers](\contract-ref\1delta\composer\transfers\Transfers.sol\contract.Transfers.md), [Permits](\contract-ref\1delta\composer\permit\Permits.sol\abstract.Permits.md), [ExternalCall](\contract-ref\1delta\composer\generic\ExternalCall.sol\abstract.ExternalCall.md)
 
 **Title:**
 Base aggregator contract that needs overrides for explicit chains.

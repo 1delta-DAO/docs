@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\chains\ethereum\flashSwap\SwapCallbacks.sol)
 
 **Inherits:**
-[UniV4Callbacks](\contracts\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\UniV4Callback.sol\abstract.UniV4Callbacks.md), [UniV3Callbacks](\contracts\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\UniV3Callback.sol\abstract.UniV3Callbacks.md), [UniV2Callbacks](\contracts\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\UniV2Callback.sol\abstract.UniV2Callbacks.md), [DodoV2Callbacks](\contracts\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\DodoV2Callback.sol\abstract.DodoV2Callbacks.md), [BalancerV3Callbacks](\contracts\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\BalancerV3Callback.sol\abstract.BalancerV3Callbacks.md)
+[UniV4Callbacks](\contract-ref\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\UniV4Callback.sol\abstract.UniV4Callbacks.md), [UniV3Callbacks](\contract-ref\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\UniV3Callback.sol\abstract.UniV3Callbacks.md), [UniV2Callbacks](\contract-ref\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\UniV2Callback.sol\abstract.UniV2Callbacks.md), [DodoV2Callbacks](\contract-ref\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\DodoV2Callback.sol\abstract.DodoV2Callbacks.md), [BalancerV3Callbacks](\contract-ref\1delta\composer\chains\arbitrum-one\flashSwap\callbacks\BalancerV3Callback.sol\abstract.BalancerV3Callbacks.md)
 
 **Title:**
 Swap Callback executor

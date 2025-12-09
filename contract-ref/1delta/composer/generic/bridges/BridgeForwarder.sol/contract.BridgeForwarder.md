@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\generic\bridges\BridgeForwarder.sol)
 
 **Inherits:**
-[StargateV2](\contracts\1delta\composer\generic\bridges\StargateV2\StargateV2.sol\contract.StargateV2.md), [Across](\contracts\1delta\composer\generic\bridges\Across\Across.sol\contract.Across.md), [SquidRouter](\contracts\1delta\composer\generic\bridges\Squid_Router\SquidRouter.sol\contract.SquidRouter.md), [GasZip](\contracts\1delta\composer\generic\bridges\GasZip\GasZip.sol\contract.GasZip.md)
+[StargateV2](\contract-ref\1delta\composer\generic\bridges\StargateV2\StargateV2.sol\contract.StargateV2.md), [Across](\contract-ref\1delta\composer\generic\bridges\Across\Across.sol\contract.Across.md), [SquidRouter](\contract-ref\1delta\composer\generic\bridges\Squid_Router\SquidRouter.sol\contract.SquidRouter.md), [GasZip](\contract-ref\1delta\composer\generic\bridges\GasZip\GasZip.sol\contract.GasZip.md)
 
 Aggregates multiple bridge calls
 

@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\generic\CallForwarder.sol)
 
 **Inherits:**
-[Transfers](\contracts\1delta\composer\transfers\Transfers.sol\contract.Transfers.md), [ExternalCallsGeneric](\contracts\1delta\composer\generic\ExternalCallsGeneric.sol\abstract.ExternalCallsGeneric.md), [BridgeForwarder](\contracts\1delta\composer\generic\bridges\BridgeForwarder.sol\contract.BridgeForwarder.md), [ERC721Receiver](\contracts\1delta\composer\generic\ERC721Receiver.sol\abstract.ERC721Receiver.md)
+[Transfers](\contract-ref\1delta\composer\transfers\Transfers.sol\contract.Transfers.md), [ExternalCallsGeneric](\contract-ref\1delta\composer\generic\ExternalCallsGeneric.sol\abstract.ExternalCallsGeneric.md), [BridgeForwarder](\contract-ref\1delta\composer\generic\bridges\BridgeForwarder.sol\contract.BridgeForwarder.md), [ERC721Receiver](\contract-ref\1delta\composer\generic\ERC721Receiver.sol\abstract.ERC721Receiver.md)
 
 An arbitrary call contract to forward generic calls
 Does pull funds if desired

@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\quoter\dex\BalancerV3Quoter.sol)
 
 **Inherits:**
-[QuoterUtils](\contracts\1delta\composer\quoter\dex\utils\QuoterUtils.sol\abstract.QuoterUtils.md), [Masks](\contracts\1delta\shared\masks\Masks.sol\abstract.Masks.md)
+[QuoterUtils](\contract-ref\1delta\composer\quoter\dex\utils\QuoterUtils.sol\abstract.QuoterUtils.md), [Masks](\contract-ref\1delta\shared\masks\Masks.sol\abstract.Masks.md)
 
 
 ## State Variables

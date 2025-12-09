@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\chains\ethereum\flashLoan\UniversalFlashLoan.sol)
 
 **Inherits:**
-[MorphoFlashLoans](\contracts\1delta\composer\flashLoan\Morpho.sol\contract.MorphoFlashLoans.md), [AaveV3FlashLoans](\contracts\1delta\composer\flashLoan\AaveV3.sol\contract.AaveV3FlashLoans.md), [AaveV2FlashLoans](\contracts\1delta\composer\flashLoan\AaveV2.sol\contract.AaveV2FlashLoans.md), [BalancerV2FlashLoans](\contracts\1delta\composer\chains\arbitrum-one\flashLoan\BalancerV2.sol\abstract.BalancerV2FlashLoans.md), [FlashLoanCallbacks](\contracts\1delta\composer\chains\arbitrum-one\flashLoan\FlashLoanCallbacks.sol\contract.FlashLoanCallbacks.md)
+[MorphoFlashLoans](\contract-ref\1delta\composer\flashLoan\Morpho.sol\contract.MorphoFlashLoans.md), [AaveV3FlashLoans](\contract-ref\1delta\composer\flashLoan\AaveV3.sol\contract.AaveV3FlashLoans.md), [AaveV2FlashLoans](\contract-ref\1delta\composer\flashLoan\AaveV2.sol\contract.AaveV2FlashLoans.md), [BalancerV2FlashLoans](\contract-ref\1delta\composer\chains\arbitrum-one\flashLoan\BalancerV2.sol\abstract.BalancerV2FlashLoans.md), [FlashLoanCallbacks](\contract-ref\1delta\composer\chains\arbitrum-one\flashLoan\FlashLoanCallbacks.sol\contract.FlashLoanCallbacks.md)
 
 **Title:**
 Flash loan aggregator

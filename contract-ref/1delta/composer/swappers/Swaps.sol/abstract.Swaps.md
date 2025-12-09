@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\swappers\Swaps.sol)
 
 **Inherits:**
-[BaseSwapper](\contracts\1delta\composer\swappers\BaseSwapper.sol\abstract.BaseSwapper.md)
+[BaseSwapper](\contract-ref\1delta\composer\swappers\BaseSwapper.sol\abstract.BaseSwapper.md)
 
 entrypoint for swaps
 - supports a broad variety of DEXs

@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\shared\permit\PermitUtils.sol)
 
 **Inherits:**
-[PermitConstants](\contracts\1delta\shared\permit\PermitConstants.sol\abstract.PermitConstants.md)
+[PermitConstants](\contract-ref\1delta\shared\permit\PermitConstants.sol\abstract.PermitConstants.md)
 
 **Title:**
 PermitUtils

@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\chains\ethereum\flashLoan\callbacks\BalancerV2Callback.sol)
 
 **Inherits:**
-[Slots](\contracts\1delta\composer\slots\Slots.sol\contract.Slots.md), [Masks](\contracts\1delta\shared\masks\Masks.sol\abstract.Masks.md), [DeltaErrors](\contracts\1delta\shared\errors\Errors.sol\abstract.DeltaErrors.md)
+[Slots](\contract-ref\1delta\composer\slots\Slots.sol\contract.Slots.md), [Masks](\contract-ref\1delta\shared\masks\Masks.sol\abstract.Masks.md), [DeltaErrors](\contract-ref\1delta\shared\errors\Errors.sol\abstract.DeltaErrors.md)
 
 Flash loaning through BalancerV2
 

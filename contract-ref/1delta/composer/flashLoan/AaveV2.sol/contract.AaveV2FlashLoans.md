@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\flashLoan\AaveV2.sol)
 
 **Inherits:**
-[Masks](\contracts\1delta\shared\masks\Masks.sol\abstract.Masks.md)
+[Masks](\contract-ref\1delta\shared\masks\Masks.sol\abstract.Masks.md)
 
 **Title:**
 Aave V2 flash loan executor

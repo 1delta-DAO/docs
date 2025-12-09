@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\lending\UniversalLending.sol)
 
 **Inherits:**
-[AaveLending](\contracts\1delta\composer\lending\AaveLending.sol\abstract.AaveLending.md), [CompoundV3Lending](\contracts\1delta\composer\lending\CompoundV3Lending.sol\abstract.CompoundV3Lending.md), [CompoundV2Lending](\contracts\1delta\composer\lending\CompoundV2Lending.sol\abstract.CompoundV2Lending.md), [MorphoLending](\contracts\1delta\composer\lending\MorphoLending.sol\abstract.MorphoLending.md), [SiloV2Lending](\contracts\1delta\composer\lending\SiloV2Lending.sol\abstract.SiloV2Lending.md), [DeltaErrors](\contracts\1delta\shared\errors\Errors.sol\abstract.DeltaErrors.md)
+[AaveLending](\contract-ref\1delta\composer\lending\AaveLending.sol\abstract.AaveLending.md), [CompoundV3Lending](\contract-ref\1delta\composer\lending\CompoundV3Lending.sol\abstract.CompoundV3Lending.md), [CompoundV2Lending](\contract-ref\1delta\composer\lending\CompoundV2Lending.sol\abstract.CompoundV2Lending.md), [MorphoLending](\contract-ref\1delta\composer\lending\MorphoLending.sol\abstract.MorphoLending.md), [SiloV2Lending](\contract-ref\1delta\composer\lending\SiloV2Lending.sol\abstract.SiloV2Lending.md), [DeltaErrors](\contract-ref\1delta\shared\errors\Errors.sol\abstract.DeltaErrors.md)
 
 Merge all lending ops in one operation
 Can inject parameters

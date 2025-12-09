@@ -2,7 +2,7 @@
 [Git Source](https://github.com/1delta-DAO/contracts-delegation/blob/9b965ed48187540d9e40eade64641964f3e13765/contracts/1delta\composer\generic\ExternalCall.sol)
 
 **Inherits:**
-[BaseUtils](\contracts\1delta\composer\generic\BaseUtils.sol\contract.BaseUtils.md)
+[BaseUtils](\contract-ref\1delta\composer\generic\BaseUtils.sol\contract.BaseUtils.md)
 
 External call on call forwarder which can safely execute any calls for a specific selector
 without compromising this contract

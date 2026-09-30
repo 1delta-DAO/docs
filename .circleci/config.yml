@@ -12,8 +12,8 @@ jobs:
       - run:
           name: Build static files
           command: |
-            npm install
-            npx honkit build
+            npm ci
+            npm run build
       - persist_to_workspace:
           root: ~/project
           paths:

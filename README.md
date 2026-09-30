@@ -15,3 +15,9 @@ Our vision is to bring fully-featured, decentralized aggregator services to EVMs
 * **Seamless UX and visibility** - easy risk management through risk parameter displays and single-click self-liquidations
 * **Full transparency** - Users hold the lending protocol balances themselves and can always see and access their raw balances with the lender
 * Lending protocols have been less accessible to traders who are looking for a fully-featured aggregator. With 1delta, we hope to open the door for these traders to take advantage of the **strong liquidity and attractive rates** on large lending protocols without sacrificing the tools they have come to expect while trading.
+
+## Building these docs
+
+Use the checked-in lockfile for the package manager you choose. With npm, run `npm ci` followed by `npm run build`; with pnpm 10, run `pnpm install --frozen-lockfile` followed by `pnpm run build`. Both generate the static site in `_book/`. CircleCI uses the npm lockfile and `npm ci`.
+
+Keep both lockfiles updated when changing dependencies. HonKit's configured plugins include custom JS/CSS, search, syntax highlighting, the logo, edit links, and the page footer; the footer plugin reads its settings from `pluginsConfig.page-footer`. Some upstream plugins still emit deprecation warnings during otherwise successful builds.

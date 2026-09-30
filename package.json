@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/1delta-DAO/docs#readme",
   "devDependencies": {
-    "@honkit/internal-test-utils": "^6.0.3",
+    "@honkit/internal-test-utils": "^6.2.2",
     "benchmark": "^2.1.4",
     "gitbook-plugin-add-js-css": "^0.0.1",
     "gitbook-plugin-anchors": "^0.7.1",
@@ -30,22 +30,36 @@
     "gitbook-plugin-flexible-alerts": "^1.0.4",
     "gitbook-plugin-ga": "^2.0.0",
     "gitbook-plugin-github-issue-feedback": "^1.4.0",
-    "gitbook-plugin-include-codeblock": "^3.2.3",
     "gitbook-plugin-insert-logo": "^0.1.5",
     "gitbook-plugin-js-console": "^3.2.0",
     "gitbook-plugin-local-pagefooter": "^1.0.5",
     "gitbook-plugin-lunr": "^1.2.0",
     "gitbook-plugin-page-toc-button": "^0.1.1",
     "gitbook-summary-to-path": "^2.0.0",
-    "honkit": "^6.0.3",
-    "honkit-plugin-holaspirit": "^1.0.1",
+    "honkit": "^6.2.2",
     "honkit-plugin-pagefooter": "^0.1.1",
-    "honkit-plugin-prism": "^2.5.3",
+    "honkit-plugin-prism": "^2.5.4",
     "honkit-plugin-search-plus": "^1.0.0",
-    "jest": "^30.0.5",
-    "ts-jest": "^29.4.1"
+    "jest": "^30.5.2",
+    "ts-jest": "^29.4.14"
   },
   "dependencies": {
     "@dogatana/honkit-plugin-theme-default-fa5": "^1.0.6"
+  },
+  "overrides": {
+    "gitbook-plugin-add-js-css": {
+      "lodash": "^4.18.0",
+      "tmp": "^0.2.6"
+    },
+    "remark-parse": {
+      "trim": "0.0.3"
+    }
+  },
+  "pnpm": {
+    "overrides": {
+      "gitbook-plugin-add-js-css>lodash": "^4.18.0",
+      "gitbook-plugin-add-js-css>tmp": "^0.2.6",
+      "remark-parse>trim": "0.0.3"
+    }
   }
 }
